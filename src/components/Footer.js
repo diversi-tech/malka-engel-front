@@ -1,7 +1,10 @@
 import React from 'react';
-const  Footer=()=> {
+
+//Footer page
+export const Footer = () => {
   return (
     <footer className="footer">
+      <h1>Footer page</h1>
       <div className="footer-content">
         <div className="footer-section about">
           <h2>About Us</h2>
@@ -32,4 +35,3 @@ const  Footer=()=> {
   );
 }
 
-export default Footer;

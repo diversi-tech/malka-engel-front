@@ -1,12 +1,10 @@
 import './App.css';
-import Contact from './components/Contact.js';
-import HomePage from './components/HomePage.js';
+import { MyRouting } from './components/MyRouting.js';
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-      <Contact></Contact>
-      <HomePage></HomePage>
+        <MyRouting></MyRouting>
       </header>
     </div>
   );
