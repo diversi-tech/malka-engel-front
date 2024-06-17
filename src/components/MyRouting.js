@@ -10,8 +10,8 @@ export const MyRouting = () => {
         <BrowserRouter>
             <Nav></Nav>
             <Routes>
-                <Route path="./myHome" element={<Home></Home>}></Route>
-                <Route path="./myContact" element={<Contact></Contact>}></Route>
+                <Route path="/myHome" element={<Home></Home>}></Route>
+                <Route path="/myContact" element={<Contact></Contact>}></Route>
             </Routes>
             <Footer></Footer>
         </BrowserRouter>

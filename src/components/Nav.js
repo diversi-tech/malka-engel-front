@@ -9,15 +9,15 @@ export const Nav = () => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <Link className="nav-link" to="/myHome">Home</Link>
+                            <Link className="nav-link" to="./myHome">Home</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/myContact">Contact</Link>
+                            <Link className="nav-link" to="./myContact">Contact</Link>
                         </li>
                     </ul>
                 </div>
-                <Outlet></Outlet>
             </nav>
+            <Outlet></Outlet>
         </div>
     );
 }
