@@ -1,5 +1,8 @@
 
 {
+    "popUpPage":{
+        "modalTitle":"הזמנתך בוצעה בהצלחה!"
+    },
     "homePage":{
         "title":"דף הבית"
     },
