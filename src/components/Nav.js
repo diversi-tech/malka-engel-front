@@ -1,7 +1,8 @@
 import { Link, Outlet } from "react-router-dom"
-
+import { useTranslation } from 'react-i18next';
 // Nav page
 export const Nav = () => {
+    const { t, i18n } = useTranslation();
     return (
         <div className="container">
             <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
@@ -16,7 +17,12 @@ export const Nav = () => {
                         </li>
                     </ul>
                 </div>
+                <div>
+                    <button onClick={() => i18n.changeLanguage('en')}>English</button>
+                    <button onClick={() => i18n.changeLanguage('he')}>עברית</button>
+                </div>
             </nav>
+
             <Outlet></Outlet>
         </div>
     );

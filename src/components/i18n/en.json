@@ -1,0 +1,30 @@
+{
+    "homePage":{
+        "title":"Home page"
+    },
+    "loginPage": {
+      "title": "Login",
+      "username": "Username",
+      "password": "Password",
+      "loginButton": "Login"
+    },
+    "contactPage":{
+        "title":"Contact page",
+        "h5contact" :"contact"
+    },
+    "footerpage":{
+        "title":"Footer page",
+        "h2About" :"About Us",
+        "p1":"We aim to provide you with the best gifts for every occasion.",
+        "h2QuickLinks":"Quick Links",
+        "linkHome":"Home",
+        "linkProducts":"Products",
+        "linkCart":"Cart",
+        "linkContact":"contact",
+        "contact":"Contact Us",
+        "lableEmail":"Your email address",
+        "lableMessage":"Your message",
+        "buttonSend":"Send",
+        "p2":"2024 Gift Shop. All rights reserved."
+    }
+}

@@ -1,9 +1,16 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import { Link, Outlet } from "react-router-dom"
+=======
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+
+>>>>>>> e0060c6f7c9708a26de1d60e6fc49b8d5b97f96d
 //Footer page
 
 
 export const Footer = () => {
+  const { t, i18n } = useTranslation();
   return (
  
 
