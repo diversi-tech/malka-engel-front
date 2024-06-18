@@ -6,6 +6,7 @@ export const Home = () => {
     return (
        <div>
         <h1>{t('homePage.title')}</h1>
+        
        </div>
     );
 }

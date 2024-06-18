@@ -1,6 +1,5 @@
 
 {
-
     "homePage":{
         "title":"דף הבית"
     },
@@ -9,6 +8,25 @@
       "username": "שם משתמש",
       "password": "סיסמה",
       "loginButton": "התחבר"
+    },
+    "contactPage":{
+        "title":"דף התחברות",
+        "h5contact" :"יצירת קשר"
+    },
+    "footerpage":{
+        "title":" תחתית עמוד",
+        "h2About" :"קצת עלינו",
+        "p1":"אנו שואפים לספק לך את המתנות הטובות ביותר לכל אירוע.",
+        "h2QuickLinks":"קישורים מהירים",
+        "linkHome":"דף בית",
+        "linkProducts":"Products",
+        "linkCart":"סל קניות",
+        "contact":"צור קשר",
+        "linkContact":"התחברות",
+        "lableEmail":"Your email address",
+        "lableMessage":"Your message",
+        "buttonSend":"Send",
+        "p2":"2024 Gift Shop. All rights reserved."
     }
   }
   
