@@ -7,7 +7,6 @@ import { CommonQuestions } from "./CommonQuestions";
 import { Contact} from "./Contact";
 
 
-// Routing page
 export const MyRouting = () => {
     return (
         <BrowserRouter>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, Outlet } from "react-router-dom"
 //Footer page
 
@@ -8,7 +8,6 @@ export const Footer = () => {
  
 
       <footer className="footer" style={{
-        position: "fixed",
         left: 0,
         bottom: 0,
         width: "100%",
