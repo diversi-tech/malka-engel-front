@@ -1,6 +1,9 @@
 {
-    "homePage": {
-        "title": "דף הבית"
+    "popUpPage":{
+        "modalTitle":"הזמנתך בוצעה בהצלחה!"
+    },
+    "homePage":{
+        "title":"דף הבית"
     },
     "loginPage": {
         "title": "התחברות",

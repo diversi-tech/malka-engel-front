@@ -1,6 +1,9 @@
 {
-    "homePage": {
-        "title": "Home page"
+    "popUpPage":{
+        "modalTitle":"Your order was successfully plased"
+    },
+    "homePage":{
+        "title":"Home page"
     },
     "loginPage": {
         "title": "Login",
