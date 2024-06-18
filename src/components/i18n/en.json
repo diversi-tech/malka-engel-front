@@ -1,0 +1,14 @@
+{
+
+
+    "homePage":{
+        "title":"Home page"
+    },
+    "loginPage": {
+      "title": "Login",
+      "username": "Username",
+      "password": "Password",
+      "loginButton": "Login"
+    }
+   
+}

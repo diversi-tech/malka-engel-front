@@ -1,0 +1,14 @@
+
+{
+
+    "homePage":{
+        "title":"דף הבית"
+    },
+    "loginPage": {
+      "title": "התחברות",
+      "username": "שם משתמש",
+      "password": "סיסמה",
+      "loginButton": "התחבר"
+    }
+  }
+  
