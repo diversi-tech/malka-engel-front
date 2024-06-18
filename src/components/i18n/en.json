@@ -1,4 +1,7 @@
 {
+    "popUpPage":{
+        "modalTitle":"Your order was successfully plased"
+    },
     "homePage":{
         "title":"Home page"
     },
