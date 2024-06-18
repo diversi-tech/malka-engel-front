@@ -15,25 +15,22 @@ export const Footer = () => {
         <div className="footer-section links">
           <h2>{t('footerpage.h2QuickLinks')}</h2>
           <ul>
-            <li><a href="/">{t('footerpage.linkHome')}</a></li>
+            <li><a href="/myHome">{t('footerpage.linkHome')}</a></li>
             <li><a href="/products">{t('footerpage.linkProducts')}</a></li>
             <li><a href="/cart">{t('footerpage.linkCart')}</a></li>
-            <li><a href="/contact">{t('footerpage.linkContact')}</a></li>
+            <li><a href="/myContact">{t('footerpage.linkContact')}</a></li>
           </ul>
         </div>
         <div className="footer-section contact-form">
           <h2>{t('footerpage.contact')}</h2>
           <form>
-            <label>Your email address</label>
-            <input type="email" name="email" className="text-input contact-input"  />
-            <label>Your message</label>            
+            <label>{t('footerpage.lableMessage')}</label>
+            <input type="email" name="email" className="text-input contact-input" />
+            <label>{t('footerpage.lableMessage')}</label>
             <textarea rows="4" name="message" className="text-input contact-input" ></textarea>
-            <button type="submit" className="btn btn-primary">Send</button>
+            <button type="submit" className="btn btn-primary">{t('footerpage.buttonSend')}</button>
           </form>
         </div>
-      </div>
-      <div className="footer-bottom">
-        <p>&copy; 2024 Gift Shop. All rights reserved.</p>
       </div>
     </footer>
   );

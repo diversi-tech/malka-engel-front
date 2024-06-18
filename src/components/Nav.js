@@ -10,10 +10,10 @@ export const Nav = () => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <Link className="nav-link" to="./myHome">Home</Link>
+                            <Link className="nav-link" to="./myHome">{t('navPage.linkHome')}</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="./myContact">Contact</Link>
+                            <Link className="nav-link" to="./myContact">{t('navPage.linkContact')}</Link>
                         </li>
                     </ul>
                 </div>
@@ -22,7 +22,6 @@ export const Nav = () => {
                     <button onClick={() => i18n.changeLanguage('he')}>עברית</button>
                 </div>
             </nav>
-
             <Outlet></Outlet>
         </div>
     );

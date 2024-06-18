@@ -15,10 +15,8 @@ const Login = () => {
             <form onSubmit={handleLogin}>
                 <label>{t('loginPage.username')}</label>
                 <input type="text" name="username" />
-
                 <label>{t('loginPage.password')}</label>
                 <input type="password" name="password" />
-
                 <button type="submit">{t('loginPage.loginButton')}</button>
             </form>
         </div>
