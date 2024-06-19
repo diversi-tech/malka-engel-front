@@ -35,11 +35,11 @@ export const MyRouting = () => {
                 <Route path="/myContact" element={<Contact></Contact>}></Route>
                 <Route path="/myCommonQuestions" element={<CommonQuestions></CommonQuestions>}></Route>
                 <Route path="/myAccount" element={<MyAccount></MyAccount>}></Route>
-                <AuthProvider>
+                {/* <AuthProvider> */}
                     <Route path="/Login" element={<LoginForm />} />
                     <Route path="/Profile" element={<UserProfile />} />
                     <Route path="/Register" element={<RegistrationForm />} />
-                </AuthProvider>
+                {/* </AuthProvider> */}
 
 
             </Routes>
