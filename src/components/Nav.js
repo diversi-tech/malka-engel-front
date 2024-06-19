@@ -5,6 +5,8 @@ export const Nav = () => {
     const { t, i18n } = useTranslation();
     return (
         <div className="container">
+
+                        
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container">
                     <Link className="navbar-brand" to="/">Navbar page</Link>
@@ -19,12 +21,16 @@ export const Nav = () => {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/myContact">{t('navPage.linkContact')}</Link>
                             </li>
+                            <li className="nav-item">
+                            <Link className="nav-link" to="./Login">{t('navPage.linkLoginForm')}</Link>
+                        </li>
                         </ul>
                         <div className="d-flex">
                             <button className="btn btn-outline-warning me-2" onClick={() => i18n.changeLanguage('en')}>English</button>
                             <button className="btn btn-outline-warning" onClick={() => i18n.changeLanguage('he')}>עברית</button>
                         </div>
                     </div>
+
                 </div>
             </nav>
         </div>
