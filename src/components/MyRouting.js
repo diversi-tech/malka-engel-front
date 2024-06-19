@@ -15,15 +15,19 @@ export const MyRouting = () => {
         <BrowserRouter>
             <Nav></Nav>
             <Routes>
+                {/*  שימו לב שבגרסה הזאת אין צורך להשתמש בסוויטש אפשר ישר לשים בתוך תגית הראוט */} 
                 <Route path="/myHome" element={<Home></Home>}></Route>
                 <Route path="/myContact" element={<Contact></Contact>}></Route>
                 <Route path="/myCommonQuestions" element={<CommonQuestions></CommonQuestions>}></Route>
                 <Route path="/myAccount" element={<MyAccount></MyAccount>}></Route>
                 <Route path="/myLoginForm" element={<LoginForm></LoginForm>}></Route>
+                {/* אין צורך בזה  */}
+                {/* <Switch> */}
                 {/* <AuthProvider>
                         <Route path="/Login" component={LoginForm} />
                         <Route path="/Profile" component={UserProfile} />
                 </AuthProvider> */}
+                {/* </Switch> */}
             </Routes>
             <Footer></Footer>
         </BrowserRouter>
