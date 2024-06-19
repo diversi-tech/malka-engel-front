@@ -1,4 +1,3 @@
-import React from 'react';
 
 //Account page
 export const MyAccount = () => {
