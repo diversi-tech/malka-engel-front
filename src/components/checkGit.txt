@@ -1,0 +1,13 @@
+
+hi girls!
+hi just creat this page to check if git is ok
+so in this page i make change from task1ForWeek1 branch that inside of week1 branch that inside of main branch
+main
+   |
+week1
+   |
+task1ForWeek1
+
+
+
+B"H!!!
