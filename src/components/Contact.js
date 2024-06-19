@@ -7,6 +7,7 @@ export const Contact = () => {
     return (
         <div>
             <h1>{t('contactPage.title')}</h1>
+            
             <h5>{t('contactPage.h5contact')}</h5>
         </div>
      );

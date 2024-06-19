@@ -4,10 +4,16 @@ import { Nav } from "./Nav";
 import { Footer } from "./Footer";
 import { MyAccount } from "./MyAccount";
 import { CommonQuestions } from "./CommonQuestions";
-import { Contact } from "./Contact";
+import { Contact} from "./Contact";
+import {Joys} from "./Joys";
+import {DesignerBirkins} from "./DesignerBirkins";
+import {CongratulationsToTheDonors} from "./CongratulationsToTheDonors";
+
+
 import { AuthProvider } from './ClientApi.js/AuthContext';
 import { LoginForm } from "./ClientApi.js/LoginForm";
 import UserProfile from './ClientApi.js/UserProfile';
+
 
 
 export const MyRouting = () => {
@@ -17,6 +23,14 @@ export const MyRouting = () => {
             <Routes>
                 {/*  שימו לב שבגרסה הזאת אין צורך להשתמש בסוויטש אפשר ישר לשים בתוך תגית הראוט */} 
                 <Route path="/myHome" element={<Home></Home>}></Route>
+
+                <Route path="/Contact" element={<Contact></Contact>}></Route>
+                <Route path="/CommonQuestions" element={<CommonQuestions></CommonQuestions>}></Route>
+                <Route path="/MyAccount" element={<MyAccount></MyAccount>}></Route>
+                <Route path="/Joys" element={<Joys></Joys>}></Route>
+                <Route path="/designerBirkins" element={<DesignerBirkins></DesignerBirkins>}></Route>
+                <Route path="/CongratulationsToTheDonors" element={<CongratulationsToTheDonors></CongratulationsToTheDonors>}></Route>
+
                 <Route path="/myContact" element={<Contact></Contact>}></Route>
                 <Route path="/myCommonQuestions" element={<CommonQuestions></CommonQuestions>}></Route>
                 <Route path="/myAccount" element={<MyAccount></MyAccount>}></Route>
@@ -28,6 +42,7 @@ export const MyRouting = () => {
                         <Route path="/Profile" component={UserProfile} />
                 </AuthProvider> */}
                 {/* </Switch> */}
+
             </Routes>
             <Footer></Footer>
         </BrowserRouter>

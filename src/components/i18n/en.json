@@ -27,10 +27,20 @@
         "contact": "Contact Us",
         "lableEmail": "Your email address",
         "lableMessage": "Your message",
-        "buttonSend": "Send"
+        "buttonSend": "Send",
+        "linkDesignerBirkins": "DesignerBirkins",
+        "linkCongratulationsToTheDonors": "Congratulations to the donors",
+        "linkMyAccount": "my accont",
+        "linkJoys":"joys",
+        "linkCommonQuestions":"Common questions",
+        "linkEvents":"events",
+        "linkTerms":"terms",
+        "linkLogin":"login"
+       
     },
     "navPage": {
         "linkHome": "Home",
         "linkContact": "contact"
     }
+    
 }

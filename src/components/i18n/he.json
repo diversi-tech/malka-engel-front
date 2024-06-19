@@ -1,9 +1,9 @@
 {
-    "popUpPage":{
-        "modalTitle":"הזמנתך בוצעה בהצלחה!"
+    "popUpPage": {
+        "modalTitle": "הזמנתך בוצעה בהצלחה!"
     },
-    "homePage":{
-        "title":"דף הבית"
+    "homePage": {
+        "title": "דף הבית"
     },
     "loginPage": {
         "title": "התחברות",
@@ -24,10 +24,20 @@
         "linkProducts": "מוצרים",
         "linkCart": "סל קניות",
         "contact": "צור קשר",
-        "linkContact": "התחברות",
+        "linkContact": "יצירת קשר",
         "lableEmail": "כתובת מייל שלך ",
         "lableMessage": "ההודעה שלך",
-        "buttonSend": "שלח"
+        "buttonSend": "שלח",
+        "linkDesignerBirkins": "בירכונים מעוצבים",
+        "linkCongratulationsToTheDonors": "ברכות לתורמים",
+        "linkMyAccount": "החשבון שלי",
+        "linkJoys":"שמחות",
+        "linkCommonQuestions":"שאלות נפוצות",
+        "linkEvents":"אירועים",
+        "linkLogin":"התחברות",
+        "linkTerms":"תקנון"
+        
+        
     },
     "navPage": {
         "linkHome": "דף בית",
