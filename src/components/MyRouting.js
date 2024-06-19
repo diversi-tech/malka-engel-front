@@ -20,12 +20,10 @@ export const MyRouting = () => {
                 <Route path="/myCommonQuestions" element={<CommonQuestions></CommonQuestions>}></Route>
                 <Route path="/myAccount" element={<MyAccount></MyAccount>}></Route>
                 <Route path="/myLoginForm" element={<LoginForm></LoginForm>}></Route>
-                <AuthProvider>
-                    <Switch>
+                {/* <AuthProvider>
                         <Route path="/Login" component={LoginForm} />
                         <Route path="/Profile" component={UserProfile} />
-                    </Switch>
-                </AuthProvider>
+                </AuthProvider> */}
             </Routes>
             <Footer></Footer>
         </BrowserRouter>

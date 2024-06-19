@@ -6,12 +6,11 @@ import { useNavigate } from "react-router-dom";
 export const PopUp = () => {
     const [showModal, setShowModal] = useState(false);
     // to navigate the page after paying
-    const myNavigate = useNavigate();
+    //const myNavigate = useNavigate();
     const handleClose = () => {setShowModal(false);/* myNavigate('./myHome'); //why it doesnt work??*/};
     const handleShow = () => setShowModal(true);
-    return (
-        <>
-      <Button variant="primary" onClick={handleShow}>
+    return (<>
+    <Button variant="primary" onClick={handleShow}>
         Open Popup
       </Button>
 
@@ -29,6 +28,6 @@ export const PopUp = () => {
           {/* Add additional buttons if needed */}
         </Modal.Footer>
       </Modal>
-    </>
+      </>
     );
 }
