@@ -16,7 +16,7 @@ export const Nav = () => {
                             <Link className="nav-link" to="./myContact">{t('navPage.linkContact')}</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="./myLoginForm">{t('navPage.linkLoginForm')}</Link>
+                            <Link className="nav-link" to="./Login">{t('navPage.linkLoginForm')}</Link>
                         </li>
                     </ul>
                 </div>
