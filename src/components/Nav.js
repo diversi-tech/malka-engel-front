@@ -6,7 +6,7 @@ export const Nav = () => {
     return (
         <div className="container">
 
-                        
+
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container">
                     <Link className="navbar-brand" to="/">Navbar page</Link>
@@ -22,8 +22,11 @@ export const Nav = () => {
                                 <Link className="nav-link" to="/myContact">{t('navPage.linkContact')}</Link>
                             </li>
                             <li className="nav-item">
-                            {/* <Link className="nav-link" to="/Login">{t('navPage.linkLoginForm')}</Link> */}
-                        </li>
+                                <Link className="nav-link" to="./Login">{t('navPage.linkLoginForm')}</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="./myProductList">{t('productList.title')}</Link>
+                            </li>
                         </ul>
                         <div className="d-flex">
                             <button className="btn btn-outline-warning me-2" onClick={() => i18n.changeLanguage('en')}>English</button>
@@ -33,7 +36,7 @@ export const Nav = () => {
 
                 </div>
             </nav>
-        </div>
+        </div >
     );
 }
 //     <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
