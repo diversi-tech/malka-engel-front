@@ -36,7 +36,7 @@ export const Nav = () => {
 
                 </div>
             </nav>
-        </div>
+        </div >
     );
 }
 //     <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
