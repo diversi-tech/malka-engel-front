@@ -18,7 +18,7 @@ export const RecommendedProducts = () => {
   
     return (
         <div>
-            <h1>{t('ho.title')}</h1> 
+            
             <Container>
                 <Row xs={1} md={2} lg={3} className="g-4">
                     {products.map((product, index) => (
