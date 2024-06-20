@@ -24,10 +24,10 @@ export const MyRouting = () => {
                 <Route path="/MyAccount" element={<MyAccount></MyAccount>}></Route>
                 <Route path="/myLoginForm" element={<LoginForm></LoginForm>}></Route>
                 <AuthProvider>
-                    <Switch>
+                    {/* <Switch>
                         <Route path="/Login" component={LoginForm} />
                         <Route path="/Profile" component={UserProfile} />
-                    </Switch>
+                    </Switch> */}
                 </AuthProvider>
             </Routes>
             <Footer></Footer>
@@ -36,3 +36,4 @@ export const MyRouting = () => {
         </BrowserRouter>
     );
 }
+export default MyRouting;
