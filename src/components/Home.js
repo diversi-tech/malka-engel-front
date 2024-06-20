@@ -1,5 +1,9 @@
 import { useTranslation } from 'react-i18next';
+
+
+
 import { RecommendedProducts } from '../RecommendedProducts';
+
 //Home page
 export const Home = () => {
     const { t, i18n } = useTranslation();
