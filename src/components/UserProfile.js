@@ -1,9 +1,11 @@
 
 import React, { useEffect, useState } from 'react';
-import { useAuth } from './AuthContext';
-import { getUserProfile } from './Api';
+import { useAuth } from './ClientApi.js/AuthContext';
+import { getUserProfile } from './ClientApi.js/Api';
+import {useTranslation} from'react-i18next';
 
 const UserProfile = () => {
+  const { t, i18n } = useTranslation();
   const { state, dispatch } = useAuth();
   const [profile, setProfile] = useState(null);
 

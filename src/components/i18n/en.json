@@ -15,7 +15,7 @@
         "title": "Contact page",
         "h5contact": "contact"
     },
-    "footerpage": {
+    "footerPage": {
         "title": "Footer page",
         "h2About": "About Us",
         "p1": "We aim to provide you with the best gifts for every occasion.",
@@ -27,10 +27,24 @@
         "contact": "Contact Us",
         "lableEmail": "Your email address",
         "lableMessage": "Your message",
-        "buttonSend": "Send"
+        "buttonSend": "Send",
+        "linkDesignerBirkins": "DesignerBirkins",
+        "linkCongratulationsToTheDonors": "Congratulations to the donors",
+        "linkMyAccount": "my accont",
+        "linkJoys":"joys",
+        "linkCommonQuestions":"Common questions",
+        "linkEvents":"events",
+        "linkTerms":"terms",
+        "linkLogin":"login"
+       
     },
     "navPage": {
         "linkHome": "Home",
-        "linkContact": "contact"
+        "linkContact": "contact",
+        "linkLogin":"login",
+        "linkProduct":"product list"
+    },
+    "productListPage":{
+        "title": "product List"
     }
 }
