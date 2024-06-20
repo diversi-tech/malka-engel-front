@@ -27,8 +27,8 @@ export const MyRouting = () => {
             <Routes>
                 {/*  שימו לב שבגרסה הזאת אין צורך להשתמש בסוויטש אפשר ישר לשים בתוך תגית הראוט */}
                 <Route path="/myHome" element={<Home></Home>}></Route>
-                <Route path="/myProductList" element={<ProductList></ProductList>}></Route>
-                <Route path="/myDetails/:id" element={<Details/>}></Route>
+
+
 
                 <Route path="/myJoys" element={<Joys></Joys>}></Route>
                 <Route path="/myDesignerBirkins" element={<DesignerBirkins></DesignerBirkins>}></Route>
@@ -49,3 +49,4 @@ export const MyRouting = () => {
         </BrowserRouter>
     );
 }
+export default MyRouting;
