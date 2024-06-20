@@ -42,5 +42,8 @@
     "navPage": {
         "linkHome": "דף בית",
         "linkContact": "התחברות"
+    },
+    "productList":{
+        "title": "  רשימת מוצרים"
     }
 }

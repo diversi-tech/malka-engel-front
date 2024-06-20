@@ -41,6 +41,8 @@
     "navPage": {
         "linkHome": "Home",
         "linkContact": "contact"
+    },
+    "productList":{
+        "title": "product List"
     }
-    
 }
