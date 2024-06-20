@@ -22,10 +22,10 @@ export const Nav = () => {
                                 <Link className="nav-link" to="/myContact">{t('navPage.linkContact')}</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="./Login">{t('navPage.linkLoginForm')}</Link>
+                                <Link className="nav-link" to="./Login">{t('navPage.linkLogin')}</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="./myProductList">{t('productList.title')}</Link>
+                                <Link className="nav-link" to="./myProductList">{t('navPage.linkProduct')}</Link>
                             </li>
                         </ul>
                         <div className="d-flex">

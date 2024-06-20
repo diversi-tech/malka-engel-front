@@ -1,25 +1,29 @@
-// Login.js
+import React, { useState } from 'react';
+import { loginUser } from './ClientApi.js/Api';
 import { useTranslation } from 'react-i18next';
 
-const Login = () => {
-    const { t, i18n } = useTranslation();
+export const Login = () => {
+  const { t, i18n } = useTranslation();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-    const handleLogin = () => {
-        // Handle login logic here
-    };
+  const handleLogin = async () => {
+    try {
+      const userData = { email, password };
+      const response = await loginUser(userData);
+      console.log('Login Successful:', response);
+      // ניתן להתעלם מהקונסול ולעבור לתצוגה מתאימה למשתמש
+    } catch (error) {
+      console.error('Login Failed:', error);
+      // טיפול בטעות בהתאם
+    }
+  };
 
-    return (
-        <div>
-            <h2>{t('loginPage.title')}</h2>
-            <form onSubmit={handleLogin}>
-                <label>{t('loginPage.username')}</label>
-                <input type="text" name="username" />
-                <label>{t('loginPage.password')}</label>
-                <input type="password" name="password" />
-                <button type="submit">{t('loginPage.loginButton')}</button>
-            </form>
-        </div>
-    );
+  return (
+    <div>
+      <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+      <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      <button onClick={handleLogin}>Login</button>
+    </div>
+  );
 };
-
-export default Login;

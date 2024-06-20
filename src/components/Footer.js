@@ -12,15 +12,15 @@ export const Footer = () => {
   return (
 
       <footer class="bg-dark text-white p-3 fixed-bottom">
-        <Link  to="./CommonQuestions" className="text-white text-decoration-none me-3">{t('footerpage.linkCommonQuestions')}</Link>
-        <Link  to="./MyAccount" className="text-white text-decoration-none me-3">{t('footerpage.linkMyAccount')}</Link>
-        <Link  to="./Contact" className="text-white text-decoration-none me-3">{t('footerpage.linkContact')}</Link>
-        <Link  to="./DesignerBirkins" className="text-white text-decoration-none me-3">{t('footerpage.linkDesignerBirkins')}</Link>
-        <Link  to="./CongratulationsToTheDonors" className="text-white text-decoration-none me-3">{t('footerpage.linkCongratulationsToTheDonors')}</Link>
-        <Link  to="./Joys" className="text-white text-decoration-none me-3">{t('footerpage.linkJoys')}</Link>
-        <Link  to="./Events" className="text-white text-decoration-none me-3">{t('footerpage.linkEvents')}</Link>
-        <Link  to="./Login" className="text-white text-decoration-none me-3">{t('footerpage.linkLogin')}</Link>
-        <Link  to="./Terms" className="text-white text-decoration-none me-3">{t('footerpage.linkTerms')}</Link>
+        <Link  to="./CommonQuestions" className="text-white text-decoration-none me-3">{t('footerPage.linkCommonQuestions')}</Link>
+        <Link  to="./MyAccount" className="text-white text-decoration-none me-3">{t('footerPage.linkMyAccount')}</Link>
+        <Link  to="./Contact" className="text-white text-decoration-none me-3">{t('footerPage.linkContact')}</Link>
+        <Link  to="./DesignerBirkins" className="text-white text-decoration-none me-3">{t('footerPage.linkDesignerBirkins')}</Link>
+        <Link  to="./CongratulationsToTheDonors" className="text-white text-decoration-none me-3">{t('footerPage.linkCongratulationsToTheDonors')}</Link>
+        <Link  to="./Joys" className="text-white text-decoration-none me-3">{t('footerPage.linkJoys')}</Link>
+        <Link  to="./Events" className="text-white text-decoration-none me-3">{t('footerPage.linkEvents')}</Link>
+        <Link  to="./Login" className="text-white text-decoration-none me-3">{t('footerPage.linkLogin')}</Link>
+        <Link  to="./Terms" className="text-white text-decoration-none me-3">{t('footerPage.linkTerms')}</Link>
       
        
 

@@ -1,9 +1,9 @@
 
 //Account page
-export const MyAccount = () => {
+export const Account = () => {
     return (
         <div>
-            <h1>myAccount</h1>
+            <h1>Account</h1>
         </div>
     );
 }

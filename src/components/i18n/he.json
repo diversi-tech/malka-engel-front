@@ -15,7 +15,7 @@
         "title": "דף התחברות",
         "h5contact": "יצירת קשר"
     },
-    "footerpage": {
+    "footerPage": {
         "title": " תחתית עמוד",
         "h2About": "קצת עלינו",
         "p1": "אנו שואפים לספק לך את המתנות הטובות ביותר לכל אירוע.",
@@ -41,9 +41,11 @@
     },
     "navPage": {
         "linkHome": "דף בית",
-        "linkContact": "התחברות"
+        "linkContact": "איש קשר",
+        "linkLogin":"התחברות",
+        "linkProduct":"רשימת מוצרים"
     },
-    "productList":{
+    "productListPage":{
         "title": "  רשימת מוצרים"
     }
 }

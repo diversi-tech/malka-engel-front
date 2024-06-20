@@ -15,7 +15,7 @@
         "title": "Contact page",
         "h5contact": "contact"
     },
-    "footerpage": {
+    "footerPage": {
         "title": "Footer page",
         "h2About": "About Us",
         "p1": "We aim to provide you with the best gifts for every occasion.",
@@ -40,9 +40,11 @@
     },
     "navPage": {
         "linkHome": "Home",
-        "linkContact": "contact"
+        "linkContact": "contact",
+        "linkLogin":"login",
+        "linkProduct":"product list"
     },
-    "productList":{
+    "productListPage":{
         "title": "product List"
     }
 }

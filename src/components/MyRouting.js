@@ -2,7 +2,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Home } from "./Home";
 import { Nav } from "./Nav";
 import { Footer } from "./Footer";
-import { MyAccount } from "./MyAccount";
 import { CommonQuestions } from "./CommonQuestions";
 import { Contact } from "./Contact";
 import { Joys } from "./Joys";
@@ -11,14 +10,15 @@ import { CongratulationsToTheDonors } from "./CongratulationsToTheDonors";
 import { Details } from "./Details";
 
 import { AuthProvider } from './ClientApi.js/AuthContext';
-import { LoginForm } from "./LoginForm";
+import { Login } from "./Login";
 import UserProfile from './UserProfile';
 import RegistrationForm from './RegistrationForm';
 import { ProductList } from "./ProductList";
+import { Account } from "./Account";
 
-
-
-
+// MyRouting רשמתי 
+// Routing במקום 
+// כי זה שם שמור
 
 export const MyRouting = () => {
     return (
@@ -30,17 +30,17 @@ export const MyRouting = () => {
                 <Route path="/myProductList" element={<ProductList></ProductList>}></Route>
                 <Route path="/myDetails/:id" element={<Details/>}></Route>
 
-                <Route path="/Joys" element={<Joys></Joys>}></Route>
-                <Route path="/designerBirkins" element={<DesignerBirkins></DesignerBirkins>}></Route>
-                <Route path="/CongratulationsToTheDonors" element={<CongratulationsToTheDonors></CongratulationsToTheDonors>}></Route>
+                <Route path="/myJoys" element={<Joys></Joys>}></Route>
+                <Route path="/myDesignerBirkins" element={<DesignerBirkins></DesignerBirkins>}></Route>
+                <Route path="/myCongratulationsToTheDonors" element={<CongratulationsToTheDonors></CongratulationsToTheDonors>}></Route>
 
                 <Route path="/myContact" element={<Contact></Contact>}></Route>
                 <Route path="/myCommonQuestions" element={<CommonQuestions></CommonQuestions>}></Route>
-                <Route path="/myAccount" element={<MyAccount></MyAccount>}></Route>
+                <Route path="/myAccount" element={<Account></Account>}></Route>
                 {/* <AuthProvider> */}
-                    <Route path="/Login" element={<LoginForm />} />
-                    <Route path="/Profile" element={<UserProfile />} />
-                    <Route path="/Register" element={<RegistrationForm />} />
+                    <Route path="/myLogin" element={<Login />} />
+                    <Route path="/myProfile" element={<UserProfile />} />
+                    <Route path="/myRegister" element={<RegistrationForm />} />
                 {/* </AuthProvider> */}
 
 
