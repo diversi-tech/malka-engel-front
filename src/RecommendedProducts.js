@@ -3,6 +3,9 @@ import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import { useState } from 'react';
 
+
+
+
 export const RecommendedProducts = () => {
     const { t, i18n } = useTranslation();
     const products = [
@@ -15,9 +18,7 @@ export const RecommendedProducts = () => {
   
     return (
         <div>
-
-            <h1>{t('homePage.recommendedProducts')}</h1>
-
+            <h1>{t('ho.title')}</h1> 
             <Container>
                 <Row xs={1} md={2} lg={3} className="g-4">
                     {products.map((product, index) => (
