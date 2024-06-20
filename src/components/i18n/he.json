@@ -3,7 +3,8 @@
         "modalTitle": "הזמנתך בוצעה בהצלחה!"
     },
     "homePage": {
-        "title": "דף הבית"
+        "title": "דף הבית",
+        "recommendedProducts":"מוצרים מומלצים"
     },
     "loginPage": {
         "title": "התחברות",
