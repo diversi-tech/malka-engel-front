@@ -42,7 +42,7 @@
     "navPage": {
         "linkHome": "Home",
         "linkContact": "Contact",
-        "linCommonQuestions":"FQA"
+        "linCommonQuestions":"FQA",
         "linkLogin":"login",
         "linkProduct":"product list"
     },
