@@ -1,9 +1,10 @@
 {
-    "popUpPage":{
-        "modalTitle":"הזמנתך בוצעה בהצלחה!"
+    "popUpPage": {
+        "modalTitle": "הזמנתך בוצעה בהצלחה!"
     },
-    "homePage":{
-        "title":"דף הבית"
+    "homePage": {
+        "title": "דף הבית",
+        "recommendedProducts":"מוצרים מומלצים"
     },
     "loginPage": {
         "title": "התחברות",
@@ -15,7 +16,7 @@
         "title": "דף התחברות",
         "h5contact": "יצירת קשר"
     },
-    "footerpage": {
+    "footerPage": {
         "title": " תחתית עמוד",
         "h2About": "קצת עלינו",
         "p1": "אנו שואפים לספק לך את המתנות הטובות ביותר לכל אירוע.",
@@ -24,14 +25,30 @@
         "linkProducts": "מוצרים",
         "linkCart": "סל קניות",
         "contact": "צור קשר",
-        "linkContact": "התחברות",
+        "linkContact": "יצירת קשר",
         "lableEmail": "כתובת מייל שלך ",
         "lableMessage": "ההודעה שלך",
-        "buttonSend": "שלח"
+        "buttonSend": "שלח",
+        "linkDesignerBirkins": "בירכונים מעוצבים",
+        "linkCongratulationsToTheDonors": "ברכות לתורמים",
+        "linkMyAccount": "החשבון שלי",
+        "linkJoys":"שמחות",
+        "linkCommonQuestions":"שאלות נפוצות",
+        "linkEvents":"אירועים",
+        "linkLogin":"התחברות",
+        "linkTerms":"תקנון"
+        
+        
     },
     "navPage": {
         "linkHome": "דף בית",
-        "linkContact": "התחברות",
         "linCommonQuestions":"שאלות נפוצות"
+        "linkContact": "איש קשר",
+        "linkLogin":"התחברות",
+        "linkProduct":"רשימת מוצרים"
+    },
+    "productListPage":{
+        "title": "  רשימת מוצרים"
+
     }
 }
