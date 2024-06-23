@@ -41,11 +41,14 @@
     },
     "navPage": {
         "linkHome": "Home",
-        "linkContact": "contact",
+        "linkContact": "Contact",
+        "linCommonQuestions":"FQA"
         "linkLogin":"login",
         "linkProduct":"product list"
     },
+  
     "productListPage":{
         "title": "product List"
+
     }
 }
