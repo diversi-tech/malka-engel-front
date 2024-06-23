@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link, Outlet } from "react-router-dom"
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 //Footer page

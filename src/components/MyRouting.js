@@ -13,12 +13,11 @@ export const MyRouting = () => {
             <Nav></Nav>
             <Routes>
                 <Route path="/myHome" element={<Home></Home>}></Route>
-                <Route path="/Contact" element={<Contact></Contact>}></Route>
-                <Route path="/CommonQuestions" element={<CommonQuestions></CommonQuestions>}></Route>
-                <Route path="/MyAccount" element={<MyAccount></MyAccount>}></Route>
-
+                <Route path="/myContact" element={<Contact></Contact>}></Route>
+                <Route path="/myCommonQuestions" element={<CommonQuestions></CommonQuestions>}></Route>
+                <Route path="/myAccount" element={<MyAccount></MyAccount>}></Route>
             </Routes>
-            <Footer></Footer>
+            {/* <Footer></Footer> */}
                 
             
         </BrowserRouter>
