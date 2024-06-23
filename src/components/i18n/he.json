@@ -50,5 +50,9 @@
     "productListPage":{
         "title": "  רשימת מוצרים"
 
+    },
+    "CommonQuestionsPage": {
+        "title": "שאלות נפוצות"
     }
+    
 }
