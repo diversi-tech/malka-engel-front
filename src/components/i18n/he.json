@@ -42,11 +42,13 @@
     },
     "navPage": {
         "linkHome": "דף בית",
+        "linCommonQuestions":"שאלות נפוצות"
         "linkContact": "איש קשר",
         "linkLogin":"התחברות",
         "linkProduct":"רשימת מוצרים"
     },
     "productListPage":{
         "title": "  רשימת מוצרים"
+
     }
 }
