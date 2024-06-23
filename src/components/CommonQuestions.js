@@ -4,7 +4,7 @@ import React from 'react';
 export const CommonQuestions = () => {
     return (
         <div>
-            <h1>CommonQuestions</h1>
+            <h1>CommonQuestions   My branch</h1>
         </div>
     );
 }
