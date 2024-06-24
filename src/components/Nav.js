@@ -1,5 +1,10 @@
 import { Link, Outlet } from "react-router-dom"
 import { useTranslation } from 'react-i18next';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+
+
+
 // Nav page
 export const Nav = () => {
     const { t, i18n } = useTranslation();
@@ -13,6 +18,7 @@ export const Nav = () => {
                 <h1 className="navbar-brand" to="/">Designery</h1>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
+                        <li className="nav-item"><Link className="nav-link" to="./myShoppingCart"><FontAwesomeIcon icon={faShoppingCart} /><span className="cart-item-count"></span></Link> </li>
                         <li className="nav-item"><Link className="nav-link" to="./myHome">{t('navPage.linkHome')}</Link> </li>
                         {/* <li className="nav-item"><Link className="nav-link" to="./myContact">{t('navPage.linkContact')}</Link> </li> */}
                         <li className="nav-item"><Link className="nav-link" to="./myCommonQuestions">{t('navPage.linCommonQuestions')}</Link> </li>

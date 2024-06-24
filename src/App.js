@@ -1,5 +1,5 @@
 import './App.css';
-import './bootstrap.min.css';
+import './bootstrap.css';
 import { Provider } from 'react-redux';
 import { Store } from './redux/Stor.js';
 
