@@ -1,5 +1,5 @@
 
-//Home page
+//CommonQuestions page
 export const CommonQuestions = () => {
     return (
         <div>

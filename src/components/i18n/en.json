@@ -3,8 +3,8 @@
         "modalTitle":"Your order was successfully plased"
     },
     "homePage":{
-        "title":"Home page",
-        "recommendedProducts":"Recommended Products"
+        "title":"Home page"
+       
     },
     "loginPage": {
         "title": "Login",
@@ -47,5 +47,8 @@
     },
     "productListPage":{
         "title": "product List"
+    },
+    "recommendedProducts":{
+        "title": "recommended Products"
     }
 }

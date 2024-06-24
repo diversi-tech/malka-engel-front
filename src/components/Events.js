@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-//Home page
+//Events page
 export const Events = () => {
     const { t, i18n } = useTranslation();
     return (

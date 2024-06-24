@@ -3,8 +3,8 @@
         "modalTitle": "הזמנתך בוצעה בהצלחה!"
     },
     "homePage": {
-        "title": "דף הבית",
-        "recommendedProducts":"מוצרים מומלצים"
+        "title": "דף הבית"
+        
     },
     "loginPage": {
         "title": "התחברות",
@@ -48,5 +48,8 @@
     },
     "productListPage":{
         "title": "  רשימת מוצרים"
+    },
+    "recommendedProducts":{
+        "title": "מוצרים מומלצים"
     }
 }
