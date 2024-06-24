@@ -5,8 +5,8 @@ export const Nav = () => {
     const { t, i18n } = useTranslation();
     return (
 
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-            <div class="container-fluid">
+        <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+            <div className="container-fluid">
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -18,6 +18,7 @@ export const Nav = () => {
                         <li className="nav-item"><Link className="nav-link" to="./myCommonQuestions">{t('navPage.linCommonQuestions')}</Link> </li>
                         <li className="nav-item"> <Link className="nav-link" to="./Login">{t('navPage.linkLogin')}</Link></li>
                         <li className="nav-item"><Link className="nav-link" to="./myProductList">{t('navPage.linkProduct')}</Link> </li>
+                        <li className="nav-item"><Link className="nav-link" to="./myOrderForm">{t('navPage.linkOrderForm')}</Link> </li>
                     </ul>
                 </div>
                 <div className="d-flex">

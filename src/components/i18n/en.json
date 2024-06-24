@@ -44,7 +44,8 @@
         "linkContact": "Contact",
         "linCommonQuestions":"FQA",
         "linkLogin":"login",
-        "linkProduct":"product list"
+        "linkProduct":"product list",
+        "linkOrderForm": " Order Form"
     },
   
     "productListPage":{
@@ -59,5 +60,8 @@
     "CommonQuestionsPage": {
         "title": "FQA"
 
+    },
+    "orderFormPage":{
+        "title":"this is order form component"
     }
 }

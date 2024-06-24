@@ -18,7 +18,7 @@ export const Footer = () => {
       <Link to="./myLogin" className="text-white text-decoration-none me-3">{t('footerPage.linkLogin')}</Link>
       <Link to="./myTerms" className="text-white text-decoration-none me-3">{t('footerPage.linkTerms')}</Link>
       <Link to="./myProduct" className="text-white text-decoration-none me-3">product</Link>
-      <h5 className="text-white text-decoration-none me-3">כל הזכויות שמורות@</h5>
+      <h5 className="text-white text-decoration-none me-3"  >כל הזכויות שמורות@</h5>
 
 
     </footer>

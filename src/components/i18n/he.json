@@ -45,7 +45,9 @@
         "linCommonQuestions":"שאלות נפוצות",
         "linkContact": "איש קשר",
         "linkLogin":"התחברות",
-        "linkProduct":"רשימת מוצרים"
+        "linkProduct":"רשימת מוצרים",
+        "linkOrderForm": "  טופס הזמנות"
+
     },
     "productListPage":{
         "title": "  רשימת מוצרים"
@@ -59,6 +61,9 @@
     "CommonQuestionsPage": {
         "title": "שאלות נפוצות"
 
+    },
+    "orderFormPage":{
+        "title":"זה עמוד של טופס הזמנות"
     }
     
 }
