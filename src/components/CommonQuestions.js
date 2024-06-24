@@ -2,6 +2,8 @@ import { Collapse } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 
+
+
 //FQA page
 export const CommonQuestions = () => {
   const { t, i18n } = useTranslation();
