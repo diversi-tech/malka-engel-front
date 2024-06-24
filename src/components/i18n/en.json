@@ -1,6 +1,6 @@
 {
     "popUpPage":{
-        "modalTitle":"Your order was successfully plased"
+        "modalTitle":"Your order was successfully placed"
     },
     "homePage":{
         "title":"Home page"
@@ -11,9 +11,29 @@
         "password": "Password",
         "loginButton": "Login"
     },
+    "loginFormPage": {
+        "title": "LoginForm",
+        "username": "Username",
+        "password": "Password",
+        "loginButton": "Login"
+    },
     "contactPage": {
         "title": "Contact page",
         "h5contact": "contact"
+    },
+    "shoppingCartPage": {
+        "title": "Shopping Cart",
+        "p1": "your basket is empty",
+        "thItem": "Item",
+        "thQuantity": "Quantity",
+        "thPrice" : "Price",
+        "thTotal": "Total",
+        "thActions": "Actions",
+        "removeButton": "Remove",
+        "h3Total": "Total",
+        "clearButton": "Clear Cart",
+        "addButton": "Add Item"
+        
     },
     "footerpage": {
         "title": "Footer page",
@@ -35,12 +55,15 @@
         "linkCommonQuestions":"Common questions",
         "linkEvents":"events",
         "linkTerms":"terms",
-        "linkLogin":"login"
+        "linkLoginForm":"login"
        
     },
     "navPage": {
         "linkHome": "Home",
-        "linkContact": "contact"
+        "linkContact": "Contact",
+        "linkLoginForm": "Login",
+        "linkShoppingCart": "Cart"
+
     }
     
 }

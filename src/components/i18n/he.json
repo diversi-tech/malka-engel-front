@@ -11,9 +11,31 @@
         "password": "סיסמה",
         "loginButton": "התחבר"
     },
+    "loginFormPage": {
+        "title": "התחברות",
+        "username": "שם משתמש",
+        "password": "סיסמה",
+        "loginButton": "התחבר"
+    },
     "contactPage": {
         "title": "דף התחברות",
         "h5contact": "יצירת קשר"
+    },
+    "shoppingCartPage": {
+        "title": " סל קניות",
+        "p1": " הסל שלך ריק",
+        "thItem": "מוצר",
+        "thQuantity": "כמות",
+        "thPrice" : "מחיר",
+        "thTotal": "סהכ ",
+        "thActions": "פעולות",
+        "removeButton": "הסר",
+        "h3Total": "סהכ",
+        "clearButton": "נקה עגלה ",
+        "addButton": "הוסף פריט"
+
+
+
     },
     "footerpage": {
         "title": " תחתית עמוד",
@@ -34,13 +56,16 @@
         "linkJoys":"שמחות",
         "linkCommonQuestions":"שאלות נפוצות",
         "linkEvents":"אירועים",
-        "linkLogin":"התחברות",
+        "linkLoginForm":"התחברות",
         "linkTerms":"תקנון"
         
         
     },
     "navPage": {
         "linkHome": "דף בית",
-        "linkContact": "התחברות"
+        "linkContact": "יצירת קשר",
+        "linkLoginForm": "התחברות",
+        "linkShoppingCart": "סל קניות"
+
     }
 }

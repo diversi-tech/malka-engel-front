@@ -6,7 +6,7 @@ export const Nav = () => {
     return (
         <div className="container">
 
-                        
+
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container">
                     <Link className="navbar-brand" to="/">Navbar page</Link>
@@ -22,8 +22,14 @@ export const Nav = () => {
                                 <Link className="nav-link" to="/myContact">{t('navPage.linkContact')}</Link>
                             </li>
                             <li className="nav-item">
-                            {/* <Link className="nav-link" to="/Login">{t('navPage.linkLoginForm')}</Link> */}
-                        </li>
+                                <Link className="nav-link" to="/myShoppingCart">{t('navPage.linkShoppingCart')}</Link>
+                            </li>
+                            <li className="nav-item">
+                            <Link className="nav-link" to="/myLogin">{t('navPage.linkLoginForm')}</Link>
+                            </li>
+                            {/* <li className="nav-item">
+                            <Link className="nav-link" to="/myRegister">{t('navPage.linkRegister')}</Link>
+                            </li> */}
                         </ul>
                         <div className="d-flex">
                             <button className="btn btn-outline-warning me-2" onClick={() => i18n.changeLanguage('en')}>English</button>
@@ -37,23 +43,23 @@ export const Nav = () => {
     );
 }
 //     <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
-        //         <h1 className="navbar-brand" to="/">Navbar page</h1>
-        //         <div className="collapse navbar-collapse" id="navbarNav">
-        //             <ul className="navbar-nav">
-        //                 <li className="nav-item">
-        //                     <Link className="nav-link" to="./myHome">{t('navPage.linkHome')}</Link>
-        //                 </li>
-        //                 <li className="nav-item">
-        //                     <Link className="nav-link" to="./myContact">{t('navPage.linkContact')}</Link>
-        //                 </li>
-        //             </ul>
-        //         </div>
-        //         <div>
-        //             <div className="container">
-        //                 <button type="button" class="btn btn-outline-warning" onClick={() => i18n.changeLanguage('en')}>English</button>
-        //                 <button type="button" class="btn btn-outline-warning" onClick={() => i18n.changeLanguage('he')}>עברית</button>
-        //             </div>
-        //         </div>
-        //     </nav>
+//         <h1 className="navbar-brand" to="/">Navbar page</h1>
+//         <div className="collapse navbar-collapse" id="navbarNav">
+//             <ul className="navbar-nav">
+//                 <li className="nav-item">
+//                     <Link className="nav-link" to="./myHome">{t('navPage.linkHome')}</Link>
+//                 </li>
+//                 <li className="nav-item">
+//                     <Link className="nav-link" to="./myContact">{t('navPage.linkContact')}</Link>
+//                 </li>
+//             </ul>
+//         </div>
+//         <div>
+//             <div className="container">
+//                 <button type="button" class="btn btn-outline-warning" onClick={() => i18n.changeLanguage('en')}>English</button>
+//                 <button type="button" class="btn btn-outline-warning" onClick={() => i18n.changeLanguage('he')}>עברית</button>
+//             </div>
+//         </div>
+//     </nav>
 
 // import { Link } from 'react-router-dom';

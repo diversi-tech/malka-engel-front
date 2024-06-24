@@ -19,7 +19,7 @@ export const Footer = () => {
         <Link  to="./CongratulationsToTheDonors" className="text-white text-decoration-none me-3">{t('footerpage.linkCongratulationsToTheDonors')}</Link>
         <Link  to="./Joys" className="text-white text-decoration-none me-3">{t('footerpage.linkJoys')}</Link>
         <Link  to="./Events" className="text-white text-decoration-none me-3">{t('footerpage.linkEvents')}</Link>
-        <Link  to="./Login" className="text-white text-decoration-none me-3">{t('footerpage.linkLogin')}</Link>
+        <Link  to="./myLogin" className="text-white text-decoration-none me-3">{t('footerpage.linkLoginForm')}</Link>
         <Link  to="./Terms" className="text-white text-decoration-none me-3">{t('footerpage.linkTerms')}</Link>
       
        

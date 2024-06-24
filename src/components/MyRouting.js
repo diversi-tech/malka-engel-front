@@ -8,8 +8,7 @@ import { Contact} from "./Contact";
 import {Joys} from "./Joys";
 import {DesignerBirkins} from "./DesignerBirkins";
 import {CongratulationsToTheDonors} from "./CongratulationsToTheDonors";
-
-
+import ShoppingCart from "./Cart/ShoppingCart";
 import { AuthProvider } from './ClientApi.js/AuthContext';
 import { LoginForm } from "./LoginForm";
 import UserProfile from './UserProfile';
@@ -35,10 +34,12 @@ export const MyRouting = () => {
                 <Route path="/myContact" element={<Contact></Contact>}></Route>
                 <Route path="/myCommonQuestions" element={<CommonQuestions></CommonQuestions>}></Route>
                 <Route path="/myAccount" element={<MyAccount></MyAccount>}></Route>
+                <Route path="/myShoppingCart" element={<ShoppingCart></ShoppingCart>}></Route>
+
                 {/* <AuthProvider> */}
-                    <Route path="/Login" element={<LoginForm />} />
-                    <Route path="/Profile" element={<UserProfile />} />
-                    <Route path="/Register" element={<RegistrationForm />} />
+                    <Route path="/myLogin" element={<LoginForm />} />
+                    <Route path="/myProfile" element={<UserProfile />} />
+                    <Route path="/myRegister" element={<RegistrationForm />} />
                 {/* </AuthProvider> */}
 
 
