@@ -28,15 +28,15 @@ export const MyRouting = () => {
             <Routes>
                 {/*  שימו לב שבגרסה הזאת אין צורך להשתמש בסוויטש אפשר ישר לשים בתוך תגית הראוט */}
                 <Route path="/myHome" element={<Home></Home>}></Route>
-
-
-
+                <Route path="/myContact" element={<Contact></Contact>}></Route>
+                <Route path="/myCommonQuestions" element={<CommonQuestions></CommonQuestions>}></Route>
+                {/* <Route path="/myAccount" element={<MyAccount></MyAccount>}></Route> */}
                 <Route path="/myJoys" element={<Joys></Joys>}></Route>
                 <Route path="/myDesignerBirkins" element={<DesignerBirkins></DesignerBirkins>}></Route>
                 <Route path="/myCongratulationsToTheDonors" element={<CongratulationsToTheDonors></CongratulationsToTheDonors>}></Route>
                 <Route path="/myProductList" element={<ProductList></ProductList>}></Route>
-                <Route path="/myContact" element={<Contact></Contact>}></Route>
                 <Route path="/myCommonQuestions" element={<CommonQuestions></CommonQuestions>}></Route>
+
                 <Route path="/myAccount" element={<Account></Account>}></Route>
                 <Route path="/myLogin" element={<Login></Login>} />
                 <Route path="/myProfile" element={<UserProfile />} />
@@ -47,6 +47,7 @@ export const MyRouting = () => {
 
             </Routes>
             <Footer></Footer>
+
         </BrowserRouter>
     );
 }
