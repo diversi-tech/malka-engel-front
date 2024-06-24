@@ -9,13 +9,15 @@ import { DesignerBirkins } from "./DesignerBirkins";
 import { CongratulationsToTheDonors } from "./CongratulationsToTheDonors";
 import { Details } from "./Details";
 import ShoppingCart from "./ShoppingCart";
+import {Terms} from "./Terms";
 import { AuthProvider } from './ClientApi.js/AuthContext';
 import { Login } from "./Login";
 import UserProfile from './UserProfile';
 import RegistrationForm from './RegistrationForm';
 import { ProductList } from "./ProductList";
 import { Account } from "./Account";
-
+import { Events } from "./Events";
+import { Product } from "./Product";
 // MyRouting רשמתי 
 // Routing במקום 
 // כי זה שם שמור
@@ -44,6 +46,13 @@ export const MyRouting = () => {
                     <Route path="/myRegister" element={<RegistrationForm />} />
                 {/* </AuthProvider> */}
 
+                <Route path="/myAccount" element={<Account></Account>}></Route>
+                <Route path="/myLogin" element={<Login></Login>} />
+                <Route path="/myProfile" element={<UserProfile />} />
+                <Route path="/myRegister" element={<RegistrationForm />} />
+                <Route path="myTerms" element={<Terms></Terms>} ></Route>
+                <Route path="/myEvents" element={<Events></Events>} ></Route>
+                <Route path="/myProduct" element={<Product></Product>} ></Route>
 
             </Routes>
             <Footer></Footer>
