@@ -16,6 +16,21 @@
         "title": "דף התחברות",
         "h5contact": "יצירת קשר"
     },
+    "shoppingCartPage": {
+        "title": " סל קניות",
+        "p1": " הסל שלך ריק",
+        "thItem": "מוצר",
+        "thQuantity": "כמות",
+        "thPrice" : "מחיר",
+        "thTotal": "סהכ ",
+        "thActions": "פעולות",
+        "removeButton": "הסר",
+        "h3Total": "סהכ",
+        "clearButton": "נקה עגלה ",
+        "addButton": "הוסף פריט",
+        "checkoutButton": "המשך לטופס  ההזמנה"
+    
+    },
     "footerPage": {
         "title": " תחתית עמוד",
         "h2About": "קצת עלינו",
@@ -45,7 +60,8 @@
         "linCommonQuestions":"שאלות נפוצות",
         "linkContact": "איש קשר",
         "linkLogin":"התחברות",
-        "linkProduct":"רשימת מוצרים"
+        "linkProduct":"רשימת מוצרים",
+        "linkShoppingCart": "סל קניות"
     },
     "productListPage":{
         "title": "  רשימת מוצרים"
