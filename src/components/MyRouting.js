@@ -53,7 +53,7 @@ export const MyRouting = () => {
                 <Route path="/myRegister" element={<RegistrationForm />} />
                 <Route path="myTerms" element={<Terms></Terms>} ></Route>
                 <Route path="/myEvents" element={<Events></Events>} ></Route>
-                <Route path="/myProduct" element={<Product></Product>} ></Route>
+                <Route path="/myProduct/:id" element={<Product></Product>} ></Route>
 
             </Routes>
             <Footer></Footer>

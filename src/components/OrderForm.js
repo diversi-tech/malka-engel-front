@@ -71,7 +71,7 @@ export const OrderForm = () => {
                 </div>
                 <button type="submit" className="btn btn-primary">Submit Order</button>
             </form>
-            <hr className="mt-5" />
+            {/* <hr className="mt-5" />
             <h3>Products:</h3>
             <ul>
                 {products.map((product, index) => (
@@ -82,7 +82,7 @@ export const OrderForm = () => {
             <div className="mb-3">
                 <button className="btn btn-outline-secondary me-3" onClick={() => handleAddProduct('Product 1')}>Add Product 1</button>
                 <button className="btn btn-outline-secondary" onClick={() => handleAddProduct('Product 2')}>Add Product 2</button>
-            </div>
+            </div> */}
             {/* Additional buttons or inputs for adding more products */}
         </div>
     )

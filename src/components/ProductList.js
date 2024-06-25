@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import { useState } from 'react';
-
+import { itemsSubject } from './ShoppingCart';
 
 
 
@@ -16,21 +16,28 @@ export const ProductList = () => {
         { id: 3, name: 'Product 3', price: 120, image: 'product3.jpg' }
     ];
     const navigate = useNavigate();
+
+
     const addToCart = (productId) => {
         const productToAdd = products.find(product => product.id === productId);
         if (productToAdd) {
-            setCart([...cart, productToAdd]);
+            debugger
+            itemsSubject.next([...itemsSubject.value, { ...productToAdd, quantity: 1 }]);
         }
     };
-
-    const removeFromCart = (productId) => {
-        const updatedCart = cart.filter(product => product.id !== productId);
-        setCart(updatedCart);
+    const goToProductDetails = (productId) => {
+        navigate(`/myProduct/${productId}`);  // Navigate to product details page with product ID
     };
 
-    const calculateTotalPrice = () => {
-        return cart.reduce((total, product) => total + product.price, 0);
-    };
+
+    // const removeFromCart = (productId) => {
+    //     const updatedCart = cart.filter(product => product.id !== productId);
+    //     setCart(updatedCart);
+    // };
+
+    // const calculateTotalPrice = () => {
+    //     return cart.reduce((total, product) => total + product.price, 0);
+    // };
     return (
         <div>
             <h1>{t('productListPage.title')}</h1>
@@ -45,8 +52,9 @@ export const ProductList = () => {
                                     <Card.Text>
                                         Price: {products.price} USD
                                     </Card.Text>
-                                    <Button variant="primary" onClick={()=>navigate(`myOrderForm/${product.id}`)}>Details</Button>
-                                    <Button variant="primary" onClick={() => addToCart(product.id)}>Add to cart </Button>
+                                    <Button variant="primary" onClick={() => goToProductDetails(product.id)}>Details</Button>
+                                    <Button variant="primary" onClick={() => addToCart(product.id)}>Add to cart</Button>
+                                    {/* <Button variant="primary" onClick={() => addToCart(product.id)}>Add to cart </Button> */}
                                 </Card.Body>
                             </Card>
                         </Col>
