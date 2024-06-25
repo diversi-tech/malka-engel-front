@@ -13,3 +13,15 @@ export const GetAllReviews = async (language) => {
         console.log(ch)
     }
 }
+export const AddReview = async (language, reviewToAdd) => {
+    debugger
+    try {
+        // to ask what is mean language?? in the query string---
+        let result = await axios.post(`${API_BASE_URL}AddReview?Language=${language}`, reviewToAdd);
+        return result.data
+    }
+    catch (ch) {
+        console.log(ch)
+    }
+}
+
