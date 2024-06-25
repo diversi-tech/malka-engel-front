@@ -28,7 +28,8 @@
         "h3Total": "Total",
         "clearButton": "Clear Cart",
         "addButton": "Add Item",
-        "checkoutButton": "Checkout"
+        "checkoutButton": "Proceed to Checkout",
+        "emptyCartMessage": "Your cart is empty.To checkout add an item to your cart"
     },
     "footerPage": {
         "title": "Footer page",

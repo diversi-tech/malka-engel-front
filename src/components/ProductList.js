@@ -18,14 +18,31 @@ export const ProductList = () => {
     ];
     const navigate = useNavigate();
 
-
     const addToCart = (productId) => {
         const productToAdd = products.find(product => product.id === productId);
         if (productToAdd) {
-            debugger
-            itemsSubject.next([...itemsSubject.value, { ...productToAdd, quantity: 1 }]);
+            const currentItems = itemsSubject.value;
+            const existingItemIndex = currentItems.findIndex(item => item.id === productToAdd.id);
+
+            if (existingItemIndex !== -1) {
+                // Item already exists in cart, update quantity
+                const updatedItems = [...currentItems];
+                updatedItems[existingItemIndex].quantity += 1;
+                itemsSubject.next(updatedItems);
+            } else {
+                // Item does not exist in cart, add it
+                itemsSubject.next([...currentItems, { ...productToAdd, quantity: 1 }]);
+            }
         }
     };
+    // const addToCart = (productId) => {
+    //     const productToAdd = products.find(product => product.id === productId);
+    //     if (productToAdd) {
+    //         debugger
+    //         itemsSubject.next([...itemsSubject.value, { ...productToAdd, quantity: 1 }]);
+    //     }
+    // };
+    
     const goToProductDetails = (productId) => {
         navigate(`/myProduct/${productId}`);  // Navigate to product details page with product ID
     };
