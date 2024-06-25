@@ -9,7 +9,7 @@ import { PageTitle } from './PageTitle';
 
 
 // Initialize BehaviorSubject with an empty array
-const itemsSubject = new BehaviorSubject([]);
+export const itemsSubject = new BehaviorSubject([]);
 
 const ShoppingCart= () => {
   const { t, i18n } = useTranslation();
@@ -37,7 +37,7 @@ const ShoppingCart= () => {
   const addItem = (item) => {
     const currentItems = itemsSubject.value;
     itemsSubject.next([...currentItems, item]);
-  };
+};
 
   const removeItem = (item) => {
     const updatedItems = itemsSubject.value.filter(i => i.id !== item.id);
@@ -50,7 +50,7 @@ const ShoppingCart= () => {
 
   
   const goToCheckout = () => {
-    navigate('/checkout');
+    navigate('/myOrderForm');
   };
 
   return (
@@ -100,31 +100,10 @@ const ShoppingCart= () => {
         </>
       )}
       {/* For testing purpose: Add item button */}
-      <button onClick={() => addItem({ id: new Date().getTime(), name: 'New Item', price: 9.99, quantity: 1 })}>{t('shoppingCartPage.addButton')}</button>
+      {/* <button onClick={() => addItem({ id: new Date().getTime(), name: 'New Item', price: 9.99, quantity: 1 })}>{t('shoppingCartPage.addButton')}</button> */}
       <button onClick={goToCheckout}>{t('shoppingCartPage.checkoutButton')}</button>
     </div>
   );
 };
 
 export default ShoppingCart;
-
-
-
-
-  
-
-   
-
- 
-  
-
-  
-
- 
-  
-             
-              
-             
-          
- 
-

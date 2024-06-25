@@ -77,6 +77,14 @@
 
     },
     "orderFormPage":{
-        "title":"this is order form component"
+        "title":"this is order form component",
+        "name":"Name:",
+        "address":"Address:",
+        "phone":"Phone",
+        "email":"Email:",
+        "addLogo":" Add Logo",
+        "selectLogo":"Selected Logo File:",
+        "fileLogo":"Logo File:",
+        "buttonSubmitOrder":"Submit Order"
     }
 }
