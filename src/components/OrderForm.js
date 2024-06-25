@@ -44,10 +44,9 @@ export const OrderForm = () => {
     };
     return (
         <div className="container mt-5">
-            <div>
+            <div className="mb-4">
             <PageTitle title={t('orderFormPage.title')} />
            </div>  
-            <h2 className="mb-4">{t('orderFormPage.title')}</h2>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="name" className="form-label">{t('orderFormPage.name')}</label>

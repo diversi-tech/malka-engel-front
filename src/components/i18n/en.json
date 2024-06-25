@@ -77,7 +77,7 @@
 
     },
     "orderFormPage":{
-        "title":"this is order form component",
+        "title":"Order Form ",
         "name":"Name:",
         "address":"Address:",
         "phone":"Phone",
