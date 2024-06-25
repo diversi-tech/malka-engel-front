@@ -8,7 +8,7 @@ import { faShoppingCart, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 
 // Initialize BehaviorSubject with an empty array
-const itemsSubject = new BehaviorSubject([]);
+export const itemsSubject = new BehaviorSubject([]);
 
 const ShoppingCart= () => {
   const { t, i18n } = useTranslation();
@@ -36,7 +36,7 @@ const ShoppingCart= () => {
   const addItem = (item) => {
     const currentItems = itemsSubject.value;
     itemsSubject.next([...currentItems, item]);
-  };
+};
 
   const removeItem = (item) => {
     const updatedItems = itemsSubject.value.filter(i => i.id !== item.id);
@@ -49,7 +49,7 @@ const ShoppingCart= () => {
 
   
   const goToCheckout = () => {
-    navigate('/checkout');
+    navigate('/myOrderForm');
   };
 
   return (
@@ -104,24 +104,3 @@ const ShoppingCart= () => {
 };
 
 export default ShoppingCart;
-
-
-
-
-  
-
-   
-
- 
-  
-
-  
-
- 
-  
-             
-              
-             
-          
- 
-
