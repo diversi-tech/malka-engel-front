@@ -1,6 +1,7 @@
-import {produce} from "immer"
+import { produce } from "immer"
+
 export const InitialState_FQA = {
-//משתנים גלובלים
+    //משתנים גלובלים
     FQAlist:
         [
             {
@@ -26,14 +27,13 @@ export const InitialState_FQA = {
                 question: "aaaabnnn",
                 answer: "ua. Ufhghfhrtthttht",
                 Rating: 0
-            }             
+            }
         ]
 }
-export const DataReducer_FQA = produce((state, action)=>{
-    switch(action.type)
-    {
-        case "SET_FQALIST":{
-            state.FQAlist=action.payload
+export const DataReducer_FQA = produce((state, action) => {
+    switch (action.type) {
+        case "SET_FQALIST": {
+            state.FQAlist = action.payload
             break
         }
 
