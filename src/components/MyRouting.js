@@ -16,7 +16,7 @@ import RegistrationForm from './RegistrationForm';
 import { ProductList } from "./ProductList";
 import { Account } from "./Account";
 import { Events } from "./Events";
-import { Product } from "./Product";
+import { Product } from "./productComponent/Product";
 // MyRouting רשמתי 
 // Routing במקום 
 // כי זה שם שמור
