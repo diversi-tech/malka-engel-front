@@ -78,7 +78,15 @@
 
     },
     "orderFormPage":{
-        "title":"זה עמוד של טופס הזמנות"
+        "title":"טופס הזמנה",
+        "name":"שם:",
+        "address":"כתובת:",
+        "phone":"טלפון:",
+        "email":"מייל:",
+        "addLogo":" הוסף לוגו",
+        "selectLogo":"בחר קובץ לוגו :",
+        "fileLogo":"קובץ לוגו:",
+        "buttonSubmitOrder":"שלח הזמנה"
     }
     
 }

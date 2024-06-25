@@ -97,7 +97,7 @@ const ShoppingCart= () => {
         </>
       )}
       {/* For testing purpose: Add item button */}
-      <button onClick={() => addItem({ id: new Date().getTime(), name: 'New Item', price: 9.99, quantity: 1 })}>{t('shoppingCartPage.addButton')}</button>
+      {/* <button onClick={() => addItem({ id: new Date().getTime(), name: 'New Item', price: 9.99, quantity: 1 })}>{t('shoppingCartPage.addButton')}</button> */}
       <button onClick={goToCheckout}>{t('shoppingCartPage.checkoutButton')}</button>
     </div>
   );
