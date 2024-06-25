@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import { useState } from 'react';
+import { PageTitle } from './PageTitle';
 
 
 
@@ -33,7 +34,9 @@ export const ProductList = () => {
     };
     return (
         <div>
-            <h1>{t('productListPage.title')}</h1>
+            <div>
+             <PageTitle title={t('productListPage.title')} />
+            </div>  
             <Container>
                 <Row xs={1} md={2} lg={3} className="g-4">
                     {products.map((product, index) => (

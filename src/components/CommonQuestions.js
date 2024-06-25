@@ -3,7 +3,9 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { getCommonQuestions } from "../axios/CommonQuestionsAxios";
-import { setFQAlist } from "../redux/DataActions/DataActions.FQA"
+import { setFQAlist } from "../redux/DataActions/DataActions.FQA";
+import { PageTitle } from "./PageTitle";
+
 
 
 
@@ -58,8 +60,9 @@ export const CommonQuestions = () => {
         </div>
       </div>
     </div> */}
-
-      <h1>{t('CommonQuestionsPage.title')}</h1>     
+       <div>
+          <PageTitle title={t('CommonQuestionsPage.title')} />
+       </div>
       {currentQuestion.map(x => <div>
 
         <div class="container mt-3">

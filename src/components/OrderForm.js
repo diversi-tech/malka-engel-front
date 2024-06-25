@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
 import ProductList from './ProductList';
+import { PageTitle } from './PageTitle';
 
 export const OrderForm = () => {
     const { t, i18n } = useTranslation();
@@ -39,7 +40,9 @@ export const OrderForm = () => {
     };
     return (
         <div className="container mt-5">
-            <h2 className="mb-4">Order Form</h2>
+            <div>
+            <PageTitle title="Order Form" />
+           </div>  
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="name" className="form-label">Name:</label>

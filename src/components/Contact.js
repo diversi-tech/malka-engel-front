@@ -1,4 +1,6 @@
 import { useTranslation } from 'react-i18next';
+import { PageTitle } from './PageTitle';
+
 
 
 //Contact page
@@ -6,8 +8,9 @@ export const Contact = () => {
     const { t, i18n } = useTranslation();
     return (
         <div>
-            <h1>{t('contactPage.title')}</h1>
-            
+            <div>
+            <PageTitle title={t('contactPage.title')} />
+            </div>
             <h5>{t('contactPage.h5contact')}</h5>
         </div>
      );

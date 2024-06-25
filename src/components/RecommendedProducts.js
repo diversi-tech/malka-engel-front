@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import { useState } from 'react';
+import { PageTitle } from './PageTitle';
 
 const RecommendedProducts = () => {
     const { t, i18n } = useTranslation();
@@ -17,9 +18,9 @@ const RecommendedProducts = () => {
         <div>
             <h2 style={{ color: 'black' }}>rrr</h2>
             <h1 style={{ color: 'black' }}>{t('recommendedProducts.title')}</h1>
-
-            <h1>{t('recommendedProducts.title')}</h1>
-
+            <div>
+             <PageTitle title={t('recommendedProducts.title')}/>
+           </div>  
             <Row xs={1} md={2} lg={3} className="g-4">
                 {products.map((product, index) => (
                     <Col key={index}>
