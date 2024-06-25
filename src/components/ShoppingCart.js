@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { PageTitle } from './PageTitle';
 
 
 
@@ -58,7 +59,9 @@ const ShoppingCart= () => {
         <FontAwesomeIcon icon={faShoppingCart} size="2x" />
         <span className="cart-item-count">{items.length}</span>
         </div>
-<h1>{t('shoppingCartPage.title')}</h1>
+        <div>
+            <PageTitle title={t('shoppingCartPage.title')} />
+        </div>
             
                   {items.length === 0 ? (
         <p>{t('shoppingCartPage.p1')}</p>

@@ -1,5 +1,7 @@
 // Login.js
 import { useTranslation } from 'react-i18next';
+import { PageTitle } from './PageTitle';
+
 
 const ExmpleLanguage = () => {
     const { t, i18n } = useTranslation();
@@ -10,8 +12,9 @@ const ExmpleLanguage = () => {
 
     return (
         <div>
-            <h2>{t('loginPage.title')}</h2>
-            <form onSubmit={handleLogin}>
+<div>
+            <PageTitle title={t('loginPage.title')} />
+        </div>            <form onSubmit={handleLogin}>
                 <label>{t('loginPage.username')}</label>
                 <input type="text" name="username" />
                 <label>{t('loginPage.password')}</label>

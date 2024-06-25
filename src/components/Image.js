@@ -2,6 +2,8 @@ import { useTranslation } from 'react-i18next';
 import React from 'react';
 import { Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { PageTitle } from './PageTitle';
+
 
 export const Image = () => {
     const { t, i18n } = useTranslation();

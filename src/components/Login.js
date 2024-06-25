@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { loginUser } from './ClientApi.js/Api';
 import { useTranslation } from 'react-i18next';
+import { PageTitle } from './PageTitle';
 
 export const Login = () => {
   const { t, i18n } = useTranslation();
