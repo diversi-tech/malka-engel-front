@@ -5,6 +5,7 @@ import { GetAllReviews } from "../axios/ReviewsAxios";
 import { FaStar } from 'react-icons/fa';
 
 export const Review = () => {
+    debugger
     const { t, i18n } = useTranslation();
     const dispatch = useDispatch();
     const reviewList = useSelector(state => state.DataReducer_Reviews.ReviewsList);
@@ -13,6 +14,7 @@ export const Review = () => {
     useEffect(() => {
         async function fetchReviews() {
             try {
+              debugger
                 const response = await GetAllReviews(); // Assuming GetAllReviews fetches reviews from an API
                 setReviews(response.data); // Assuming response.data contains the list of reviews
             } catch (error) {
