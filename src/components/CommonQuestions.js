@@ -67,7 +67,7 @@ async function fetchData() {
       </div>
     </div> */}
        <div>
-          <PageTitle title={t('CommonQuestionsPage.title')} />
+          <h1 title={t('CommonQuestionsPage.title')} />
        </div>
       {currentQuestion.map(x => <div>
 
