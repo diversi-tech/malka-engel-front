@@ -5,17 +5,14 @@ import { useNavigate } from 'react-router';
 import { useState } from 'react';
 import { PageTitle } from './PageTitle';
 import { itemsSubject } from './ShoppingCart';
-
+import { useSelector } from 'react-redux';
 
 
 export const ProductList = () => {
     const { t, i18n } = useTranslation();
     const [cart, setCart] = useState([]);
-    const products = [
-        { id: 1, name: 'Product 1', price: 50, image: 'product1.jpg' },
-        { id: 2, name: 'Product 2', price: 80, image: 'product2.jpg' },
-        { id: 3, name: 'Product 3', price: 120, image: 'product3.jpg' }
-    ];
+    const products = useSelector(s => s.DataReducer_Pro.Prolist)
+
     const navigate = useNavigate();
 
     const addToCart = (productId) => {
@@ -35,27 +32,14 @@ export const ProductList = () => {
             }
         }
     };
-    // const addToCart = (productId) => {
-    //     const productToAdd = products.find(product => product.id === productId);
-    //     if (productToAdd) {
-    //         debugger
-    //         itemsSubject.next([...itemsSubject.value, { ...productToAdd, quantity: 1 }]);
-    //     }
-    // };
+
     
     const goToProductDetails = (productId) => {
         navigate(`/myProduct/${productId}`);  // Navigate to product details page with product ID
     };
 
 
-    // const removeFromCart = (productId) => {
-    //     const updatedCart = cart.filter(product => product.id !== productId);
-    //     setCart(updatedCart);
-    // };
 
-    // const calculateTotalPrice = () => {
-    //     return cart.reduce((total, product) => total + product.price, 0);
-    // };
     return (
         <div>
             <div>
@@ -70,7 +54,7 @@ export const ProductList = () => {
                                 <Card.Body>
                                     <Card.Title>{product.name}</Card.Title>
                                     <Card.Text>
-                                        Price: {products.price} USD
+                                        Price: {product.price} USD
                                     </Card.Text>
                                     <Button variant="primary" onClick={() => goToProductDetails(product.id)}>Details</Button>
                                     <Button variant="primary" onClick={() => addToCart(product.id)}>Add to cart</Button>
