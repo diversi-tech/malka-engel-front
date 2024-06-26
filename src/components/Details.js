@@ -2,6 +2,8 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
 import { ProductList } from './ProductList';
 import {useSelector} from 'react-redux';
+import { PageTitle } from './PageTitle';
+
 //Details page
 export const Details = () => {
     // זה בדיוק קומפוננטת Product

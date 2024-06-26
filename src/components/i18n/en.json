@@ -16,6 +16,21 @@
         "title": "Contact page",
         "h5contact": "contact"
     },
+    "shoppingCartPage": {
+        "title": "Shopping Cart",
+        "p1": "your basket is empty",
+        "thItem": "Item",
+        "thQuantity": "Quantity",
+        "thPrice" : "Price",
+        "thTotal": "Total",
+        "thActions": "Actions",
+        "removeButton": "Remove",
+        "h3Total": "Total",
+        "clearButton": "Clear Cart",
+        "addButton": "Add Item",
+        "checkoutButton": "Proceed to Checkout",
+        "emptyCartMessage": "Your cart is empty.To checkout add an item to your cart"
+    },
     "footerPage": {
         "title": "Footer page",
         "h2About": "About Us",
@@ -44,7 +59,9 @@
         "linkContact": "Contact",
         "linCommonQuestions":"FAQ",
         "linkLogin":"login",
-        "linkProduct":"product list"
+        "linkProduct":"product list",
+        "linkOrderForm": " Order Form",
+        "linkShoppingCart": " Shopping Cart"
     },
   
     "productListPage":{

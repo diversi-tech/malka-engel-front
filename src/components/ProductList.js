@@ -3,23 +3,48 @@ import { useTranslation } from 'react-i18next';
 import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import { useState } from 'react';
-
-
+import { PageTitle } from './PageTitle';
+import { itemsSubject } from './ShoppingCart';
+import { useSelector } from 'react-redux';
 
 
 export const ProductList = () => {
     const { t, i18n } = useTranslation();
-    const products = [
-        { id: 1, name: 'Product 1', price: 50, image: 'product1.jpg' },
-        { id: 2, name: 'Product 2', price: 80, image: 'product2.jpg' },
-        { id: 3, name: 'Product 3', price: 120, image: 'product3.jpg' }
-    ];
-    
+    const [cart, setCart] = useState([]);
+    const products = useSelector(s => s.DataReducer_Pro.Prolist)
+
     const navigate = useNavigate();
-  
+
+    const addToCart = (productId) => {
+        const productToAdd = products.find(product => product.id === productId);
+        if (productToAdd) {
+            const currentItems = itemsSubject.value;
+            const existingItemIndex = currentItems.findIndex(item => item.id === productToAdd.id);
+
+            if (existingItemIndex !== -1) {
+                // Item already exists in cart, update quantity
+                const updatedItems = [...currentItems];
+                updatedItems[existingItemIndex].quantity += 1;
+                itemsSubject.next(updatedItems);
+            } else {
+                // Item does not exist in cart, add it
+                itemsSubject.next([...currentItems, { ...productToAdd, quantity: 1 }]);
+            }
+        }
+    };
+
+    
+    const goToProductDetails = (productId) => {
+        navigate(`/myProduct/${productId}`);  // Navigate to product details page with product ID
+    };
+
+
+
     return (
         <div>
-            <h1>{t('productListPage.title')}</h1>
+            <div>
+             <PageTitle title={t('productListPage.title')} />
+            </div>  
             <Container>
                 <Row xs={1} md={2} lg={3} className="g-4">
                     {products.map((product, index) => (
@@ -29,15 +54,41 @@ export const ProductList = () => {
                                 <Card.Body>
                                     <Card.Title>{product.name}</Card.Title>
                                     <Card.Text>
-                                        Price: {products.price} USD
+                                        Price: {product.price} USD
                                     </Card.Text>
-                                    <Button variant="primary" onClick={navigate(`myDetails/${product.id}`)}>Details</Button>
+                                    <Button variant="primary" onClick={() => goToProductDetails(product.id)}>Details</Button>
+                                    <Button variant="primary" onClick={() => addToCart(product.id)}>Add to cart</Button>
+                                    {/* <Button variant="primary" onClick={() => addToCart(product.id)}>Add to cart </Button> */}
                                 </Card.Body>
                             </Card>
                         </Col>
                     ))}
                 </Row>
             </Container>
+            {/* <ShoppingCart cart={cart} removeFromCart={removeFromCart} calculateTotalPrice={calculateTotalPrice} /> */}
         </div>
     )
 }
+
+/**
+ * 
+ *     const addToCart = (myid) => {
+        // מציאת המוצר ברשימת המוצרים על פי ה-ID
+        let item = products.find(x => x.id === myid);
+        // if (item) {
+        //     // העברת המוצר לפונקציה המועברת מקומפוננטת האב (OrderForm) להוספה לסל
+        //     onAddProduct(item);
+        // }
+    };
+
+    const infom = (id) => {
+        // חיפוש המוצר ברשימת המוצרים ושמירתו ב-sessionStorage לצורך העברה לדף פרטים נוספים
+        for (let i = 0; i < products.length; i++) {
+          if (products[i].id === id) {
+            sessionStorage.setItem('items', JSON.stringify(products[i]));
+          }
+        }
+        // מעבר לדף ה-HTML המתאים
+        window.location = "./myOrderForm";
+      };
+ */

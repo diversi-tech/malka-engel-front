@@ -66,8 +66,9 @@ async function fetchData() {
         </div>
       </div>
     </div> */}
-
-      <h1>{t('CommonQuestionsPage.title')}</h1>     
+       <div>
+          <PageTitle title={t('CommonQuestionsPage.title')} />
+       </div>
       {currentQuestion.map(x => <div>
 
         <div class="container mt-3">

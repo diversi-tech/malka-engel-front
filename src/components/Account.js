@@ -1,9 +1,11 @@
+import { PageTitle } from './PageTitle';
 
-//Account page
 export const Account = () => {
     return (
         <div>
-            <h1>Account</h1>
+           <div>
+            <PageTitle title="Account" />
+           </div>
         </div>
     );
 }

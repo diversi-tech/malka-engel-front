@@ -15,7 +15,7 @@ export const Image = () => {
 
     return (
         <div className="container mt-4">
-            <h1>{product.name}</h1>
+           
             <Card style={{ width: '18rem' }}>
                 <Card.Img
                     variant="top"

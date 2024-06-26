@@ -1,7 +1,9 @@
+import { PageTitle } from './PageTitle';
+
 export const Terms = () => {
     return (
         <div>
-            <h1>terms</h1>
-        </div>
+            <PageTitle title="terms" />
+        </div>  
     );
 }
