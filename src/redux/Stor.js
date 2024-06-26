@@ -7,4 +7,4 @@ const reducers = combineReducers(
     DataReducer_FAQ: DataReducer_FAQ
 }
 )
-export const Store = createStore(reducers)
+export const Store = createStore(reducers)  
