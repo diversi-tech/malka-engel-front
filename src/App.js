@@ -4,13 +4,16 @@ import { Provider } from 'react-redux';
 import { Store } from './redux/Stor.js';
 
 import { MyRouting } from './components/MyRouting.js';
+import { Review } from './components/Review';
+
 
 function App() {
   return (
     <div className="App">
  <Provider store={Store}>
       {/* <header className="App-header"> */}
-        <MyRouting></MyRouting>
+      
+  <MyRouting></MyRouting>
       {/* </header> */}
       </Provider>
     </div>

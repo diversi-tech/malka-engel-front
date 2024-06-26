@@ -1,13 +1,14 @@
 import axios from "axios"
 
-const API_BASE_URL = process.env.REACT_APP_API_URL + "/api/Reviews/"
-
+const API_BASE_URL = process.env.REACT_APP_API_URL + "/api/Review"
+let s = "https://localhost:7297/api/Review"
 export const GetAllReviews = async () => {
-    debugger
+    
     try {
+        debugger
         // to ask what is mean language?? in the query string---
-        let result = await axios.get(`${API_BASE_URL}GetAllReviews`)
-        return result.data
+        let result = await axios.get(`${s}`)
+        return result
     }
     catch (ch) {
         console.log(ch)
