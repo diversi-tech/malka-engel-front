@@ -28,7 +28,9 @@
         "h3Total": "סהכ",
         "clearButton": "נקה עגלה ",
         "addButton": "הוסף פריט",
-        "checkoutButton": "המשך לטופס  ההזמנה"
+        "checkoutButton": "המשך לטופס  ההזמנה",
+        "emptyCartMessage": "העגלה שלך ריקה.כדי להתקדם לטופס ההזמנה הוסף פריט לעגלת הקניות "
+
     
     },
     "footerPage": {

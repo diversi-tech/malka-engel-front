@@ -36,8 +36,19 @@ const ShoppingCart= () => {
 
   const addItem = (item) => {
     const currentItems = itemsSubject.value;
-    itemsSubject.next([...currentItems, item]);
-};
+     const existingItemIndex = currentItems.findIndex(i => i.id === item.id);
+  
+      if (existingItemIndex >= 0) {
+        const updatedItems = [...currentItems];
+        updatedItems[existingItemIndex].quantity += item.quantity;
+        itemsSubject.next(updatedItems);
+      } else {
+        itemsSubject.next([...currentItems, item]);
+      }
+    };
+  
+  
+
 
   const removeItem = (item) => {
     const updatedItems = itemsSubject.value.filter(i => i.id !== item.id);
@@ -50,8 +61,13 @@ const ShoppingCart= () => {
 
   
   const goToCheckout = () => {
-    navigate('/myOrderForm');
-  };
+      if (items.length === 0) {
+        alert(t('shoppingCartPage.emptyCartMessage'));
+        return;
+      }
+      navigate('/myOrderForm');
+    };
+  
 
   return (
     <div className="shopping-cart">
