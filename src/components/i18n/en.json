@@ -57,7 +57,7 @@
     "navPage": {
         "linkHome": "Home",
         "linkContact": "Contact",
-        "linCommonQuestions":"FQA",
+        "linCommonQuestions":"FAQ",
         "linkLogin":"login",
         "linkProduct":"product list",
         "linkOrderForm": " Order Form",
@@ -74,18 +74,9 @@
 
     },
     "CommonQuestionsPage": {
-        "title": "FQA"
-
-    },
-    "orderFormPage":{
-        "title":"Order Form ",
-        "name":"Name:",
-        "address":"Address:",
-        "phone":"Phone",
-        "email":"Email:",
-        "addLogo":" Add Logo",
-        "selectLogo":"Selected Logo File:",
-        "fileLogo":"Logo File:",
-        "buttonSubmitOrder":"Submit Order"
+        "title": "FAQ",
+        "languageId":2,
+        "FAQlist" : "FAQlistEn",
+        "language":"EN"
     }
 }
