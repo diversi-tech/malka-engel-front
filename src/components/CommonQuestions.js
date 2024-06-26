@@ -1,45 +1,53 @@
 // import { Collapse } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getCommonQuestions } from "../axios/CommonQuestionsAxios";
-import { setFQAlist } from "../redux/DataActions/DataActions.FQA"
+import { setFAQlist_HE } from "../redux/DataActions/DataActions.FAQ"
 
 
 
-//FQA page
+//FAQ page
 
 export const CommonQuestions = () => {
   //Translate  
   const { t, i18n } = useTranslation();
-  //List of FQA questions from redux
-  const FQAlist = useSelector(s => s.DataReducer_FQA.FQAlist)
-  //List of FQA questions for search filter - Initialize with the complete list of questions
-  const [currentQuestion, setCurrentQuestion] = useState(FQAlist);
-
+  //List of FAQ questions from redux
+  // const ss =`.DataReducer_FAQ.${t('CommonQuestionsPage.FAQlist')}`
+  let FAQlist = useSelector(s =>s.DataReducer_FAQ.FAQlistHe)
+  // const aa = `setFAQlist_${t('CommonQuestionsPage.language')}`
+  //List of FAQ questions for search filter - Initialize with the complete list of questions
+  let [currentQuestion, setCurrentQuestion] = useState(FAQlist);
   //יצירת משנה שישמש לשיגור
   const dispatch = useDispatch()
 
-
-
   // A function that retrieves from the server if the redex is empty  
-  async function fetchData() {
+async function fetchData() {
+    debugger
     //check if it is empty   
-    if (FQAlist.length == 0) {
+    if (FAQlist.length == 0) { 
       //Retrieval from server
-      let myFQAlist = await getCommonQuestions() 
-      //place in local variable
-      FQAlist = myFQAlist
+       let c = await getCommonQuestions(2) //t('CommonQuestionsPage.language')
+      //  FAQlist = c
+       setCurrentQuestion(c)
       //place in redex - שיגור                        
-      dispatch(setFQAlist(myFQAlist.data))
+      dispatch(setFAQlist_HE(c)) //+t('CommonQuestionsPage.language')(myFAQlist.data))
     }
   }
+// קריאה לפונקצית שליפה מהשרת
+ useEffect(x=>{
+  fetchData(); 
+},[])
+
 
   // A function to handle the search   
   const handleChange = (event) => {
 //Filter the questions by text of the search field.
-    setCurrentQuestion(FQAlist.filter(q => q.question.toLowerCase().includes(event.target.value.toLowerCase())))
+    setCurrentQuestion(FAQlist.filter(q => q.question.toLowerCase().includes(event.target.value.toLowerCase())))
   };
+
+
+
 
   return (
     <div>
@@ -67,15 +75,15 @@ export const CommonQuestions = () => {
           <div id="accordion">
             <div class="card">
               <div class="card-header">
-                <a class="btn" data-bs-toggle="collapse" href="#collapseOne">{x.question}</a>
-              </div>
-              <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
-                <div class="card-body">{x.answer}</div>
-                <div class="card-body">{x.Rating}</div>
+                <button class="btn"   data-bs-toggle="collapse" data-bs-target="#demo">{x.question}</button>
+              
+              <div id="demo" class="collapse">{x.answer}</div>
+                <div class="card-body">{x.answer}
+                {/* <div class="card-body">{x.Rating}</div> */}
 
               </div>
             </div>
-
+</div>
           </div>
         </div>
 

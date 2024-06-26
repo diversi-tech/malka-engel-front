@@ -42,7 +42,7 @@
     "navPage": {
         "linkHome": "Home",
         "linkContact": "Contact",
-        "linCommonQuestions":"FQA",
+        "linCommonQuestions":"FAQ",
         "linkLogin":"login",
         "linkProduct":"product list"
     },
@@ -57,7 +57,9 @@
 
     },
     "CommonQuestionsPage": {
-        "title": "FQA"
-
+        "title": "FAQ",
+        "languageId":2,
+        "FAQlist" : "FAQlistEn",
+        "language":"EN"
     }
 }

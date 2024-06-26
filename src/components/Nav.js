@@ -16,7 +16,7 @@ export const Nav = () => {
                         <li className="nav-item"><Link className="nav-link" to="./myHome">{t('navPage.linkHome')}</Link> </li>
                         {/* <li className="nav-item"><Link className="nav-link" to="./myContact">{t('navPage.linkContact')}</Link> </li> */}
                         <li className="nav-item"><Link className="nav-link" to="./myCommonQuestions">{t('navPage.linCommonQuestions')}</Link> </li>
-                        <li className="nav-item"> <Link className="nav-link" to="./Login">{t('navPage.linkLogin')}</Link></li>
+                        <li className="nav-item"> <Link className="nav-link" to="./myLogin">{t('navPage.linkLogin')}</Link></li>
                         <li className="nav-item"><Link className="nav-link" to="./myProductList">{t('navPage.linkProduct')}</Link> </li>
                     </ul>
                 </div>

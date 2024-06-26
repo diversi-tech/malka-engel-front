@@ -1,10 +1,10 @@
 import { combineReducers, createStore } from "redux";
-import { DataReducer_FQA } from "./DateReducer/dataReducer.FQA";
+import { DataReducer_FAQ } from "./DateReducer/dataReducer.FAQ";
 
 
 const reducers = combineReducers(
     { 
-    DataReducer_FQA: DataReducer_FQA
+    DataReducer_FAQ: DataReducer_FAQ
 }
 )
 export const Store = createStore(reducers)
