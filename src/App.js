@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import { Store } from './redux/Stor.js';
 
 import { MyRouting } from './components/MyRouting.js';
-import { Review } from './components/Review';
 
 
 function App() {
@@ -12,7 +11,6 @@ function App() {
     <div className="App">
  <Provider store={Store}>
       {/* <header className="App-header"> */}
-      
   <MyRouting></MyRouting>
       {/* </header> */}
       </Provider>
