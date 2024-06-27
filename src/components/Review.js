@@ -8,25 +8,36 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const Review = () => {
   const { t, i18n } = useTranslation();
+
   let reviewList = useSelector(state => state.DataReducer_Reviews.ReviewsList);
-  let [reviews, setReviews] = useState(reviewList);
+  const [reviews, setReviews] = useState(reviewList);
+
+
   const myDispatch = useDispatch();
 
+
   async function fetchReviews() {
+    
     if (reviewList.length == 0) {
       var response = await GetAllReviews();
-      setReviews(response.data); // Assuming response.data contains the list of reviews
-      myDispatch(fillReviewsList(response.data));
-    } else {
-      setReviews(reviewList);
+
+      setReviews(response);
+      //console.log(response);
+      debugger
+      // Assuming response contains the list of reviews
+      myDispatch(fillReviewsList(response));
+    }
+    else {
+      setReviews(response); // Assuming response.data contains the list of reviews
+      myDispatch(fillReviewsList(response));
     }
   }
 
-  // Call the function automatically
+ 
+  //call the function automatically
   useEffect(() => {
     fetchReviews();
   }, []);
-
   // Calculate average rating
   const averageRating = reviews.length ? (reviews.reduce((sum, review) => sum + review.Rating, 0) / reviews.length).toFixed(1) : 0;
 
@@ -87,6 +98,30 @@ export const Review = () => {
           </div>
         </div>
 
+         {/* More details section  */}
+        {/*  for more detail - dont touch please!!  */}
+           
+          <div className="col-md-8">
+            {reviews.map(review => (
+              <div className="card mb-3" key={review.ReviewID}>
+                <div className="card-body">
+                  <div className="d-flex justify-content-between">
+                    <h5 className="card-title">{review.ProductId}</h5>
+                    <span>{review.UserId}</span>
+                  </div>
+                  <div className="card-text mb-2">{renderStars(review.Rating)}</div>
+                  <p className="card-text">{review.Comment}</p>
+                  <div className="d-flex justify-content-between align-items-center">
+                    <div className="btn-group" role="group" aria-label="User feedback">
+                      <button className="btn btn-outline-success" onClick={() => handleFeedback(review.ReviewID, 'happy')}>
+                        😊 Happy
+                      </button>
+                      <button className="btn btn-outline-danger" onClick={() => handleFeedback(review.ReviewID, 'sad')}>
+                        😞 Sad
+                      </button>
+                    </div>
+                    <small className="text-muted">{review.CreatedAt}</small>
+
         <div className="col-md-8">
           {/* Content for the right side */}
  
@@ -114,6 +149,11 @@ export const Review = () => {
                 </div>
               </div>
             </div>
+          </div>
+      </div>
+    </div>);
+}
+
           ))}
           <div className="card">
             <div className="card-body">

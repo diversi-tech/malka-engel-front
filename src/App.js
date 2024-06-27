@@ -2,7 +2,6 @@ import './App.css';
 import './bootstrap.css';
 import { Provider } from 'react-redux';
 import { Store } from './redux/Stor.js';
-
 import { MyRouting } from './components/MyRouting.js';
 
 
