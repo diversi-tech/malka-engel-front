@@ -17,11 +17,14 @@ import RegistrationForm from './RegistrationForm';
 import { ProductList } from "./ProductList";
 import { Account } from "./Account";
 import { Events } from "./Events";
-import { Product } from "./Product";
+import { Product } from "./productDetail/Product";
 import { OrderForm } from "./OrderForm";
 import AdminDashboard from "./AdminComponents/AdminDashboard.js";
 import CategoriesManager from "./AdminComponents/CategoriesManager.js";
 import OrderManager from "./AdminComponents/OrderManager.js";
+
+import { ShowReviews } from "./productDetail/ShowReviews";
+import { Review } from "./productDetail/Review";
 
 // Routing במקום 
 // כי זה שם שמור
@@ -50,10 +53,13 @@ export const MyRouting = () => {
   
 
 
+
+                <Route path="/review" element={<Review></Review>}></Route>
+
                 <Route path="/myShoppingCart" element={<ShoppingCart></ShoppingCart>}></Route>
         
                 {/* <AuthProvider> */}
-                    <Route path="/myLogin" element={<Login />} />
+                    <Route path="/myLogin" element={<Login/>} />
                     <Route path="/myProfile" element={<UserProfile />} />
                     <Route path="/myRegister" element={<RegistrationForm />} />
                 {/* </AuthProvider> */}
@@ -64,6 +70,7 @@ export const MyRouting = () => {
                 <Route path="myTerms" element={<Terms></Terms>} ></Route>
                 <Route path="/myEvents" element={<Events></Events>} ></Route>
                 <Route path="/myProduct/:id" element={<Product></Product>} ></Route>
+                <Route path="/myShowReviews/:numStars" element={<ShowReviews></ShowReviews>}></Route>
 
             </Routes>
             <Footer></Footer>

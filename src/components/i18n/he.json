@@ -10,7 +10,11 @@
         "title": "התחברות",
         "username": "שם משתמש",
         "password": "סיסמה",
-        "loginButton": "התחבר"
+        "loginButton": "התחבר",
+        "invalidEmail": "פורמט דואר אלקטרוני לא חוקי",
+        "invalidPassword" :"הסיסמה צריכה להיות באורך של לפחות 8 תווים"
+
+
     },
     "contactPage": {
         "title": "דף התחברות",
@@ -28,7 +32,9 @@
         "h3Total": "סהכ",
         "clearButton": "נקה עגלה ",
         "addButton": "הוסף פריט",
-        "checkoutButton": "המשך לטופס  ההזמנה"
+        "checkoutButton": "המשך לטופס  ההזמנה",
+        "emptyCartMessage": "העגלה שלך ריקה.כדי להתקדם לטופס ההזמנה הוסף פריט לעגלת הקניות "
+
     
     },
     "footerPage": {
@@ -74,7 +80,14 @@
 
     },
     "CommonQuestionsPage": {
-        "title": "שאלות נפוצות"
+        "title": "שאלות נפוצות",
+        "languageId":1,
+        "FAQlist" : "FAQlistHe",
+        "language":"HE",
+        "question":"questionHe",
+        "answer":"answerHe"
+
+
 
     },
     "orderFormPage":{

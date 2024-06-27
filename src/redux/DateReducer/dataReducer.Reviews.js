@@ -72,8 +72,8 @@ export const InitialState_Reviews = {
 }
 export const DataReducer_Reviews = produce((state, action) => {
     switch (action.type) {
-        case "SET_REVIEWS": {
-            state.reviews = action.payload;
+        case 'FILL_REVIEWS_LIST': {
+            state.ReviewsList = action.payload;
             break;
         }
         default:

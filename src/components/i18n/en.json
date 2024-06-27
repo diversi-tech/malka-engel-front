@@ -10,7 +10,9 @@
         "title": "Login",
         "username": "Username",
         "password": "Password",
-        "loginButton": "Login"
+        "loginButton": "Login",
+        "invalidEmail": "Invalid email format",
+        "invalidPassword" :"Password should be at least 8 characters long"
     },
     "contactPage": {
         "title": "Contact page",
@@ -28,7 +30,8 @@
         "h3Total": "Total",
         "clearButton": "Clear Cart",
         "addButton": "Add Item",
-        "checkoutButton": "Checkout"
+        "checkoutButton": "Proceed to Checkout",
+        "emptyCartMessage": "Your cart is empty.To checkout add an item to your cart"
     },
     "footerPage": {
         "title": "Footer page",
@@ -56,7 +59,7 @@
     "navPage": {
         "linkHome": "Home",
         "linkContact": "Contact",
-        "linCommonQuestions":"FQA",
+        "linCommonQuestions":"FAQ",
         "linkLogin":"login",
         "linkProduct":"product list",
         "linkOrderForm": " Order Form",
@@ -73,18 +76,11 @@
 
     },
     "CommonQuestionsPage": {
-        "title": "FQA"
-
-    },
-    "orderFormPage":{
-        "title":"Order Form ",
-        "name":"Name:",
-        "address":"Address:",
-        "phone":"Phone",
-        "email":"Email:",
-        "addLogo":" Add Logo",
-        "selectLogo":"Selected Logo File:",
-        "fileLogo":"Logo File:",
-        "buttonSubmitOrder":"Submit Order"
+        "title": "FAQ",
+        "languageId":2,
+        "FAQlist" : "FAQlistEn",
+        "language":"EN",
+        "question":"questionEn",
+        "answer":"answerEn"
     }
 }
