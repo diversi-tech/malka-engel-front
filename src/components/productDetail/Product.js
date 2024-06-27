@@ -43,11 +43,14 @@ export const Product = () => {
 
     return (
         <div>
-            <div>{products[id].name}</div>product found!!!!!
+            <br></br>
+            <h1>More details:</h1>
+            <br></br>
+            {/* <div>{products[id].name}</div>product found!!!!! */}
             <div style={{ display: 'flex' }}>
                 <div style={{ flex: '2' }}>
                     <p style={{ direction: 'rtl' }}>{products[id].imageURL}</p>
-                    <h1>{products[id].name}</h1>
+                    <h2>{products[id].name}</h2>
 
                     <p>{products[id].description}</p>
                     <p>מחיר:{products[id].price}ש"ח </p>

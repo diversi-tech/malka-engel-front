@@ -9,36 +9,26 @@ import { fillReviewsList } from "../../redux/DataActions/DataAction.Reviews";
 
 export const Review = () => {
   const { t, i18n } = useTranslation();
-
   let reviewList = useSelector(state => state.DataReducer_Reviews.ReviewsList);
-  const [reviews, setReviews] = useState(reviewList);
-
-
+  let [reviews, setReviews] = useState(reviewList);
   const myDispatch = useDispatch();
   const navigate = useNavigate();
 
   async function fetchReviews() {
-    if (reviewList.length == 0) {
+    if (reviewList.length === 0) {
       var response = await GetAllReviews();
-
-      setReviews(response);
-      //console.log(response);
-      debugger
-      // Assuming response contains the list of reviews
-      myDispatch(fillReviewsList(response));
-    }
-    else {
-      setReviews(reviewList); // Assuming response.data contains the list of reviews
-      //myDispatch(fillReviewsList(response));
+      setReviews(response.data); // Assuming response.data contains the list of reviews
+      myDispatch(fillReviewsList(response.data));
+    } else {
+      setReviews(reviewList);
     }
   }
 
- 
-  //call the function automatically
+  // Call the function automatically
   useEffect(() => {
     fetchReviews();
-    setReviews(reviewList)
   }, []);
+
   // Calculate average rating
   const averageRating = reviews.length ? (reviews.reduce((sum, review) => sum + review.Rating, 0) / reviews.length).toFixed(1) : 0;
 
@@ -65,7 +55,6 @@ export const Review = () => {
   };
 
   const sentToSeeStars = (numOfStar) => {
-    alert('Navigate to show review form');
     navigate(`/myShowReviews/${numOfStar}`);  // Navigate to product details page with product ID
   };
 
@@ -84,7 +73,11 @@ export const Review = () => {
             <div>
               {ratingsDistribution.map((percent, index) => (
                 <div key={index} className="d-flex align-items-center mb-2">
-                  <span className="font-weight-bold" style={{ color: '#555' }}>{5 - index} כוכבים</span>
+                  <span className="font-weight-bold" style={{ color: '#555' }}>
+                    <button className="btn btn-light " onClick={() => sentToSeeStars(5 - index)}>
+                      {5 - index} כוכבים
+                    </button>
+                  </span>
                   <div className="progress w-100 mx-2" style={{ height: '1.5rem', backgroundColor: '#f1f1f1' }}>
                     <div className="progress-bar bg-warning" style={{ width: `${(percent / totalRatings) * 100}%`, borderRadius: '0' }}></div>
                   </div>
@@ -98,45 +91,6 @@ export const Review = () => {
             <button className="btn btn-lg btn-secondary" style={{ borderRadius: '0', fontWeight: 'bold', backgroundColor: '#6c757d', color: '#fff' }}>כתוב ביקורת צרכן</button>
           </div>
         </div>
-
-        <div className="col-md-8">
-          {/* Content for the right side */}
- 
-
-        <div className="col-md-8">
-          {reviews.map(review => (
-            <div className="card mb-3" key={review.ReviewID}>
-              <div className="card-body">
-                <div className="d-flex justify-content-between">
-                  <h5 className="card-title">{review.ProductId}</h5>
-                  <span>{review.UserId}</span>
-                </div>
-                <div className="card-text mb-2">{renderStars(review.Rating)}</div>
-                <p className="card-text">{review.Comment}</p>
-                <div className="d-flex justify-content-between align-items-center">
-                  <div className="btn-group" role="group" aria-label="User feedback">
-                    <button className="btn btn-outline-success" onClick={() => handleFeedback(review.ReviewID, 'happy')}>
-                      😊 Happy
-                    </button>
-                    <button className="btn btn-outline-danger" onClick={() => handleFeedback(review.ReviewID, 'sad')}>
-                      😞 Sad
-                    </button>
-                  </div>
-                  <small className="text-muted">{review.CreatedAt}</small>
-                </div>
-              </div>
-            </div>
-          ))}
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">More Details</h5>
-              <p className="card-text">Placeholder for more details about the product.</p>
-              <textarea className="form-control mb-3" placeholder="Enter more details..."></textarea>
-              <button className="btn btn-primary">Submit</button>
-            </div>
-          </div>
-        </div>
-       </div>
       </div>
     </div>
   );

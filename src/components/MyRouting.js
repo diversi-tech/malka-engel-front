@@ -19,8 +19,8 @@ import { Account } from "./Account";
 import { Events } from "./Events";
 import { Product } from "./productDetail/Product";
 import { OrderForm } from "./OrderForm";
-import { Review } from "./Review";
 import { ShowReviews } from "./productDetail/ShowReviews";
+import { Review } from "./productDetail/Review";
 
 // Routing במקום 
 // כי זה שם שמור
