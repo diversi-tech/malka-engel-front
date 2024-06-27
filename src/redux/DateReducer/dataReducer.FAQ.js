@@ -1,41 +1,16 @@
 import {produce} from "immer"
 export const InitialState_FAQ = {
 //משתנים גלובלים
-    FAQlistEn:
+         FAQlist:
         [
-        //     {
-        //         id: 1,
-        //         question: "aaaa",
-        //         answer: "ua. Ufhghfhrtthttht",
-        //         Rating: 5
-        //     },
-        //     {
-        //         id: 2,
-        //         question: "aaaab",
-        //         answer: "ua. Ufhghfhrtthttht",
-        //         Rating: 4
-        //     },
-        //     {
-        //         id: 6,
-        //         question: "aaaabcc",
-        //         answer: "ua. Ufhghfhrtthttht",
-        //         Rating: 1
-        //     },
-        //     {
-        //         id: 4,
-        //         question: "aaaabnnn",
-        //         answer: "ua. Ufhghfhrtthttht",
-        //         Rating: 0
-        //     }             
-         ],
-         FAQlistHe:
-        [
-        //     {
-        //         id: 1,
-        //         question: "אאא",
-        //         answer: "ua. Ufhghfhrtthttht",
-        //         Rating: 5
-        //     },
+            // {
+            //     id: 1,
+            //     questionH: "אאא",
+            //     answerH: "ua. Ufhghfhrtthttht",
+            //     questionE: "אאא",
+            //     answerE: "ua. Ufhghfhrtthttht",
+            //     Rating: 5
+            // },
         //     {
         //         id: 2,
         //         question: "אאאב",
@@ -59,15 +34,10 @@ export const InitialState_FAQ = {
 export const DataReducer_FAQ = produce((state, action)=>{
     switch(action.type)
     {
-        case "SET_FAQLIST_EN":{
-            state.FAQlistEn = action.payload
+        case "SET_FAQLIST":{
+            state.FAQlist = action.payload
             break
         }
-        case "SET_FAQLIST_HE":{
-            state.FAQlistHe = action.payload
-            break
-        }
-
         default:
             break;
     }

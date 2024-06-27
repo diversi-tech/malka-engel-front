@@ -77,6 +77,8 @@
         "title": "FAQ",
         "languageId":2,
         "FAQlist" : "FAQlistEn",
-        "language":"EN"
+        "language":"EN",
+        "question":"questionEn",
+        "answer":"answerEn"
     }
 }
