@@ -10,7 +10,9 @@
         "title": "Login",
         "username": "Username",
         "password": "Password",
-        "loginButton": "Login"
+        "loginButton": "Login",
+        "invalidEmail": "Invalid email format",
+        "invalidPassword" :"Password should be at least 8 characters long"
     },
     "contactPage": {
         "title": "Contact page",

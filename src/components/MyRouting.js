@@ -43,7 +43,7 @@ export const MyRouting = () => {
                 <Route path="/myShoppingCart" element={<ShoppingCart></ShoppingCart>}></Route>
         
                 {/* <AuthProvider> */}
-                    <Route path="/myLogin" element={<Login />} />
+                    <Route path="/myLogin" element={<Login/>} />
                     <Route path="/myProfile" element={<UserProfile />} />
                     <Route path="/myRegister" element={<RegistrationForm />} />
                 {/* </AuthProvider> */}
