@@ -8,7 +8,7 @@ export const GetAllReviews = async () => {
         debugger
         // to ask what is mean language?? in the query string---
         let result = await axios.get(`${s}`)
-        return result
+        return result.data
     }
     catch (ch) {
         console.log(ch)

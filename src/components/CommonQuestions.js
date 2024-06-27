@@ -3,19 +3,16 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getCommonQuestions } from "../axios/CommonQuestionsAxios";
-import { setFAQlist_HE } from "../redux/DataActions/DataActions.FAQ"
-
-
+import { setFAQlist } from "../redux/DataActions/DataActions.FAQ"
 
 //FAQ page
 
 export const CommonQuestions = () => {
+  debugger
   //Translate  
   const { t, i18n } = useTranslation();
   //List of FAQ questions from redux
-  // const ss =`.DataReducer_FAQ.${t('CommonQuestionsPage.FAQlist')}`
-  let FAQlist = useSelector(s =>s.DataReducer_FAQ.FAQlistHe)
-  // const aa = `setFAQlist_${t('CommonQuestionsPage.language')}`
+  let FAQlist = useSelector(s =>s.DataReducer_FAQ.FAQlist)
   //List of FAQ questions for search filter - Initialize with the complete list of questions
   let [currentQuestion, setCurrentQuestion] = useState(FAQlist);
   //יצירת משנה שישמש לשיגור
@@ -27,11 +24,11 @@ async function fetchData() {
     //check if it is empty   
     if (FAQlist.length == 0) { 
       //Retrieval from server
-       let c = await getCommonQuestions(2) //t('CommonQuestionsPage.language')
+         let c = await getCommonQuestions() 
       //  FAQlist = c
-       setCurrentQuestion(c)
+         setCurrentQuestion(c)
       //place in redex - שיגור                        
-      dispatch(setFAQlist_HE(c)) //+t('CommonQuestionsPage.language')(myFAQlist.data))
+      dispatch(setFAQlist(c)) //+t('CommonQuestionsPage.language')(myFAQlist.data))
     }
   }
 // קריאה לפונקצית שליפה מהשרת
@@ -67,7 +64,7 @@ async function fetchData() {
       </div>
     </div> */}
        <div>
-          <h1 title={t('CommonQuestionsPage.title')} />
+          <h1 title={t('CommonQuestionsPage.title')}></h1>
        </div>
       {currentQuestion.map(x => <div>
 
@@ -76,11 +73,11 @@ async function fetchData() {
           <div id="accordion">
             <div class="card">
               <div class="card-header">
-                <button class="btn"   data-bs-toggle="collapse" data-bs-target="#demo">{x.question}</button>
+                <button class="btn"   data-bs-toggle="collapse" data-bs-target="#demo">{x[t('CommonQuestionsPage.question')]}</button>
               
-              <div id="demo" class="collapse">{x.answer}</div>
-                <div class="card-body">{x.answer}
-                {/* <div class="card-body">{x.Rating}</div> */}
+              <div id="demo" class="collapse"></div>
+                <div class="card-body">{x[t('CommonQuestionsPage.answer')]}
+                <div class="card-body">{x.rating}</div>
 
               </div>
             </div>
