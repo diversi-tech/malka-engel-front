@@ -5,8 +5,6 @@ import { useEffect, useState } from "react";
 import { getCommonQuestions } from "../axios/CommonQuestionsAxios";
 import { setFAQlist_HE } from "../redux/DataActions/DataActions.FAQ"
 
-
-
 //FAQ page
 
 export const CommonQuestions = () => {
@@ -27,9 +25,14 @@ async function fetchData() {
     //check if it is empty   
     if (FAQlist.length == 0) { 
       //Retrieval from server
-       let c = await getCommonQuestions(2) //t('CommonQuestionsPage.language')
+      let c
+      if(t('CommonQuestionsPage.languageId')==1)
+           c = await getCommonQuestions(1) //t('CommonQuestionsPage.language')
+       else
+       c = await getCommonQuestions(2) //t('CommonQuestionsPage.language')
+
       //  FAQlist = c
-       setCurrentQuestion(c)
+         setCurrentQuestion(c)
       //place in redex - שיגור                        
       dispatch(setFAQlist_HE(c)) //+t('CommonQuestionsPage.language')(myFAQlist.data))
     }
@@ -67,7 +70,7 @@ async function fetchData() {
       </div>
     </div> */}
        <div>
-          <h1 title={t('CommonQuestionsPage.title')} />
+          <h1 title={t('CommonQuestionsPage.title')}></h1>
        </div>
       {currentQuestion.map(x => <div>
 

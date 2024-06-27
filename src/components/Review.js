@@ -7,30 +7,32 @@ import { fillReviewsList } from "../redux/DataActions/DataAction.Reviews";
 
 export const Review = () => {
   const { t, i18n } = useTranslation();
+
   let reviewList = useSelector(state => state.DataReducer_Reviews.ReviewsList);
-  let [reviews, setReviews] = useState(reviewList);
+  const [reviews, setReviews] = useState(reviewList);
+
   const myDispatch = useDispatch();
 
-
   async function fetchReviews() {
+    
     if (reviewList.length == 0) {
       var response = await GetAllReviews();
+      setReviews(response);
       //console.log(response.data);
       debugger
-      setReviews(response.data); // Assuming response.data contains the list of reviews
-      myDispatch(fillReviewsList(response.data));
+      // Assuming response.data contains the list of reviews
+      myDispatch(fillReviewsList(response));
     }
     else {
       setReviews(reviewList);
       console.log('Error fetching reviews:');
     }
   }
-
+ 
   //call the function automatically
   useEffect(() => {
     fetchReviews();
   }, []);
-
   // Calculate average rating
   const averageRating = reviews.length ? (reviews.reduce((sum, review) => sum + review.Rating, 0) / reviews.length).toFixed(1) : 0;
 
@@ -95,9 +97,9 @@ export const Review = () => {
           <button className="btn btn-primary">כתוב ביקורת צרכן</button>
         </div>
 
-        {/* More details section */}
-        {/* for more detail - dont touch please!! */}
-        {/*   
+         {/* More details section  */}
+        {/*  for more detail - dont touch please!!  */}
+           
           <div className="col-md-8">
             {reviews.map(review => (
               <div className="card mb-3" key={review.ReviewID}>
@@ -130,7 +132,7 @@ export const Review = () => {
                 <button className="btn btn-primary">Submit</button>
               </div>
             </div>
-          </div>*/}
+          </div>
       </div>
     </div>);
-};
+}

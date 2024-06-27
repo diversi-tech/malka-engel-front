@@ -8,7 +8,7 @@ export const InitialState_Reviews = {
             //     ReviewID: 1,
             //     ProductID: 2,
             //     UserID: 3,
-            //     Rating: 5,
+            //     Rating: 4,
             //     Comment: "a buetefully review",
             //     CreatedAt: "2015-09-90"
             // },
@@ -19,7 +19,7 @@ export const InitialState_Reviews = {
             //     Rating: 3,
             //     Comment: "a wanderfull review",
             //     CreatedAt: "2020-09-90"
-            // },
+            // }//,
             // {
             //     ReviewID: 1,
             //     ProductID: 2,
@@ -71,7 +71,6 @@ export const InitialState_Reviews = {
         ]
 }
 export const DataReducer_Reviews = produce((state, action) => {
-    debugger
     switch (action.type) {
         case "SET_REVIEWS": {
             state.reviews = action.payload;

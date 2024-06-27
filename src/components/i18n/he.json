@@ -77,7 +77,7 @@
     },
     "CommonQuestionsPage": {
         "title": "שאלות נפוצות",
-        "languageId":2,
+        "languageId":1,
         "FAQlist" : "FAQlistHe",
         "language":"HE"
 
