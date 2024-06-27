@@ -9,10 +9,10 @@ import { MyRouting } from './components/MyRouting.js';
 function App() {
   return (
     <div className="App">
- <Provider store={Store}>
-      {/* <header className="App-header"> */}
-  <MyRouting></MyRouting>
-      {/* </header> */}
+      <Provider store={Store}>
+        {/* <header className="App-header"> */}
+        <MyRouting></MyRouting>
+        {/* </header> */}
       </Provider>
     </div>
   );

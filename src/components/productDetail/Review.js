@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { GetAllReviews } from "../axios/ReviewsAxios";
+import { GetAllReviews } from "../../axios/ReviewsAxios";
 import { FaStar } from 'react-icons/fa';
-import { fillReviewsList } from "../redux/DataActions/DataAction.Reviews";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate } from "react-router-dom";
+import { fillReviewsList } from "../../redux/DataActions/DataAction.Reviews";
 
 export const Review = () => {
   const { t, i18n } = useTranslation();
   let reviewList = useSelector(state => state.DataReducer_Reviews.ReviewsList);
   let [reviews, setReviews] = useState(reviewList);
   const myDispatch = useDispatch();
+  const navigate = useNavigate();
 
   async function fetchReviews() {
-    if (reviewList.length == 0) {
+    if (reviewList.length === 0) {
       var response = await GetAllReviews();
       setReviews(response.data); // Assuming response.data contains the list of reviews
       myDispatch(fillReviewsList(response.data));
@@ -47,14 +49,14 @@ export const Review = () => {
     );
   };
 
-  // Function to handle user feedback (happy/sad)
-  const handleFeedback = (reviewId, feedbackType) => {
-    console.log(`User feedback for review ${reviewId}: ${feedbackType}`);
-  };
-
   const navigateToReviewForm = () => {
     setReviews(reviewList);
     alert('Navigate to review form');
+  };
+
+  const sentToSeeStars = (numOfStar) => {
+    alert('Navigate to show review form');
+    navigate(`/myShowReviews/${numOfStar}`);  // Navigate to product details page with product ID
   };
 
   return (
@@ -70,9 +72,15 @@ export const Review = () => {
             <p className="font-weight-bold" style={{ fontSize: '1.2em', color: '#666' }}>{averageRating} מתוך 5</p>
             <p className="font-weight-bold" style={{ fontSize: '1.2em', color: '#666' }}>{totalRatings} דירוגים גלובליים</p>
             <div>
-              {ratingsDistribution.map((percent, index) => (
+            {ratingsDistribution.map((percent, index) => (
                 <div key={index} className="d-flex align-items-center mb-2">
-                  <span className="font-weight-bold" style={{ color: '#555' }}>{5 - index} כוכבים</span>
+                  <div className="col">
+                    <button className="btn btn-light long" onClick={() => sentToSeeStars(5 - index)}>
+                      <span className="font-weight-bold" style={{ color: '#555' }}>
+                        {5 - index} כוכבים
+                      </span>
+                    </button>
+                  </div>
                   <div className="progress w-100 mx-2" style={{ height: '1.5rem', backgroundColor: '#f1f1f1' }}>
                     <div className="progress-bar bg-warning" style={{ width: `${(percent / totalRatings) * 100}%`, borderRadius: '0' }}></div>
                   </div>
@@ -86,45 +94,6 @@ export const Review = () => {
             <button className="btn btn-lg btn-secondary" style={{ borderRadius: '0', fontWeight: 'bold', backgroundColor: '#6c757d', color: '#fff' }}>כתוב ביקורת צרכן</button>
           </div>
         </div>
-
-        <div className="col-md-8">
-          {/* Content for the right side */}
- 
-
-        <div className="col-md-8">
-          {reviews.map(review => (
-            <div className="card mb-3" key={review.ReviewID}>
-              <div className="card-body">
-                <div className="d-flex justify-content-between">
-                  <h5 className="card-title">{review.ProductId}</h5>
-                  <span>{review.UserId}</span>
-                </div>
-                <div className="card-text mb-2">{renderStars(review.Rating)}</div>
-                <p className="card-text">{review.Comment}</p>
-                <div className="d-flex justify-content-between align-items-center">
-                  <div className="btn-group" role="group" aria-label="User feedback">
-                    <button className="btn btn-outline-success" onClick={() => handleFeedback(review.ReviewID, 'happy')}>
-                      😊 Happy
-                    </button>
-                    <button className="btn btn-outline-danger" onClick={() => handleFeedback(review.ReviewID, 'sad')}>
-                      😞 Sad
-                    </button>
-                  </div>
-                  <small className="text-muted">{review.CreatedAt}</small>
-                </div>
-              </div>
-            </div>
-          ))}
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">More Details</h5>
-              <p className="card-text">Placeholder for more details about the product.</p>
-              <textarea className="form-control mb-3" placeholder="Enter more details..."></textarea>
-              <button className="btn btn-primary">Submit</button>
-            </div>
-          </div>
-        </div>
-       </div>
       </div>
     </div>
   );
