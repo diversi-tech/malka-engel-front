@@ -25,6 +25,9 @@ export const Nav = () => {
                         <li className="nav-item"> <Link className="nav-link" to="./myLogin">{t('navPage.linkLogin')}</Link></li>
                         <li className="nav-item"><Link className="nav-link" to="./myProductList">{t('navPage.linkProduct')}</Link> </li>
                         <li className="nav-item"><Link className="nav-link" to="./myOrderForm">{t('navPage.linkOrderForm')}</Link> </li>
+                        <li className="nav-item"><Link className="nav-link" to="./myAdminDashboard">AdminDashboard</Link> </li> 
+                        <li className="nav-item"><Link className="nav-link" to="./myCategoriesManager">CategoriesManager</Link> </li> 
+                        <li className="nav-item"><Link className="nav-link" to="./myOrderManager">OrderManager</Link> </li> 
                     </ul>
                 </div>
                 <div className="d-flex">

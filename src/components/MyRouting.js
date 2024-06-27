@@ -19,6 +19,10 @@ import { Account } from "./Account";
 import { Events } from "./Events";
 import { Product } from "./productDetail/Product";
 import { OrderForm } from "./OrderForm";
+import AdminDashboard from "./AdminComponents/AdminDashboard.js";
+import CategoriesManager from "./AdminComponents/CategoriesManager.js";
+import OrderManager from "./AdminComponents/OrderManager.js";
+
 import { ShowReviews } from "./productDetail/ShowReviews";
 import { Review } from "./productDetail/Review";
 
@@ -41,7 +45,17 @@ export const MyRouting = () => {
                 <Route path="/myProductList" element={<ProductList></ProductList>}></Route>
                 <Route path="/myCommonQuestions" element={<CommonQuestions></CommonQuestions>}></Route>
                 <Route path="/myOrderForm" element={<OrderForm></OrderForm>}></Route>
+               
+                <Route path="/myAdminDashboard" element={<AdminDashboard></AdminDashboard>}></Route>
+                <Route path="/myCategoriesManager" element={<CategoriesManager></CategoriesManager>}></Route>
+                <Route path="/myOrderManager" element={<OrderManager></OrderManager>}></Route>
+               
+  
+
+
+
                 <Route path="/review" element={<Review></Review>}></Route>
+
                 <Route path="/myShoppingCart" element={<ShoppingCart></ShoppingCart>}></Route>
         
                 {/* <AuthProvider> */}
