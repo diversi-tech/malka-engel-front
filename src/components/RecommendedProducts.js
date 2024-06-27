@@ -7,7 +7,7 @@ import { PageTitle } from './PageTitle';
 const RecommendedProducts = () => {
     const { t, i18n } = useTranslation();
     const [cart, setCart] = useState([]);
-    const products = useSelector(s => s.DataReducer_Pro.Prolist)
+    const products = useSelector(s => s.DataReducer_Products.Prodlist)
     // const products = [
     //     { id: 1, name: 'Product 1', price: 50, image: 'product1.jpg' },
     //     { id: 2, name: 'Product 2', price: 80, image: 'product2.jpg' },
