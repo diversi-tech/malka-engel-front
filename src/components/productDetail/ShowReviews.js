@@ -20,6 +20,8 @@ export const ShowReviews = () => {
     const [reviews, setReviews] = useState([]);
     const myDispatch = useDispatch();
 
+    //TODO//
+    //if i need to call the function from server
     // async function fetchReviewByProdID() {
     //     try {
     //         var response = await GetReviewByProd(param.numStars);
@@ -45,6 +47,8 @@ export const ShowReviews = () => {
     }, [param.numStars, reviewList]);
 
     return (
+        //TODO//
+        //continue working!!!!!!!!!!!
         <div className="container">
             <br></br>
             <h3>The all reviews for {param.numStars} stars</h3>

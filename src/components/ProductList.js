@@ -18,11 +18,13 @@ export const ProductList = () => {
     const myDispatch = useDispatch();
     const navigate = useNavigate();
 
+    //there is an explention int the product page - exactly!
+    //TODO//
+    //how to send the right language?
     async function fetchProducts() {
-        debugger
         if (productsList.length == 0) {
           var response = await GetAllProducts(1);
-          setProducts(response); // Assuming response.data contains the list of reviews
+          setProducts(response); 
           myDispatch(setProductList(response));
         } else {
             setProducts(productsList);
@@ -30,13 +32,12 @@ export const ProductList = () => {
       }
     
       // Call the function automatically
-      useEffect(() => {
+      useEffect(f => {
+        //call function to set product list
         fetchProducts();
-        setProducts(productsList);
       }, []);
 
     const addToCart = (productId) => {
-        
         const productToAdd = products.find(product => product.id === productId);
         if (productToAdd) {
             const currentItems = itemsSubject.value;
