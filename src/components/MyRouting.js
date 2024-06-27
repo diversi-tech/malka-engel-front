@@ -19,6 +19,7 @@ import { Account } from "./Account";
 import { Events } from "./Events";
 import { Product } from "./Product";
 import { OrderForm } from "./OrderForm";
+import { Review } from "./Review";
 
 // Routing במקום 
 // כי זה שם שמור
@@ -39,7 +40,7 @@ export const MyRouting = () => {
                 <Route path="/myProductList" element={<ProductList></ProductList>}></Route>
                 <Route path="/myCommonQuestions" element={<CommonQuestions></CommonQuestions>}></Route>
                 <Route path="/myOrderForm" element={<OrderForm></OrderForm>}></Route>
-               
+                <Route path="/review" element={<Review></Review>}></Route>
                 <Route path="/myShoppingCart" element={<ShoppingCart></ShoppingCart>}></Route>
         
                 {/* <AuthProvider> */}

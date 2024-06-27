@@ -83,7 +83,9 @@
         "title": "שאלות נפוצות",
         "languageId":1,
         "FAQlist" : "FAQlistHe",
-        "language":"HE"
+        "language":"HE",
+        "question":"questionHe",
+        "answer":"answerHe"
 
 
 
