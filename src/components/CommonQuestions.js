@@ -28,7 +28,7 @@ async function fetchData() {
       //  FAQlist = c
          setCurrentQuestion(c)
       //place in redex - שיגור                        
-      dispatch(setFAQlist(c)) //+t('CommonQuestionsPage.language')(myFAQlist.data))
+      dispatch(setFAQlist(c)) 
     }
   }
 // קריאה לפונקצית שליפה מהשרת
@@ -37,7 +37,7 @@ async function fetchData() {
 },[])
 
 
-  // A function to handle the search   
+// A function to handle the search   
   const handleChange = (event) => {
 //Filter the questions by text of the search field.
     setCurrentQuestion(FAQlist.filter(q => q.question.toLowerCase().includes(event.target.value.toLowerCase())))
