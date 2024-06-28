@@ -2,18 +2,40 @@
 import { useTranslation } from 'react-i18next';
 import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PageTitle } from './PageTitle';
 import { itemsSubject } from './ShoppingCart';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { GetAllProducts } from '../axios/ProductAxios';
+import { setProductList } from '../redux/DataActions/DataAction.Product';
 
 
 export const ProductList = () => {
     const { t, i18n } = useTranslation();
     const [cart, setCart] = useState([]);
-    const products = useSelector(s => s.DataReducer_Pro.Prolist)
-
+    const productsList = useSelector(s => s.DataReducer_Products.Prodlist);
+    const [products, setProducts] = useState(productsList);
+    const myDispatch = useDispatch();
     const navigate = useNavigate();
+
+    //there is an explention int the product page - exactly!
+    //TODO//
+    //how to send the right language?
+    async function fetchProducts() {
+        if (productsList.length == 0) {
+          var response = await GetAllProducts(1);
+          setProducts(response); 
+          myDispatch(setProductList(response));
+        } else {
+            setProducts(productsList);
+        }
+      }
+    
+      // Call the function automatically
+      useEffect(f => {
+        //call function to set product list
+        fetchProducts();
+      }, []);
 
     const addToCart = (productId) => {
         const productToAdd = products.find(product => product.id === productId);
@@ -35,7 +57,8 @@ export const ProductList = () => {
 
     
     const goToProductDetails = (productId) => {
-        navigate(`/myProduct/${productId}`);  // Navigate to product details page with product ID
+        debugger
+        navigate(`/myProduct/${productId-1}`);  // Navigate to product details page with product ID
     };
 
 
@@ -56,7 +79,7 @@ export const ProductList = () => {
                                     <Card.Text>
                                         Price: {product.price} USD
                                     </Card.Text>
-                                    <Button variant="primary" onClick={() => goToProductDetails(product.id)}>Details</Button>
+                                    <Button variant="primary" onClick={() => {debugger;goToProductDetails(product.productID)}}>Details</Button>
                                     <Button variant="primary" onClick={() => addToCart(product.id)}>Add to cart</Button>
                                     {/* <Button variant="primary" onClick={() => addToCart(product.id)}>Add to cart </Button> */}
                                 </Card.Body>
