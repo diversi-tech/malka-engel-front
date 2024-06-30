@@ -40,7 +40,7 @@ async function fetchData() {
 // A function to handle the search   
   const handleChange = (event) => {
 //Filter the questions by text of the search field.
-    setCurrentQuestion(FAQlist.filter(q => q.question.toLowerCase().includes(event.target.value.toLowerCase())))
+    setCurrentQuestion(FAQlist.filter(q => q[t('CommonQuestionsPage.answer')].toLowerCase().includes(event.target.value.toLowerCase())))
   };
 
 
