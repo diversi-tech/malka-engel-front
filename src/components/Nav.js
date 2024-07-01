@@ -5,10 +5,20 @@ import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 import usFlag from '../assets/flags/us_flag.png';
 import ilFlag from '../assets/flags/il_flag.png';
+import { useSelector } from "react-redux";
+import { setCurrentUser } from "../redux/DataActions/DataAction.Users";
 
 // Nav page
 export const Nav = () => {
     const { t, i18n } = useTranslation();
+    const currentUser = useSelector(s=>s.DataReducer_Users.currentUser)
+    const connected = useSelector(s=>s.DataReducer_Users.connected)
+
+    let currentName = "NOT CONNECTED";
+    if(connected) {
+        currentName =currentUser.name;
+    }
+  let myStyle = {backgroundColor: "rgb(207, 97, 221)"}
     //TODO//
     // i want to declare a global variable to save in what language are we currently!!
     //to check if i need....
@@ -40,6 +50,9 @@ export const Nav = () => {
                         <li className="nav-item"><Link className="nav-link" to="./myAdminDashboard">AdminDashboard</Link> </li>
                         <li className="nav-item"><Link className="nav-link" to="./myCategoriesManager">CategoriesManager</Link> </li>
                         <li className="nav-item"><Link className="nav-link" to="./myOrderManager">OrderManager</Link> </li>
+                       
+                        <li className="nav-item"><p className="nav-link" style ={myStyle}>{currentName}</p> </li>
+
                     </ul>
                 </div>
                 {i18n.language !== 'en' && (
