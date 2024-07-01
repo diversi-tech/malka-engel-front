@@ -9,6 +9,7 @@
     "loginPage": {
         "title": "התחברות",
         "username": "שם משתמש",
+        "email": "אימייל",
         "password": "סיסמה",
         "loginButton": "התחבר",
         "invalidEmail": "פורמט דואר אלקטרוני לא חוקי",
