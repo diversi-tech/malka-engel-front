@@ -11,6 +11,7 @@ import { Review } from './Review';
 
 
 export const Product = () => {
+    debugger
     const { t, i18n } = useTranslation();
     //get the product list from the redux store
     const productsList = useSelector(s => s.DataReducer_Products.Prodlist);
@@ -29,7 +30,7 @@ export const Product = () => {
         //if the list in the redux empty
         if (productsList.length == 0) {
             //get data - the list from server - 
-            var response = await GetAllProducts(1);
+            var response = await GetAllProducts();
             //set current product list - that loaded from redux
             setProducts(response); // Assuming response.data contains the list of reviews
             //update the product list in the redux stor
@@ -58,10 +59,10 @@ export const Product = () => {
             {/* <div>{products[id].name}</div>product found!!!!! */}
             <div style={{ display: 'flex' }}>
                 <div style={{ flex: '2' }}>
-                    <p style={{ direction: 'rtl' }}>{products[id].imageURL}</p>
-                    <h2>{products[id].name}</h2>
+                    {/* <p style={{ direction: 'rtl' }}>{products[id].imageURL}</p> */}
+                    <h2>{products[id].nameHe}</h2>
 
-                    <p>{products[id].description}</p>
+                    <p>{products[id].descriptionHe}</p>
                     <p>מחיר:{products[id].price}ש"ח </p>
                     <Wording />
                     <br></br>

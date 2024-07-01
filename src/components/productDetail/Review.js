@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { fillReviewsList } from "../../redux/DataActions/DataAction.Reviews";
 
 //Review page
+//TODO://
+//this page need help sos!!!!!!!!!!!!!!!
 export const Review = () => {
   const { t, i18n } = useTranslation();
   let reviewList = useSelector(s => s.DataReducer_Reviews.ReviewsList);
@@ -17,6 +19,7 @@ export const Review = () => {
 
   //really the same like in Product page!!!!
   async function fetchReviews() {
+    debugger
     if (reviewList.length == 0) {
       try {
         const response = await GetAllReviews();
