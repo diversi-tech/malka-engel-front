@@ -1,6 +1,7 @@
 import axios from "axios"
 
 const API_BASE_URL = process.env.REACT_APP_API_URL + "/api/Review"
+
 let s = "https://localhost:7297/api/Review"
 export const GetAllReviews = async () => {
     try {
@@ -18,7 +19,7 @@ export const AddReview = async (reviewToAdd) => {
     debugger
     try {
         // to ask what is mean language?? in the query string---
-        let result = await axios.post(`${API_BASE_URL}AddReview`, reviewToAdd);
+        let result = await axios.post(`${API_BASE_URL}/AddReview`, reviewToAdd);
         return result.data
     }
     catch (ch) {
