@@ -1,4 +1,3 @@
-
 import { useTranslation } from 'react-i18next';
 import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router';

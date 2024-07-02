@@ -22,7 +22,7 @@ import { OrderForm } from "./OrderForm";
 import AdminDashboard from "./AdminComponents/AdminDashboard.js";
 import CategoriesManager from "./AdminComponents/CategoriesManager.js";
 import OrderManager from "./AdminComponents/OrderManager.js";
-
+import {OrderHistory} from "./OrderHistory.js";
 import { ShowReviews } from "./productDetail/ShowReviews";
 import { Review } from "./productDetail/Review";
 
@@ -49,6 +49,7 @@ export const MyRouting = () => {
                 <Route path="/myAdminDashboard" element={<AdminDashboard></AdminDashboard>}></Route>
                 <Route path="/myCategoriesManager" element={<CategoriesManager></CategoriesManager>}></Route>
                 <Route path="/myOrderManager" element={<OrderManager></OrderManager>}></Route>
+                <Route path="/myOrderHistory/:UserId" element={<OrderHistory></OrderHistory>}></Route>
                
   
 

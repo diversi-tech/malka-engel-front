@@ -49,7 +49,7 @@ export const Footer = ({ showOnScroll }) => {
       <Link to="./myEvents" className="text-black text-decoration-none me-3">{t('footerPage.linkEvents')}</Link>
       <Link to="./myLogin" className="text-black text-decoration-none me-3">{t('footerPage.linkLogin')}</Link>
       <Link to="./myTerms" className="text-black text-decoration-none me-3">{t('footerPage.linkTerms')}</Link>
-      <h5 className="text-black text-decoration-none me-3"  >כל הזכויות שמורות@</h5>
+      <p className="text-black text-decoration-none me-3"  >כל הזכויות שמורות@</p>
 
 
     </footer >
