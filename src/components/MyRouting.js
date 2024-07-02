@@ -59,13 +59,7 @@ export const MyRouting = () => {
                     <Route path="/myAdminDashboard" element={<AdminDashboard></AdminDashboard>}></Route>
                     <Route path="/myCategoriesManager" element={<CategoriesManager></CategoriesManager>}></Route>
                     <Route path="/myOrderManager" element={<OrderManager></OrderManager>}></Route>
-
-
-
-
-
                     <Route path="/review" element={<Review></Review>}></Route>
-
 
                 <Route path="/myShoppingCart" element={<ShoppingCart></ShoppingCart>}></Route>
         
@@ -90,8 +84,8 @@ export const MyRouting = () => {
 
 
                    
-                    <Route path="/myProfile" element={<UserProfile />} />
-                    <Route path="/myRegister" element={<RegistrationForm />} />
+                    {/* <Route path="/myProfile" element={<UserProfile />} /> */}
+                    {/* <Route path="/myRegister" element={<RegistrationForm />} /> */}
                     {/* </AuthProvider> */}
                  
                     
