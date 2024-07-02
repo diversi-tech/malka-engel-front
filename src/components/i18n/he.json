@@ -72,7 +72,10 @@
         "linkShoppingCart": "סל קניות"
     },
     "productListPage":{
-        "title": "  רשימת מוצרים"
+        "title": "  רשימת מוצרים",
+        "moreDetails": "פרטים נוספים",
+        "cart":"הוספה לסל"
+
 
     },
     "recommendedProducts":{
@@ -101,6 +104,9 @@
         "selectLogo":"בחר קובץ לוגו :",
         "fileLogo":"קובץ לוגו:",
         "buttonSubmitOrder":"שלח הזמנה"
+    },
+    "productPage":{
+        "review":"חוות דעת"
     }
     
 }

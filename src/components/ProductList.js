@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import { Card, Button, Container, Row, Col } from 'react-bootstrap';
-import { useNavigate } from 'react-router';
+import { Card, Container, Row, Col, Badge } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { itemsSubject } from './ShoppingCart';
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,44 +29,67 @@ export const ProductList = () => {
         fetchProducts();
     }, []);
 
-    const addToCart = (productId) => {
-        const productToAdd = products.find(product => product.id === productId);
-        if (productToAdd) {
-            const currentItems = itemsSubject.value;
-            const existingItemIndex = currentItems.findIndex(item => item.id === productToAdd.id);
-
-            if (existingItemIndex !== -1) {
-                const updatedItems = [...currentItems];
-                updatedItems[existingItemIndex].quantity += 1;
-                itemsSubject.next(updatedItems);
-            } else {
-                itemsSubject.next([...currentItems, { ...productToAdd, quantity: 1 }]);
-            }
-        }
-    };
-
     const goToProductDetails = (productId) => {
         navigate(`/myProduct/${productId}`);
     };
 
     return (
-        <div>
+        <div style={{ padding: '20px', backgroundColor: '#f9f9f9' }}>
             <h1>{t('productListPage.title')}</h1>
             <Container>
-                <Row xs={1} md={2} lg={3} className="g-4">
+                <Row xs={1} md={2} lg={4} className="g-4">
                     {products.map((product, index) => (
                         <Col key={index}>
-                            <Card style={{ backgroundColor: 'darksalmon' }}>
-                                {/* //TODO:// */}
-                                {/* sapose to be in a global url!! */}
-                                <Card.Img variant="top" src={`https://localhost:44314${product.imageURL}`} alt={product.name} />
+                            <Card style={{ 
+                                position: 'relative', 
+                                border: 'none', 
+                                transition: 'transform 0.2s', 
+                                boxShadow: '0 4px 8px rgba(0,0,0,0.1)' 
+                            }}>
+                                {product.isNew && <Badge bg="success" style={{ 
+                                    position: 'absolute', 
+                                    top: '10px', 
+                                    right: '10px', 
+                                    zIndex: 10 
+                                }}>New</Badge>}
+                                <div style={{ 
+                                    overflow: 'hidden', 
+                                    position: 'relative' 
+                                }}>
+                                    <Card.Img 
+                                        variant="top" 
+                                        src={`https://localhost:44314${product.imageURL}`} 
+                                        alt={product.name} 
+                                        style={{ 
+                                            height: '250px', 
+                                            objectFit: 'cover', 
+                                            transition: 'transform 0.3s' 
+                                        }}
+                                        onMouseOver={e => e.currentTarget.style.transform = 'scale(1.1)'}
+                                        onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}
+                                    />
+                                </div>
                                 <Card.Body>
                                     <Card.Title>{product.name}</Card.Title>
-                                    <Card.Text>
-                                        Price: {product.price} USD
+                                    <Card.Text style={{ 
+                                        fontSize: '18px', 
+                                        color: '#888' 
+                                    }}>
+                                        {product.price} ₪
                                     </Card.Text>
-                                    <Button variant="primary" onClick={() => goToProductDetails(product.productID)}>Details</Button>
-                                    <Button variant="primary" onClick={() => addToCart(product.id)}>Add to cart</Button>
+                                    <Link 
+                                        to={`/myProduct/${product.productID}`} 
+                                        style={{ 
+                                            display: 'block', 
+                                            width: '100%', 
+                                            marginTop: '10px', 
+                                            textAlign: 'center',
+                                            textDecoration: 'none', 
+                                            color: '#007bff' 
+                                        }}
+                                    >
+                                        {t('productListPage.moreDetails')}
+                                    </Link>
                                 </Card.Body>
                             </Card>
                         </Col>
@@ -75,4 +98,4 @@ export const ProductList = () => {
             </Container>
         </div>
     );
-}
+};
