@@ -10,12 +10,10 @@ import { CongratulationsToTheDonors } from "./CongratulationsToTheDonors";
 import { Details } from "./Details";
 import ShoppingCart from "./ShoppingCart";
 import {Terms} from "./Terms";
-import { AuthProvider } from './ClientApi.js/AuthContext';
-import { Login } from "./Login";
-import UserProfile from './UserProfile';
-import RegistrationForm from './RegistrationForm';
+import { Login } from "./User Forms/SignIn.js";
+// import UserProfile from './UserProfile';
+import SignUp from './User Forms/SignUp.js';
 import { ProductList } from "./ProductList";
-import { Account } from "./Account";
 import { Events } from "./Events";
 import { Product } from "./productDetail/Product";
 import { OrderForm } from "./OrderForm";
@@ -25,6 +23,9 @@ import OrderManager from "./AdminComponents/OrderManager.js";
 
 import { ShowReviews } from "./productDetail/ShowReviews";
 import { Review } from "./productDetail/Review";
+import { ResetPassword } from "./User Forms/ResetPassword.js";
+import { Account } from "./User Forms/Account.js";
+import { ResetPasTakeCare } from "./User Forms/RestPasTakeCare.js";
 
 // Routing במקום 
 // כי זה שם שמור
@@ -60,13 +61,15 @@ export const MyRouting = () => {
         
                 {/* <AuthProvider> */}
                     <Route path="/myLogin" element={<Login/>} />
-                    <Route path="/myProfile" element={<UserProfile />} />
-                    <Route path="/myRegister" element={<RegistrationForm />} />
+                    <Route path="/myResetPassword" element={<ResetPassword/>}></Route>
+                    <Route path="/myResetPasswordLink" element={<ResetPasTakeCare/>}></Route>
+
+                    {/* <Route path="/myProfile" element={<UserProfile />} /> */}
+                    <Route path="/mySignUp" element={<SignUp />} />
                 {/* </AuthProvider> */}
                 <Route path="/myAccount" element={<Account></Account>}></Route>
                 <Route path="/myLogin" element={<Login></Login>} />
-                <Route path="/myProfile" element={<UserProfile />} />
-                <Route path="/myRegister" element={<RegistrationForm />} />
+                {/* <Route path="/myProfile" element={<UserProfile />} /> */}
                 <Route path="myTerms" element={<Terms></Terms>} ></Route>
                 <Route path="/myEvents" element={<Events></Events>} ></Route>
                 <Route path="/myProduct/:id" element={<Product></Product>} ></Route>

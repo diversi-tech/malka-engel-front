@@ -1,19 +1,47 @@
 {
-    "popUpPage":{
-        "modalTitle":"Your order was successfully plased"
+    "popUpPage": {
+        "modalTitle": "Your order was successfully plased"
     },
-    "homePage":{
-        "title":"Home page"
-       
+    "homePage": {
+        "title": "Home page"
     },
     "loginPage": {
-        "title": "Login",
-        "username": "Username",
+        "title": "Sign in",
         "email": "Email",
         "password": "Password",
-        "loginButton": "Login",
+        "loginButton": "Sign in",
         "invalidEmail": "Invalid email format",
-        "invalidPassword" :"Password should be at least 8 characters long"
+        "invalidPassword": "Password should be at least 8 characters long",
+        "noAccount": "Don't have an account yet? ",
+        "createAccount": "Create an account",
+        "forgot": "Forgot password?"
+    },
+    "signUpPage": {
+        "title": "Sign up",
+        "userName": "User name",
+        "email": "Email",
+        "password": "Password",
+        "phoneNumber": "Phone number",
+        "typeName": "Event designer?",
+        "loginButton": "Sign up",
+        "invalidEmail": "Invalid email format",
+        "invalidphoneNumber": "Invalid phone number",
+        "invalidPassword": "Password should be at least 8 characters long"
+    },
+    "resetPasswordPage": {
+        "title": "Reset Password",
+        "putEmail": "Enter your email address and receive a link to reset your password",
+        "resetButton": "Send Email",
+        "invalidEmail": "Invalid email format"
+    },
+    "resetPasswordCarePage": {
+        "title": "Set new password",
+        "password1": "Enter your new password",
+        "password2": "Confirm your password",
+        "invalidPassword": "Password should be at least 8 characters long",
+        "invalidPasswordConfirmation": "The passwords do not match",
+        "resetButton": "Confirm",
+        "alertMessage": "your password has been reset successfully"
     },
     "contactPage": {
         "title": "Contact page",
@@ -24,7 +52,7 @@
         "p1": "your basket is empty",
         "thItem": "Item",
         "thQuantity": "Quantity",
-        "thPrice" : "Price",
+        "thPrice": "Price",
         "thTotal": "Total",
         "thActions": "Actions",
         "removeButton": "Remove",
@@ -50,38 +78,33 @@
         "linkDesignerBirkins": "DesignerBirkins",
         "linkCongratulationsToTheDonors": "Congratulations to the donors",
         "linkMyAccount": "my accont",
-        "linkJoys":"joys",
-        "linkCommonQuestions":"Common questions",
-        "linkEvents":"events",
-        "linkTerms":"terms",
-        "linkLogin":"login"
-       
+        "linkJoys": "joys",
+        "linkCommonQuestions": "Common questions",
+        "linkEvents": "events",
+        "linkTerms": "terms",
+        "linkLogin": "Sign in"
     },
     "navPage": {
         "linkHome": "Home",
         "linkContact": "Contact",
-        "linCommonQuestions":"FAQ",
-        "linkLogin":"login",
-        "linkProduct":"product list",
+        "linCommonQuestions": "FAQ",
+        "linkLogin": "Sign in",
+        "linkProduct": "product list",
         "linkOrderForm": " Order Form",
         "linkShoppingCart": " Shopping Cart"
     },
-  
-    "productListPage":{
+    "productListPage": {
         "title": "product List"
-
     },
-    "recommendedProducts":{
+    "recommendedProducts": {
         "title": "recommended Products"
-
-
     },
     "CommonQuestionsPage": {
         "title": "FAQ",
-        "languageId":2,
-        "FAQlist" : "FAQlistEn",
-        "language":"EN",
-        "question":"questionEn",
-        "answer":"answerEn"
+        "languageId": 2,
+        "FAQlist": "FAQlistEn",
+        "language": "EN",
+        "question": "questionEn",
+        "answer": "answerEn"
     }
 }
