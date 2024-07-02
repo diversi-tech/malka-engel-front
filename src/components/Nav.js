@@ -49,6 +49,10 @@ export const Nav = () => {
                         <li className="nav-item"><Link className="nav-link" to="./myOrderForm">{t('navPage.linkOrderForm')}</Link> </li>
                         <li className="nav-item"><Link className="nav-link" to="./myAdminDashboard">AdminDashboard</Link> </li>
                         <li className="nav-item"><Link className="nav-link" to="./myCategoriesManager">CategoriesManager</Link> </li>
+
+                   
+                        <li className="nav-item"><Link className="nav-link" to="./myOrderHistory/:UserId">OrderHistory</Link> </li>
+
                         <li className="nav-item"><Link className="nav-link" to="./myOrderManager">OrderManager</Link></li>
                         <li className="nav-item"><Link className="nav-link" to="./myAddProduct">ProductForm</Link> </li>
                        

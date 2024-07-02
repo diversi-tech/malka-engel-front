@@ -21,7 +21,7 @@ import { OrderForm } from "./OrderForm";
 import AdminDashboard from "./AdminComponents/AdminDashboard.js";
 import CategoriesManager from "./AdminComponents/CategoriesManager.js";
 import OrderManager from "./AdminComponents/OrderManager.js";
-
+import {OrderHistory} from "./OrderHistory.js";
 import { ShowReviews } from "./productDetail/ShowReviews";
 import { Review } from "./productDetail/Review";
 import ProductForm from "./addProduct.js";
@@ -47,6 +47,9 @@ export const MyRouting = () => {
                     <Route path="/myCommonQuestions" element={<CommonQuestions></CommonQuestions>}></Route>
                     <Route path="/myOrderForm" element={<OrderForm></OrderForm>}></Route>
                     <Route path="/myAddProduct" element={<ProductForm></ProductForm>}></Route>
+                                                   
+                     //Later we will have to bring the variable really from other data at the moment it is something temporary                              
+      <Route path="/myOrderHistory/:UserId" element={<OrderHistory></OrderHistory>}></Route>
 
                     <Route path="/myAdminDashboard" element={<AdminDashboard></AdminDashboard>}></Route>
                     <Route path="/myCategoriesManager" element={<CategoriesManager></CategoriesManager>}></Route>
