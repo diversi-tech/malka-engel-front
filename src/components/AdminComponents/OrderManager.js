@@ -22,23 +22,35 @@ const OrderManager = () => {
 
   const handleStatusChange = async () => {
     try {
-      await axios.put(`https://localhost:7297/api/orders/PutOrder/${orderToUpdate.orderId}`, orderToUpdate);
-      const updatedOrders = orders.map(order => {
-        if (order.orderID === orderToUpdate.orderId) {
-          return { ...order, status: orderToUpdate.status };
-        }
-        return order;
-      });
-      setOrders(updatedOrders);
-      setShowModal(false);
+      if (
+        (orderToUpdate.status === 'Proccess' && orderToUpdate.status !== 'Completed') ||
+        (orderToUpdate.status === 'Completed' && orderToUpdate.status !== 'Proccess')
+      ) {
+        await axios.put(`https://localhost:7297/api/orders/PutOrder/${orderToUpdate.orderId}`, orderToUpdate);
+        const updatedOrders = orders.map(order => {
+          if (order.orderID === orderToUpdate.orderId) {
+            return { ...order, status: orderToUpdate.status };
+          }
+          return order;
+        });
+        setOrders(updatedOrders);
+        setShowModal(false);
+      } else {
+        console.error('Invalid status change');
+      }
     } catch (error) {
       console.error('Error updating order status:', error);
     }
   };
+  
+
 
   const handleOpenModal = (orderId) => {
-    setOrderToUpdate({ orderId, status: '' });
-    setShowModal(true);
+    const order = orders.find(order => order.orderID === orderId);
+    if (order && (order.status === 'Pending' || order.status === 'Proccess')) {
+      setOrderToUpdate({ orderId, status: order.status });
+      setShowModal(true);
+    }
   };
 
   const handleCloseModal = () => {
@@ -68,7 +80,7 @@ const OrderManager = () => {
               <td>{order.userID}</td>
               <td>{order.status}</td>
               <td>
-                {order.status === 'Pending' && (
+                {(order.status === 'Pending' || order.status === 'Proccess') && (
                   <Button variant="primary" onClick={() => handleOpenModal(order.orderID)}>
                     שנה סטטוס
                   </Button>
@@ -85,12 +97,16 @@ const OrderManager = () => {
         </Modal.Header>
         <Modal.Body>
           <p>בחר סטטוס חדש להזמנה:</p>
-          <Button variant="success" onClick={() => handleStatusSelection('מושלם')}>
-            מושלם
-          </Button>{' '}
-          <Button variant="info" onClick={() => handleStatusSelection('בביצוע')}>
-            בביצוע
-          </Button>
+          {orderToUpdate.status === 'Pending' && (
+            <Button variant="success" onClick={() => handleStatusSelection('Proccess')}>
+              מעבר לביצוע
+            </Button>
+          )}
+          {orderToUpdate.status === 'Proccess' && (
+            <Button variant="info" onClick={() => handleStatusSelection('Completed')}>
+              הזמנה הושלמה
+            </Button>
+          )}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseModal}>
