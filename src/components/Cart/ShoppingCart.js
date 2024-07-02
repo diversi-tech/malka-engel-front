@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { PageTitle } from './PageTitle';
+import { PageTitle } from '../PageTitle';
 
 
 

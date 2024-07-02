@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Card, Container, Row, Col, Badge } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { itemsSubject } from './ShoppingCart';
+import { itemsSubject } from './Cart/ShoppingCart';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetAllProducts } from '../axios/ProductAxios';
 import { setProductList } from '../redux/DataActions/DataAction.Product';

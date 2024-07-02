@@ -7,7 +7,7 @@ import { Contact } from "./Contact";
 import { Joys } from "./Joys";
 import { DesignerBirkins } from "./DesignerBirkins";
 import { CongratulationsToTheDonors } from "./CongratulationsToTheDonors";
-import ShoppingCart from "./ShoppingCart";
+import ShoppingCart from "./Cart/ShoppingCart";
 import { Terms } from "./Terms";
 import { AuthProvider } from './ClientApi.js/AuthContext';
 import { Login } from "./Login";
