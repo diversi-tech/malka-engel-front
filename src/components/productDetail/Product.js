@@ -1,16 +1,17 @@
 import { useTranslation } from 'react-i18next';
 import { Wording } from '../Wording';
 import { Image } from '../Image';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { GetAllProducts } from '../../axios/ProductAxios';
 import { setProductList } from '../../redux/DataActions/DataAction.Product';
 import { Review } from './Review';
-
+import { Container, Row, Col, Button, Card, Badge } from 'react-bootstrap';
 
 export const Product = () => {
+    debugger
     const { t, i18n } = useTranslation();
     //get the product list from the redux store
     const productsList = useSelector(s => s.DataReducer_Products.Prodlist);
@@ -20,58 +21,92 @@ export const Product = () => {
     const [products, setProducts] = useState(productsList);
     //get dispatch function to send to redux store
     const myDispatch = useDispatch();
-    //TODO//
-    //it dosent work!!! - p is null!!
-    //const p = products.find(product => product.productID === id);
+    const imageRef = useRef(null); // Use ref to reference the image element
 
     //fetch the product list when the component mounts
     async function fetchProducts() {
-        //if the list in the redux empty
-        if (productsList.length == 0) {
-            //get data - the list from server - 
-            var response = await GetAllProducts(1);
-            //set current product list - that loaded from redux
-            setProducts(response); // Assuming response.data contains the list of reviews
-            //update the product list in the redux stor
+        if (productsList.length === 0) {
+            var response = await GetAllProducts();
+            setProducts(response); 
             myDispatch(setProductList(response));
         } else {
-            //if the list in the product full
-            //mean - was server call
-            //i want to set the current list - from there
             setProducts(productsList);
         }
     }
 
-    // Call the function automatically
-    useEffect(f => {
-        //set the product list
+    useEffect(() => {
         fetchProducts();
     }, []);
 
-    return (
-        //TODO//
-        //i want to improve this look!!
-        <div>
-            <br></br>
-            <h1>More details:</h1>
-            <br></br>
-            {/* <div>{products[id].name}</div>product found!!!!! */}
-            <div style={{ display: 'flex' }}>
-                <div style={{ flex: '2' }}>
-                    <p style={{ direction: 'rtl' }}>{products[id].imageURL}</p>
-                    <h2>{products[id].name}</h2>
+    // Find the current product
+    const product = products.find(product => product.productID == id);
 
-                    <p>{products[id].description}</p>
-                    <p>מחיר:{products[id].price}ש"ח </p>
+    if (!product) {
+        return <div>Loading...</div>;
+    }
+
+    const addToCart = () => {
+        // TODO: Add the product to the cart in redux store
+    }
+
+    // Handle mouse movement over the image
+    const handleMouseMove = (e) => {
+        const img = imageRef.current;
+        const rect = img.getBoundingClientRect();
+        const x = e.clientX - rect.left; // x position within the element
+        const y = e.clientY - rect.top;  // y position within the element
+
+        img.style.transformOrigin = `${x}px ${y}px`;
+        img.style.transform = 'scale(1.3)';
+    };
+
+    const handleMouseOut = () => {
+        const img = imageRef.current;
+        img.style.transform = 'scale(1)';
+    };
+
+    return (
+        <Container className="mt-4">
+            <Row>
+                <Col md={5} style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}>
+                    <div style={{
+                        overflow: 'hidden',
+                        position: 'relative',
+                        width: '100%',
+                        // maxWidth: '300px'
+                    }}>
+                        <img 
+                            ref={imageRef}
+                            src={`https://localhost:44314${product.imageURL}`} 
+                            alt={product.name} 
+                            style={{
+                                width: '100%',
+                                height: 'auto',
+                                transition: 'transform 0.005s, transform-origin 0.005s'
+                            }}
+                            onMouseMove={handleMouseMove}
+                            onMouseOut={handleMouseOut}
+                        />
+                        <button className="btn btn-light" onClick={()=>{}} >* {t('productPage.review')}</button>
+                    </div>
+                </Col>
+                <Col md={7}>
+                    <h2>{product.nameHe}</h2>
+                    <p>{product.descriptionHe}</p>
+                    <p className="text-muted">מחיר: {product.price} ש"ח</p>
                     <Wording />
-                    <br></br>
-                    <button>הוספה לסל</button>
-                </div>
-                <div style={{ flex: '2' }}>
-                    <Image />
-                </div>
-            </div>
-            <Review></Review>
-        </div>
+                    <Button variant="outline-primary" className="mt-2">הוספה לסל</Button>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    {/* <Review /> */}
+                </Col>
+            </Row>
+        </Container>
     );
 }

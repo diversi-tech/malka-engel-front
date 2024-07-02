@@ -5,7 +5,6 @@ import { Store } from './redux/Stor.js';
 import { MyRouting } from './components/MyRouting.js';
 
 
-
 function App() {
   
   return (
@@ -15,7 +14,7 @@ function App() {
         <MyRouting></MyRouting>
         {/* </header> */}
       </Provider>
-    </div>
+    </div> 
   );
 }
 

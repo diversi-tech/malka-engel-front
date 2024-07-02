@@ -93,8 +93,14 @@
         "linkOrderForm": "  טופס הזמנות",
         "linkShoppingCart": "סל קניות"
     },
-    "productListPage": {
-        "title": "  רשימת מוצרים"
+
+    "productListPage":{
+        "title": "  רשימת מוצרים",
+        "moreDetails": "פרטים נוספים",
+        "cart":"הוספה לסל"
+
+
+
     },
     "recommendedProducts": {
         "title": "מוצרים מומלצים"
@@ -107,15 +113,20 @@
         "question": "questionHe",
         "answer": "answerHe"
     },
-    "orderFormPage": {
-        "title": "טופס הזמנה",
-        "name": "שם:",
-        "address": "כתובת:",
-        "phone": "טלפון:",
-        "email": "מייל:",
-        "addLogo": " הוסף לוגו",
-        "selectLogo": "בחר קובץ לוגו :",
-        "fileLogo": "קובץ לוגו:",
-        "buttonSubmitOrder": "שלח הזמנה"
+
+    "orderFormPage":{
+        "title":"טופס הזמנה",
+        "name":"שם:",
+        "address":"כתובת:",
+        "phone":"טלפון:",
+        "email":"מייל:",
+        "addLogo":" הוסף לוגו",
+        "selectLogo":"בחר קובץ לוגו :",
+        "fileLogo":"קובץ לוגו:",
+        "buttonSubmitOrder":"שלח הזמנה"
+    },
+    "productPage":{
+        "review":"חוות דעת"
+
     }
 }

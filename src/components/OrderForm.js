@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
-import ProductList from './ProductList';
 import { PageTitle } from './PageTitle';
 
 export const OrderForm = () => {

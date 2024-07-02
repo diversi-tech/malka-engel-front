@@ -93,18 +93,27 @@
         "linkOrderForm": " Order Form",
         "linkShoppingCart": " Shopping Cart"
     },
-    "productListPage": {
-        "title": "product List"
+  
+    "productListPage":{
+        "title": "product List",
+        "moreDetails": "more details",
+        "cart":"add to cart"
+
+
     },
     "recommendedProducts": {
         "title": "recommended Products"
     },
     "CommonQuestionsPage": {
         "title": "FAQ",
-        "languageId": 2,
-        "FAQlist": "FAQlistEn",
-        "language": "EN",
-        "question": "questionEn",
-        "answer": "answerEn"
+        "languageId":2,
+        "FAQlist" : "FAQlistEn",
+        "language":"EN",
+        "question":"questionEn",
+        "answer":"answerEn"
+    },
+    "productPage":{
+        "review":"review products"
+
     }
 }
