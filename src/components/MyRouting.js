@@ -7,9 +7,8 @@ import { Contact } from "./Contact";
 import { Joys } from "./Joys";
 import { DesignerBirkins } from "./DesignerBirkins";
 import { CongratulationsToTheDonors } from "./CongratulationsToTheDonors";
-import { Details } from "./Details";
 import ShoppingCart from "./ShoppingCart";
-import {Terms} from "./Terms";
+import { Terms } from "./Terms";
 import { AuthProvider } from './ClientApi.js/AuthContext';
 import { Login } from "./Login";
 import UserProfile from './UserProfile';
@@ -25,6 +24,7 @@ import OrderManager from "./AdminComponents/OrderManager.js";
 import {OrderHistory} from "./OrderHistory.js";
 import { ShowReviews } from "./productDetail/ShowReviews";
 import { Review } from "./productDetail/Review";
+import ProductForm from "./addProduct.js";
 
 // Routing במקום 
 // כי זה שם שמור
@@ -32,50 +32,54 @@ import { Review } from "./productDetail/Review";
 export const MyRouting = () => {
     return (
         <BrowserRouter>
-            <Nav></Nav>
-            <Routes>
-                {/*  שימו לב שבגרסה הזאת אין צורך להשתמש בסוויטש אפשר ישר לשים בתוך תגית הראוט */}
-                <Route path="/myHome" element={<Home></Home>}></Route>
-                <Route path="/myContact" element={<Contact></Contact>}></Route>
-                <Route path="/myCommonQuestions" element={<CommonQuestions></CommonQuestions>}></Route>
-                {/* <Route path="/myAccount" element={<MyAccount></MyAccount>}></Route> */}
-                <Route path="/myJoys" element={<Joys></Joys>}></Route>
-                <Route path="/myDesignerBirkins" element={<DesignerBirkins></DesignerBirkins>}></Route>
-                <Route path="/myCongratulationsToTheDonors" element={<CongratulationsToTheDonors></CongratulationsToTheDonors>}></Route>
-                <Route path="/myProductList" element={<ProductList></ProductList>}></Route>
-                <Route path="/myCommonQuestions" element={<CommonQuestions></CommonQuestions>}></Route>
-                <Route path="/myOrderForm" element={<OrderForm></OrderForm>}></Route>
-               
-                <Route path="/myAdminDashboard" element={<AdminDashboard></AdminDashboard>}></Route>
-                <Route path="/myCategoriesManager" element={<CategoriesManager></CategoriesManager>}></Route>
-                <Route path="/myOrderManager" element={<OrderManager></OrderManager>}></Route>
-                <Route path="/myOrderHistory/:UserId" element={<OrderHistory></OrderHistory>}></Route>
-               
-  
+            <div  style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+                <Nav></Nav>
+                <Routes>
+                    {/*  שימו לב שבגרסה הזאת אין צורך להשתמש בסוויטש אפשר ישר לשים בתוך תגית הראוט */}
+                    <Route path="/myHome" element={<Home></Home>}></Route>
+                    <Route path="/myContact" element={<Contact></Contact>}></Route>
+                    <Route path="/myCommonQuestions" element={<CommonQuestions></CommonQuestions>}></Route>
+                    {/* <Route path="/myAccount" element={<MyAccount></MyAccount>}></Route> */}
+                    <Route path="/myJoys" element={<Joys></Joys>}></Route>
+                    <Route path="/myDesignerBirkins" element={<DesignerBirkins></DesignerBirkins>}></Route>
+                    <Route path="/myCongratulationsToTheDonors" element={<CongratulationsToTheDonors></CongratulationsToTheDonors>}></Route>
+                    <Route path="/myProductList" element={<ProductList></ProductList>}></Route>
+                    <Route path="/myCommonQuestions" element={<CommonQuestions></CommonQuestions>}></Route>
+                    <Route path="/myOrderForm" element={<OrderForm></OrderForm>}></Route>
+                    <Route path="/myAddProduct" element={<ProductForm></ProductForm>}></Route>
+                                                   
+                     //Later we will have to bring the variable really from other data at the moment it is something temporary                              
+      <Route path="/myOrderHistory/:UserId" element={<OrderHistory></OrderHistory>}></Route>
+
+                    <Route path="/myAdminDashboard" element={<AdminDashboard></AdminDashboard>}></Route>
+                    <Route path="/myCategoriesManager" element={<CategoriesManager></CategoriesManager>}></Route>
+                    <Route path="/myOrderManager" element={<OrderManager></OrderManager>}></Route>
 
 
 
-                <Route path="/review" element={<Review></Review>}></Route>
 
-                <Route path="/myShoppingCart" element={<ShoppingCart></ShoppingCart>}></Route>
-        
-                {/* <AuthProvider> */}
-                    <Route path="/myLogin" element={<Login/>} />
+
+                    <Route path="/review" element={<Review></Review>}></Route>
+
+                    <Route path="/myShoppingCart" element={<ShoppingCart></ShoppingCart>}></Route>
+
+                    {/* <AuthProvider> */}
+                    <Route path="/myLogin" element={<Login />} />
                     <Route path="/myProfile" element={<UserProfile />} />
                     <Route path="/myRegister" element={<RegistrationForm />} />
-                {/* </AuthProvider> */}
-                <Route path="/myAccount" element={<Account></Account>}></Route>
-                <Route path="/myLogin" element={<Login></Login>} />
-                <Route path="/myProfile" element={<UserProfile />} />
-                <Route path="/myRegister" element={<RegistrationForm />} />
-                <Route path="myTerms" element={<Terms></Terms>} ></Route>
-                <Route path="/myEvents" element={<Events></Events>} ></Route>
-                <Route path="/myProduct/:id" element={<Product></Product>} ></Route>
-                <Route path="/myShowReviews/:numStars" element={<ShowReviews></ShowReviews>}></Route>
+                    {/* </AuthProvider> */}
+                    <Route path="/myAccount" element={<Account></Account>}></Route>
+                    <Route path="/myLogin" element={<Login></Login>} />
+                    <Route path="/myProfile" element={<UserProfile />} />
+                    <Route path="/myRegister" element={<RegistrationForm />} />
+                    <Route path="myTerms" element={<Terms></Terms>} ></Route>
+                    <Route path="/myEvents" element={<Events></Events>} ></Route>
+                    <Route path="/myProduct/:id" element={<Product></Product>} ></Route>
+                    <Route path="/myShowReviews/:numStars" element={<ShowReviews></ShowReviews>}></Route>
 
-            </Routes>
-            <Footer></Footer>
-
+                </Routes>
+                <Footer></Footer>
+            </div>
         </BrowserRouter>
     );
 }

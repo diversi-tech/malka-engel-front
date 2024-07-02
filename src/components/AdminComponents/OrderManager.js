@@ -1,45 +1,64 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Table, Modal } from 'react-bootstrap';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Button, Modal, Table } from 'react-bootstrap';
 
 const OrderManager = () => {
   const [orders, setOrders] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [selectedOrderId, setSelectedOrderId] = useState(null);
+  const [orderToUpdate, setOrderToUpdate] = useState({ orderId: null, status: '' });
 
   useEffect(() => {
-    // כאן יש לכתוב קוד לטעינת ההזמנות מהשרת או מבסיס הנתונים
-    // לדוגמה:
-    // fetchOrdersFromServer();
-    const dummyOrders = [
-      { id: 1, customer: 'Customer A', status: 'Pending' },
-      { id: 2, customer: 'Customer B', status: 'Pending' },
-      { id: 3, customer: 'Customer C', status: 'Completed' },
-      { id: 4, customer: 'Customer D', status: 'Pending' },
-    ];
-    setOrders(dummyOrders);
+    const fetchOrdersFromServer = async () => {
+      try {
+        const response = await axios.get('https://localhost:7297/api/orders/GetAllOrders');
+        setOrders(response.data);
+      } catch (error) {
+        console.error('Error fetching orders:', error);
+      }
+    };
+
+    fetchOrdersFromServer();
   }, []);
 
-  const handleStatusChange = () => {
-    // כאן יש לכתוב קוד לשינוי סטטוס ההזמנה בשרת או בבסיס הנתונים
-    // לדוגמה:
-    // updateOrderStatus(selectedOrderId, 'בוצע');
-    const updatedOrders = orders.map(order => {
-      if (order.id === selectedOrderId) {
-        return { ...order, status: 'בוצע' }; // עדכון הסטטוס במערך המקומי
+  const handleStatusChange = async () => {
+    try {
+      if (
+        (orderToUpdate.status === 'Proccess' && orderToUpdate.status !== 'Completed') ||
+        (orderToUpdate.status === 'Completed' && orderToUpdate.status !== 'Proccess')
+      ) {
+        await axios.put(`https://localhost:7297/api/orders/PutOrder/${orderToUpdate.orderId}`, orderToUpdate);
+        const updatedOrders = orders.map(order => {
+          if (order.orderID === orderToUpdate.orderId) {
+            return { ...order, status: orderToUpdate.status };
+          }
+          return order;
+        });
+        setOrders(updatedOrders);
+        setShowModal(false);
+      } else {
+        console.error('Invalid status change');
       }
-      return order;
-    });
-    setOrders(updatedOrders);
-    setShowModal(false);
+    } catch (error) {
+      console.error('Error updating order status:', error);
+    }
   };
+  
+
 
   const handleOpenModal = (orderId) => {
-    setSelectedOrderId(orderId);
-    setShowModal(true);
+    const order = orders.find(order => order.orderID === orderId);
+    if (order && (order.status === 'Pending' || order.status === 'Proccess')) {
+      setOrderToUpdate({ orderId, status: order.status });
+      setShowModal(true);
+    }
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
+  };
+
+  const handleStatusSelection = (status) => {
+    setOrderToUpdate({ ...orderToUpdate, status });
   };
 
   return (
@@ -56,14 +75,14 @@ const OrderManager = () => {
         </thead>
         <tbody>
           {orders.map((order, index) => (
-            <tr key={order.id}>
+            <tr key={order.orderID}>
               <td>{index + 1}</td>
-              <td>{order.customer}</td>
+              <td>{order.userID}</td>
               <td>{order.status}</td>
               <td>
-                {order.status === 'Pending' && (
-                  <Button variant="primary" onClick={() => handleOpenModal(order.id)}>
-                    שנה ל"בוצע"
+                {(order.status === 'Pending' || order.status === 'Proccess') && (
+                  <Button variant="primary" onClick={() => handleOpenModal(order.orderID)}>
+                    שנה סטטוס
                   </Button>
                 )}
               </td>
@@ -77,14 +96,24 @@ const OrderManager = () => {
           <Modal.Title>שינוי סטטוס הזמנה</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>האם לשנות את סטטוס ההזמנה ל"בוצע"?</p>
+          <p>בחר סטטוס חדש להזמנה:</p>
+          {orderToUpdate.status === 'Pending' && (
+            <Button variant="success" onClick={() => handleStatusSelection('Proccess')}>
+              מעבר לביצוע
+            </Button>
+          )}
+          {orderToUpdate.status === 'Proccess' && (
+            <Button variant="info" onClick={() => handleStatusSelection('Completed')}>
+              הזמנה הושלמה
+            </Button>
+          )}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseModal}>
             ביטול
           </Button>
           <Button variant="primary" onClick={handleStatusChange}>
-            אישור
+            שמור שינוי
           </Button>
         </Modal.Footer>
       </Modal>

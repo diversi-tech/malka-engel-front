@@ -9,6 +9,7 @@
     "loginPage": {
         "title": "Login",
         "username": "Username",
+        "email": "Email",
         "password": "Password",
         "loginButton": "Login",
         "invalidEmail": "Invalid email format",
@@ -67,13 +68,13 @@
     },
   
     "productListPage":{
-        "title": "product List"
+        "title": "product List",
+        "moreDetails": "more details",
+        "cart":"add to cart"
 
     },
     "recommendedProducts":{
         "title": "recommended Products"
-
-
     },
     "CommonQuestionsPage": {
         "title": "FAQ",
@@ -82,5 +83,8 @@
         "language":"EN",
         "question":"questionEn",
         "answer":"answerEn"
+    },
+    "productPage":{
+        "review":"review products"
     }
 }

@@ -31,14 +31,13 @@ export const Footer = ({ showOnScroll }) => {
 
 
 <footer style={{
-            display: showFooter ? 'block' : 'none',
-            position: 'fixed',
-            bottom: '0',
-            width: '100%',
-            backgroundColor: '#f8f9fa',
-            padding: '10px',
-            textAlign: 'center',
-            zIndex: '1000'
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: '#f8f9fa',
+              padding: '10px',
+              marginTop: 'auto', // Push footer to the bottom
+              borderTop: '1px solid #ccc', // Optional: Add a border at the top of the footer
         }}>
       <Link to="./myCommonQuestions" className="text-black text-decoration-none me-3">{t('footerPage.linkCommonQuestions')}</Link>
       <Link to="./MyAccount" className="text-black text-decoration-none me-3">{t('footerPage.linkMyAccount')}</Link>
