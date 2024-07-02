@@ -4,18 +4,44 @@
     },
     "homePage": {
         "title": "דף הבית"
-        
     },
     "loginPage": {
-        "title": "התחברות",
-        "username": "שם משתמש",
+        "title": "התחבר",
         "email": "אימייל",
-        "password": "סיסמה",
+        "password": "סיסמה ",
         "loginButton": "התחבר",
         "invalidEmail": "פורמט דואר אלקטרוני לא חוקי",
-        "invalidPassword" :"הסיסמה צריכה להיות באורך של לפחות 8 תווים"
-
-
+        "invalidPassword": "הסיסמה צריכה להיות באורך של לפחות 8 תווים",
+        "noAccount": "אין לך חשבון? ",
+        "createAccount": "צור חשבון",
+        "forgot": "?שכחת סיסמא"
+    },
+    "signUpPage": {
+        "title": "הרשם",
+        "userName": "שם משתמש",
+        "email": "מייל",
+        "password": "סיסמה",
+        "phoneNumber": "מספר טלפון",
+        "typeName": "?מעצב אירועים",
+        "loginButton": "הרשם",
+        "invalidEmail": "פורמט דואר אלקטרוני לא חוקי",
+        "invalidphoneNumber": "מספר טלפון לא חוקי",
+        "invalidPassword": "הסיסמה צריכה להיות באורך של לפחות 8 תווים"
+    },
+    "resetPasswordPage": {
+        "title": "אפס סיסמא",
+        "putEmail": "הזן כתובת מייל וקבל קישור לאיפוס הסיסמא",
+        "invalidEmail": "פורמט דואר אלקטרוני לא חוקי",
+        "resetButton": "שלח מייל"
+    },
+    "resetPasswordCarePage": {
+        "title":  "הגדר סיסמא חדשה",
+        "password1": "הזן את הסיסמא החדשה",
+        "password2": "אמת את הסיסמא",
+        "invalidPassword": "הסיסמה צריכה להיות באורך של לפחות 8 תווים",
+        "invalidPasswordConfirmation": "סיסמאות אינן תואמות",
+        "resetButton": "אשר",
+        "alertMessage": "סיסמתך שונתה בהצלחה"
     },
     "contactPage": {
         "title": "דף התחברות",
@@ -26,7 +52,7 @@
         "p1": " הסל שלך ריק",
         "thItem": "מוצר",
         "thQuantity": "כמות",
-        "thPrice" : "מחיר",
+        "thPrice": "מחיר",
         "thTotal": "סהכ ",
         "thActions": "פעולות",
         "removeButton": "הסר",
@@ -35,8 +61,6 @@
         "addButton": "הוסף פריט",
         "checkoutButton": "המשך לטופס  ההזמנה",
         "emptyCartMessage": "העגלה שלך ריקה.כדי להתקדם לטופס ההזמנה הוסף פריט לעגלת הקניות "
-
-    
     },
     "footerPage": {
         "title": " תחתית עמוד",
@@ -54,46 +78,42 @@
         "linkDesignerBirkins": "בירכונים מעוצבים",
         "linkCongratulationsToTheDonors": "ברכות לתורמים",
         "linkMyAccount": "החשבון שלי",
-        "linkJoys":"שמחות",
-        "linkCommonQuestions":"שאלות נפוצות",
-        "linkEvents":"אירועים",
-        "linkLogin":"התחברות",
-        "linkTerms":"תקנון"
-        
-        
+        "linkJoys": "שמחות",
+        "linkCommonQuestions": "שאלות נפוצות",
+        "linkEvents": "אירועים",
+        "linkLogin": "התחברות",
+        "linkTerms": "תקנון"
     },
     "navPage": {
         "linkHome": "דף בית",
-        "linCommonQuestions":"שאלות נפוצות",
+        "linCommonQuestions": "שאלות נפוצות",
         "linkContact": "איש קשר",
-        "linkLogin":"התחברות",
-        "linkProduct":"רשימת מוצרים",
+        "linkLogin": "התחברות",
+        "linkProduct": "רשימת מוצרים",
         "linkOrderForm": "  טופס הזמנות",
         "linkShoppingCart": "סל קניות"
     },
+
     "productListPage":{
         "title": "  רשימת מוצרים",
         "moreDetails": "פרטים נוספים",
         "cart":"הוספה לסל"
 
 
+
     },
-    "recommendedProducts":{
+    "recommendedProducts": {
         "title": "מוצרים מומלצים"
-
-
     },
     "CommonQuestionsPage": {
         "title": "שאלות נפוצות",
-        "languageId":1,
-        "FAQlist" : "FAQlistHe",
-        "language":"HE",
-        "question":"questionHe",
-        "answer":"answerHe"
-
-
-
+        "languageId": 1,
+        "FAQlist": "FAQlistHe",
+        "language": "HE",
+        "question": "questionHe",
+        "answer": "answerHe"
     },
+
     "orderFormPage":{
         "title":"טופס הזמנה",
         "name":"שם:",
@@ -107,6 +127,6 @@
     },
     "productPage":{
         "review":"חוות דעת"
+
     }
-    
 }
