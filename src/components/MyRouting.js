@@ -7,7 +7,6 @@ import { Contact } from "./Contact";
 import { Joys } from "./Joys";
 import { DesignerBirkins } from "./DesignerBirkins";
 import { CongratulationsToTheDonors } from "./CongratulationsToTheDonors";
-import { Details } from "./Details";
 import ShoppingCart from "./ShoppingCart";
 import { Terms } from "./Terms";
 import { AuthProvider } from './ClientApi.js/AuthContext';

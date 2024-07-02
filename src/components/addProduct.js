@@ -14,7 +14,7 @@ const ProductForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+        debugger
         const formData = new FormData();
         formData.append('ProductID', 0);
         formData.append('NameHe', nameHe);
@@ -24,7 +24,8 @@ const ProductForm = () => {
         formData.append('NameEn', nameEn);
         formData.append('DescriptionEn', descriptionEn);
         if (image) {
-            formData.append('Image', image);
+            formData.append('ImageURL', image);
+            formData.append('Image', image)
         }
 
         try {

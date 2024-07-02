@@ -2,7 +2,6 @@ import { useTranslation } from 'react-i18next';
 import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
-import { PageTitle } from './PageTitle';
 import { itemsSubject } from './ShoppingCart';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetAllProducts } from '../axios/ProductAxios';
@@ -16,6 +15,7 @@ export const ProductList = () => {
     const navigate = useNavigate();
 
     async function fetchProducts() {
+        debugger
         if (productsList.length === 0) {
             var response = await GetAllProducts();
             setProducts(response); 
