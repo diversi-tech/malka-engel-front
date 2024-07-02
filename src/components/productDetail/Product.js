@@ -9,39 +9,49 @@ import { GetAllProducts } from '../../axios/ProductAxios';
 import { setProductList } from '../../redux/DataActions/DataAction.Product';
 import { Review } from './Review';
 
-//Product page
-//{ filteredData, filterDataById, match }
 
 export const Product = () => {
     debugger
     const { t, i18n } = useTranslation();
-    // const childrens=React.Children.toArray(props.children);
-    // var oneChild = React.cloneElement(childrens[1]);
-    const productsList = useSelector(s => s.DataReducer_Products.Prodlist)
+    //get the product list from the redux store
+    const productsList = useSelector(s => s.DataReducer_Products.Prodlist);
+    //get the product ID from the URL parameters
     const { id } = useParams();
+    //set current product list - that loaded from redux
     const [products, setProducts] = useState(productsList);
+    //get dispatch function to send to redux store
     const myDispatch = useDispatch();
+    //TODO//
     //it dosent work!!! - p is null!!
-    const p = products.find(product => product.productID === id);
+    //const p = products.find(product => product.productID === id);
 
+    //fetch the product list when the component mounts
     async function fetchProducts() {
-        debugger
+        //if the list in the redux empty
         if (productsList.length == 0) {
-            var response = await GetAllProducts(1);
+            //get data - the list from server - 
+            var response = await GetAllProducts();
+            //set current product list - that loaded from redux
             setProducts(response); // Assuming response.data contains the list of reviews
+            //update the product list in the redux stor
             myDispatch(setProductList(response));
         } else {
+            //if the list in the product full
+            //mean - was server call
+            //i want to set the current list - from there
             setProducts(productsList);
         }
     }
 
     // Call the function automatically
-    useEffect(() => {
+    useEffect(f => {
+        //set the product list
         fetchProducts();
-        setProducts(productsList);
     }, []);
 
     return (
+        //TODO//
+        //i want to improve this look!!
         <div>
             <br></br>
             <h1>More details:</h1>
@@ -49,10 +59,10 @@ export const Product = () => {
             {/* <div>{products[id].name}</div>product found!!!!! */}
             <div style={{ display: 'flex' }}>
                 <div style={{ flex: '2' }}>
-                    <p style={{ direction: 'rtl' }}>{products[id].imageURL}</p>
-                    <h2>{products[id].name}</h2>
+                    {/* <p style={{ direction: 'rtl' }}>{products[id].imageURL}</p> */}
+                    <h2>{products[id].nameHe}</h2>
 
-                    <p>{products[id].description}</p>
+                    <p>{products[id].descriptionHe}</p>
                     <p>מחיר:{products[id].price}ש"ח </p>
                     <Wording />
                     <br></br>

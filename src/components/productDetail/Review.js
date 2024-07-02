@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { GetAllReviews } from "../../axios/ReviewsAxios";
@@ -7,27 +7,40 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from "react-router-dom";
 import { fillReviewsList } from "../../redux/DataActions/DataAction.Reviews";
 
+//Review page
+//TODO://
+//this page need help sos!!!!!!!!!!!!!!!
 export const Review = () => {
   const { t, i18n } = useTranslation();
-  let reviewList = useSelector(state => state.DataReducer_Reviews.ReviewsList);
+  let reviewList = useSelector(s => s.DataReducer_Reviews.ReviewsList);
   let [reviews, setReviews] = useState(reviewList);
   const myDispatch = useDispatch();
   const navigate = useNavigate();
 
+  //really the same like in Product page!!!!
   async function fetchReviews() {
-    if (reviewList.length === 0) {
-      var response = await GetAllReviews();
-      setReviews(response.data); // Assuming response.data contains the list of reviews
-      myDispatch(fillReviewsList(response.data));
+    debugger
+    if (reviewList.length == 0) {
+      try {
+        const response = await GetAllReviews();
+        setReviews(response.data);
+        myDispatch(fillReviewsList(response.data));
+      } catch (err) {
+        console.error('Error fetching reviews:', err);
+      }
     } else {
       setReviews(reviewList);
     }
   }
 
   // Call the function automatically
-  useEffect(() => {
+  useEffect(f => {
     fetchReviews();
+    //TODO//
+    //why it does'nt work?
+    setReviews(reviewList);
   }, []);
+
 
   // Calculate average rating
   const averageRating = reviews.length ? (reviews.reduce((sum, review) => sum + review.Rating, 0) / reviews.length).toFixed(1) : 0;
@@ -50,12 +63,12 @@ export const Review = () => {
   };
 
   const navigateToReviewForm = () => {
-    setReviews(reviewList);
     alert('Navigate to review form');
   };
 
   const sentToSeeStars = (numOfStar) => {
-    navigate(`/myShowReviews/${numOfStar}`);  // Navigate to product details page with product ID
+    // Navigate to product details page with product ID
+    navigate(`/myShowReviews/${numOfStar}`);  
   };
 
   return (

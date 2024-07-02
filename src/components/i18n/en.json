@@ -9,6 +9,7 @@
     "loginPage": {
         "title": "Login",
         "username": "Username",
+        "email": "Email",
         "password": "Password",
         "loginButton": "Login",
         "invalidEmail": "Invalid email format",
