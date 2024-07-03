@@ -14,7 +14,8 @@
         "invalidPassword": "Password should be at least 8 characters long",
         "noAccount": "Don't have an account yet? ",
         "createAccount": "Create an account",
-        "forgot": "Forgot password?"
+        "forgot": "Forgot password?",
+        "errorLoging":"One of the data entered is incorrect"
     },
     "signUpPage": {
         "title": "Sign up",
@@ -30,7 +31,7 @@
     },
     "resetPasswordPage": {
         "title": "Reset Password",
-        "putEmail": "Enter your email address and receive a link to reset your password",
+        "putEmail": "To reset your password, please enter the email address you registered with.",
         "resetButton": "Send Email",
         "invalidEmail": "Invalid email format"
     },
@@ -112,7 +113,8 @@
         "FAQlist" : "FAQlistEn",
         "language":"EN",
         "question":"questionEn",
-        "answer":"answerEn"
+        "answer":"answerEn",
+        "serchTitle":"Start typing  your question..."
     },
     "productPage":{
         "review":"review products"

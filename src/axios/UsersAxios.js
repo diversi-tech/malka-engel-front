@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const API_BASE_URL = "https://localhost:44314/api/User"
+const API_BASE_URL = "https://localhost:7297/api/User"
 
 
 export const GetAllUsers = async () => {

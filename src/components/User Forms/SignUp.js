@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { Form, Button, Container, Row, Col, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { connect, setCurrentUser } from '../../redux/DataActions/DataAction.Users';
@@ -30,7 +30,9 @@ const SignUp = () => {
  const [emailError, setEmailError] = useState('');
  const [passwordError, setPasswordError] = useState('');
  const [phoneNumberError, setPhoneNumberError] = useState('');
-
+//Pupup 
+const [showModal, setShowModal] = useState(true);
+const handleClose = () => {navigate(-2)};
 
 // בדיקות תקינות למייל ,סיסמא וטלפון
  const validateEmail = (email) => {
@@ -91,21 +93,25 @@ const SignUp = () => {
            alert("Thank you!"); 
          //Go to Home page
             navigate('/myHome')
-        //    popup - nevigate
         //    save in cookies
-          
-        
           }
           else
           alert("Error while registering")
          } 
     };
-
-    return (<>
-
-        <Container className="d-flex justify-content-center align-items-center vh-100">
+    const style3={
+      ' width': '100%',
+      ' height': '700px',
+       'border': '5px'
+     }
+    return (
+<Modal show={showModal} onHide={handleClose}  centered> 
+    <Modal.Body>
+{/*  */}
+<Container className="d-flex justify-content-center align-items-center vh-50"  style={style3}>
         <Row className="w-100">
-          <Col xs={4} md={1} lg={4} className="mx-auto">
+        
+          <Col xs={80} md={50} lg={100} className="mx-auto">
             <h3 className="text-center mb-4">{t('signUpPage.title')}</h3>
             <Form>
                 
@@ -130,9 +136,9 @@ const SignUp = () => {
               </Form.Group>
 {/*  */}
               <Form.Group controlId="formType">
+              <Form.Label> {t('signUpPage.typeName')}</Form.Label>
                 <input type="checkbox"
                  onChange={(e) => setNewUser({ ...newUser,typeID : e.target.checked})} />
-              <Form.Label> {t('signUpPage.typeName')}</Form.Label>
               </Form.Group>
 
 {/*  */}
@@ -153,7 +159,16 @@ const SignUp = () => {
           </Col>
         </Row>
       </Container>
-      </>
-    );
-};
+     
+{/*  */}
+    </Modal.Body>
+    <Modal.Footer>
+      <Button variant="secondary" onClick={handleClose}>
+        Close
+      </Button>
+      {/* Add additional buttons if needed */}
+    </Modal.Footer>
+  </Modal>
+      );
+    };
 export default SignUp

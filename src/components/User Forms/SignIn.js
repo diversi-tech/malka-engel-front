@@ -1,27 +1,30 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { PageTitle } from '../Empty pages/PageTitle';
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { Form, Button, Container, Row, Col, Modal } from 'react-bootstrap';
 import { GetAllUsers, LoginUser } from '../../axios/UsersAxios';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { connect, setCurrentUser } from '../../redux/DataActions/DataAction.Users';
+import { ResetPassword } from './ResetPassword';
 
 
 export const Login = () => {
   debugger
   const { t, i18n } = useTranslation();
   const [user, setUser] = useState({});
-
+//
+const [showModal, setShowModal] = useState(true);
+const handleClose = () => {navigate(-1)};
   //יצירת משנה שישמש לשיגור
   const dispatch = useDispatch()
 
   //יצירת משנה שישמש לניווט
   const navigate = useNavigate()
+
 //משתנים לבדיקות תקינות 
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
- 
+ const [errorLoginingin, setErrorLoginingin] = useState(false);
 
 //בדיקות תקינות למייל וסיסמא
   const validateEmail = (email) => {
@@ -67,27 +70,34 @@ const handleLogin = async ()=>{
      debugger
      dispatch(setCurrentUser(userLogin.data));
      dispatch(connect())
-   //Go to Home page
-      navigate('/myResetPasswordLink')
-     //popup - nevigate
+   //Go to last page you visited
+      navigate(-1)
      //save in cookies
     }
     else if (userLogin == null) alert("Network Error")
     else{
-      alert("Plese sighn up") 
-      navigate('/mySignUp')
-
-
+      setErrorLoginingin(true)
     }
 }
 }
-
+const style3={
+  ' width': '100%',
+  ' height': '700px',
+   'border': '5px'
+ }
+ const f=()=>{
+<ResetPassword/> }
   return (
-    <Container className="d-flex justify-content-center align-items-center vh-100">
+  <Modal show={showModal} onHide={handleClose}  centered> 
+    <Modal.Body>
+{/*  */}
+ <Container className="d-flex justify-content-center align-items-center vh-50" style={style3}>
     <Row className="w-100">
-      <Col xs={12} md={6} lg={4} className="mx-auto">
-        <h3 className="text-center mb-4">{t('loginPage.title')}</h3>
+      <Col xs={80} md={50} lg={100} className="mx-auto">
         <Form>
+          <br></br>
+        <h3 className="text-center mb-4">{t('loginPage.title')}</h3>
+
           <Form.Group controlId="formBasicEmail">
             <Form.Label> {t('loginPage.email')}</Form.Label>
             <Form.Control type="email"
@@ -95,25 +105,41 @@ const handleLogin = async ()=>{
               {emailError && <div style={{ color: 'red' }}>{emailError}</div>}
           </Form.Group>
 
-          <Form.Group controlId="formBasicPassword" className="mt-3">
+         <Form.Group controlId="formBasicPassword" className="mt-3">
             <Form.Label> {t('loginPage.password')} 
             </Form.Label>
             <Form.Control type="password" 
              onChange={(e) => setUser({ ...user, password: e.target.value }) }/>
               {passwordError && <div style={{ color: 'red' }}>{passwordError}</div>}
-              <a href="/myResetPassword">{t('loginPage.forgot') }</a>
+              {/* <a onClick={f}>{t('loginPage.forgot') }</a> */}
+              <a href="/myResetPassword" >{t('loginPage.forgot') }</a>
+
           </Form.Group>
 
           <Button className="w-100 mt-3" onClick={()=>handleLogin()}>
           {t('loginPage.loginButton')}
-          </Button>
+          </Button> 
           <div className="text-center mt-3">   {t('loginPage.noAccount')}
           <a  href="./mySignUp">{t('loginPage.createAccount') }</a>
-         </div>
+          {errorLoginingin && <div style={{ color: 'red' }}>{t('loginPage.errorLoging') }</div>}
+
+         </div> 
         </Form>
       </Col>
-    </Row>
-  </Container>
+    </Row> 
+  </Container>  
+{/*  */}
+    </Modal.Body>
+    <Modal.Footer>
+      <Button variant="secondary" onClick={handleClose}>
+        Close
+      </Button>
+      {/* Add additional buttons if needed */}
+    </Modal.Footer>
+  </Modal>
+  
+      
 );
  
 };
+
