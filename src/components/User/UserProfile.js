@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
-import { useAuth } from './ClientApi.js/AuthContext';
-import { getUserProfile } from './ClientApi.js/Api';
+import { useAuth } from '../ClientApi.js/AuthContext';
+import { getUserProfile } from '../ClientApi.js/Api';
 import {useTranslation} from'react-i18next';
 
 const UserProfile = () => {

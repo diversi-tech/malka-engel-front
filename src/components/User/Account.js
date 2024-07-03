@@ -1,4 +1,4 @@
-import { PageTitle } from './PageTitle';
+import { PageTitle } from "../Empty pages/PageTitle";
 
 export const Account = () => {
     return (

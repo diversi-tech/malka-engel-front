@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { PostProduct } from '../axios/ProductAxios';
+import { PostProduct } from '../../axios/ProductAxios';
 
-const ProductForm = () => {
+export const ProductForm = () => {
     const [nameHe, setNameHe] = useState('');
     const [descriptionHe, setDescriptionHe] = useState('');
     const [nameEn, setNameEn] = useState('');
@@ -30,6 +30,8 @@ const ProductForm = () => {
 
         try {
             const response = await PostProduct(formData);
+            //TODO
+            //dispattch to the product list
             if (response) {
                 alert('Product added successfully');
             }
@@ -77,4 +79,3 @@ const ProductForm = () => {
     );
 };
 
-export default ProductForm;

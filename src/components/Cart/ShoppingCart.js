@@ -4,14 +4,14 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { PageTitle } from './PageTitle';
+import { PageTitle } from '../Empty pages/PageTitle';
 
 
 
 // Initialize BehaviorSubject with an empty array
 export const itemsSubject = new BehaviorSubject([]);
 
-const ShoppingCart= () => {
+export const ShoppingCart= () => {
   const { t, i18n } = useTranslation();
   const [items, setItems] = useState([]);
   const [total, setTotal] = useState(0);
@@ -122,4 +122,3 @@ const ShoppingCart= () => {
   );
 };
 
-export default ShoppingCart;

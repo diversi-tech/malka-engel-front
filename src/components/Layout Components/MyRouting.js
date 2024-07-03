@@ -1,37 +1,38 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Home } from "./Home";
-import { Nav } from "./Nav";
-import { Footer } from "./Footer";
-import { CommonQuestions } from "./CommonQuestions";
-import { Contact } from "./Contact";
-import { Joys } from "./Joys";
-import { DesignerBirkins } from "./DesignerBirkins";
-import { CongratulationsToTheDonors } from "./CongratulationsToTheDonors";
-import ShoppingCart from "./ShoppingCart";
-import { Terms } from "./Terms";
-import { AuthProvider } from './ClientApi.js/AuthContext';
-import { Login } from "./Login";
-import UserProfile from './UserProfile';
-import RegistrationForm from './RegistrationForm';
-import { ProductList } from "./ProductList";
-import { Account } from "./Account";
-import { Events } from "./Events";
-import { Product } from "./productDetail/Product";
-import { OrderForm } from "./OrderForm";
-import AdminDashboard from "./AdminComponents/AdminDashboard.js";
-import CategoriesManager from "./AdminComponents/CategoriesManager.js";
-import OrderManager from "./AdminComponents/OrderManager.js";
+import { Footer } from "./Footer.js";
+import { Contact } from "../User/Contact.js";
+import { DesignerBirkins } from "../Empty pages/DesignerBirkins.js";
+import { CongratulationsToTheDonors } from "../Empty pages/CongratulationsToTheDonors.js";
+import { AuthProvider } from '../ClientApi.js/AuthContext.js';
+import { Events } from "../Empty pages/Events.js";
+import AdminDashboard from "../AdminComponents/AdminDashboard.js";
+import CategoriesManager from "../AdminComponents/CategoriesManager.js";
+import OrderManager from "../AdminComponents/OrderManager.js";
 
-import { ShowReviews } from "./productDetail/ShowReviews";
-import { Review } from "./productDetail/Review";
-import ProductForm from "./addProduct.js";
-
+import { ProductList } from "../product/ProductList.js";
+import { Nav } from "./Nav.js";
+import { CommonQuestions } from "../Questions/CommonQuestions.js";
+import { Joys } from "../Empty pages/Joys.js";
+import UserProfile from "../User/UserProfile.js";
+import RegistrationForm from "../User/RegistrationForm.js";
+import { Account } from "../User/Account.js";
+import { Product } from "../product/productDetail/Product.js";
+import { OrderForm } from "../Order/OrderForm.js";
+import { Review } from "../product/productDetail/Review.js";
+import { ScrollToTop } from "./scrollToTop.js";
+import {Home} from './Home.js';
+import {ProductForm} from '../product/addProduct.js'
+import { ShoppingCart } from '../Cart/ShoppingCart.js';
+import { Login} from '../User/Login.js';
+import {Terms} from '../Empty pages/Terms.js';
+import {ShowReviews} from '../product/ShowReviews.js'
 // Routing במקום 
 // כי זה שם שמור
 
 export const MyRouting = () => {
     return (
         <BrowserRouter>
+        <ScrollToTop></ScrollToTop>
             <div  style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
                 <Nav></Nav>
                 <Routes>
@@ -60,11 +61,6 @@ export const MyRouting = () => {
 
                     <Route path="/myShoppingCart" element={<ShoppingCart></ShoppingCart>}></Route>
 
-                    {/* <AuthProvider> */}
-                    <Route path="/myLogin" element={<Login />} />
-                    <Route path="/myProfile" element={<UserProfile />} />
-                    <Route path="/myRegister" element={<RegistrationForm />} />
-                    {/* </AuthProvider> */}
                     <Route path="/myAccount" element={<Account></Account>}></Route>
                     <Route path="/myLogin" element={<Login></Login>} />
                     <Route path="/myProfile" element={<UserProfile />} />

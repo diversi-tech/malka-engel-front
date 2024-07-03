@@ -2,8 +2,7 @@ import axios from "axios"
 
 const API_BASE_URL = process.env.REACT_APP_API_URL + "/api/myProduct/id"
 //to see what is this!!!!!!!!!!!!
-let s = "https://localhost:7297/api/Product/"
-
+let s = "https://localhost:44314/api/Product/"
 export const GetAllProducts = async () => {
     try {
         debugger

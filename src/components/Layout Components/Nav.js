@@ -3,10 +3,10 @@ import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
-import usFlag from '../assets/flags/us_flag.png';
-import ilFlag from '../assets/flags/il_flag.png';
+import usFlag from '../../assets/flags/us_flag.png';
+import ilFlag from '../../assets/flags/il_flag.png';
 import { useSelector } from "react-redux";
-import { setCurrentUser } from "../redux/DataActions/DataAction.Users";
+import { setCurrentUser } from "../../redux/DataActions/DataAction.Users";
 
 // Nav page
 export const Nav = () => {

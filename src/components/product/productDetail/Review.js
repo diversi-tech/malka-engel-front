@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { GetAllReviews } from "../../axios/ReviewsAxios";
+import { GetAllReviews } from "../../../axios/ReviewsAxios";
 import { FaStar } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from "react-router-dom";
-import { fillReviewsList } from "../../redux/DataActions/DataAction.Reviews";
+import { fillReviewsList } from "../../../redux/DataActions/DataAction.Reviews";
 
 //Review page
 //TODO://

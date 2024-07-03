@@ -3,7 +3,7 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { PageTitle } from './PageTitle';
+import { PageTitle } from '../Empty pages/PageTitle';
 
 
 export const Image = () => {

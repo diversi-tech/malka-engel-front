@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
-import { PageTitle } from './PageTitle';
+import { PageTitle } from '../Empty pages/PageTitle';
 
 export const OrderForm = () => {
     const { t, i18n } = useTranslation();

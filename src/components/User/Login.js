@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { PageTitle } from './PageTitle';
+import { PageTitle } from '../Empty pages/PageTitle';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
-import { GetAllUsers, LoginUser } from '../axios/UsersAxios';
+import { GetAllUsers, LoginUser } from '../../axios/UsersAxios';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { connect, setCurrentUser } from '../redux/DataActions/DataAction.Users';
+import { connect, setCurrentUser } from '../../redux/DataActions/DataAction.Users';
 
 
 export const Login = () => {

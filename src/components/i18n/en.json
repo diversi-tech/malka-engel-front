@@ -70,7 +70,9 @@
     "productListPage":{
         "title": "product List",
         "moreDetails": "more details",
-        "cart":"add to cart"
+        "cart":"add to cart",
+        "technicalIssue":"Sorry, technical issue, try to relod your page",
+        "noProducts": "no products!"
 
     },
     "recommendedProducts":{
