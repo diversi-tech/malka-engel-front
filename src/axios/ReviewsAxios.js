@@ -2,7 +2,7 @@ import axios from "axios"
 
 const API_BASE_URL = process.env.REACT_APP_API_URL + "/api/Review"
 
-let s = "https://localhost:44314/api/Review/"
+let s = "https://localhost:7297/api/Review/"
 export const GetAllReviews = async () => {
     try {
         debugger
