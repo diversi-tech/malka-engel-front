@@ -8,9 +8,12 @@ import { setProductList } from '../../../redux/DataActions/DataAction.Product';
 import { Review } from './Review';
 import { Container, Row, Col, Button, Card, Badge } from 'react-bootstrap';
 import { Wording } from './Wording';
+import { CartDisplay } from '../../Cart/CartShow';
+import { addToCart } from '../cookies/SetCart';
 
 export const Product = () => {
     const { t, i18n } = useTranslation();
+    const currentLanguage = i18n.language == "en" ? "En" : "He"
     const productsList = useSelector(s => s.DataReducer_Products.Prodlist);
     const { id } = useParams();
     const [products, setProducts] = useState(productsList);
@@ -39,9 +42,9 @@ export const Product = () => {
         return <div>Loading...</div>;
     }
 
-    const addToCart = () => {
-        // TODO: Add the product to the cart in redux store
-    }
+    // const addToCart = () => {
+    //     // TODO: Add the product to the cart in redux store
+    // }
 
     const handleMouseMove = (e) => {
         const img = imageRef.current;
@@ -62,6 +65,12 @@ export const Product = () => {
         scrollToRef.current.scrollIntoView({ behavior: 'smooth' });
     };
 
+    //add to cart function
+    const handleAddToCart = (product) => {
+        addToCart(product);
+        alert('Product added to cart');
+    };
+
     return (
         <Container className="mt-4">
             <Row>
@@ -78,7 +87,8 @@ export const Product = () => {
                         <img 
                             ref={imageRef}
                             src={`https://localhost:44314${product.imageURL}`} 
-                            alt={product.name} 
+                            //how it know to go to the name in Hebrew?
+                            alt={product[`name${currentLanguage}`]} 
                             style={{
                                 width: '100%',
                                 height: 'auto',
@@ -91,17 +101,20 @@ export const Product = () => {
                     </div>
                 </Col>
                 <Col md={7}>
-                    <h2>{product.nameHe}</h2>
-                    <p>{product.descriptionHe}</p>
+                    <h2>{product[`name${currentLanguage}`]}</h2>
+                    <p>{product[`description${currentLanguage}`]}</p>
                     <p className="text-muted">מחיר: {product.price} ש"ח</p>
                     <Wording />
-                    <Button variant="outline-primary" className="mt-2">הוספה לסל</Button>
+                    <button onClick={() => handleAddToCart(product)}>Add to Cart</button>
+                    {/* <Button variant="outline-primary" className="mt-2">הוספה לסל</Button> */}
                 </Col>
             </Row>
             <Row>
                 <Col>
                 <div style={{ marginTop: '150px' }} ref={scrollToRef}>
                     <Review />
+                    <CartDisplay />
+
                 </div>
                 </Col>
             </Row>
