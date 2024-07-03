@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getCommonQuestions } from "../../axios/CommonQuestionsAxios";
 import { setFAQlist } from "../../redux/DataActions/DataActions.FAQ"
+import { Button, Card, Collapse } from "react-bootstrap";
 
 //FAQ page
 

@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-<<<<<<<< HEAD:src/components/User/Login.js
 import { PageTitle } from '../Empty pages/PageTitle';
-========
->>>>>>>> b4aefbcb798f5ede078e3382569b4af91c233c86:src/components/User Forms/SignIn.js
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { GetAllUsers, LoginUser } from '../../axios/UsersAxios';
 import { useDispatch, useSelector } from 'react-redux';

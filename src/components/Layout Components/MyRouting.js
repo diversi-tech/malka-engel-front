@@ -3,11 +3,9 @@ import { Footer } from "./Footer.js";
 import { Contact } from "../User/Contact.js";
 import { DesignerBirkins } from "../Empty pages/DesignerBirkins.js";
 import { CongratulationsToTheDonors } from "../Empty pages/CongratulationsToTheDonors.js";
-import { AuthProvider } from '../ClientApi.js/AuthContext.js';
 import { Events } from "../Empty pages/Events.js";
 import AdminDashboard from "../AdminComponents/AdminDashboard.js";
 import CategoriesManager from "../AdminComponents/CategoriesManager.js";
-import OrderManager from "../AdminComponents/OrderManager.js";
 
 import { ProductList } from "../product/ProductList.js";
 import { Nav } from "./Nav.js";
@@ -15,7 +13,6 @@ import { CommonQuestions } from "../Questions/CommonQuestions.js";
 import { Joys } from "../Empty pages/Joys.js";
 import UserProfile from "../User/UserProfile.js";
 import RegistrationForm from "../User/RegistrationForm.js";
-import { Account } from "../User/Account.js";
 import { Product } from "../product/productDetail/Product.js";
 import { OrderForm } from "../Order/OrderForm.js";
 import { Review } from "../product/productDetail/Review.js";
@@ -25,7 +22,10 @@ import {ProductForm} from '../product/addProduct.js'
 import { ShoppingCart } from '../Cart/ShoppingCart.js';
 import { Login} from '../User/Login.js';
 import {Terms} from '../Empty pages/Terms.js';
-import {ShowReviews} from '../product/ShowReviews.js'
+import {ShowReviews} from '../product/ShowReviews.js';
+import { OrderHistory } from "../Order/OrderHistory.js";
+import { OrderManager } from "../AdminComponents/OrderManager.js"
+import { Account} from "../User Forms/Account.js"
 // Routing במקום 
 // כי זה שם שמור
 

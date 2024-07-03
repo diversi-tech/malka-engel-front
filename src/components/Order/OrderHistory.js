@@ -50,9 +50,9 @@
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getCommonQuestions } from "../axios/CommonQuestionsAxios";
-import { setFAQlist } from "../redux/DataActions/DataActions.FAQ"
-import { getUserHistory } from "../axios/UserOrdersHistoryAxios";
+import { getCommonQuestions } from "../../axios/CommonQuestionsAxios";
+import { setFAQlist } from "../../redux/DataActions/DataActions.FAQ"
+import { getUserHistory } from "../../axios/UserOrdersHistoryAxios";
 
 //FAQ page
 

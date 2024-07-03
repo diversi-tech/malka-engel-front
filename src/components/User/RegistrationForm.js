@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { registerUser } from '../ClientApi.js/Api';
 import { useAuth } from '../ClientApi.js/AuthContext';
 import { useTranslation } from 'react-i18next';
-
+import {registerUser} from "../ClientApi.js/AuthContext"
 
 const RegistrationForm = () => {
     const { t, i18n } = useTranslation();

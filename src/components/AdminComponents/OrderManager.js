@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button, Modal, Table } from 'react-bootstrap';
 
-const OrderManager = () => {
+export const OrderManager = () => {
   const [orders, setOrders] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [orderToUpdate, setOrderToUpdate] = useState({ orderId: null, status: '' });
@@ -121,4 +121,3 @@ const OrderManager = () => {
   );
 };
 
-export default OrderManager;
