@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { PostProduct } from '../../axios/ProductAxios';
+import { GetAllProducts, PostProduct } from '../../axios/ProductAxios';
+import { useDispatch } from 'react-redux';
+import { setProductList } from '../../redux/DataActions/DataAction.Product';
+import { useNavigate } from 'react-router-dom';
 
 export const ProductForm = () => {
     const [nameHe, setNameHe] = useState('');
@@ -11,6 +14,8 @@ export const ProductForm = () => {
     const [price, setPrice] = useState('');
     const [salePrice, setSalePrice] = useState('');
     const [image, setImage] = useState(null);
+    const myDispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -30,15 +35,19 @@ export const ProductForm = () => {
 
         try {
             const response = await PostProduct(formData);
+            if(response)
             //TODO
             //dispattch to the product list
-            if (response) {
+            if (response == true) {
+                const productsfromServer = await GetAllProducts();
+                myDispatch(setProductList(productsfromServer))
                 alert('Product added successfully');
             }
         } catch (error) {
             console.error('Error adding product:', error.response || error.message);
             alert('Failed to add product');
         }
+        navigate("/myHome");
     };
 
     return (
