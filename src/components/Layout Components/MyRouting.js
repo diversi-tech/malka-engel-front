@@ -12,7 +12,6 @@ import { Nav } from "./Nav.js";
 import { CommonQuestions } from "../Questions/CommonQuestions.js";
 import { Joys } from "../Empty pages/Joys.js";
 import UserProfile from "../User/UserProfile.js";
-import RegistrationForm from "../User/RegistrationForm.js";
 import { Product } from "../product/productDetail/Product.js";
 import { OrderForm } from "../Order/OrderForm.js";
 import { Review } from "../product/productDetail/Review.js";
@@ -20,12 +19,15 @@ import { ScrollToTop } from "./scrollToTop.js";
 import {Home} from './Home.js';
 import {ProductForm} from '../product/addProduct.js'
 import { ShoppingCart } from '../Cart/ShoppingCart.js';
-import { Login} from '../User/Login.js';
 import {Terms} from '../Empty pages/Terms.js';
 import {ShowReviews} from '../product/ShowReviews.js';
 import { OrderHistory } from "../Order/OrderHistory.js";
 import { OrderManager } from "../AdminComponents/OrderManager.js"
 import { Account} from "../User Forms/Account.js"
+import { Login } from "../User Forms/SignIn.js";
+import SignUp from "../User Forms/SignUp.js";
+import { ResetPassword } from "../User Forms/ResetPassword.js";
+import { ResetPasTakeCare } from "../User Forms/RestPasTakeCare.js";
 // Routing במקום 
 // כי זה שם שמור
 
@@ -62,7 +64,10 @@ export const MyRouting = () => {
                     <Route path="/myAccount" element={<Account></Account>}></Route>
                     <Route path="/myLogin" element={<Login></Login>} />
                     <Route path="/myProfile" element={<UserProfile />} />
-                    <Route path="/myRegister" element={<RegistrationForm />} />
+                    <Route path="/mySignUp" element={<SignUp />} />
+                    <Route path="/myResetPassword" element={<ResetPassword />} />
+                    <Route path="/myResetPasswordLink" element={<ResetPasTakeCare />} />
+
                     <Route path="myTerms" element={<Terms></Terms>} ></Route>
                     <Route path="/myEvents" element={<Events></Events>} ></Route>
                     <Route path="/myProduct/:id" element={<Product></Product>} ></Route>
