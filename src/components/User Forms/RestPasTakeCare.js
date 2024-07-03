@@ -3,7 +3,8 @@ import { Form, Button, Container, Row, Col, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { PutUser } from '../../axios/UsersAxios';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
+import useValidation from './useValidation';
 
 
 
@@ -13,18 +14,15 @@ export const ResetPasTakeCare=()=>{
     const [passwordError, setPasswordError] = useState('');
     const currentUser = useSelector(s=>s.DataReducer_Users.currentUser);
     const [current, setCurrent] = useState(currentUser)
-
+const navigate = useNavigate()
     //Pupup 
 const [showModal, setShowModal] = useState(true);
-const handleClose = () => {Navigate(-2)};
+const handleClose = () => {navigate(-2)};
 
-    //בדיקות תקינות לסיסמא
-const validatePassword = (password) => {
-    return password != null && password.length >= 8; 
-  };
-  const invalidPasswordConfirmation = (password1, password2) => {
-    return password1 == password2
-  };
+ //Custom Hook for Validation
+ const {invalidPasswordConfirmation, validatePassword, } = useValidation()
+ const [resetSec, setRestSec] = useState(false);
+ 
 //On click function
 const handleClick=async() => {
     let isValid = true;
@@ -46,13 +44,15 @@ const handleClick=async() => {
         //----------------------------------------------------------------
         setCurrent({...current, passwordHash: pas.password1});
         let result = await PutUser(current)
-        if(result != null && result.status == 200) {
-            alert(t('resetPasswordCarePage.alertMessage'))}
-else 
-    alert('Network error')
-
+        if(result != null && result.status == 200) 
+            setRestSec (true)
+        
+             else
+                alert('Network error')
+             
        } 
 }
+
 const style3={
     ' width': '100%',
     ' height': '700px',
@@ -64,6 +64,9 @@ return (
 <Modal show={showModal} onHide={handleClose}  centered> 
     <Modal.Body>
 {/*  */}
+{resetSec?(
+  <h2 className="text-center">{t('resetPasswordCarePage.alertMessage')}</h2>
+):(
 <Container className="d-flex justify-content-center align-items-center vh-50" style={style3}>
     <Row className="w-100">
       <Col xs={80} md={50} lg={100} className="mx-auto">
@@ -89,7 +92,7 @@ return (
           </Form>
       </Col>
     </Row>
-  </Container>
+  </Container>)}
 {/*  */}
     </Modal.Body>
     <Modal.Footer>
@@ -100,7 +103,5 @@ return (
     </Modal.Footer>
   </Modal>
   
-      
-);
+)}
  
-};

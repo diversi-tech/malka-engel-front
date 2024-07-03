@@ -40,7 +40,7 @@ return result
 export const PutUser = async (user)=>{
     debugger
     try{
-let result = await axios.put(`${API_BASE_URL}/PutUser?id=${user.userID}`, user)
+let result = await axios.put(`${API_BASE_URL}/PutUser/${user.userID}`, user)
 return result
     }
     catch(ch){      

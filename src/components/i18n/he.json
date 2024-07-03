@@ -27,20 +27,23 @@
         "loginButton": "הרשם",
         "invalidEmail": "פורמט דואר אלקטרוני לא חוקי",
         "invalidphoneNumber": "מספר טלפון לא חוקי",
-        "invalidPassword": "הסיסמה צריכה להיות באורך של לפחות 8 תווים"
+        "invalidPassword": "הסיסמה צריכה להיות באורך של לפחות 8 תווים",
+        "massage": "נרשמת בהצלחה!\n תודה"
+
     },
     "resetPasswordPage": {
-        "title": "איפוס סיסמא",
+        "title": "איפוס סיסמה",
         "putEmail": "כדי לאפס את הסיסמה, בבקשה הזן את כתובת הדוא''ל איתו נרשמת.",
         "invalidEmail": "פורמט דואר אלקטרוני לא חוקי",
-        "resetButton": "שלח מייל"
+        "resetButton": "שלח מייל",
+        "secMassage":"שלחנו קישור לאיפוס הסיסמה לכתובת הדוא''ל"
     },
     "resetPasswordCarePage": {
-        "title":  "הגדר סיסמא חדשה",
-        "password1": "הזן את הסיסמא החדשה",
-        "password2": "אמת את הסיסמא",
+        "title":  "הגדר סיסמה חדשה",
+        "password1": "הזן את הסיסמה החדשה",
+        "password2": "אמת את הסיסמה",
         "invalidPassword": "הסיסמה צריכה להיות באורך של לפחות 8 תווים",
-        "invalidPasswordConfirmation": "סיסמאות אינן תואמות",
+        "invalidPasswordConfirmation": "סיסמהות אינן תואמות",
         "resetButton": "אשר",
         "alertMessage": "סיסמתך שונתה בהצלחה"
     },
@@ -133,5 +136,20 @@
     "productPage":{
         "review":"חוות דעת"
 
+    },
+    "profilePage":{
+        "title":"פרופיל",
+        "editButton":"ערוך",
+        "saveButton":"שמור",
+        "logout":"התנתק",
+        "userName": "שם משתמש",
+        "email": "מייל",
+        "password": "סיסמה",
+        "phoneNumber": "מספר טלפון",
+        "typeName": "  מעצב אירועים?"
+    },
+    "accountPage":{
+         "errCon":"אינך מחובר",
+        "signIn":"התחבר"
     }
 }
