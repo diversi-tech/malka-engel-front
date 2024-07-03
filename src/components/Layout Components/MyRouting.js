@@ -22,12 +22,13 @@ import { ShoppingCart } from '../Cart/ShoppingCart.js';
 import {Terms} from '../Empty pages/Terms.js';
 import {ShowReviews} from '../product/ShowReviews.js';
 import { OrderHistory } from "../Order/OrderHistory.js";
-import { OrderManager } from "../AdminComponents/OrderManager.js"
+//import { OrderManager } from "../AdminComponents/OrderManager.js"
 import { Account} from "../User Forms/Account.js"
 import { Login } from "../User Forms/SignIn.js";
 import SignUp from "../User Forms/SignUp.js";
 import { ResetPassword } from "../User Forms/ResetPassword.js";
 import { ResetPasTakeCare } from "../User Forms/RestPasTakeCare.js";
+import OrderManager from "../AdminComponents/OrderManager.js";
 // Routing במקום 
 // כי זה שם שמור
 
