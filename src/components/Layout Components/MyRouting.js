@@ -48,15 +48,13 @@ export const MyRouting = () => {
                     <Route path="/myCommonQuestions" element={<CommonQuestions></CommonQuestions>}></Route>
                     <Route path="/myOrderForm" element={<OrderForm></OrderForm>}></Route>
                     <Route path="/myAddProduct" element={<ProductForm></ProductForm>}></Route>
+                                                   
+                     //Later we will have to bring the variable really from other data at the moment it is something temporary                              
+      <Route path="/myOrderHistory/:UserId" element={<OrderHistory></OrderHistory>}></Route>
 
                     <Route path="/myAdminDashboard" element={<AdminDashboard></AdminDashboard>}></Route>
                     <Route path="/myCategoriesManager" element={<CategoriesManager></CategoriesManager>}></Route>
                     <Route path="/myOrderManager" element={<OrderManager></OrderManager>}></Route>
-
-
-
-
-
                     <Route path="/review" element={<Review></Review>}></Route>
 
                     <Route path="/myShoppingCart" element={<ShoppingCart></ShoppingCart>}></Route>
@@ -70,8 +68,18 @@ export const MyRouting = () => {
                     <Route path="/myProduct/:id" element={<Product></Product>} ></Route>
                     <Route path="/myShowReviews/:numStars" element={<ShowReviews></ShowReviews>}></Route>
 
-                </Routes>
-                <Footer></Footer>
+            </Routes>
+            <Footer></Footer>
+
+
+                   
+                    {/* <Route path="/myProfile" element={<UserProfile />} /> */}
+                    {/* <Route path="/myRegister" element={<RegistrationForm />} /> */}
+                    {/* </AuthProvider> */}
+                 
+                    
+
+               
             </div>
         </BrowserRouter>
     );

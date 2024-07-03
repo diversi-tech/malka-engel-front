@@ -12,9 +12,9 @@ const ExmpleLanguage = () => {
 
     return (
         <div>
-<div>
-            <PageTitle title={t('loginPage.title')} />
-        </div>            <form onSubmit={handleLogin}>
+            <div>
+                <PageTitle title={t('loginPage.title')} />
+            </div>            <form onSubmit={handleLogin}>
                 <label>{t('loginPage.username')}</label>
                 <input type="text" name="username" />
                 <label>{t('loginPage.password')}</label>

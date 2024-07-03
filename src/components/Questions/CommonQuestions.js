@@ -14,7 +14,9 @@ export const CommonQuestions = () => {
   //List of FAQ questions from redux
   let FAQlist = useSelector(s =>s.DataReducer_FAQ.FAQlist)
   //List of FAQ questions for search filter - Initialize with the complete list of questions
-  let [currentQuestion, setCurrentQuestion] = useState(FAQlist);
+  let [questionsList, setQuestionsList] = useState(FAQlist);
+  const [openIndex, setOpenIndex] = useState(null);
+
   //יצירת משנה שישמש לשיגור
   const dispatch = useDispatch()
 
@@ -26,7 +28,7 @@ async function fetchData() {
       //Retrieval from server
          let c = await getCommonQuestions() 
       //  FAQlist = c
-         setCurrentQuestion(c)
+      setQuestionsList(c)
       //place in redex - שיגור                        
       dispatch(setFAQlist(c)) 
     }
@@ -40,59 +42,52 @@ async function fetchData() {
 // A function to handle the search   
   const handleChange = (event) => {
 //Filter the questions by text of the search field.
-    setCurrentQuestion(FAQlist.filter(q => q[t('CommonQuestionsPage.question')].toLowerCase().includes(event.target.value.toLowerCase())))
+  setQuestionsList(FAQlist.filter(q => q[t('CommonQuestionsPage.question')].toLowerCase().includes(event.target.value.toLowerCase())))
   };
 
-
+  // פונקציה לטיפול בפתיחת ושמירת תשובות
+  const handleToggle = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
 
 
   return (
     <div>
-      <form class="d-flex">
+       <form class="d-flex">
         <input class="form-control me-2" type="text" placeholder="Search" onChange={handleChange} />
       </form>
-      {/* <div class="card">
-      <div class="card-header">
-        <a class="collapsed btn" data-bs-toggle="Collapse" href="#collapseTwo">
-        Collapsible Group Item #2
-      </a>
-      </div>
-      <div id="collapseTwo" class="collapse" data-bs-parent="#accordion">
-        <div class="card-body">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </div>
-      </div>
-    </div> */}
-       <div>
-          <h1 title={t('CommonQuestionsPage.title')}></h1>
-       </div>
-      {currentQuestion.map(x => <div>
+      <h1 title={t('CommonQuestionsPage.title')}></h1>
 
-        <div class="container mt-3">
-
-          <div id="accordion">
-            <div class="card">
-              <div class="card-header">
-                <button class="btn"   data-bs-toggle="collapse" data-bs-target="#demo">{x[t('CommonQuestionsPage.question')]}</button>
-              
-              <div id="demo" class="collapse"></div>
-                <div class="card-body">{x[t('CommonQuestionsPage.answer')]}
-                <div class="card-body">{x.rating}</div>
-
-              </div>
-            </div>
-</div>
+    {questionsList.map((item, index) => (
+      <Card key={index} className="mb-3">
+        <Card.Header>
+          <Button
+            variant="link"
+            onClick={() => handleToggle(index)}
+            aria-controls={`faq-collapse-${index}`}
+            aria-expanded={openIndex === index}
+            className="text-dark text-decoration-none w-100 text-right d-flex justify-content-between align-items-center"
+          >
+            {item[t('CommonQuestionsPage.question')]}
+            <span>{openIndex === index ? '▲' : '▼'}</span>
+          </Button>
+        </Card.Header>
+        <Collapse in={openIndex === index}>
+          <div id={`faq-collapse-${index}`}>
+            <Card.Body>
+              {item[t('CommonQuestionsPage.answer')]}
+            </Card.Body>
+            <Card.Body>
+              {item.rating}
+            </Card.Body>
           </div>
-        </div>
-
-
-
-      </div>
-      )}
-
-    </div>
+        </Collapse>
+      </Card>
+    ))}
+  </div>
   );
 }
+
 
 
 
