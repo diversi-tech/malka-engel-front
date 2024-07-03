@@ -1,93 +1,121 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { PutUser } from '../../axios/UsersAxios';
+import { setCurrentUser } from '../../redux/DataActions/DataAction.Users';
+import useValidation from './useValidation';
 
 export const Profile = () => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [profileData, setProfileData] = useState({
-    username: 'user123',
-    phone: '123-456-7890',
-    email: 'user@example.com',
-    password: 'password123',
-  });
+    const { t, i18n } = useTranslation();
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setProfileData({ ...profileData, [name]: value });
-  };
+  const [isEditing, setIsEditing] = useState(false);
+  const currentUser = useSelector(s=>s.DataReducer_Users.currentUser);
+
+  const [profileData, setProfileData] = useState(currentUser)
+  const [isChecked, setIsChecked] = useState(profileData.typeID === 2);
+  //Custom Hook for Validation
+  const {validForm,
+    //משתנים לבדיקות תקינות 
+    emailError, passwordError, phoneNumberError} = useValidation()
 
   const handleEdit = () => {
     setIsEditing(true);
   };
 
-  const handleSave = () => {
-    setIsEditing(false);
+  const handleSave = async() => {
+    if(profileData.typeID)
+        setProfileData({ ...profileData, typeID: 2})
+    else 
+        setProfileData({ ...profileData, typeID: 1})
+    //בדיקת תקינות קלטים
+    debugger
+if(validForm(profileData)){
     // כאן אפשר להוסיף לוגיקה לשמירת הנתונים לשרת
-    console.log('Profile data saved:', profileData);
-  };
+   let result =await PutUser(profileData)
+   if(result && result.status==200)
+    {
+        setCurrentUser(profileData)
+            alert("Saved secc")
+            setIsEditing(false);
 
-  return (
-    <Container className="mt-5">
+    }
+else{
+    alert("Network error")
+}
+
+  };
+  }
+  return <>
+          
+<Container className="mt-5">
       <Row>
         <Col md={{ span: 6, offset: 3 }}>
-          <h1 className="text-center">פרופיל</h1>
+          <h1 className="text-center">{t('profilePage.title')}</h1>
           <Form>
             <Form.Group className="mb-3" controlId="formUsername">
-              <Form.Label>שם משתמש</Form.Label>
-              <Form.Control
-                type="text"
-                name="username"
-                value={profileData.username}
-                onChange={handleInputChange}
-                readOnly={!isEditing}
-              />
+              <Form.Label>{t('profilePage.userName')}</Form.Label>
+              <Form.Control type="text" name="username" value={profileData.name}   
+                onChange={(e) => setProfileData({ ...profileData, name: e.target.value })}                
+                readOnly={!isEditing}/> 
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formPhone">
-              <Form.Label>מספר טלפון</Form.Label>
-              <Form.Control
-                type="text"
-                name="phone"
-                value={profileData.phone}
-                onChange={handleInputChange}
+              <Form.Label>{t('profilePage.phoneNumber')}</Form.Label>
+              <Form.Control type="text" name="phone"  
+                value={profileData.phoneNumber}
+                onChange={(e) => setProfileData({ ...profileData, phoneNumber: e.target.value })}                
                 readOnly={!isEditing}
               />
+           {phoneNumberError && <div style={{ color: 'red' }}>{t('signUpPage.invalidphoneNumber')}</div>}
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formEmail">
-              <Form.Label>אימייל</Form.Label>
-              <Form.Control
-                type="email"
-                name="email"
+              <Form.Label>{t('profilePage.email')}</Form.Label>
+              <Form.Control    type="email"  name="email" 
                 value={profileData.email}
-                onChange={handleInputChange}
+                onChange={(e) => setProfileData({ ...profileData, email: e.target.value })}                
                 readOnly={!isEditing}
               />
+             {emailError && <div style={{ color: 'red' }}>{t('signUpPage.invalidEmail')}</div>}
+             
             </Form.Group>
 
+            <Form.Group controlId="formType">
+              <Form.Label> {t('signUpPage.typeName')}</Form.Label>
+                <input type="checkbox"
+                 checked={isChecked}
+                 onChange={(e) => setProfileData({ ...profileData,typeID : e.target.checked})}
+                 disabled={!isEditing} 
+                 />
+              </Form.Group>
+
+
             <Form.Group className="mb-3" controlId="formPassword">
-              <Form.Label>סיסמה</Form.Label>
+              <Form.Label>{t('profilePage.password')}</Form.Label>
               <Form.Control
-                type="password"
+                type="text"
                 name="password"
-                value={profileData.password}
-                onChange={handleInputChange}
+                value={profileData.passwordHash}
+                onChange={(e) => setProfileData({ ...profileData, passwordHash: e.target.value })}                
                 readOnly={!isEditing}
               />
+{passwordError && <div style={{ color: 'red' }}>{t('signUpPage.invalidPassword')}</div>}
             </Form.Group>
 
             {isEditing ? (
               <Button variant="primary" onClick={handleSave}>
-                שמור
+                {t('profilePage.saveButton')}
               </Button>
             ) : (
               <Button variant="secondary" onClick={handleEdit}>
-                ערוך
+                {t('profilePage.editButton')}
               </Button>
             )}
           </Form>
         </Col>
       </Row>
     </Container>
-  );
+  </>;
 };
 
