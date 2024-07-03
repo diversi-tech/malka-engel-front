@@ -14,7 +14,8 @@
         "invalidPassword": "הסיסמה צריכה להיות באורך של לפחות 8 תווים",
         "noAccount": "אין לך חשבון? ",
         "createAccount": "צור חשבון",
-        "forgot": "?שכחת סיסמא"
+        "forgot":"שכחת סיסמה?",
+        "errorLoging":"אחד הנתונים הוקש שגוי"
     },
     "signUpPage": {
         "title": "הרשם",
@@ -22,15 +23,15 @@
         "email": "מייל",
         "password": "סיסמה",
         "phoneNumber": "מספר טלפון",
-        "typeName": "?מעצב אירועים",
+        "typeName": "  מעצב אירועים?",
         "loginButton": "הרשם",
         "invalidEmail": "פורמט דואר אלקטרוני לא חוקי",
         "invalidphoneNumber": "מספר טלפון לא חוקי",
         "invalidPassword": "הסיסמה צריכה להיות באורך של לפחות 8 תווים"
     },
     "resetPasswordPage": {
-        "title": "אפס סיסמא",
-        "putEmail": "הזן כתובת מייל וקבל קישור לאיפוס הסיסמא",
+        "title": "איפוס סיסמא",
+        "putEmail": "כדי לאפס את הסיסמה, בבקשה הזן את כתובת הדוא''ל איתו נרשמת.",
         "invalidEmail": "פורמט דואר אלקטרוני לא חוקי",
         "resetButton": "שלח מייל"
     },
@@ -114,7 +115,8 @@
         "FAQlist": "FAQlistHe",
         "language": "HE",
         "question": "questionHe",
-        "answer": "answerHe"
+        "answer": "answerHe",
+        "serchTitle":"התחל להקליד את השאלה שלך..."
     },
 
     "orderFormPage":{
