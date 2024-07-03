@@ -86,7 +86,7 @@ export const Product = () => {
                     }}>
                         <img 
                             ref={imageRef}
-                            src={`https://localhost:44314${product.imageURL}`} 
+                            src={`https://localhost:7297${product.imageURL}`} 
                             //how it know to go to the name in Hebrew?
                             alt={product[`name${currentLanguage}`]} 
                             style={{

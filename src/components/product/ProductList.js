@@ -73,7 +73,7 @@ export const ProductList = () => {
                                     }}>
                                         <Card.Img
                                             variant="top"
-                                            src={`https://localhost:44314${product.imageURL}`}
+                                            src={`https://localhost:7297${product.imageURL}`}
                                             onClick={()=>{navigate(`/myProduct/${product.productID}`)}}
                                             alt={product.name}
                                             style={{
