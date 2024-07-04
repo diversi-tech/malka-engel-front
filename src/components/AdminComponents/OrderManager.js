@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button, Modal, Table } from 'react-bootstrap';
-import { GetAllOrders, PutOrder } from '../../axios/OrderAdminAxios';
+import { GetAllOrders, PutOrder } from '../../axios/OrderAxios';
 import { useDispatch, useSelector } from 'react-redux';
 import { fillOrdersList } from '../../redux/DataActions/DataAction.Order';
 

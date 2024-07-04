@@ -53,6 +53,7 @@
     "shoppingCartPage": {
         "title": "Shopping Cart",
         "p1": "your basket is empty",
+        "inCart":"products in your cart",
         "thItem": "Item",
         "thQuantity": "Quantity",
         "thPrice": "Price",

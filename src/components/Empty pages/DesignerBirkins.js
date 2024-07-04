@@ -1,6 +1,6 @@
 
 import { useTranslation } from 'react-i18next';
-import { PageTitle } from './PageTitle';
+import { PageTitle } from '../Layout Components/PageTitle';
 
 export const DesignerBirkins = () => {
 const { t, i18n } = useTranslation();

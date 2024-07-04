@@ -7,10 +7,6 @@ export const addToCart = (product) => {
     setCookie('cart', JSON.stringify(cart), 7); // נשמור את העוגיה ל-7 ימים
 };
 
-// export const getCart = () => {
-//     return JSON.parse(getCookie('cart') || '[]');
-// };
-
 export const clearCart = () => {
     setCookie('cart', '[]', 7);
 };
