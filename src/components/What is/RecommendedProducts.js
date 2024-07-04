@@ -1,85 +1,107 @@
 import { useTranslation } from 'react-i18next';
-import { Card, Button, Container, Row, Col } from 'react-bootstrap';
-import { useNavigate } from 'react-router';
-import { useState } from 'react';
-import { PageTitle } from './PageTitle';
+import { Card, Container, Row, Col, Badge } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setProductList } from '../../redux/DataActions/DataAction.Product';
+import { GetRecommendedProducts } from '../../axios/ProductAxios';
+import { itemsSubject } from '../Cart/ShoppingCart';
 
-const RecommendedProducts = () => {
+export const RecommendedProducts = () => {
     const { t, i18n } = useTranslation();
-    const [cart, setCart] = useState([]);
-    const products = useSelector(s => s.DataReducer_Products.Prodlist)
-    // const products = [
-    //     { id: 1, name: 'Product 1', price: 50, image: 'product1.jpg' },
-    //     { id: 2, name: 'Product 2', price: 80, image: 'product2.jpg' },
-    //     { id: 3, name: 'Product 3', price: 120, image: 'product3.jpg' }
-    // ];
+    const productsList = useSelector(s => s.DataReducer_Products.Prodlist);
+    const [products, setProducts] = useState([]);
+    const myDispatch = useDispatch();
     const navigate = useNavigate();
-
-    const addToCart = (productId) => {
-        const productToAdd = products.find(product => product.id === productId);
-        if (productToAdd) {
-            const currentItems = itemsSubject.value;
-            const existingItemIndex = currentItems.findIndex(item => item.id === productToAdd.id);
-
-            if (existingItemIndex !== -1) {
-                // Item already exists in cart, update quantity
-                const updatedItems = [...currentItems];
-                updatedItems[existingItemIndex].quantity += 1;
-                itemsSubject.next(updatedItems);
-            } else {
-                // Item does not exist in cart, add it
-                itemsSubject.next([...currentItems, { ...productToAdd, quantity: 1 }]);
-            }
+    const recoproduct = products.find(product => product.isRecommended == true);
+    async function fetchProducts() {
+        
+        if (productsList.length === 0) {
+            var response = await GetRecommendedProducts();
+            setProducts(response); 
+            myDispatch(setProductList(response));
+        } else {
+            setProducts(productsList);
         }
-    };
-    // const addToCart = (productId) => {
-    //     const productToAdd = products.find(product => product.id === productId);
-    //     if (productToAdd) {
-    //         debugger
-    //         itemsSubject.next([...itemsSubject.value, { ...productToAdd, quantity: 1 }]);
-    //     }
-    // };
-    
+    }
+
+    useEffect(() => {
+        fetchProducts();
+    }, []);
+
     const goToProductDetails = (productId) => {
-        navigate(`/myProduct/${productId}`);  // Navigate to product details page with product ID
+        navigate(`/myProduct/${productId}`);
     };
-
-
-    // const removeFromCart = (productId) => {
-    //     const updatedCart = cart.filter(product => product.id !== productId);
-    //     setCart(updatedCart);
-    // };
-
-    // const calculateTotalPrice = () => {
-    //     return cart.reduce((total, product) => total + product.price, 0);
-    // };
+if(!recoproduct) 
     return (
         <div>
-            <div>
-             <PageTitle title={t('productListPage.title')} />
-            </div>  
+            <h2>{t('recommendedProducts.title')}</h2>
+            <Link to="/">{t('productListPage.backToHome')}</Link>
+        </div>);
+        else{
+    return (
+        <div style={{ padding: '20px', backgroundColor: '#f9f9f9' }}>
+            <h1>{t('recommendedProducts.title')}</h1>
             <Container>
-                <Row xs={1} md={2} lg={3} className="g-4">
-                    {products.map((product, index) => (
+                <Row xs={1} md={2} lg={4} className="g-4">
+                    {recoproduct.map((product, index) => (
                         <Col key={index}>
-                            <Card style={{ backgroundColor: 'darksalmon' }}>
-                                <Card.Img variant="top" src={product.image} />
+                            <Card style={{ 
+                                position: 'relative', 
+                                border: 'none', 
+                                transition: 'transform 0.2s', 
+                                boxShadow: '0 4px 8px rgba(0,0,0,0.1)' 
+                            }}>
+                                {product.isNew && <Badge bg="success" style={{ 
+                                    position: 'absolute', 
+                                    top: '10px', 
+                                    right: '10px', 
+                                    zIndex: 10 
+                                }}>New</Badge>}
+                                <div style={{ 
+                                    overflow: 'hidden', 
+                                    position: 'relative' 
+                                }}>
+                                    <Card.Img 
+                                        variant="top" 
+                                        src={`https://localhost:44314${product.imageURL}`} 
+                                        alt={product.name} 
+                                        style={{ 
+                                            height: '250px', 
+                                            objectFit: 'cover', 
+                                            transition: 'transform 0.3s' 
+                                        }}
+                                        onMouseOver={e => e.currentTarget.style.transform = 'scale(1.1)'}
+                                        onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}
+                                    />
+                                </div>
                                 <Card.Body>
                                     <Card.Title>{product.name}</Card.Title>
-                                    <Card.Text>
-                                        Price: {product.price} USD
+                                    <Card.Text style={{ 
+                                        fontSize: '18px', 
+                                        color: '#888' 
+                                    }}>
+                                        {product.price} ₪
                                     </Card.Text>
-                                    <Button variant="primary" onClick={() => goToProductDetails(product.id)}>Details</Button>
-                                    <Button variant="primary" onClick={() => addToCart(product.id)}>Add to cart</Button>
-                                    {/* <Button variant="primary" onClick={() => addToCart(product.id)}>Add to cart </Button> */}
+                                    <Link 
+                                        to={`/myProduct/${product.productID}`} 
+                                        style={{ 
+                                            display: 'block', 
+                                            width: '100%', 
+                                            marginTop: '10px', 
+                                            textAlign: 'center',
+                                            textDecoration: 'none', 
+                                            color: '#007bff' 
+                                        }}
+                                    >
+                                        {t('productListPage.moreDetails')}
+                                    </Link>
                                 </Card.Body>
                             </Card>
                         </Col>
                     ))}
                 </Row>
             </Container>
-            {/* <ShoppingCart cart={cart} removeFromCart={removeFromCart} calculateTotalPrice={calculateTotalPrice} /> */}
         </div>
-    )
-}
-export default RecommendedProducts;
+    );}
+};

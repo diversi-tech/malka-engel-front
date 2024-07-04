@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { RecommendedProducts } from '../../RecommendedProducts';
-
+import { RecommendedProducts } from '../What is/RecommendedProducts';
 
 //Home page
 export const Home = () => {
