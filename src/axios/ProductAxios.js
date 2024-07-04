@@ -38,3 +38,16 @@ export const PostProduct = async (productForm) => {
         console.log(ch)
     }
 }
+
+
+export const GetRecommendedProducts = async () => {
+    try {
+        
+        // to ask what is mean language?? in the query string---
+        let result = await axios.get(`${s}GetRecommendedProducts`)
+        return result.data
+    }
+    catch (ch) {
+        console.log(ch)
+    }
+}
