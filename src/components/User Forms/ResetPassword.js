@@ -3,6 +3,7 @@ import { Form, Button, Container, Row, Col, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import useValidation from './useValidation';
 
 export const ResetPassword=()=>{
 
@@ -11,14 +12,14 @@ export const ResetPassword=()=>{
     const [emailError, setEmailError] = useState('');
 //Pupup 
 const [showModal, setShowModal] = useState(true);
+const [restSec, setRestSec] = useState(false);
+
 const handleClose = () => {navigate(-2)};    
   //יצירת משנה שישמש לניווט
   const navigate = useNavigate()
-//בדיקות תקינות למייל
-const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
+   //Custom Hook for Validation
+ const {validateEmail} = useValidation()
+
 //On click function
 const handleClick=() => {
     if (!validateEmail(user.email)) {
@@ -30,7 +31,8 @@ const handleClick=() => {
 //כאן צריך להיות פעולה של שליחת מייל 
 //המייל יכנס ל - '/myResetPasswordLink'
 //Go back
-navigate(-2) 
+setRestSec(true)
+// navigate(-2) 
 
     }
 }
@@ -44,10 +46,11 @@ return<>
 <Modal show={showModal} onHide={handleClose}  centered> 
     <Modal.Body>
 {/*  */}
+{restSec?(<h3 className="text-center">{t('resetPasswordPage.secMassage')}</h3>):(
 <Container className="d-flex justify-content-center align-items-center vh-50" style={style3}>
     <Row className="w-100">
       <Col xs={80} md={50} lg={100} className="mx-auto">
-        <Form className='align-auto'>
+        <Form className="text-center">
             <h3>{t('resetPasswordPage.title')}</h3>
           <Form.Group controlId="formBasicEmail">
             <Form.Label > {t('resetPasswordPage.putEmail')}</Form.Label>
@@ -62,7 +65,7 @@ return<>
           </Form>
       </Col>
     </Row>
-  </Container>
+  </Container>)}
 {/*  */}
     </Modal.Body>
     <Modal.Footer>

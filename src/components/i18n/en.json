@@ -27,13 +27,15 @@
         "loginButton": "Sign up",
         "invalidEmail": "Invalid email format",
         "invalidphoneNumber": "Invalid phone number",
-        "invalidPassword": "Password should be at least 8 characters long"
+        "invalidPassword": "Password should be at least 8 characters long",
+        "massage": "You have successfully registered!\n Thanks"
     },
     "resetPasswordPage": {
         "title": "Reset Password",
         "putEmail": "To reset your password, please enter the email address you registered with.",
         "resetButton": "Send Email",
-        "invalidEmail": "Invalid email format"
+        "invalidEmail": "Invalid email format",
+        "secMassage":"We have sent a password reset link to the email address"
     },
     "resetPasswordCarePage": {
         "title": "Set new password",
@@ -119,5 +121,20 @@
     "productPage":{
         "review":"review products"
 
-    }
+    },
+    "profilePage":{
+        "title":"Profile",
+        "editButton":"Edit",
+        "saveButton":"Save",
+        "logout":"Logout",
+        "userName": "User name",
+        "email": "Email",
+        "password": "Password",
+        "phoneNumber": "Phone number",
+        "typeName": "Event designer?"
+    },
+    "accountPage":{
+        "errCon":"You are not signed in",
+        "signIn":"Sign in"
+   }
 }

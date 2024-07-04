@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { connect, setCurrentUser } from '../../redux/DataActions/DataAction.Users';
 import { LoginUser, PostUser } from '../../axios/UsersAxios';
+import useValidation from './useValidation';
 
 
 const SignUp = () => {
@@ -21,57 +22,26 @@ const SignUp = () => {
       "credits": 0
     }
    );
+   const [signsec, setSignsec] = useState(false)
  //יצירת משנה שישמש לשיגור
  const dispatch = useDispatch()
 
  //יצירת משנה שישמש לניווט
  const navigate = useNavigate()
  
- const [emailError, setEmailError] = useState('');
- const [passwordError, setPasswordError] = useState('');
- const [phoneNumberError, setPhoneNumberError] = useState('');
+ //Custom Hook for Validation
+ const {validForm,
+  //משתנים לבדיקות תקינות 
+  emailError, passwordError, phoneNumberError} = useValidation()
 //Pupup 
 const [showModal, setShowModal] = useState(true);
 const handleClose = () => {navigate(-2)};
 
-// בדיקות תקינות למייל ,סיסמא וטלפון
- const validateEmail = (email) => {
-   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-   return emailRegex.test(email);
- };
-
- const validatePassword = (password) => {
-   return password != null && password.length >= 8; 
- };
- const validatePhone = (phone) => {
-  // בדיקה של מספר ישראלי עם קידומת בינלאומית או מקומית
-  const re = /^(\+972|0)?[5-9]\d{8}$/;
-  return re.test(phone);
-};
  //--------------------------------------------------------------------------
 
 //Function to handle Register
     const handleRegister = async () => {
-        let isValid = true;
-        //Check email
-            if (!validateEmail(newUser.email)) {
-              setEmailError(t('loginPage.invalidEmail'));
-              isValid = false;
-            } 
-            else{setEmailError(''); }
-           
-        //Check password   
-            if (!validatePassword(newUser.passwordHash)) {
-              setPasswordError(t('loginPage.invalidPassword'));
-              isValid = false;
-            }
-             else {setPasswordError('');} 
-        //Check Phone Number
-        if (!validatePhone(newUser.phoneNumber)) {
-          setPhoneNumberError(t('loginPage.invalidphoneNumber'));
-          isValid = false;
-        }
-         else {setPhoneNumberError('');}   
+        
        //type----
        if(newUser.typeID)
         newUser.typeID = 2
@@ -80,7 +50,8 @@ const handleClose = () => {navigate(-2)};
 
       }
         //The Email & the password are valid
-            if (isValid) {
+        let c = validForm(newUser)
+            if (validForm(newUser)) {
         // //Go to DB ......
         debugger
           let postUser = await PostUser(newUser); 
@@ -90,9 +61,9 @@ const handleClose = () => {navigate(-2)};
            dispatch(connect())
            let userLogin = await LoginUser(newUser.email, newUser.passwordHash); 
            dispatch(setCurrentUser(userLogin.data));
-           alert("Thank you!"); 
-         //Go to Home page
-            navigate('/myHome')
+           //נרשם בהצלחה
+           setSignsec(true)
+      
         //    save in cookies
           }
           else
@@ -108,7 +79,10 @@ const handleClose = () => {navigate(-2)};
 <Modal show={showModal} onHide={handleClose}  centered> 
     <Modal.Body>
 {/*  */}
-<Container className="d-flex justify-content-center align-items-center vh-50"  style={style3}>
+{signsec?(
+  <h2 className="text-center">{t('signUpPage.massage')}</h2>
+):(
+  <Container className="d-flex justify-content-center align-items-center vh-50"  style={style3}>
         <Row className="w-100">
         
           <Col xs={80} md={50} lg={100} className="mx-auto">
@@ -159,6 +133,7 @@ const handleClose = () => {navigate(-2)};
           </Col>
         </Row>
       </Container>
+    )}
      
 {/*  */}
     </Modal.Body>

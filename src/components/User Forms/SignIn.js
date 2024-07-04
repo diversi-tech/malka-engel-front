@@ -6,65 +6,35 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { connect, setCurrentUser } from '../../redux/DataActions/DataAction.Users';
 import { ResetPassword } from './ResetPassword';
+import useValidation from './useValidation';
 
 
 export const Login = () => {
-  debugger
   const { t, i18n } = useTranslation();
   const [user, setUser] = useState({});
 //
 const [showModal, setShowModal] = useState(true);
-const handleClose = () => {navigate(-1)};
+const [errorLoginingin, setErrorLoginingin]= useState(false);
   //יצירת משנה שישמש לשיגור
   const dispatch = useDispatch()
 
   //יצירת משנה שישמש לניווט
   const navigate = useNavigate()
 
+ //Custom Hook for Validation
+ const {validForm,
 //משתנים לבדיקות תקינות 
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
- const [errorLoginingin, setErrorLoginingin] = useState(false);
+emailError, passwordError, phoneNumberError} = useValidation()
+                                        
+const handleClose = () => {navigate(-1)};
 
-//בדיקות תקינות למייל וסיסמא
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const validatePassword = (password) => {
-    return password != null && password.length >= 8; 
-  };
-const faCheck=(e)=>{
-  if (!validateEmail(e)) {
-    setEmailError(t('loginPage.invalidEmail'));
-  } 
-  else{setEmailError(''); }
-}
 //--------------------------------------------------------------------------
-
 //Function to handle login
 const handleLogin = async ()=>{
-  let isValid = true;
-  //Check email
-      if (!validateEmail(user.email)) {
-        setEmailError(t('loginPage.invalidEmail'));
-        isValid = false;
-      } 
-      else{setEmailError(''); }
-     
-  // //Check password   
-      if (!validatePassword(user.password)) {
-        setPasswordError(t('loginPage.invalidPassword'));
-        isValid = false;
-      }
-       else {setPasswordError('');}  
-
-  //The Email & the password are valid
-      if (isValid) {
-        
+  debugger
+      if ( validForm(user)) {    
   //Go to DB ......
-    let userLogin = await LoginUser(user.email, user.password); 
+    let userLogin = await LoginUser(user.email, user.passwordHash); 
     if(userLogin != null && userLogin.status == 200){
      //User exists in the database
      debugger
@@ -109,7 +79,7 @@ const style3={
             <Form.Label> {t('loginPage.password')} 
             </Form.Label>
             <Form.Control type="password" 
-             onChange={(e) => setUser({ ...user, password: e.target.value }) }/>
+             onChange={(e) => setUser({ ...user, passwordHash: e.target.value }) }/>
               {passwordError && <div style={{ color: 'red' }}>{passwordError}</div>}
               {/* <a onClick={f}>{t('loginPage.forgot') }</a> */}
               <a href="/myResetPassword" >{t('loginPage.forgot') }</a>
