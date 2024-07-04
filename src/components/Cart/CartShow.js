@@ -22,7 +22,8 @@
 
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { getCart, setCookie } from "../product/cookies/SetCart";
+import { getCart } from "../product/cookies/SetCart";
+import { setCookie } from "../product/cookies/CookieUtils";
 
 export const CartDisplay = () => {
   // קבלת כל המוצרים מה-Cookies
