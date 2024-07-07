@@ -5,7 +5,7 @@ import { DesignerBirkins } from "../Empty pages/DesignerBirkins.js";
 import { CongratulationsToTheDonors } from "../Empty pages/CongratulationsToTheDonors.js";
 import { Events } from "../Empty pages/Events.js";
 import AdminDashboard from "../AdminComponents/AdminDashboard.js";
-import CategoriesManager from "../AdminComponents/CategoriesManager.js";
+import CategoriesManager, { AllCategories } from "../AdminComponents/CategoriesManager.js";
 
 import { ProductList } from "../product/ProductList.js";
 import { Nav } from "./Nav.js";
@@ -58,7 +58,7 @@ export const MyRouting = () => {
                     <Route path="/myOrderHistory/:UserId" element={<OrderHistory></OrderHistory>}></Route>
 
                     <Route path="/myAdminDashboard" element={<AdminDashboard></AdminDashboard>}></Route>
-                    <Route path="/myCategoriesManager" element={<CategoriesManager></CategoriesManager>}></Route>
+                    <Route path="/myCategoriesManager" element={<AllCategories></AllCategories>}></Route>
                     <Route path="/myOrderManager" element={<OrderManager></OrderManager>}></Route>
                     <Route path="/review" element={<Review></Review>}></Route>
 
