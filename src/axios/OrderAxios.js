@@ -53,10 +53,11 @@ export const PutOrder = async (id, status) => {
 export const PostOrder = async (order) => {
     try {
         let result = await axios.post(`${API_BASE_URL}PostOrder`, order);
-        debugger
         return result.data
     }
     catch (ch) {
+        debugger
         console.log(ch)
+        alert('i came to here!!!!');
     }
 }
