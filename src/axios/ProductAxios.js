@@ -27,7 +27,6 @@ export const GetProById = async (language) => {
     }
 }
 
-
 export const PostProduct = async (productForm) => {
     try {
         let result = await axios.post("https://localhost:7297/api/Product/PostProduct", productForm)
@@ -41,8 +40,7 @@ export const PostProduct = async (productForm) => {
 
 
 export const GetRecommendedProducts = async () => {
-    try {
-        
+    try {        
         // to ask what is mean language?? in the query string---
         let result = await axios.get(`${s}GetRecommendedProducts`)
         return result.data

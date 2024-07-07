@@ -25,7 +25,7 @@ export const Product = () => {
     async function fetchProducts() {
         if (productsList.length === 0) {
             var response = await GetAllProducts();
-            setProducts(response); 
+            setProducts(response);
             myDispatch(setProductList(response));
         } else {
             setProducts(productsList);
@@ -84,11 +84,11 @@ export const Product = () => {
                         position: 'relative',
                         width: '100%',
                     }}>
-                        <img 
+                        <img
                             ref={imageRef}
-                            src={`https://localhost:7297${product.imageURL}`} 
+                            src={`https://localhost:7297${product.imageURL}`}
                             //how it know to go to the name in Hebrew?
-                            alt={product[`name${currentLanguage}`]} 
+                            alt={product[`name${currentLanguage}`]}
                             style={{
                                 width: '100%',
                                 height: 'auto',
@@ -111,11 +111,10 @@ export const Product = () => {
             </Row>
             <Row>
                 <Col>
-                <div style={{ marginTop: '150px' }} ref={scrollToRef}>
-                    <Review />
-                    <CartDisplay />
-
-                </div>
+                    <div style={{ marginTop: '150px' }} ref={scrollToRef}>
+                        <Review />
+                        <CartDisplay />
+                    </div>
                 </Col>
             </Row>
         </Container>
