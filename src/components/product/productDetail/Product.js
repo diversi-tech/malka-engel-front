@@ -111,10 +111,9 @@ export const Product = () => {
             </Row>
             <Row>
                 <Col>
-                    <div style={{ marginTop: '150px' }} ref={scrollToRef}>
-                        <Review />
-                        <CartDisplay />
-                    </div>
+                <div style={{ marginTop: '150px' }} ref={scrollToRef}>
+                    <Review />
+                </div>
                 </Col>
             </Row>
         </Container>

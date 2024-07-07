@@ -4,12 +4,20 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import useValidation from './useValidation';
+import { SendEmail } from '../../axios/EmailAxios';
 
 export const ResetPassword=()=>{
 
     const { t, i18n } = useTranslation();
-    const [user, setUser] = useState({});
+    // const [user, setUser] = useState({});
     const [emailError, setEmailError] = useState('');
+//Email
+const [emailRequest, setEmailRequest]=useState({
+    toAddress: "",
+    subject: "Email to reset password",
+    body: "Click on this link...........",
+    isBodyHtml: false
+  } )  
 //Pupup 
 const [showModal, setShowModal] = useState(true);
 const [restSec, setRestSec] = useState(false);
@@ -21,8 +29,9 @@ const handleClose = () => {navigate(-2)};
  const {validateEmail} = useValidation()
 
 //On click function
-const handleClick=() => {
-    if (!validateEmail(user.email)) {
+const handleClick= async() => {
+    debugger
+    if (!validateEmail(emailRequest.toAddress)) {
         setEmailError(t('resetPasswordPage.invalidEmail'));
     }
     else{
@@ -30,8 +39,11 @@ const handleClick=() => {
     //Send a Email to Rest the password
 //כאן צריך להיות פעולה של שליחת מייל 
 //המייל יכנס ל - '/myResetPasswordLink'
+debugger
+let result = await SendEmail(emailRequest)
+if (result && result.status == 200)
 //Go back
-setRestSec(true)
+        setRestSec(true)
 // navigate(-2) 
 
     }
@@ -55,11 +67,11 @@ return<>
           <Form.Group controlId="formBasicEmail">
             <Form.Label > {t('resetPasswordPage.putEmail')}</Form.Label>
             <Form.Control type="email"
-             onChange={(e) => {setUser({ ...user, email: e.target.value })}} />
+             onChange={(e) => {setEmailRequest({ ...emailRequest, toAddress: e.target.value })}} />
               {emailError && <div style={{ color: 'red' }}>{emailError}</div>}
           </Form.Group>
 
-          <Button className="w-100 mt-3" onClick={()=>handleClick()}>
+          <Button className="w-100 mt-3" onClick={handleClick}>
           {t('resetPasswordPage.resetButton')}
           </Button>
           </Form>
