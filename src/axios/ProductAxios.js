@@ -26,7 +26,6 @@ export const GetProById = async (language) => {
     }
 }
 
-
 export const PostProduct = async (productForm) => {
     try {
         let result = await axios.post(`${API_BASE_URL}PostProduct`, productForm)

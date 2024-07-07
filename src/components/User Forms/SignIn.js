@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Form, Button, Container, Row, Col, Modal } from 'react-bootstrap';
 import { GetAllUsers, LoginUser } from '../../axios/UsersAxios';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, Route, useNavigate } from 'react-router-dom';
 import { connect, setCurrentUser } from '../../redux/DataActions/DataAction.Users';
 import { ResetPassword } from './ResetPassword';
 import useValidation from './useValidation';
@@ -32,7 +32,8 @@ const handleClose = () => {navigate(-1)};
 //Function to handle login
 const handleLogin = async ()=>{
   debugger
-      if ( validForm(user)) {    
+      if ( validForm(user)) { 
+        debugger   
   //Go to DB ......
     let userLogin = await LoginUser(user.email, user.passwordHash); 
     if(userLogin != null && userLogin.status == 200){
@@ -71,7 +72,8 @@ const style3={
           <Form.Group controlId="formBasicEmail">
             <Form.Label> {t('loginPage.email')}</Form.Label>
             <Form.Control type="email"
-             onChange={(e) => {setUser({ ...user, email: e.target.value })}} />
+             onChange={(e) => {validForm(user);{setUser({ ...user, email: e.target.value })}}} />
+             {/* onChange={(e) => {setUser({ ...user, email: e.target.value })}} /> */}
               {emailError && <div style={{ color: 'red' }}>{emailError}</div>}
           </Form.Group>
 
@@ -79,10 +81,9 @@ const style3={
             <Form.Label> {t('loginPage.password')} 
             </Form.Label>
             <Form.Control type="password" 
-             onChange={(e) => setUser({ ...user, passwordHash: e.target.value }) }/>
+             onChange={(e) => {validForm(user);setUser({ ...user, passwordHash: e.target.value }) }}/>
               {passwordError && <div style={{ color: 'red' }}>{passwordError}</div>}
-              {/* <a onClick={f}>{t('loginPage.forgot') }</a> */}
-              <a href="/myResetPassword" >{t('loginPage.forgot') }</a>
+              <Link  to="/myResetPassword">{t('loginPage.forgot') }</Link> 
 
           </Form.Group>
 
@@ -90,7 +91,7 @@ const style3={
           {t('loginPage.loginButton')}
           </Button> 
           <div className="text-center mt-3">   {t('loginPage.noAccount')}
-          <a  href="./mySignUp">{t('loginPage.createAccount') }</a>
+          <Link  to="/mySignUp">{t('loginPage.createAccount')}</Link> 
           {errorLoginingin && <div style={{ color: 'red' }}>{t('loginPage.errorLoging') }</div>}
 
          </div> 
