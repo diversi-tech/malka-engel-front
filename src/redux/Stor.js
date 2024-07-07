@@ -5,7 +5,7 @@ import { DataReducer_Products } from "./DateReducer/dataReducer.Products";
 import { DataReducer_UHistory } from "./DateReducer/dataReducer.UHistory";
 import { DataReducer_Users } from "./DateReducer/dataReducer.Users";
 import { DataReducer_Orders } from "./DateReducer/dataReducer.Order";
-
+import { DataReducer_Categry } from "./DateReducer/dataReducer.Category";
 
 const reducers = combineReducers(
     {
@@ -14,7 +14,9 @@ const reducers = combineReducers(
         DataReducer_Products: DataReducer_Products,
         DataReducer_UHistory: DataReducer_UHistory,
         DataReducer_Users: DataReducer_Users,
-        DataReducer_Orders: DataReducer_Orders
+        DataReducer_Orders: DataReducer_Orders,  
+        DataReducer_Categry: DataReducer_Categry 
+
     }
 )
 export const Store = createStore(reducers)
