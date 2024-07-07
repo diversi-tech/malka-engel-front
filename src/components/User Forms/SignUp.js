@@ -92,20 +92,20 @@ const handleClose = () => {navigate(-2)};
             <Form.Group controlId="formBasicName">
                 <Form.Label> {t('signUpPage.userName')}</Form.Label>
                 <Form.Control type="text"
-                 onChange={(e) => setNewUser({ ...newUser, name: e.target.value })} />
+                 onChange={(e) =>setNewUser({ ...newUser, name: e.target.value })}/>
               </Form.Group>
 
               <Form.Group controlId="formBasicPhoneNuber">
                 <Form.Label> {t('signUpPage.phoneNumber')}</Form.Label>
                 <Form.Control type="phoneNumber"
-                 onChange={(e) => setNewUser({ ...newUser, phoneNumber: e.target.value })} />
+                 onChange={(e) =>{validForm(newUser); setNewUser({ ...newUser, phoneNumber: e.target.value })}} />
                   {phoneNumberError && <div style={{ color: 'red' }}>{t('signUpPage.invalidphoneNumber')}</div>}
               </Form.Group>
 
               <Form.Group controlId="formBasicEmail">
                 <Form.Label> {t('signUpPage.email')}</Form.Label>
                 <Form.Control type="email"
-                 onChange={(e) => setNewUser({ ...newUser, email: e.target.value })} />
+                 onChange={(e) =>{validForm(newUser); setNewUser({ ...newUser, email: e.target.value })}} />
                   {emailError && <div style={{ color: 'red' }}>{t('signUpPage.invalidEmail')}</div>}
               </Form.Group>
 {/*  */}
@@ -119,7 +119,7 @@ const handleClose = () => {navigate(-2)};
               <Form.Group controlId="formBasicPassword" className="mt-3">
                 <Form.Label> {t('signUpPage.password')}</Form.Label>
                 <Form.Control type="password" 
-                 onChange={(e) => setNewUser({ ...newUser, passwordHash: e.target.value })}/>
+                 onChange={(e) =>{validForm(newUser); setNewUser({ ...newUser, passwordHash: e.target.value })}}/>
                   {passwordError && <div style={{ color: 'red' }}>{t('signUpPage.invalidPassword')}</div>}
               </Form.Group>
     
