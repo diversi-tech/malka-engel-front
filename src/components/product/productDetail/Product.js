@@ -113,8 +113,6 @@ export const Product = () => {
                 <Col>
                 <div style={{ marginTop: '150px' }} ref={scrollToRef}>
                     <Review />
-                    <CartDisplay />
-
                 </div>
                 </Col>
             </Row>

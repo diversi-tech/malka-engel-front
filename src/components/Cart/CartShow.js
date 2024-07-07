@@ -1,32 +1,14 @@
-// import { useTranslation } from "react-i18next";
-// import { getCart } from "../product/cookies/SetCart";
-// export const CartDisplay = () => {
-//     debugger
-//     // get all the products from cookies memory
-//     const cart = getCart();
-//     const { t, i18n } = useTranslation();
-//     const currentLanguage = i18n.language == "en" ? "En" : "He"    
-
-
-//     return (
-//         <div>
-//             <h2>Cart</h2>
-//             <ul>
-//                 {cart.map((product, index) => (
-//                     <li key={index}>{ product[`name${currentLanguage}`]}</li>
-//                 ))}
-//             </ul>
-//         </div>
-//     );
-// };
 
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { getCart, setCookie } from "../product/cookies/SetCart";
+import { getCart } from "../product/cookies/SetCart";
+import { setCookie } from "../product/cookies/CookieUtils";
+import { useNavigate } from "react-router-dom";
 
 export const CartDisplay = () => {
   // קבלת כל המוצרים מה-Cookies
   const [cart, setCart] = useState(getCart());
+  const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const currentLanguage = i18n.language === "en" ? "En" : "He";
 
@@ -44,9 +26,16 @@ export const CartDisplay = () => {
     setCookie("cart", JSON.stringify(newCart), 7); // עדכון ה-Cookie
   };
 
+  const goToCheckout = () => {
+    if (cart.length === 0) {
+      alert(t('shoppingCartPage.emptyCartMessage'));
+      return;
+    }
+    navigate('/myOrderForm');
+  };
+
   return (
     <div className="container mt-4">
-      <h2>{t("Cart")}</h2>
       <table className="table table-striped">
         <thead>
           <tr>
@@ -85,7 +74,7 @@ export const CartDisplay = () => {
         </tbody>
       </table>
       <div className="text-right">
-        <button className="btn btn-primary">{t("Proceed to Checkout")}</button>
+        <button className="btn btn-primary" onClick={goToCheckout} >{t("Proceed to Checkout")}</button>
       </div>
     </div>
   );

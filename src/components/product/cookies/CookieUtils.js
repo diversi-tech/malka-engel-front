@@ -17,7 +17,7 @@ export const setCookie = (name, value, days) => {
     // יצירת ה-Cookie על ידי הגדרת document.cookie לפורמט name=value; expires=DATE; path=/
     document.cookie = name + "=" + (value || "") + expires + "; path=/";
 };
-
+  
 // מייצא את הפונקציה getCookie
 export const getCookie = (name) => {
     debugger

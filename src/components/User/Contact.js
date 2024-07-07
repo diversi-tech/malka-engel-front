@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { PageTitle } from '../Empty pages/PageTitle';
+import { PageTitle } from '../Layout Components/PageTitle';
 
 
 
