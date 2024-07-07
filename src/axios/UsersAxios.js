@@ -21,8 +21,8 @@ export const LoginUser = async (mail, pas) => {
     debugger
     try {
 
-        let result = await axios.get(`${API_BASE_URL}Login?mail=${mail}&pas=${pas}`)
-        debugger
+        let result = await axios.get(`${API_BASE_URL}/Login/${mail}/${pas}`)
+        
         return result
     }
 
