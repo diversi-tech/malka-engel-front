@@ -1,56 +1,63 @@
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Button, Alert, ListGroup } from 'react-bootstrap';
 import { getCommonQuestions } from "../../axios/CommonQuestionsAxios";
-import { setFAQlist } from "../../redux/DataActions/DataActions.FAQ"
-import { getUserHistory } from "../../axios/UserOrdersHistoryAxios";
-//this page not complete
-export const OrderHistory = () => { 
+import { setFAQlist } from "../../redux/DataActions/DataActions.FAQ";
+import { getUserHistory, GetOrdersByUserID } from "../../axios/UserOrdersHistoryAxios";
+import { GetOrderByUserId } from "../../axios/UsersAxios";
+
+export const OrderHistory = ({ connect }) => {
   const { t, i18n } = useTranslation();
-  let UHistorylist = useSelector(s => s.DataReducer_UHistory.UHistorylist)
-  let [currentHistory, setCurrentHistory] = useState(UHistorylist);
-  const dispatch = useDispatch()
-  async function fetchData() {
-    if (UHistorylist.length == 0) {
-      let c = await getUserHistory()
-      setCurrentHistory(c)
-      dispatch(setFAQlist(c)) 
-      if(!currentHistory){
-        return <p>Loading...</p>
-   } 
-  else{
-    return (
-      <div className="container mt-4">
-        <h2>Orders History</h2>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>status</th>
-              <th>Order Date</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentHistory.map(order => (
-              <tr key={order.userID}>
-                <td>{order.status}</td>
-                <td>{order.createdAt}</td>
-                <td> ₪{order.totalAmount}</td>
-                
-              </tr>
+  const dispatch = useDispatch();
+  const currentUser = useSelector(state => state.DataReducer_Users.currentUser);
+  const connected = useSelector(state => state.DataReducer_Users.connected);
+  const [orders, setOrders] = useState([]);
+  useEffect(() => {
+    if (connected) {
+      fetchOrders(currentUser.userID);
+    }
+  }, [connected, currentUser]);
+  
+  const fetchOrders = async (userId) => {
+    try {
+      const response = await GetOrderByUserId(userId);
+      setOrders(response.data);
+    } catch (error) {
+      console.error(`Error fetching orders for user ${userId}:`, error);
+    }
+  };
+
+  const handleFetchOrders = () => {
+    if (connected) {
+      fetchOrders(currentUser.userID);
+    }
+  };
+
+  return (
+    <div className="order-history">
+      {!connected && (
+        <Alert variant="danger">
+          <Alert.Heading>{t('OrderHistoryPage.not connect1')}</Alert.Heading>
+          <p>
+            {t('OrderHistoryPage.not connect2')}
+          </p>
+        </Alert>
+      )}
+      {connected && (
+        <div>
+          <h2>{t('OrderHistoryPage.ordersFor')} {currentUser.name}</h2>
+          <ListGroup>
+            {orders.map(order => (
+              <ListGroup.Item key={order.orderId}>
+                <p><strong>{t('OrderHistoryPage.createdAt')}:</strong> {order.createdAt}</p>
+                <p><strong>{t('OrderHistoryPage.status')}:</strong> {order.status}</p>
+                <p><strong>{t('OrderHistoryPage.totalAmount')}:</strong> {order.totalAmount}</p>
+              </ListGroup.Item>
             ))}
-          </tbody>
-        </table>
-      </div>
-    );
-  }}
-  }
-  useEffect(x => {
-    fetchData();
-  }, [])
-}
-
-
-
-
-
+          </ListGroup>
+        </div>
+      )}
+    </div>
+  );
+};

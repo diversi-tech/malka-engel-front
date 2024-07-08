@@ -137,5 +137,13 @@
     "accountPage":{
         "errCon":"You are not signed in",
         "signIn":"Sign in"
+   },
+   "OrderHistoryPage":{
+    "not connect1":"Sorry, you are not connected.",
+    "not connect2":"Log in and you can see your order history",
+    "ordersFor":"orders for",
+    "createdAt":"ordered at",
+    "status":"status",
+    "totalAmount":"total amount"
    }
 }
