@@ -61,19 +61,19 @@ export const ProductList = () => {
                                     transition: 'transform 0.2s',
                                     boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
                                 }}>
-                                    {product.isNew && <Badge bg="success" style={{
+                                    {/* {product.isNew && <Badge bg="success" style={{
                                         position: 'absolute',
                                         top: '10px',
                                         right: '10px',
                                         zIndex: 10
-                                    }}>New</Badge>}
+                                    }}>New</Badge>} */}
                                     <div style={{
                                         overflow: 'hidden',
                                         position: 'relative'
                                     }}>
                                         <Card.Img
                                             variant="top"
-                                            src={`https://localhost:44314${product.imageURL}`}
+                                            src={`https://localhost:7297${product.imageURL}`}
                                             onClick={()=>{navigate(`/myProduct/${product.productID}`)}}
                                             alt={product.name}
                                             style={{

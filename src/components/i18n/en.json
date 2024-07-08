@@ -14,7 +14,8 @@
         "invalidPassword": "Password should be at least 8 characters long",
         "noAccount": "Don't have an account yet? ",
         "createAccount": "Create an account",
-        "forgot": "Forgot password?"
+        "forgot": "Forgot password?",
+        "errorLoging":"One of the data entered is incorrect"
     },
     "signUpPage": {
         "title": "Sign up",
@@ -26,13 +27,15 @@
         "loginButton": "Sign up",
         "invalidEmail": "Invalid email format",
         "invalidphoneNumber": "Invalid phone number",
-        "invalidPassword": "Password should be at least 8 characters long"
+        "invalidPassword": "Password should be at least 8 characters long",
+        "massage": "You have successfully registered!\n Thanks"
     },
     "resetPasswordPage": {
         "title": "Reset Password",
-        "putEmail": "Enter your email address and receive a link to reset your password",
+        "putEmail": "To reset your password, please enter the email address you registered with.",
         "resetButton": "Send Email",
-        "invalidEmail": "Invalid email format"
+        "invalidEmail": "Invalid email format",
+        "secMassage":"Reset password link has been sent to your email"
     },
     "resetPasswordCarePage": {
         "title": "Set new password",
@@ -50,6 +53,7 @@
     "shoppingCartPage": {
         "title": "Shopping Cart",
         "p1": "your basket is empty",
+        "inCart":"products in your cart",
         "thItem": "Item",
         "thQuantity": "Quantity",
         "thPrice": "Price",
@@ -112,10 +116,26 @@
         "FAQlist" : "FAQlistEn",
         "language":"EN",
         "question":"questionEn",
-        "answer":"answerEn"
+        "answer":"answerEn",
+        "serchTitle":"Start typing  your question..."
     },
     "productPage":{
         "review":"review products"
 
-    }
+    },
+    "profilePage":{
+        "title":"Profile",
+        "editButton":"Edit",
+        "saveButton":"Save",
+        "logout":"Logout",
+        "userName": "User name",
+        "email": "Email",
+        "password": "Password",
+        "phoneNumber": "Phone number",
+        "typeName": "Event designer?"
+    },
+    "accountPage":{
+        "errCon":"You are not signed in",
+        "signIn":"Sign in"
+   }
 }

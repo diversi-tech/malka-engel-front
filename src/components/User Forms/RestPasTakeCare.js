@@ -1,8 +1,10 @@
 import React,{ useState } from 'react';
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { Form, Button, Container, Row, Col, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { PutUser } from '../../axios/UsersAxios';
+import { Navigate, useNavigate } from 'react-router-dom';
+import useValidation from './useValidation';
 
 
 
@@ -12,46 +14,62 @@ export const ResetPasTakeCare=()=>{
     const [passwordError, setPasswordError] = useState('');
     const currentUser = useSelector(s=>s.DataReducer_Users.currentUser);
     const [current, setCurrent] = useState(currentUser)
+const navigate = useNavigate()
+    //Pupup 
+const [showModal, setShowModal] = useState(true);
+const handleClose = () => {navigate(-2)};
 
-    //בדיקות תקינות לסיסמא
-const validatePassword = (password) => {
-    return password != null && password.length >= 8; 
-  };
-  const invalidPasswordConfirmation = (password1, password2) => {
-    return password1 == password2
-  };
+ //Custom Hook for Validation
+ const {invalidPasswordConfirmation, validatePassword, } = useValidation()
+ const [resetSec, setRestSec] = useState(false);
+ 
 //On click function
 const handleClick=async() => {
     let isValid = true;
+    //בדיקות תקינות הקלטים
     if (!validatePassword(pas.password1)) {
         setPasswordError(t('resetPasswordCarePage.invalidPassword'));
         isValid = false;
       }
-
-      else if (!invalidPasswordConfirmation(pas.password1, pas.password2)) {
+    else if (!invalidPasswordConfirmation(pas.password1, pas.password2)) {
         setPasswordError(t('resetPasswordCarePage.invalidPasswordConfirmation'));
         isValid = false;
       }
-       else {setPasswordError('');    
+    else {setPasswordError('');    
          isValid = true;
        } 
-       if(isValid) {
+    if(isValid) {
         debugger
         //לשנות את הסיסמא עבור המשתמש
         //----------------------------------------------------------------
         setCurrent({...current, passwordHash: pas.password1});
         let result = await PutUser(current)
-        if(result != null && result.status == 200) {
-            alert(t('resetPasswordCarePage.alertMessage'))}
-else 
-    alert('Network error')
-
+        if(result != null && result.status == 200) 
+            setRestSec (true)
+        
+             else
+                alert('Network error')
+             
        } 
 }
-return <>
-    <Container className="d-flex justify-content-center align-items-center vh-100">
+
+const style3={
+    ' width': '100%',
+    ' height': '700px',
+     'border': '5px'
+   }
+return (
+    
+
+<Modal show={showModal} onHide={handleClose}  centered> 
+    <Modal.Body>
+{/*  */}
+{resetSec?(
+  <h2 className="text-center">{t('resetPasswordCarePage.alertMessage')}</h2>
+):(
+<Container className="d-flex justify-content-center align-items-center vh-50" style={style3}>
     <Row className="w-100">
-      <Col xs={12} md={6} lg={4} className="mx-auto">
+      <Col xs={80} md={50} lg={100} className="mx-auto">
         <h3 className="text-center mb-4">{t('resetPasswordCarePage.title')}</h3>
         <Form>
           <Form.Group controlId="formBasicEmail">
@@ -74,6 +92,16 @@ return <>
           </Form>
       </Col>
     </Row>
-  </Container>
-  </>
-}
+  </Container>)}
+{/*  */}
+    </Modal.Body>
+    <Modal.Footer>
+      <Button variant="secondary" onClick={handleClose}>
+        Close
+      </Button>
+      {/* Add additional buttons if needed */}
+    </Modal.Footer>
+  </Modal>
+  
+)}
+ 
