@@ -5,17 +5,24 @@ const API_BASE_URL = "https://localhost:7297/api/User"
 
 export const GetAllUsers = async () => {
     try {
-        debugger
         let result = await axios.get("https://localhost:7297/api/User/GetUsers")
-
-        debugger
         return result
     }
     catch (ch) {
-        debugger
         console.log(ch)
     }
 }
+
+export const GetOrderByUserId = async (userId) => {
+    try {
+        let result = await axios.get(`https://localhost:7297/api/orders/GetOrderByUserId/${userId}`)
+        return result
+    }
+    catch (ch) {
+        console.log(ch)
+    }
+}
+
 export const LoginUser = async (mail, pas) => {
     debugger
     try {
