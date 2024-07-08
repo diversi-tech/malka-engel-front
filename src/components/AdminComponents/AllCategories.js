@@ -8,7 +8,7 @@ import { GetAllProducts } from '../../axios/ProductAxios';
 // import { GetAllProducts } from '../../axios/ProductAxios';
 // צריכה לאפס ארת הנתונים בטופס!
 // צריכהךלרםפש בצורה יותר יעילה
-export const AllCategories = () => {
+const AllCategories = () =>  {
     const { t, i18n } = useTranslation();
     const myCategory = useSelector(c => c.DataReducer_Categry.Categorylist);
     const [data, setData] = useState([]);
@@ -152,7 +152,7 @@ export const AllCategories = () => {
             upCategory: category.upCategory
         });
         setShowEditForm(true);
-        
+
     };
 
     const handleUpdateCategory = async (e) => {
@@ -175,13 +175,13 @@ export const AllCategories = () => {
             alert("An error occurred while updating the category.");
         }
         setNewC({
-          nameHe: '',
-          descriptionHe: '',
-          nameEn: '',
-          descriptionEn: '',
-          upCategory: 0
-      });
-      // setShowAddForm(false);
+            nameHe: '',
+            descriptionHe: '',
+            nameEn: '',
+            descriptionEn: '',
+            upCategory: 0
+        });
+        // setShowAddForm(false);
     };
     //---------------------------add productto category
 
@@ -253,7 +253,7 @@ export const AllCategories = () => {
 
                         <Collapse in={expandedCategories.includes(category.categoryID)}>
                             <div className="mt-3">
-                                {products[category.categoryID] ?.length > 0 ? (
+                                {products[category.categoryID]?.length > 0 ? (
                                     <Row>
                                         {products[category.categoryID].map(product => (
                                             <Col key={product.productID} md={3}>
@@ -348,7 +348,7 @@ export const AllCategories = () => {
                 </Modal.Footer>
             </Modal>
 
- {/* <Modal show={showModal} onHide={() => setShowModal(false)}>
+            {/* <Modal show={showModal} onHide={() => setShowModal(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>הוספת מוצרים לקטגוריה</Modal.Title>
                 </Modal.Header>
@@ -379,7 +379,7 @@ export const AllCategories = () => {
                 <Modal.Body>
                     <ListGroup>
                         {allProducts.map(product => {
-                            const isProductInCategory = products[modalCategory] ?.some(p => p.productID === product.productID);
+                            const isProductInCategory = products[modalCategory]?.some(p => p.productID === product.productID);
                             return (
                                 <ListGroup.Item key={product.productID} style={{ backgroundColor: isProductInCategory ? 'darkgray' : '' }}>
                                     <Form.Check
@@ -510,7 +510,7 @@ export const AllCategories = () => {
             </Modal>
 
 
-             <Modal show={showDetailsModal} onHide={() => setShowDetailsModal(false)}>
+            <Modal show={showDetailsModal} onHide={() => setShowDetailsModal(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>פרטים נוספים</Modal.Title>
                 </Modal.Header>
@@ -532,12 +532,13 @@ export const AllCategories = () => {
             </Modal>
 
 
-            
+
         </div>
 
 
     );
 };
+export default AllCategories;
 // צבע לבחירה ::selection {
 // 	color: #0B1126;
 // 	background-color: #05FD75;
