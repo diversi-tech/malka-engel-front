@@ -5,7 +5,7 @@ import { DesignerBirkins } from "../Empty pages/DesignerBirkins.js";
 import { CongratulationsToTheDonors } from "../Empty pages/CongratulationsToTheDonors.js";
 import { Events } from "../Empty pages/Events.js";
 import AdminDashboard from "../AdminComponents/AdminDashboard.js";
-import CategoriesManager, { AllCategories } from "../AdminComponents/CategoriesManager.js";
+import CategoriesManager, { AllCategories } from "../AdminComponents/AllCategories.js";
 
 import { ProductList } from "../product/ProductList.js";
 import { Nav } from "./Nav.js";
@@ -33,6 +33,7 @@ import OrderManager from "../AdminComponents/OrderManager.js";
 import UserAdmin from "../AdminComponents/UserAdmin.js";
 
 import { UnconnectedUser } from "../User Forms/NotConnected.js";
+import AllAdminPages from "../AdminComponents/AllAdminPages.js";
 
 // Routing במקום 
 // כי זה שם שמור
@@ -60,28 +61,23 @@ export const MyRouting = () => {
                     {/* Later we will have to bring the variable really from other data at the moment it is something temporary                               */}
                     <Route path="/myOrderHistory/:CurrentUser" element={<OrderHistory></OrderHistory>}></Route>
 
-                    <Route path="/myAdminDashboard" element={<AdminDashboard></AdminDashboard>}></Route>
+                    {/* <Route path="/myAdminDashboard" element={<AdminDashboard></AdminDashboard>}></Route>
                     <Route path="/myCategoriesManager" element={<AllCategories></AllCategories>}></Route>
-                    <Route path="/myOrderManager" element={<OrderManager></OrderManager>}></Route>
+                    <Route path="/myOrderManager" element={<OrderManager></OrderManager>}></Route> */}
                     <Route path="/review" element={<Review></Review>}></Route>
-
                     <Route path="/myShoppingCart" element={<ShoppingCart></ShoppingCart>}></Route>
-
                     <Route path="/myAccount" element={<Account></Account>}></Route>
                     <Route path="/myLogin" element={<Login></Login>} />
                     <Route path="/myUnconnectedUser " element={<UnconnectedUser></UnconnectedUser>}></Route>
-
                     <Route path="/myProfile" element={<UserProfile />} />
                     <Route path="/mySignUp" element={<SignUp />} />
                     <Route path="/myResetPassword" element={<ResetPassword />} />
                     <Route path="/myResetPasswordLink" element={<ResetPasTakeCare />} />
-
                     <Route path="myTerms" element={<Terms></Terms>} ></Route>
                     <Route path="/myEvents" element={<Events></Events>} ></Route>
                     <Route path="/myProduct/:id" element={<Product></Product>} ></Route>
                     <Route path="/myShowReviews/:numStars" element={<ShowReviews></ShowReviews>}></Route>
-
-                    <Route path="/UserAdmin" element={<UserAdmin></UserAdmin>}></Route>
+                    <Route path="/AllAdminPages" element={<AllAdminPages></AllAdminPages>}></Route>
                 </Routes>
                 <Footer></Footer>
 
