@@ -3,7 +3,10 @@
         "modalTitle": "Your order was successfully plased"
     },
     "homePage": {
-        "title": "Home page"
+        "title": "Home page",
+        "up":"up",
+        "information":"Here it will be written, brief information about the site, who operates it and all kinds of other interesting things"
+
     },
     "loginPage": {
         "title": "Sign in",
