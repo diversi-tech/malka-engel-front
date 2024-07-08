@@ -29,6 +29,9 @@ import SignUp from "../User Forms/SignUp.js";
 import { ResetPassword } from "../User Forms/ResetPassword.js";
 import { ResetPasTakeCare } from "../User Forms/RestPasTakeCare.js";
 import OrderManager from "../AdminComponents/OrderManager.js";
+
+import UserAdmin from "../AdminComponents/UserAdmin.js";
+
 import { UnconnectedUser } from "../User Forms/NotConnected.js";
 
 // Routing במקום 
@@ -77,8 +80,24 @@ export const MyRouting = () => {
                     <Route path="/myEvents" element={<Events></Events>} ></Route>
                     <Route path="/myProduct/:id" element={<Product></Product>} ></Route>
                     <Route path="/myShowReviews/:numStars" element={<ShowReviews></ShowReviews>}></Route>
+
+                    <Route path="/UserAdmin" element={<UserAdmin></UserAdmin>}></Route>
+            </Routes>
+            <Footer></Footer>
+
+
+                   
+                    {/* <Route path="/myProfile" element={<UserProfile />} /> */}
+                    {/* <Route path="/myRegister" element={<RegistrationForm />} /> */}
+                    {/* </AuthProvider> */}
+                 
+                    
+
+               
+
                 </Routes>
                 <Footer></Footer>
+
             </div>
         </BrowserRouter>
     );

@@ -6,7 +6,6 @@ import MyRouting from './components/Layout Components/MyRouting.js';
 import { Subscriber } from 'rxjs';
 import { Review } from './components/product/productDetail/Review.js';
 
-
 function App() {
   
   return (
