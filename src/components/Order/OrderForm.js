@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { UnconnectedUserModal } from '../User Forms/NotConnected';
 import { getCart } from '../product/cookies/SetCart';
-import { PostOrder } from '../../axios/OrderAxios';
+import { GetAllOrders, PostOrder } from '../../axios/OrderAxios';
 import { PostOrderItem } from '../../axios/OrderItemAxios';
 
 export const OrderForm = () => {
@@ -20,7 +20,7 @@ export const OrderForm = () => {
     // const [logoFile, setLogoFile] = useState(null); // משתנה לאחסון הקובץ שנבחר
     const { currentUser, connected } = useSelector(u => u.DataReducer_Users);
     const navigate = useNavigate();
-    const currentCart = useState(getCart());
+    const [currentCart, setCurrentCart] = useState(getCart());
 
 
     // const handleAddProduct = (product) => {
@@ -36,50 +36,80 @@ export const OrderForm = () => {
 
     //function to create order
     const addOrder = async () => {
+        debugger
         const order = {
             "OrderID": 0,
-            "UserID": currentUser.UserID,
+            "UserID": currentUser.userID,
             "TotalAmount": 0,
             "Status": "Processing",
             "CreatedAt": null
         }
+        debugger
         const result = await PostOrder(order);
-        if (result == true) {
-            alert("Order added successfully");
-        }
+        return result;
     }
 
     //function to create item order - for the general order
-    const addOrderItem = async (product) => {
-        // const itemOrder = {
-        //     "OrderItemID":0,
-        //     "OrderID":0,
-        //     "ProductID":product.productID,
-        //     "Quantity":product.quantity,
-        //     "Price":product.price
-        // }
-        // const result = await PostOrderItem(itemOrder);
-        const result = await PostOrderItem(product);
-        if (result == true) {
-            alert("Item added successfully");
+    const addOrderItem = async (product, orderidToAdd) => {
+        const itemOrder = {
+            "OrderItemID": 0,
+            "OrderID": orderidToAdd,
+            "ProductID": product.productID,
+            "Quantity": product.quantity,
+            "Price": product.price
         }
+        const result = await PostOrderItem(itemOrder);
+        //TODO
+        //update the order item - orderId to be match to the current order
     }
 
     //
-    const func_submit = () => {
+    const func_submit = async () => {
         debugger
         if (!connected)
             navigate('/myUnconnectedUser')
         else {
-            addOrder();
-            currentCart.map((product, index) => {
-                //TODO
-                //to return from procedure the order id to set the order id in the item order!!
-                //IMPORTANAT
-                addOrderItem(product);
-            })
+            const order = {
+                "OrderID": 0,
+                "UserID": currentUser.userID,
+                "TotalAmount": 0,
+                "Status": "Processing",
+                "CreatedAt": "2024-07-07T09:31:32.38"
+            }
+            debugger
+            const result = await PostOrder(order);
+            const orderidToAdd = result
+            if (!orderidToAdd) {
+                alert("Failed to create order, please try again later");
+                return;
+            }
+            else {
+                debugger
+                alert(orderidToAdd)
+                currentCart.map(async (product, index) => {
+                    //it is not do the map
+                    //TODO
+                    //to return from procedure the order id to set the order id in the item order!!
+                    //IMPORTANAT
+                        const itemOrder = {
+                            "OrderItemID": 0,
+                            "OrderID": orderidToAdd,
+                            "ProductID": product.productID,
+                            "Quantity": product.salePrice,
+                            "Price": product.price
+                        }
+                        const result = await PostOrderItem(itemOrder);
+                        alert(result);
+                    
+                })
+            }
         }
     };
+
+    const func_submit_1 = async () => {
+        const order = await GetAllOrders();
+        debugger
+    }
     return (
         <div className="container mt-5">
             <div className="mb-4">
@@ -116,6 +146,8 @@ export const OrderForm = () => {
                 </div>
             </form> */}
             <button onClick={func_submit} className="btn btn-primary">{t('orderFormPage.buttonSubmitOrder')}</button>
+            <button onClick={func_submit_1} className="btn btn-primary">hhhhhh</button>
+
         </div>
     )
 }

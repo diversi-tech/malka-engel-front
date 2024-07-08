@@ -38,7 +38,7 @@
         "putEmail": "To reset your password, please enter the email address you registered with.",
         "resetButton": "Send Email",
         "invalidEmail": "Invalid email format",
-        "secMassage":"We have sent a password reset link to the email address"
+        "secMassage":"Reset password link has been sent to your email"
     },
     "resetPasswordCarePage": {
         "title": "Set new password",

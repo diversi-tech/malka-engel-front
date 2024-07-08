@@ -20,7 +20,6 @@ export const GetAllUsers = async () => {
 export const LoginUser = async (mail, pas) => {
     debugger
     try {
-
         let result = await axios.get(`${API_BASE_URL}Login/${mail}/${pas}`)
         debugger
         return result

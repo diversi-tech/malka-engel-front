@@ -29,25 +29,35 @@ const validateEmail = (email) => {
    const validForm = (newUser) => {
    debugger  
    //Check email
-       if (!validateEmail(newUser.email)) {
+       if (newUser.email && !validateEmail(newUser.email)) {
          setEmailError(t('loginPage.invalidEmail'));
          setIsValid(false);
        } 
-       else{setEmailError(''); }
+       else{setEmailError(''); 
+        setIsValid(true);
+
+       }
    
    //Check password   
-       if (!validatePassword(newUser.passwordHash)) {
+       if (newUser.passwordHash && !validatePassword(newUser.passwordHash)) {
          setPasswordError(t('loginPage.invalidPassword'));
          setIsValid(false);
+
        }
-        else {setPasswordError('');} 
+        else {setPasswordError('');
+          setIsValid(true);
+
+        } 
    //Check Phone Number
    if(newUser.phoneNumber != null){
    if (!validatePhone(newUser.phoneNumber)) {
      setPhoneNumberError(t('loginPage.invalidphoneNumber'));
      setIsValid(false);
     }
-    else {setPhoneNumberError('');} } 
+    else {setPhoneNumberError('');
+    setIsValid(true);
+    } 
+  } 
     debugger 
     return isValid;
  }
@@ -62,6 +72,7 @@ const validateEmail = (email) => {
     passwordError,
     emailError,
     validForm
+    
   };
 };
 
