@@ -151,5 +151,13 @@
     "accountPage":{
          "errCon":"אינך מחובר",
         "signIn":"התחבר"
+    },
+    "OrderHistoryPage":{
+     "not connect1":"מצטערים, אינך מחובר",
+     "not connect2":"התחבר ותוכל לראות את היסטוריית ההזמנות שלך",
+     "ordersFor":"הזמנות ל",
+     "createdAt":" תאריך הזמנה",
+     "status":"סטטוס",
+     "totalAmount":"סך לתשלום"
     }
 }
