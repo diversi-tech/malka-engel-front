@@ -248,7 +248,7 @@ export const AllCategories = () => {
                                 {expandedCategories.includes(category.categoryID) ? 'הסתר מוצרים' : 'הצג מוצרים לקטגוריה'}
                             </button>
                             <button className="btn btn-success me-2" onClick={() => handleShowModal(category.categoryID)}>הוסף מוצר לקטגוריה</button>
-                            <button className="btn btn-warning" onClick={() => handleEditCategory(category)}>ערוך קטגוריה</button>
+                            <button className="btn btn-warning me-2" onClick={() => handleEditCategory(category)}>ערוך קטגוריה</button>
                         </div>
 
                         <Collapse in={expandedCategories.includes(category.categoryID)}>
