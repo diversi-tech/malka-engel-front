@@ -8,7 +8,7 @@ import { GetAllProducts } from '../../axios/ProductAxios';
 // import { GetAllProducts } from '../../axios/ProductAxios';
 // צריכה לאפס ארת הנתונים בטופס!
 // צריכהךלרםפש בצורה יותר יעילה
-const AllCategories = () =>  {
+export const AllCategories = () =>  {
     const { t, i18n } = useTranslation();
     const myCategory = useSelector(c => c.DataReducer_Categry.Categorylist);
     const [data, setData] = useState([]);
@@ -539,7 +539,7 @@ const AllCategories = () =>  {
 
     );
 };
-export default AllCategories;
+// export default AllCategories;
 // צבע לבחירה ::selection {
 // 	color: #0B1126;
 // 	background-color: #05FD75;
