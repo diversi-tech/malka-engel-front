@@ -27,7 +27,7 @@ import OrderManager from "../AdminComponents/OrderManager.js";
 
 import UserAdmin from "../AdminComponents/UserAdmin.js";
 
-import { UnconnectedUser } from "../User Forms/NotConnected.js";
+// import { UnconnectedUser } from "../User Forms/NotConnected.js";
 import ProductByCategory from "../product/ProductByCategory.js";
 import { ToConnect } from "../User Forms/ToConnect.js";
 import AllAdminPages from "../AdminComponents/AllAdminPages.js";
