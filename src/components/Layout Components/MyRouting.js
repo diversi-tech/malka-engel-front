@@ -5,7 +5,7 @@ import { DesignerBirkins } from "../Empty pages/DesignerBirkins.js";
 import { CongratulationsToTheDonors } from "../Empty pages/CongratulationsToTheDonors.js";
 import { Events } from "../Empty pages/Events.js";
 import AdminDashboard from "../AdminComponents/AdminDashboard.js";
-import CategoriesManager, { AllCategories } from "../AdminComponents/CategoriesManager.js";
+// import CategoriesManager, { AllCategories } from "../AdminComponents/CategoriesManager.js";
 import { SeEmails } from "../Email/SeEmails.js";
 import { ProductList } from "../product/ProductList.js";
 import { Nav } from "./Nav.js";
@@ -56,13 +56,13 @@ export const MyRouting = () => {
                     <Route path="/myProductList" element={<ProductList></ProductList>}></Route>
                     <Route path="/myCommonQuestions" element={<CommonQuestions></CommonQuestions>}></Route>
                     <Route path="/myOrderForm" element={<OrderForm></OrderForm>}></Route>
-                    <Route path="/myAddProduct" element={<ProductForm></ProductForm>}></Route>
+                    {/* <Route path="/myAddProduct" element={<ProductForm></ProductForm>}></Route> */}
                     <Route path="/mySendEmails" element={<SeEmails></SeEmails>}></Route>
                     {/* Later we will have to bring the variable really from other data at the moment it is something temporary                               */}
                     <Route path="/myOrderHistory/:CurrentUser" element={<OrderHistory></OrderHistory>}></Route>
                     <Route path="/myAdminDashboard" element={<AdminDashboard></AdminDashboard>}></Route>
-                    <Route path="/myCategoriesManager" element={<AllCategories></AllCategories>}></Route>
-                    <Route path="/myOrderManager" element={<OrderManager></OrderManager>}></Route>
+                    {/* <Route path="/myCategoriesManager" element={<AllCategories></AllCategories>}></Route> */}
+                    {/* <Route path="/myOrderManager" element={<OrderManager></OrderManager>}></Route> */}
                     <Route path="/review" element={<Review></Review>}></Route>
                     <Route path="/myShoppingCart" element={<ShoppingCart></ShoppingCart>}></Route>
                                                                         
