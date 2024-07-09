@@ -52,6 +52,7 @@ export const Nav = () => {
                         <li className="nav-item"><Link className="nav-link" to="./UserAdmin">UserAdmin</Link> </li>
                    
                         <li className="nav-item"><Link className="nav-link" to="./myOrderHistory/:UserId">OrderHistory</Link> </li>
+                        <li className="nav-item"><Link className="nav-link" to="./myProductByCategory/:idCategory">my products</Link> </li>
 
                         <li className="nav-item"><Link className="nav-link" to="./myOrderManager">OrderManager</Link></li>
                         <li className="nav-item"><Link className="nav-link" to="./myAddProduct">ProductForm</Link> </li>

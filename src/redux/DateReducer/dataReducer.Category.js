@@ -4,8 +4,7 @@ export const InitialState_Category = {
     Categorylist:
         [],
 
-    ProducrtToCategory:
-        []
+    ProducrtToCategory:[ ]
 
 }
 export const DataReducer_Categry = produce((state, action) => {

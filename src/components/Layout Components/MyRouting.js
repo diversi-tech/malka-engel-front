@@ -33,6 +33,7 @@ import OrderManager from "../AdminComponents/OrderManager.js";
 import UserAdmin from "../AdminComponents/UserAdmin.js";
 
 import { UnconnectedUser } from "../User Forms/NotConnected.js";
+import ProductByCategory from "../product/ProductByCategory.js";
 
 // Routing במקום 
 // כי זה שם שמור
@@ -80,6 +81,7 @@ export const MyRouting = () => {
                     <Route path="/myEvents" element={<Events></Events>} ></Route>
                     <Route path="/myProduct/:id" element={<Product></Product>} ></Route>
                     <Route path="/myShowReviews/:numStars" element={<ShowReviews></ShowReviews>}></Route>
+                    <Route path="/myProductByCategory/:idCategory" element={<ProductByCategory></ProductByCategory>}></Route>
 
                     <Route path="/UserAdmin" element={<UserAdmin></UserAdmin>}></Route>
                 </Routes>

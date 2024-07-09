@@ -152,7 +152,7 @@ export const AllCategories = () => {
             upCategory: category.upCategory
         });
         setShowEditForm(true);
-        
+
     };
 
     const handleUpdateCategory = async (e) => {
@@ -175,13 +175,13 @@ export const AllCategories = () => {
             alert("An error occurred while updating the category.");
         }
         setNewC({
-          nameHe: '',
-          descriptionHe: '',
-          nameEn: '',
-          descriptionEn: '',
-          upCategory: 0
-      });
-      // setShowAddForm(false);
+            nameHe: '',
+            descriptionHe: '',
+            nameEn: '',
+            descriptionEn: '',
+            upCategory: 0
+        });
+        // setShowAddForm(false);
     };
     //---------------------------add productto category
 
@@ -268,7 +268,8 @@ export const AllCategories = () => {
                                             </Col>
                                         ))}
                                     </Row>
-                                ) : (<p className="alert-danger">אין מוצרים לקטגוריה</p>)}
+                                ) : (<p className="alert-danger">אין מוצרים לקטגוריה</p>)
+                                }
                             </div>
                         </Collapse>
                     </li>
@@ -348,7 +349,7 @@ export const AllCategories = () => {
                 </Modal.Footer>
             </Modal>
 
- {/* <Modal show={showModal} onHide={() => setShowModal(false)}>
+            {/* <Modal show={showModal} onHide={() => setShowModal(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>הוספת מוצרים לקטגוריה</Modal.Title>
                 </Modal.Header>
@@ -510,7 +511,7 @@ export const AllCategories = () => {
             </Modal>
 
 
-             <Modal show={showDetailsModal} onHide={() => setShowDetailsModal(false)}>
+            <Modal show={showDetailsModal} onHide={() => setShowDetailsModal(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>פרטים נוספים</Modal.Title>
                 </Modal.Header>
@@ -532,7 +533,7 @@ export const AllCategories = () => {
             </Modal>
 
 
-            
+
         </div>
 
 
