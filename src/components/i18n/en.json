@@ -103,9 +103,9 @@
         "moreDetails": "more details",
         "cart":"add to cart",
         "technicalIssue":"Sorry, technical issue, try to relod your page",
-        "noProducts": "no products!"
-
-
+        "noProducts": "no products!",
+        "minPrice":"min price",
+        "maxPrice":"max price"
     },
     "recommendedProducts": {
         "title": "recommended Products"

@@ -103,11 +103,9 @@
         "moreDetails": "פרטים נוספים",
         "cart":"הוספה לסל",
         "technicalIssue":"מצטערים, תקלה טכנית, נסו לרענן את הדף או להכנס שוב מחדש",
-        "noProducts": "אין מוצרים!"
-
-
-
-
+        "noProducts": "אין מוצרים!",
+        "minPrice":"מחיר מינינלי",
+        "maxPrice":"מחיר מקסימלי "
     },
     "recommendedProducts": {
         "title": "מוצרים מומלצים"
