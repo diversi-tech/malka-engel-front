@@ -2,23 +2,21 @@ import { Link, Outlet } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-
 import usFlag from '../../assets/flags/us_flag.png';
 import ilFlag from '../../assets/flags/il_flag.png';
 import { useSelector } from "react-redux";
 import { setCurrentUser } from "../../redux/DataActions/DataAction.Users";
-
 // Nav page
 export const Nav = () => {
     const { t, i18n } = useTranslation();
-    const currentUser = useSelector(s=>s.DataReducer_Users.currentUser)
-    const connected = useSelector(s=>s.DataReducer_Users.connected)
+    const currentUser = useSelector(s => s.DataReducer_Users.currentUser)
+    const connected = useSelector(s => s.DataReducer_Users.connected)
 
     let currentName = "NOT CONNECTED";
-    if(connected) {
-        currentName =currentUser.name;
+    if (connected) {
+        currentName = currentUser.name;
     }
-  let myStyle = {backgroundColor: "rgb(207, 97, 221)"}
+    let myStyle = { backgroundColor: "rgb(207, 97, 221)" }
     //TODO//
     // i want to declare a global variable to save in what language are we currently!!
     //to check if i need....
