@@ -3,14 +3,13 @@ import { useState, useEffect } from 'react';
 import { PageTitle } from '../Layout Components/PageTitle';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { UnconnectedUserModal } from '../User Forms/NotConnected';
-import { getCart } from '../product/cookies/SetCart';
-import { GetAllOrders, PostOrder } from '../../axios/OrderAxios';
-import { PostOrderItem } from '../../axios/OrderItemAxios';
+import { UnconnectedUserModal } from '../User Forms/ToConnect';
+import { clearCart, getCart } from '../product/cookies/SetCart';
+import { GetOrderByOrderId, GetAllOrders, PostOrder, PutAllPropOfOrder,  } from '../../axios/OrderAxios';
+import { PostOrderItem,PostOrderItemList } from '../../axios/OrderItemAxios';
 
 export const OrderForm = () => {
     const { t, i18n } = useTranslation();
-
 
     // const [products, setProducts] = useState([]);
     // const [name, setName] = useState('');
@@ -49,26 +48,12 @@ export const OrderForm = () => {
         return result;
     }
 
-    //function to create item order - for the general order
-    const addOrderItem = async (product, orderidToAdd) => {
-        const itemOrder = {
-            "OrderItemID": 0,
-            "OrderID": orderidToAdd,
-            "ProductID": product.productID,
-            "Quantity": product.quantity,
-            "Price": product.price
-        }
-        const result = await PostOrderItem(itemOrder);
-        //TODO
-        //update the order item - orderId to be match to the current order
-    }
-
-    //
     const func_submit = async () => {
         debugger
         if (!connected)
-            navigate('/myUnconnectedUser')
+            navigate('/myToConnect')
         else {
+            //Add order//
             const order = {
                 "OrderID": 0,
                 "UserID": currentUser.userID,
@@ -76,21 +61,22 @@ export const OrderForm = () => {
                 "Status": "Processing",
                 "CreatedAt": "2024-07-07T09:31:32.38"
             }
-            debugger
             const result = await PostOrder(order);
             const orderidToAdd = result
+            // end //
             if (!orderidToAdd) {
                 alert("Failed to create order, please try again later");
                 return;
             }
             else {
-                debugger
-                alert(orderidToAdd)
+                // add item order // 
                 currentCart.map(async (product, index) => {
                     //it is not do the map
                     //TODO
                     //to return from procedure the order id to set the order id in the item order!!
                     //IMPORTANAT
+                    const listItemOrder = []
+                    currentCart.map((product, i) => {
                         const itemOrder = {
                             "OrderItemID": 0,
                             "OrderID": orderidToAdd,
@@ -98,25 +84,35 @@ export const OrderForm = () => {
                             "Quantity": product.salePrice,
                             "Price": product.price
                         }
-                        const result = await PostOrderItem(itemOrder);
-                        alert(result);
-                    
-                })
-            }
+                        listItemOrder.push(itemOrder);
+                    })
+                    const result = await PostOrderItemList(listItemOrder);
+                    // end //
+                    //delete all data from cookies
+                    clearCart();
+                    let tAmount = 0;
+                    for(let i = 0; i < listItemOrder.length; i++) {
+                        tAmount = tAmount + listItemOrder[i].Price * listItemOrder[i].Quantity
+                    }
+                    let order = await GetOrderByOrderId(orderidToAdd);
+                    order.TotalAmount = tAmount;
+                    let resultFrUpdate = await PutAllPropOfOrder(orderidToAdd, order);
+                    if(resultFrUpdate)
+                        alert('בהצלחה!');
+                    else
+                alert(result);
+            })
         }
-    };
-
-    const func_submit_1 = async () => {
-        const order = await GetAllOrders();
-        debugger
     }
-    return (
-        <div className="container mt-5">
-            <div className="mb-4">
-                <PageTitle title={t('orderFormPage.title')} />
-            </div>
-            <h3>פרטי אשראי!</h3>
-            {/* <form >
+};
+
+return (
+    <div className="container mt-5">
+        <div className="mb-4">
+            <PageTitle title={t('orderFormPage.title')} />
+        </div>
+        <h3>פרטי אשראי!</h3>
+        {/* <form >
                 <div className="mb-3">
                     <label htmlFor="name" className="form-label">{t('orderFormPage.name')}</label>
                     <input type="text" className="form-control" id="name" value={name} onChange={(e) => setName(e.target.value)} required />
@@ -145,9 +141,7 @@ export const OrderForm = () => {
                     <input type="file" className="form-control" id="logoFile"/>
                 </div>
             </form> */}
-            <button onClick={func_submit} className="btn btn-primary">{t('orderFormPage.buttonSubmitOrder')}</button>
-            <button onClick={func_submit_1} className="btn btn-primary">hhhhhh</button>
-
-        </div>
-    )
+        <button onClick={func_submit} className="btn btn-primary">{t('orderFormPage.buttonSubmitOrder')}</button>
+    </div>
+)
 }

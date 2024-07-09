@@ -2,7 +2,6 @@ import { Link, Outlet } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-
 import usFlag from '../../assets/flags/us_flag.png';
 import ilFlag from '../../assets/flags/il_flag.png';
 import { useSelector } from "react-redux";
@@ -55,7 +54,11 @@ export const Nav = () => {
                         <li className="nav-item"><Link className="nav-link" to="./myAddProduct">ProductForm</Link> </li>
                         <li className="nav-item"><Link className="nav-link" to="./myAccount">Account</Link> </li>
                         <li className="nav-item"><p className="nav-link" style={myStyle}>{currentName}</p> </li>
-
+                        <li className="nav-item"><Link className="nav-link" to="./myOrderForm">{t('navPage.linkOrderForm')}</Link> </li>                   
+                        <li className="nav-item"><Link className="nav-link" to="./myAddProduct">ProductForm</Link> </li>
+                        <li className="nav-item"><Link className="nav-link" to="./myAccount">Account</Link> </li>
+                        <li className="nav-item"><Link className="nav-link" to="./AllAdminPages">מסכי ניהול</Link> </li>
+                        <li className="nav-item"><p className="nav-link" style ={myStyle}>{currentName}</p> </li>
                     </ul>
                 </div>
                 {i18n.language !== 'en' && (

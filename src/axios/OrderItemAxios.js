@@ -38,3 +38,15 @@ export const PostOrderItem = async (orderItem) => {
         console.log(ch)
     }
 }
+
+export const PostOrderItemList = async (orderList) => {
+    try {
+        let result = await axios.post(`${API_BASE_URL}PostOrderItemList`, orderList);
+        return result.data
+    }
+    catch (ch) {
+        debugger
+        console.log(ch)
+        alert('i came to here!!!!');
+    }
+}
