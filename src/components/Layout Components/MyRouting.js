@@ -33,10 +33,8 @@ import OrderManager from "../AdminComponents/OrderManager.js";
 import UserAdmin from "../AdminComponents/UserAdmin.js";
 
 import { UnconnectedUser } from "../User Forms/NotConnected.js";
-
 // Routing במקום 
 // כי זה שם שמור
-
 export const MyRouting = () => {
     return (
         <BrowserRouter>
@@ -56,41 +54,30 @@ export const MyRouting = () => {
                     <Route path="/myCommonQuestions" element={<CommonQuestions></CommonQuestions>}></Route>
                     <Route path="/myOrderForm" element={<OrderForm></OrderForm>}></Route>
                     <Route path="/myAddProduct" element={<ProductForm></ProductForm>}></Route>
-
                     {/* Later we will have to bring the variable really from other data at the moment it is something temporary                               */}
                     <Route path="/myOrderHistory/:CurrentUser" element={<OrderHistory></OrderHistory>}></Route>
-
                     <Route path="/myAdminDashboard" element={<AdminDashboard></AdminDashboard>}></Route>
                     <Route path="/myCategoriesManager" element={<AllCategories></AllCategories>}></Route>
                     <Route path="/myOrderManager" element={<OrderManager></OrderManager>}></Route>
                     <Route path="/review" element={<Review></Review>}></Route>
-
                     <Route path="/myShoppingCart" element={<ShoppingCart></ShoppingCart>}></Route>
-
                     <Route path="/myAccount" element={<Account></Account>}></Route>
                     <Route path="/myLogin" element={<Login></Login>} />
                     <Route path="/myUnconnectedUser " element={<UnconnectedUser></UnconnectedUser>}></Route>
-
                     <Route path="/myProfile" element={<UserProfile />} />
                     <Route path="/mySignUp" element={<SignUp />} />
                     <Route path="/myResetPassword" element={<ResetPassword />} />
                     <Route path="/myResetPasswordLink" element={<ResetPasTakeCare />} />
-
                     <Route path="myTerms" element={<Terms></Terms>} ></Route>
                     <Route path="/myEvents" element={<Events></Events>} ></Route>
                     <Route path="/myProduct/:id" element={<Product></Product>} ></Route>
                     <Route path="/myShowReviews/:numStars" element={<ShowReviews></ShowReviews>}></Route>
-
                     <Route path="/UserAdmin" element={<UserAdmin></UserAdmin>}></Route>
                 </Routes>
                 <Footer></Footer>
-
-
-
                 {/* <Route path="/myProfile" element={<UserProfile />} /> */}
                 {/* <Route path="/myRegister" element={<RegistrationForm />} /> */}
                 {/* </AuthProvider> */}
-
             </div>
         </BrowserRouter>
     );
