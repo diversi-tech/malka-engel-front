@@ -26,6 +26,12 @@ import { Login } from "../User Forms/SignIn.js";
 import SignUp from "../User Forms/SignUp.js";
 import { ResetPassword } from "../User Forms/ResetPassword.js";
 import { ResetPasTakeCare } from "../User Forms/RestPasTakeCare.js";
+import OrderManager from "../AdminComponents/OrderManager.js";
+
+import UserAdmin from "../AdminComponents/UserAdmin.js";
+
+// import { UnconnectedUser } from "../User Forms/NotConnected.js";
+import ProductByCategory from "../product/ProductByCategory.js";
 import { ToConnect } from "../User Forms/ToConnect.js";
 import AllAdminPages from "../AdminComponents/AllAdminPages.js";
 
@@ -75,6 +81,7 @@ export const MyRouting = () => {
                     <Route path="/myProduct/:id" element={<Product></Product>} ></Route>
                     <Route path="/review" element={<Review></Review>}></Route>
                     <Route path="/myShowReviews/:numStars" element={<ShowReviews></ShowReviews>}></Route>
+                    <Route path="/myProductByCategory/:idCategory" element={<ProductByCategory></ProductByCategory>}></Route>
 
                     {/* order pages */}
                     <Route path="/myOrderForm" element={<OrderForm></OrderForm>}></Route>

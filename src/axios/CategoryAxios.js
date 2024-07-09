@@ -17,9 +17,10 @@ export const GetAllCategories = async () => {
 }
 
 
-//7297/api/Product/GetProductByCategory/12
+//7297/adebugger
 export const GetProductsByCategory = async (categoryId) => {
     try {
+        debugger
         const response = await axios.get(`${p}GetProductByCategory/${categoryId}`);
         return response.data;
     } catch (error) {
