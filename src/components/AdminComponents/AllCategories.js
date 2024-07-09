@@ -8,7 +8,7 @@ import { GetAllProducts } from '../../axios/ProductAxios';
 // import { GetAllProducts } from '../../axios/ProductAxios';
 // צריכה לאפס ארת הנתונים בטופס!
 // צריכהךלרםפש בצורה יותר יעילה
-export const AllCategories = () => {
+const AllCategories = () =>  {
     const { t, i18n } = useTranslation();
     const myCategory = useSelector(c => c.DataReducer_Categry.Categorylist);
     const [data, setData] = useState([]);
@@ -253,7 +253,7 @@ export const AllCategories = () => {
 
                         <Collapse in={expandedCategories.includes(category.categoryID)}>
                             <div className="mt-3">
-                                {products[category.categoryID] ?.length > 0 ? (
+                                {products[category.categoryID]?.length > 0 ? (
                                     <Row>
                                         {products[category.categoryID].map(product => (
                                             <Col key={product.productID} md={3}>
@@ -380,7 +380,7 @@ export const AllCategories = () => {
                 <Modal.Body>
                     <ListGroup>
                         {allProducts.map(product => {
-                            const isProductInCategory = products[modalCategory] ?.some(p => p.productID === product.productID);
+                            const isProductInCategory = products[modalCategory]?.some(p => p.productID === product.productID);
                             return (
                                 <ListGroup.Item key={product.productID} style={{ backgroundColor: isProductInCategory ? 'darkgray' : '' }}>
                                     <Form.Check
@@ -539,6 +539,7 @@ export const AllCategories = () => {
 
     );
 };
+export default AllCategories;
 // צבע לבחירה ::selection {
 // 	color: #0B1126;
 // 	background-color: #05FD75;
