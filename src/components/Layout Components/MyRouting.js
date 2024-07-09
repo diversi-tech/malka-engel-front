@@ -58,6 +58,8 @@ export const MyRouting = () => {
                     <Route path="/myOrderForm" element={<OrderForm></OrderForm>}></Route>
                     <Route path="/myAddProduct" element={<ProductForm></ProductForm>}></Route>
 
+                    {/* <Route path="/allCategories" element={<AllCategories></AllCategories>}></Route> */}
+
                     {/* Later we will have to bring the variable really from other data at the moment it is something temporary                               */}
                     <Route path="/myOrderHistory/:CurrentUser" element={<OrderHistory></OrderHistory>}></Route>
 

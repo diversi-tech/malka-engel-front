@@ -538,8 +538,6 @@ const AllCategories = () =>  {
 
     );
 };
+
+
 export default AllCategories;
-// צבע לבחירה ::selection {
-// 	color: #0B1126;
-// 	background-color: #05FD75;
-// }
