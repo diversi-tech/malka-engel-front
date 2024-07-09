@@ -62,10 +62,10 @@ export const Nav = () => {
                         <li className="nav-item"><p className="nav-link" style={myStyle}>{currentName}</p> </li>
 
                         <li className="nav-item"><Link className="nav-link" to="./myOrderForm">{t('navPage.linkOrderForm')}</Link> </li>                   
-                        <li className="nav-item"><Link className="nav-link" to="./myAddProduct">ProductForm</Link> </li>
+                        {/* <li className="nav-item"><Link className="nav-link" to="./myAddProduct">ProductForm</Link> </li>
                         <li className="nav-item"><Link className="nav-link" to="./myAccount">Account</Link> </li>
                         <li className="nav-item"><Link className="nav-link" to="./AllAdminPages">מסכי ניהול</Link> </li>
-                        <li className="nav-item"><p className="nav-link" style ={myStyle}>{currentName}</p> </li>
+                        <li className="nav-item"><p className="nav-link" style ={myStyle}>{currentName}</p> </li> */}
                     </ul>
                 </div>
                 {i18n.language !== 'en' && (

@@ -35,7 +35,9 @@ import ProductByCategory from "../product/ProductByCategory.js";
 import { ToConnect } from "../User Forms/ToConnect.js";
 import AllAdminPages from "../AdminComponents/AllAdminPages.js";
 
-import { UnconnectedUser } from "../User Forms/NotConnected.js";
+// import { UnconnectedUser } from "../User Forms/NotConnected.js";
+import { ProductForm } from "../product/addProduct.js";
+import AllCategories from "../AdminComponents/AllCategories.js";
 // Routing במקום 
 // כי זה שם שמור
 export const MyRouting = () => {
@@ -71,7 +73,7 @@ export const MyRouting = () => {
                     <Route path="/myContact" element={<Contact></Contact>}></Route>
                     <Route path="/myAccount" element={<Account></Account>}></Route>
                     <Route path="/myLogin" element={<Login></Login>} />
-                    <Route path="/myUnconnectedUser " element={<UnconnectedUser></UnconnectedUser>}></Route>
+                    {/* <Route path="/myUnconnectedUser " element={<UnconnectedUser></UnconnectedUser>}></Route> */}
                     <Route path="/myProfile" element={<UserProfile />} />
                     <Route path="/mySignUp" element={<SignUp />} />
                     <Route path="/myResetPassword" element={<ResetPassword />} />
@@ -84,7 +86,7 @@ export const MyRouting = () => {
                     <Route path="/review" element={<Review></Review>}></Route>
                     <Route path="/myShowReviews/:numStars" element={<ShowReviews></ShowReviews>}></Route>
                     <Route path="/myProductByCategory/:idCategory" element={<ProductByCategory></ProductByCategory>}></Route>
-
+                    <Route path ="/myCategoriesManager" element={<AllCategories></AllCategories>}></Route>
                     {/* order pages */}
                     <Route path="/myOrderForm" element={<OrderForm></OrderForm>}></Route>
                     <Route path="/myOrderHistory/:CurrentUser" element={<OrderHistory></OrderHistory>}></Route>
