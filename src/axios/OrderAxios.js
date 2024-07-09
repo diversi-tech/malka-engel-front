@@ -19,7 +19,7 @@ export const GetOrderByOrderId = async (orderId) => {
     try {
         let result = await axios.get(`${API_BASE_URL}GetOrderByOrderId/${orderId}`)
         debugger
-        return result
+        return result.data
     }
     catch (ch) {
         debugger
@@ -59,5 +59,16 @@ export const PostOrder = async (order) => {
         debugger
         console.log(ch)
         alert('i came to here!!!!');
+    }
+}
+
+export const PutAllPropOfOrder = async (id, order) => {
+    try {
+        let result = await axios.put(`${API_BASE_URL}PutAllPropOfOrder/${id}`, order);
+        debugger
+        return result.data
+    }
+    catch (ch) {
+        console.log(ch)
     }
 }

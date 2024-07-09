@@ -29,7 +29,7 @@ import SignUp from "../User Forms/SignUp.js";
 import { ResetPassword } from "../User Forms/ResetPassword.js";
 import { ResetPasTakeCare } from "../User Forms/RestPasTakeCare.js";
 import OrderManager from "../AdminComponents/OrderManager.js";
-import { UnconnectedUser } from "../User Forms/NotConnected.js";
+import { ToConnect } from "../User Forms/ToConnect.js";
 
 // Routing במקום 
 // כי זה שם שמור
@@ -66,12 +66,12 @@ export const MyRouting = () => {
 
                     <Route path="/myAccount" element={<Account></Account>}></Route>
                     <Route path="/myLogin" element={<Login></Login>} />
-                    <Route path="/myUnconnectedUser " element={<UnconnectedUser></UnconnectedUser>}></Route>
 
                     <Route path="/myProfile" element={<UserProfile />} />
                     <Route path="/mySignUp" element={<SignUp />} />
                     <Route path="/myResetPassword" element={<ResetPassword />} />
                     <Route path="/myResetPasswordLink" element={<ResetPasTakeCare />} />
+                    <Route path="/myToConnect" element={<ToConnect></ToConnect>}/>
 
                     <Route path="myTerms" element={<Terms></Terms>} ></Route>
                     <Route path="/myEvents" element={<Events></Events>} ></Route>
