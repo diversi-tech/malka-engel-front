@@ -37,6 +37,16 @@ export const PostProduct = async (productForm) => {
     }
 }
 
+export const PutProduct = async (id, product) => {
+    try {
+        let result = await axios.put(`${API_BASE_URL}PutProduct/${id}`, product)
+        debugger
+        return result.data
+    }
+    catch (ch) {
+        console.log(ch)
+    }
+}
 
 export const GetRecommendedProducts = async () => {
     try {

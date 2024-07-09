@@ -5,6 +5,8 @@ import { getCart } from "../product/cookies/SetCart";
 import { setCookie } from "../product/cookies/CookieUtils";
 import { useNavigate } from "react-router-dom";
 
+//##################################################//
+//this is th page that loads in the shopping cart //
 export const CartDisplay = () => {
   // קבלת כל המוצרים מה-Cookies
   const [cart, setCart] = useState(getCart());
@@ -49,7 +51,16 @@ export const CartDisplay = () => {
         <tbody>
           {cart.map((product, index) => (
             <tr key={index}>
-              <td>{product[`name${currentLanguage}`]}</td>
+              <td><button 
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: 'black',
+                  textDecoration: 'none',
+                  cursor: 'pointer',
+                  outline: 'none'
+              }}
+              onClick={()=>{navigate(`/myProduct/${product.productID}`)}}>{product[`name${currentLanguage}`]}</button></td>
               <td>
                 <input
                   type="number"

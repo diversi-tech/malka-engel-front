@@ -7,6 +7,7 @@ import { GetAllProducts } from '../../axios/ProductAxios';
 import { setProductList } from '../../redux/DataActions/DataAction.Product';
 
 export const ProductList = () => {
+    debugger
     const { t, i18n } = useTranslation();
     const productsList = useSelector(s => s.DataReducer_Products?.Prodlist || []); // טיפול במצב בו productsList הוא undefined או null
     const [products, setProducts] = useState(productsList);
@@ -15,6 +16,7 @@ export const ProductList = () => {
     const navigate = useNavigate();
 
     async function fetchProducts() {
+        debugger
         try {
             if (!productsList || productsList.length === 0) { // בדיקה אם הרשימה ריקה או לא מוגדרת
                 var response = await GetAllProducts();

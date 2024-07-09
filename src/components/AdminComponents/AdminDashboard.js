@@ -1,107 +1,172 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Button, ListGroup, Modal, Form, Row, Col } from 'react-bootstrap';
+import { setProductList } from '../../redux/DataActions/DataAction.Product';
+import { GetAllProducts, PostProduct, PutProduct } from '../../axios/ProductAxios';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { FaPen, FaTrash } from 'react-icons/fa';
 
 const AdminDashboard = () => {
-  const [products, setProducts] = useState([]);
+  const productsList = useSelector(s => s.DataReducer_Products?.Prodlist || []); // טיפול במצב בו productsList הוא undefined או null
+  const [products, setProducts] = useState(productsList);
   const [showAddModal, setShowAddModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  const [newProduct, setNewProduct] = useState({
-    nameEn: '',
-    nameHe: '',
-    descriptionEn: '',
-    descriptionHe: '',
-    price: '',
-    onSale: false,
-    saleAmount: 0,
-    image: null
-  });
+  const [prdoId, setPrdoId] = useState('');
+  const [nameHe, setNameHe] = useState('');
+  const [descriptionHe, setDescriptionHe] = useState('');
+  const [nameEn, setNameEn] = useState('');
+  const [descriptionEn, setDescriptionEn] = useState('');
+  const [price, setPrice] = useState('');
+  const [salePrice, setSalePrice] = useState('');
+  const [image, setImage] = useState(null);
+  const [recommaned, setRecommaned] = useState(false);
+  const myDispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewProduct({ ...newProduct, [name]: value });
-  };
-
-  const handleImageChange = (e) => {
-    const imageFile = e.target.files[0];
-    setNewProduct({ ...newProduct, image: imageFile });
-  };
-
-  const handleAddProduct = () => {
-    if (newProduct.nameEn && newProduct.nameHe && newProduct.descriptionEn && newProduct.descriptionHe && newProduct.price && newProduct.image) {
-      const productToAdd = { ...newProduct, image: URL.createObjectURL(newProduct.image) };
-      setProducts([...products, productToAdd]);
-      setNewProduct({
-        nameEn: '',
-        nameHe: '',
-        descriptionEn: '',
-        descriptionHe: '',
-        price: '',
-        onSale: false,
-        saleAmount: 0,
-        image: null
-      });
-      setShowAddModal(false);
-    } else {
-      alert('Please fill in all fields including the image.');
+  async function fetchProducts() {
+    try {
+      if (!productsList || productsList.length === 0) { // בדיקה אם הרשימה ריקה או לא מוגדרת
+        var response = await GetAllProducts();
+        if (!response) {
+          setProducts([]);
+        }
+        else {
+          setProducts(response);
+          myDispatch(setProductList(response));
+        }
+      } else {
+        setProducts(productsList);
+      }
+    } catch (error) {
     }
-  };
+  }
 
-  const handleDeleteProduct = () => {
-    if (selectedProduct) {
-      const updatedProducts = products.filter(product => product !== selectedProduct);
-      setProducts(updatedProducts);
-      setSelectedProduct(null);
-      setShowDeleteModal(false);
-    }
-  };
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
-  const handleUpdateProduct = () => {
-    if (selectedProduct) {
-      // Implement update logic here
-      setShowUpdateModal(false);
-    }
+  const handleShowAddModal = () => {
+    setSelectedProduct('');
+    setPrdoId('');
+    setNameHe('');
+    setDescriptionHe('');
+    setNameEn('')
+    setDescriptionEn('');
+    setPrice('');
+    setSalePrice('');
+    setRecommaned('');
+    setImage('');
+    setShowAddModal(true);
   };
+  const handleCloseAddModal = () => setShowAddModal(false);
 
-  const handleProductSelection = (product) => {
+  const handleShowUpdateModal = (product) => {
     setSelectedProduct(product);
+    setPrdoId(product.productID);
+    setNameHe(product.nameHe);
+    setDescriptionHe(product.descriptionHe);
+    setNameEn(product.nameEn);
+    setDescriptionEn(product.descriptionEn);
+    setPrice(product.price);
+    setSalePrice(product.salePrice);
+    setRecommaned(product.isRecommended);
+    setImage(product.imageURL);
     setShowUpdateModal(true);
   };
+  const handleCloseUpdateModal = () => setShowUpdateModal(false);
 
-  const handleProductDeletion = (product) => {
-    setSelectedProduct(product);
-    setShowDeleteModal(true);
+  const handleAddProduct = async (e) => {
+    debugger
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('NameHe', nameHe);
+    formData.append('DescriptionHe', descriptionHe);
+    formData.append('Price', price);
+    formData.append('SalePrice', salePrice);
+    formData.append('NameEn', nameEn);
+    formData.append('DescriptionEn', descriptionEn);
+    formData.append('IsRecommended', recommaned);
+    if (image) {
+      formData.append('ImageURL', image);
+      formData.append('Image', image);
+    }
+
+    try {
+      const response = await PostProduct(formData);
+      if (response)
+        if (response == true) {
+          const productsfromServer = await GetAllProducts();
+          myDispatch(setProductList(productsfromServer))
+          setPrdoId(productsfromServer);
+        }
+    } catch (error) {
+      console.error('Error adding product:', error.response || error.message);
+      alert('Failed to add product');
+    }
+  };
+
+  const handleUpdateProduct = async (e) => {
+    debugger
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('ProductID', prdoId);
+    formData.append('NameHe', nameHe);
+    formData.append('DescriptionHe', descriptionHe);
+    formData.append('Price', price);
+    formData.append('SalePrice', salePrice);
+    formData.append('NameEn', nameEn);
+    formData.append('DescriptionEn', descriptionEn);
+    formData.append('IsRecommended', recommaned);
+    if (image) {
+      formData.append('ImageURL', image);
+      formData.append('Image', image);
+    }
+    try {
+      const response = await PutProduct(prdoId, formData);
+      //TODO
+      //dispattch to the product list
+      if (response == true) {
+        const productsfromServer = await GetAllProducts();
+        myDispatch(setProductList(productsfromServer))
+        setPrdoId(productsfromServer);
+      }
+    } catch (error) {
+      console.error('Error adding product:', error.response || error.message);
+    }
+    handleCloseUpdateModal();
   };
 
   return (
     <Container>
-      <h1 className="mt-4 mb-3">Admin Dashboard</h1>
-      
-      {/* כפתורי הפעולות */}
       <div className="mb-3">
-        <Button variant="primary" onClick={() => setShowAddModal(true)}>Add Product</Button>{' '}
-        <Button variant="info" onClick={() => setShowUpdateModal(true)}>Update Product</Button>{' '}
-        <Button variant="danger" onClick={() => setShowDeleteModal(true)}>Delete Product</Button>
+        <Button variant="primary" onClick={handleShowAddModal}>Add Product</Button>
       </div>
-
-      {/* רשימת המוצרים */}
       <ListGroup className="mb-4">
         {products.map((product, index) => (
           <ListGroup.Item key={index}>
             <Row>
               <Col md={3}>
-                <img src={product.image} alt="Product" className="img-fluid" />
+                <img src={`https://localhost:7297${product.imageURL}`} alt="Product" className="img-fluid" />
               </Col>
-              <Col md={9}>
+              <Col md={7}>
+                <h5><b>Id: </b>{product.productID}</h5>
                 <h4>{product.nameEn} - {product.nameHe}</h4>
                 <p>{product.descriptionEn} - {product.descriptionHe}</p>
-                <p>Price: ${product.price}</p>
-                <div>
-                  <Button variant="info" onClick={() => handleProductSelection(product)}>Edit</Button>{' '}
-                  <Button variant="danger" onClick={() => handleProductDeletion(product)}>Delete</Button>
-                </div>
+                <p>Price: ₪{product.price} (Sale price:{product.salePrice}₪)</p>
+                <p>
+                Recommended:  
+                <br></br><input 
+                  type="checkbox" 
+                  checked={product.isRecommended} 
+                  readOnly 
+                  style={{ pointerEvents: 'none' }}
+                />
+              </p>
+              </Col>
+              <Col md={2} className="d-flex align-items-center justify-content-end">
+                <Button variant="link" onClick={() => handleShowUpdateModal(product)}><FaPen /></Button>
               </Col>
             </Row>
           </ListGroup.Item>
@@ -109,125 +174,114 @@ const AdminDashboard = () => {
       </ListGroup>
 
       {/* מודל להוספת מוצר */}
-      <Modal show={showAddModal} onHide={() => setShowAddModal(false)}>
+      <Modal show={showAddModal} onHide={handleCloseAddModal}>
         <Modal.Header closeButton>
           <Modal.Title>Add Product</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3">
-              <Form.Label>Product Name (English)</Form.Label>
-              <Form.Control type="text" name="nameEn" value={newProduct.nameEn} onChange={handleInputChange} />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>שם המוצר (עברית)</Form.Label>
-              <Form.Control type="text" name="nameHe" value={newProduct.nameHe} onChange={handleInputChange} />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Product Description (English)</Form.Label>
-              <Form.Control type="text" name="descriptionEn" value={newProduct.descriptionEn} onChange={handleInputChange} />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>תיאור המוצר (עברית)</Form.Label>
-              <Form.Control type="text" name="descriptionHe" value={newProduct.descriptionHe} onChange={handleInputChange} />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Price</Form.Label>
-              <Form.Control type="text" name="price" value={newProduct.price} onChange={handleInputChange} />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>On Sale</Form.Label>
-              <Form.Check type="checkbox" name="onSale" checked={newProduct.onSale} onChange={() => setNewProduct({ ...newProduct, onSale: !newProduct.onSale })} />
-            </Form.Group>
-            {newProduct.onSale && (
-              <Form.Group className="mb-3">
-                <Form.Label>Sale Amount</Form.Label>
-                <Form.Control type="number" name="saleAmount" value={newProduct.saleAmount} onChange={handleInputChange} />
-              </Form.Group>
-            )}
-            <Form.Group className="mb-3">
-              <Form.Label>Upload Image</Form.Label>
-              <Form.Control type="file" name="image" onChange={handleImageChange} />
-            </Form.Group>
-          </Form>
+          <form onSubmit={handleAddProduct}>
+            <div className="mb-3">
+              <label className="form-label">Name (Hebrew)</label>
+              <input type="text" className="form-control" value={nameHe} onChange={(e) => setNameHe(e.target.value)} required />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Description (Hebrew)</label>
+              <textarea className="form-control" value={descriptionHe} onChange={(e) => setDescriptionHe(e.target.value)} />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Price</label>
+              <input type="number" className="form-control" value={price} onChange={(e) => setPrice(e.target.value)} required />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Sale Price</label>
+              <input type="number" className="form-control" value={salePrice} onChange={(e) => setSalePrice(e.target.value)} />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Image</label>
+              <input type="file" className="form-control" onChange={(e) => setImage(e.target.files[0])} />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Name (English)</label>
+              <input type="text" className="form-control" value={nameEn} onChange={(e) => setNameEn(e.target.value)} required />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Description (English)</label>
+              <textarea className="form-control" value={descriptionEn} onChange={(e) => setDescriptionEn(e.target.value)} />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Is recommended</label><br></br>
+              <input
+                type="checkbox"
+                className="form-check-input"
+                checked={recommaned}
+                onChange={(e) => setRecommaned(e.target.checked)}
+              />
+            </div>
+            <Button variant="primary" type="submit">
+              Add Product
+            </Button>
+          </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowAddModal(false)}>Cancel</Button>
-          <Button variant="primary" onClick={handleAddProduct}>Add Product</Button>
+          <Button variant="secondary" onClick={handleCloseAddModal}>
+            Close
+          </Button>
         </Modal.Footer>
       </Modal>
 
       {/* מודל לעדכון מוצר */}
-      <Modal show={showUpdateModal} onHide={() => setShowUpdateModal(false)}>
+      <Modal show={showUpdateModal} onHide={handleCloseUpdateModal}>
         <Modal.Header closeButton>
           <Modal.Title>Update Product</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {selectedProduct && (
-            <Form>
-              <Form.Group className="mb-3">
-                <Form.Label>Product Name (English)</Form.Label>
-                <Form.Control type="text" name="nameEn" value={selectedProduct.nameEn} onChange={handleInputChange} />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>שם המוצר (עברית)</Form.Label>
-                <Form.Control type="text" name="nameHe" value={selectedProduct.nameHe} onChange={handleInputChange} />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Product Description (English)</Form.Label>
-                <Form.Control type="text" name="descriptionEn" value={selectedProduct.descriptionEn} onChange={handleInputChange} />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>תיאור המוצר (עברית)</Form.Label>
-                <Form.Control type="text" name="descriptionHe" value={selectedProduct.descriptionHe} onChange={handleInputChange} />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Price</Form.Label>
-                <Form.Control type="text" name="price" value={selectedProduct.price} onChange={handleInputChange} />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>On Sale</Form.Label>
-                <Form.Check type="checkbox" name="onSale" checked={selectedProduct.onSale} onChange={() => setSelectedProduct({ ...selectedProduct, onSale: !selectedProduct.onSale })} />
-              </Form.Group>
-              {selectedProduct.onSale && (
-                <Form.Group className="mb-3">
-                  <Form.Label>Sale Amount</Form.Label>
-                  <Form.Control type="number" name="saleAmount" value={selectedProduct.saleAmount} onChange={handleInputChange} />
-                </Form.Group>
-              )}
-              <Form.Group className="mb-3">
-                <Form.Label>Current Image</Form.Label><br />
-                <img src={selectedProduct.image} alt="Product" className="img-fluid" />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Upload New Image</Form.Label>
-                <Form.Control type="file" name="image" onChange={handleImageChange} />
-              </Form.Group>
-            </Form>
-          )}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowUpdateModal(false)}>Cancel</Button>
-          <Button variant="primary" onClick={handleUpdateProduct}>Update Product</Button>
-        </Modal.Footer>
-      </Modal>
-
-      {/* מודל למחיקת מוצר */}
-      <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Delete Product</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {selectedProduct && (
-            <div>
-              <p>Are you sure you want to delete the product:</p>
-              <p><strong>{selectedProduct.nameEn} - {selectedProduct.nameHe}</strong></p>
+          <form onSubmit={handleUpdateProduct}>
+            <div className="mb-3">
+              <label className="form-label">Name (Hebrew)</label>
+              <input type="text" className="form-control" value={nameHe} onChange={(e) => setNameHe(e.target.value)} required />
             </div>
-          )}
+            <div className="mb-3">
+              <label className="form-label">Description (Hebrew)</label>
+              <textarea className="form-control" value={descriptionHe} onChange={(e) => setDescriptionHe(e.target.value)} />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Price</label>
+              <input type="number" className="form-control" value={price} onChange={(e) => setPrice(e.target.value)} required />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Sale Price</label>
+              <input type="number" className="form-control" value={salePrice} onChange={(e) => setSalePrice(e.target.value)} />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Image</label>
+              <input type="file" className="form-control" onChange={(e) => setImage(e.target.files[0])} />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Name (English)</label>
+              <input type="text" className="form-control" value={nameEn} onChange={(e) => setNameEn(e.target.value)} required />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Description (English)</label>
+              <textarea className="form-control" value={descriptionEn} onChange={(e) => setDescriptionEn(e.target.value)} />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Is recommended</label><br></br>
+              <input
+                type="checkbox"
+                className="form-check-input"
+                checked={recommaned}
+                onChange={(e) => setRecommaned(e.target.checked)}
+              />
+            </div>
+            <Button variant="primary" type="submit">
+              Update Product
+            </Button>
+          </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>Cancel</Button>
-          <Button variant="danger" onClick={handleDeleteProduct}>Delete Product</Button>
+          <Button variant="secondary" onClick={handleCloseUpdateModal}>
+            Close
+          </Button>
         </Modal.Footer>
       </Modal>
     </Container>

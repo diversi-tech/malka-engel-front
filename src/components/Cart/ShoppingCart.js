@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { PageTitle } from '../Layout Components/PageTitle';
-import { CartDisplay } from './CartShow';
+import { CartDisplay } from './CartDisplay';
 import { Button } from 'react-bootstrap';
 import { getCart } from '../product/cookies/SetCart';
 

@@ -130,14 +130,14 @@ export const ProductForm = () => {
 
         try {
             const response = await PostProduct(formData);
-            if(response)
-            //TODO
-            //dispattch to the product list
-            if (response == true) {
-                const productsfromServer = await GetAllProducts();
-                myDispatch(setProductList(productsfromServer))
-                alert('Product added successfully');
-            }
+            if (response)
+                //TODO
+                //dispattch to the product list
+                if (response == true) {
+                    const productsfromServer = await GetAllProducts();
+                    myDispatch(setProductList(productsfromServer))
+                    alert('Product added successfully');
+                }
         } catch (error) {
             console.error('Error adding product:', error.response || error.message);
             alert('Failed to add product');
@@ -147,11 +147,11 @@ export const ProductForm = () => {
     };
 
     return (
-        <div className="container mt-5">
-            <Button variant="primary" onClick={handleShow}>
-                Add Product
-            </Button>
-
+        // <div className="container mt-5">
+        //     <Button variant="primary" onClick={handleShow}>
+        //         Add Product
+        //     </Button>
+        <div>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Add Product</Modal.Title>
@@ -196,7 +196,7 @@ export const ProductForm = () => {
                         Close
                     </Button>
                 </Modal.Footer>
-            </Modal>
-        </div>
-    );
+                </Modal>
+                </div>
+                );
 };
