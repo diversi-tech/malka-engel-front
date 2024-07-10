@@ -30,6 +30,7 @@ import { ResetPassword } from "../User Forms/ResetPassword.js";
 import { ResetPasTakeCare } from "../User Forms/RestPasTakeCare.js";
 import OrderManager from "../AdminComponents/OrderManager.js";
 import { UnconnectedUser } from "../User Forms/NotConnected.js";
+import { RecommendedProducts } from "../product/RecommendedProducts.js";
 
 // Routing במקום 
 // כי זה שם שמור
@@ -42,6 +43,7 @@ export const MyRouting = () => {
                 <Nav></Nav>
                 <Routes>
                     {/*  שימו לב שבגרסה הזאת אין צורך להשתמש בסוויטש אפשר ישר לשים בתוך תגית הראוט */}
+                    <Route path="/" element={<Home></Home>}></Route>
                     <Route path="/myHome" element={<Home></Home>}></Route>
                     <Route path="/myContact" element={<Contact></Contact>}></Route>
                     <Route path="/myCommonQuestions" element={<CommonQuestions></CommonQuestions>}></Route>
@@ -76,6 +78,7 @@ export const MyRouting = () => {
                     <Route path="myTerms" element={<Terms></Terms>} ></Route>
                     <Route path="/myEvents" element={<Events></Events>} ></Route>
                     <Route path="/myProduct/:id" element={<Product></Product>} ></Route>
+                    <Route path="/myRecommendedProducts" element={<RecommendedProducts></RecommendedProducts>} ></Route>
                     <Route path="/myShowReviews/:numStars" element={<ShowReviews></ShowReviews>}></Route>
                 </Routes>
                 <Footer></Footer>

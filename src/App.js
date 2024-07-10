@@ -7,6 +7,7 @@ import Home from './components/Layout Components/Home.js';
 
 import { Subscriber } from 'rxjs';
 import { Review } from './components/product/productDetail/Review.js';
+import { RecommendedProducts } from './components/product/RecommendedProducts.js';
 
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
   return (
     <div className="App">
       <Provider store={Store}>
-        <MyRouting><Home></Home></MyRouting>
+        <MyRouting></MyRouting>
+        {/* <RecommendedProducts></RecommendedProducts> */}
       </Provider>
     </div> 
   );
