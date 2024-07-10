@@ -148,7 +148,7 @@ const AdminDashboard = () => {
           <ListGroup.Item key={index}>
             <Row>
               <Col md={3}>
-                <img src={`https://localhost:7297${product.imageURL}`} alt="Product" className="img-fluid" />
+                <img src={`${process.env.REACT_APP_API_URL}${product.imageURL}`} alt="Product" className="img-fluid" />
               </Col>
               <Col md={7}>
                 <h5><b>Id: </b>{product.productID}</h5>

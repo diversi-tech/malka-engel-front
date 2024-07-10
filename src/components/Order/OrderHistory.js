@@ -1,11 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
-import { Button, Alert, ListGroup } from 'react-bootstrap';
-import { getCommonQuestions } from "../../axios/CommonQuestionsAxios";
-import { setFAQlist } from "../../redux/DataActions/DataActions.FAQ";
-import { getUserHistory, GetOrdersByUserID } from "../../axios/UserOrdersHistoryAxios";
-import { GetOrderByUserId } from "../../axios/UsersAxios";
+import { Alert, ListGroup } from 'react-bootstrap';
+import { GetOrderByUserId } from "../../axios/OrderAxios";
 
 export const OrderHistory = ({ connect }) => {
   const { t, i18n } = useTranslation();

@@ -5,19 +5,7 @@ const API_BASE_URL = `${process.env.REACT_APP_API_URL}/api/User/`
 export const GetAllUsers = async () => {
     try {
 
-        let result = await axios.get("https://localhost:7297/api/User/GetUsers")
-        return result
-    }
-    catch (ch) {
-        console.log(ch)
-    }
-}
-
-
-
-export const GetOrderByUserId = async (userId) => {
-    try {
-        let result = await axios.get(`https://localhost:7297/api/orders/GetOrderByUserId/${userId}`)
+        let result = await axios.get(`${API_BASE_URL}GetUsers`)
         return result
     }
     catch (ch) {

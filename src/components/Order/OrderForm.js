@@ -74,7 +74,6 @@ export const OrderForm = () => {
                 <PageTitle title={t('orderFormPage.title')} />
             </div>
             <h3>פרטי אשראי!</h3>
-
             <button onClick={func_submit} className="btn btn-primary">{t('orderFormPage.buttonSubmitOrder')}</button>
         </div>
     )

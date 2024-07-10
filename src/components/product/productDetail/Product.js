@@ -95,7 +95,7 @@ export const Product = () => {
                     }}>
                         <img
                             ref={imageRef}
-                            src={`https://localhost:7297${product.imageURL}`}
+                            src={`${process.env.REACT_APP_API_URL}${product.imageURL}`}
                             alt={product[`name${currentLanguage}`]}
                             style={{
                                 width: '100%',

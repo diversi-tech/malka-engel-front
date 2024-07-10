@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { getCart } from "../product/cookies/SetCart";
 import { setCookie } from "../product/cookies/CookieUtils";
 import { useNavigate } from "react-router-dom";
+import { OrderForm } from "../Order/OrderForm";
 
 //##################################################//
 //this is th page that loads in the shopping cart //
@@ -85,7 +86,8 @@ export const CartDisplay = () => {
         </tbody>
       </table>
       <div className="text-right">
-        <button className="btn btn-primary" onClick={goToCheckout} >{t("Proceed to Checkout")}</button>
+        {/* <button className="btn btn-primary" onClick={goToCheckout} >{t("Proceed to Checkout")}</button> */}
+        <OrderForm></OrderForm>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, ListGroup, Modal, Button } from 'react-bootstrap';
-import { GetAllUsers, GetOrderByUserId } from '../../axios/UsersAxios'; // Assuming this is the function to get orders by user ID
+import { GetAllUsers } from '../../axios/UsersAxios'; // Assuming this is the function to get orders by user ID
+import { GetOrderByUserId } from '../../axios/OrderAxios';
 
 const UserAdmin = () => {
   const [users, setUsers] = useState([]);
