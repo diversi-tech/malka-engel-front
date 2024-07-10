@@ -1,8 +1,6 @@
 import axios from "axios"
 
-// const API_BASE_URL = `${process.env.REACT_APP_API_URL}/api/orders/`
-const API_BASE_URL = `https://localhost:7297/api/orders/`
-
+const API_BASE_URL = `${process.env.REACT_APP_API_URL}/api/orders/`
 
 export const GetAllOrders = async () => {
     try {

@@ -2,9 +2,9 @@ import { useTranslation } from 'react-i18next';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategoryList } from '../../redux/DataActions/DataAction.Category';
-import { GetAllCategories, GetProductsByCategory, addCategory, deleteProductInCategory, addProductToCategory, updateCategory } from '../../axios/CategoryAxios';
+import { GetAllCategories, addCategory, updateCategory } from '../../axios/CategoryAxios';
 import { Button, Modal, Form, Card, Collapse, ListGroup, Row, Col } from 'react-bootstrap';
-import { GetAllProducts } from '../../axios/ProductAxios';
+import { addProductToCategory, deleteProductInCategory, GetAllProducts, GetProductsByCategory } from '../../axios/ProductAxios';
 // import { GetAllProducts } from '../../axios/ProductAxios';
 // צריכה לאפס ארת הנתונים בטופס!
 // צריכהךלרםפש בצורה יותר יעילה

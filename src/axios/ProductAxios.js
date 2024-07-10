@@ -1,8 +1,6 @@
 import axios from "axios"
 
-// const API_BASE_URL = `${process.env.REACT_APP_API_URL}/api/Product/`
-const API_BASE_URL = `https://localhost:7297/api/Product/`
-
+const API_BASE_URL = `${process.env.REACT_APP_API_URL}/api/Product/`
 
 export const GetAllProducts = async () => {
     try {
@@ -57,3 +55,36 @@ export const GetRecommendedProducts = async () => {
         console.log(ch)
     }
 }
+
+export const GetProductsByCategory = async (categoryId) => {
+    try {
+        const response = await axios.get(`${API_BASE_URL}GetProductByCategory/${categoryId}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching products by category:', error);
+        throw error;
+    }
+};
+
+export const deleteProductInCategory = async (idCategory, idProduct) => {
+    try {
+        await axios.delete(`${API_BASE_URL}DeleteProductCategory/${idProduct}/${idCategory}`);
+        return true;
+    } catch (error) {
+        console.error('Error delete product in category  :', error);
+        throw error;
+    }
+};
+
+export const addProductToCategory = async (idCategory, idProduct) => {
+    try {
+        debugger
+        const response = await axios.post(`${API_BASE_URL}AddProductCategory/${idProduct}/${idCategory}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error adding product in category  :', error);
+        throw error;
+    }
+};
+
+

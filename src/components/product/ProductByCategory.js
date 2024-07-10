@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { setProductsToCategoryList } from '../../actions/CategoryActions';
 // import { GetProductsByCategory } from '../../axios/CategoryAxios';
 // import { setProductsToCategoryList } from '../../redux/DataActions/DataAction.Category';
-import { GetProductsByCategory } from '../../axios/CategoryAxios';
 import { useParams, useNavigate } from 'react-router';
 import {  Button, Modal, Form, Card, Collapse, ListGroup, Row, Col } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { GetProductsByCategory } from '../../axios/ProductAxios';
 
 // רכיב להצגת מוצרים לפי קטגוריה
 const ProductByCategory = () => {

@@ -1,7 +1,6 @@
 import axios from "axios"
 
-// const API_BASE_URL = `${process.env.REACT_APP_API_URL}/api/User/`
-const API_BASE_URL = `https://localhost:7297/api/User/`
+const API_BASE_URL = `${process.env.REACT_APP_API_URL}/api/User/`
 
 export const GetAllUsers = async () => {
     try {
