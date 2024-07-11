@@ -149,3 +149,30 @@ export const sendEmailsForAllUsers = async ({ Greeting, Subject, Body, Attachmen
       throw error;
     }
   }
+
+  // export const getMessage = async () => {
+  //     const response = await axios.post("https://localhost:7297/api/Email/get-all-messages")
+  //     return response;
+  //   } 
+    
+//   export const getMessage = async () => {
+//     try {
+//         debugger
+//         let result = await axios.get("https://localhost:7297/api/Message/get-all-messages")
+//         return result.data
+//     }
+//     catch (ch) {
+//         console.log(ch)
+//     }
+// }
+
+export const getMessage = async () => {
+  try {
+      let result = await axios.get("https://localhost:7297/api/Messages/get-all-messages");
+      return result.data;
+  } catch (error) {
+      console.log(error);
+  }
+}
+
+
