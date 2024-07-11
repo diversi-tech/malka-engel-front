@@ -119,6 +119,16 @@ export const postSendEmails = async (newEmail) => {
         throw error;
     }
 };
+export const SendEmailToReset = async (toAddress) => {
+    try {
+        debugger
+        const response = await axios.post(`${API_BASE_URL}/sendToResetPas`, toAddress);
+        return response;
+
+    } catch (error) {
+        throw error;
+    }
+};
 
 
 
@@ -149,3 +159,4 @@ export const sendEmailsForAllUsers = async ({ Greeting, Subject, Body, Attachmen
       throw error;
     }
   }
+
