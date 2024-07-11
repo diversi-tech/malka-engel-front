@@ -4,7 +4,10 @@ import AdminDashboard from './AdminDashboard';
 import OrderManager from './OrderManager';
 import UserAdmin from './UserAdmin';
 import AllCategories from './AllCategories';
-
+import EmailForm from '../Email/EmailForm';
+import MailingList from '../Email/MailingList';
+import SeEmails from '../Email/SeEmails';
+// import { sendEmailsForAllUsers } from '../../axios/EmailAxios';
 const AllAdminPages = () => {
   const [activeComponent, setActiveComponent] = useState(null);
   const [show, setShow] = useState(false);
@@ -27,6 +30,10 @@ const AllAdminPages = () => {
         return <OrderManager />;
       case 'UserAdmin':
         return <UserAdmin />;
+      case 'SeEmail':
+        return <SeEmails />;
+        case 'MailingList':
+          return <MailingList />;
       default:
         return null;
     }
@@ -89,10 +96,27 @@ const AllAdminPages = () => {
             </Button>
             <Button
               variant="primary"
+              className="mb-3"
               onClick={() => handleComponentChange('UserAdmin')}
               block
             >
               ניהול משתמשים
+            </Button>
+            <Button
+              variant="primary"
+              className="mb-3"
+              onClick={() => handleComponentChange('SeEmail')}
+              block
+            >
+              שליחת מייל ללקוח
+            </Button>
+            <Button
+              variant="primary"
+              className="mb-3"
+              onClick={() => handleComponentChange('MailingList')}
+              block
+            >
+              שליחת מייל לרשימת תפוצה
             </Button>
           </div>
         </Offcanvas.Body>

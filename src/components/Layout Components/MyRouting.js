@@ -30,8 +30,11 @@ import ProductByCategory from "../product/ProductByCategory.js";
 import { ToConnect } from "../User Forms/ToConnect.js";
 import AllAdminPages from "../AdminComponents/AllAdminPages.js";
 import AllCategories from "../AdminComponents/AllCategories.js";
+import EmailForm from "../Email/EmailForm.js";
+import MailingList from "../Email/MailingList.js";
 import { useEffect } from "react";
 import {useConnectUser} from "../User Forms/useConnectUser.js";
+
 // Routing במקום 
 // כי זה שם שמור
 export const MyRouting = () => {
@@ -80,6 +83,8 @@ export const MyRouting = () => {
 
                     {/* email page */}
                     <Route path="/mySendEmails" element={<SeEmails></SeEmails>}></Route>
+                    <Route path="myEmailForm" element={<EmailForm></EmailForm>}></Route>
+                    {/* <Route path="/myMailingList" element={<MailingList></MailingList>}></Route> */}
 
                     {/* cart pages */}
                     <Route path="/myShoppingCart" element={<ShoppingCart></ShoppingCart>}></Route>

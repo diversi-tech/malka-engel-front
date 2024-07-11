@@ -1,23 +1,21 @@
 //עמוד זה- המנהל שולח מייל עם או בלי קבצים עבור  כתובת אחת
 import React, { useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
-import { sendEmails } from '../../axios/EmailAxios';
+import { sendEmailsForAllUsers } from '../../axios/EmailAxios';
 
-export const SeEmails = () => {
+export const MailingList = () => {
   const [newE, setNewE] = useState({
     Greeting: '',
-    ToAddress: '',
     Subject: '',
     Body: '',
-    Attachments: [],
-    // EmailList:null
+    Attachments: []
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { Greeting, ToAddress, Subject, Body, Attachments } = newE;
+    const { Greeting, Subject, Body, Attachments } = newE;
     try {
-      await sendEmails({ Greeting, ToAddress, Subject, Body, Attachments });
+      await sendEmailsForAllUsers({ Greeting,Subject, Body, Attachments });
     } catch (error) {
       console.error('Error sending email:', error);
     }
@@ -69,16 +67,6 @@ export const SeEmails = () => {
             onChange={handleChange}
           />
         </Form.Group>
-        <Form.Group controlId="formToAddress">
-          <Form.Label>כתובת מייל לשליחה</Form.Label>
-          <Form.Control
-            type="email"
-            name="ToAddress"
-            // placeholder="To Address"
-            value={newE.ToAddress}
-            onChange={handleChange}
-          required/>
-        </Form.Group>
         <Form.Group controlId="formSubject">
           <Form.Label>נושא</Form.Label>
           <Form.Control
@@ -128,4 +116,4 @@ export const SeEmails = () => {
     </Container>
   );
 };
-export default SeEmails;
+export default MailingList;

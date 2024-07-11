@@ -47,6 +47,9 @@ export const Nav = () => {
                         <li className="nav-item"><Link className="nav-link" to="./myProductList">{t('navPage.linkProduct')}</Link> </li>
                         <li className="nav-item"><Link className="nav-link" to="./myAccount">Account</Link> </li>
 
+
+                        <li className="nav-item"><Link className="nav-link" to="./myEmailForm">{t('navPage.linkStayTuned')}</Link> </li>
+
                         <li className="nav-item"><Link className="nav-link" to="./AllAdminPages">מסכי ניהול</Link> </li>
                         <li className="nav-item"><p className="nav-link" style ={myStyle}>{connected && currentUser.name || !connected && "NOT CONNECTED"}</p> </li>
                     </ul>
