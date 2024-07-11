@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+
 const useValidation = () => {
     const { t, i18n } = useTranslation();
 
@@ -62,7 +63,7 @@ const validateEmail = (email) => {
     return isValid;
  }
   
-
+ 
   return {
     validatePhone,
     validateEmail,
@@ -72,6 +73,7 @@ const validateEmail = (email) => {
     passwordError,
     emailError,
     validForm
+    
     
   };
 };

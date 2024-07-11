@@ -6,7 +6,7 @@ export const InitialState_Users = {
     ordersList:[]
 }
 
-export const DataReducer_Users = produce((state, action) => {
+export const DataReducer_Users = produce ((state, action) => {
     switch (action.type) {
         case "SET_USER_LIST": {
             state.UserList = action.payload
@@ -17,7 +17,7 @@ export const DataReducer_Users = produce((state, action) => {
             break
         }
         case "SET_CURRENT": {
-            state.connected = true
+            state.connected = action.payload
             break
         }
         case "SET_ORDERS_LIST": {

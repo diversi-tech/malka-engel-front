@@ -5,12 +5,14 @@ import { useSelector } from 'react-redux';
 import { PutUser } from '../../axios/UsersAxios';
 import { setCurrentUser } from '../../redux/DataActions/DataAction.Users';
 import useValidation from './useValidation';
+import { useConnectUser } from './useConnectUser';
 
 export const Profile = () => {
     const { t, i18n } = useTranslation();
 
   const [isEditing, setIsEditing] = useState(false);
   const currentUser = useSelector(s=>s.DataReducer_Users.currentUser);
+  const {ConnectMe} = useConnectUser()
 
   const [profileData, setProfileData] = useState(currentUser)
   const [isChecked, setIsChecked] = useState(profileData.typeID === 2);
@@ -33,11 +35,12 @@ export const Profile = () => {
 if(validForm(profileData)){
     // כאן אפשר להוסיף לוגיקה לשמירת הנתונים לשרת
    let result =await PutUser(profileData)
+   debugger
    if(result && result.status==200)
     {
         setCurrentUser(profileData)
-            alert("Saved secc")
-            setIsEditing(false);
+        ConnectMe()
+        setIsEditing(false);
 
     }
 else{
