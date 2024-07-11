@@ -95,7 +95,9 @@
         "linkLogin": "התחברות",
         "linkProduct": "רשימת מוצרים",
         "linkOrderForm": "  טופס הזמנות",
-        "linkShoppingCart": "סל קניות"
+        "linkShoppingCart": "סל קניות",
+        "linkStayTuned":"הישארו מעודכנים",
+        "linkDistributionRecord":"רשימת תפוצה"
     },
 
     "productListPage":{
