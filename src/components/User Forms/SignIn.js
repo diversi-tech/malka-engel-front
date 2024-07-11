@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Form, Button, Container, Row, Col, Modal } from 'react-bootstrap';
-import { GetAllUsers, LoginUser } from '../../axios/UsersAxios';
-import { useDispatch, useSelector } from 'react-redux';
+import { GetAllUsers, GetUserDetails, LoginUser } from '../../axios/UsersAxios';
 import { Link, Route, useNavigate } from 'react-router-dom';
-import { connect, setCurrentUser } from '../../redux/DataActions/DataAction.Users';
+// import { connect, setCurrentUser } from '../../redux/DataActions/DataAction.Users';
 import { ResetPassword } from './ResetPassword';
 import useValidation from './useValidation';
+import {useConnectUser} from './useConnectUser';
 
 
 export const Login = () => {
@@ -15,39 +15,40 @@ export const Login = () => {
 //
 const [showModal, setShowModal] = useState(true);
 const [errorLoginingin, setErrorLoginingin]= useState(false);
-  //יצירת משנה שישמש לשיגור
-  const dispatch = useDispatch()
 
   //יצירת משנה שישמש לניווט
   const navigate = useNavigate()
 
  //Custom Hook for Validation
- const {validForm,
+ const {validForm, 
 //משתנים לבדיקות תקינות 
-emailError, passwordError, phoneNumberError} = useValidation()
-                                        
+emailError, passwordError} = useValidation()
+const {ConnectMe} = useConnectUser()
 const handleClose = () => {navigate(-1)};
 
 //--------------------------------------------------------------------------
 //Function to handle login
 const handleLogin = async ()=>{
-  debugger
-      if ( validForm(user)) { 
-        debugger   
+      if ( validForm(user)) {    
   //Go to DB ......
     let userLogin = await LoginUser(user.email, user.passwordHash); 
     if(userLogin != null && userLogin.status == 200){
+      debugger
      //User exists in the database
+
      debugger
-     dispatch(setCurrentUser(userLogin.data));
-     dispatch(connect())
+    //  let current = await GetUserDetails(userLogin.data.token);
+    // dispatch(setCurrentUser(current.data));
+ ConnectMe() 
+     //save in cookies
+
    //Go to last page you visited
       navigate(-1)
-     //save in cookies
     }
-    else if (userLogin == null) alert("Network Error")
-    else{
+    else if (userLogin.code === "ERR_BAD_RESPONSE") 
       setErrorLoginingin(true)
+ else{
+      alert("Network Error")  
     }
 }
 }

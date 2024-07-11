@@ -4,8 +4,8 @@ export const setUserList=(list)=>{
 export const setCurrentUser=(user)=>{
     return {type:"SET_CURRENT_USER",payload: user};
 }
-export const connect=()=>{
-    return {type:"SET_CURRENT",payload: null};
+export const connect=(t)=>{
+    return {type:"SET_CURRENT",payload: t};
 }
 export const getOrdersByUserId=(id)=>{
     return {type:"SET_ORDERS_LIST",payload: id};
