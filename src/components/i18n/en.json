@@ -96,7 +96,9 @@
         "linkLogin": "Sign in",
         "linkProduct": "product list",
         "linkOrderForm": " Order Form",
-        "linkShoppingCart": " Shopping Cart"
+        "linkShoppingCart": " Shopping Cart",
+        "linkStayTuned": "Stay Tuned",
+        "linkDistributionRecord": "Distribution Record"
     },
   
     "productListPage":{
