@@ -7,6 +7,8 @@ const useValidation = () => {
 
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
+    const [passwordComfirmError, setPasswordComfirmError] = useState('');
+
     const [phoneNumberError, setPhoneNumberError] = useState('');
     const [isValid, setIsValid] = useState(true);
 // בדיקות תקינות למייל ,סיסמא וטלפון
@@ -26,7 +28,25 @@ const validateEmail = (email) => {
    const re = /^(\+972|0|02)?[5-9]\d{8}$/;
    return re.test(phone);
   }
+const validPasswordError = (password, password2) => {
+  if (password && !validatePassword(password)) {
+    setPasswordError(t('loginPage.invalidPassword'));
+    setIsValid(false);
+  }
+   else {setPasswordError('');
+     setIsValid(true);
+   } 
+   if (password && password2 && !invalidPasswordConfirmation(password, password2)) {
+    setPasswordComfirmError(t('resetPasswordCarePage.invalidPasswordConfirmation'));
+    setIsValid(false);
 
+  }
+   else {setPasswordComfirmError('');
+     setIsValid(true);
+
+   } 
+   return isValid;
+}
    const validForm = (newUser) => {
    debugger  
    //Check email
@@ -71,8 +91,10 @@ const validateEmail = (email) => {
     invalidPasswordConfirmation,
     phoneNumberError,
     passwordError,
+    passwordComfirmError,
     emailError,
-    validForm
+    validForm,
+    validPasswordError
     
     
   };
