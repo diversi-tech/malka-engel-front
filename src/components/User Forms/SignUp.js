@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { connect, setCurrentUser } from '../../redux/DataActions/DataAction.Users';
 import { LoginUser, PostUser } from '../../axios/UsersAxios';
 import useValidation from './useValidation';
+import { useConnectUser } from './useConnectUser';
 
 
 const SignUp = () => {
@@ -28,11 +29,13 @@ const SignUp = () => {
 
  //יצירת משנה שישמש לניווט
  const navigate = useNavigate()
+ const {ConnectMe} = useConnectUser()
  
  //Custom Hook for Validation
  const {validForm,
   //משתנים לבדיקות תקינות 
   emailError, passwordError, phoneNumberError} = useValidation()
+  const [errorMailExists, setErrorMailExists] = useState(false)
 //Pupup 
 const [showModal, setShowModal] = useState(true);
 const handleClose = () => {navigate(-2)};
@@ -56,18 +59,15 @@ const handleClose = () => {navigate(-2)};
         debugger
           let postUser = await PostUser(newUser); 
           if(postUser != null && postUser.status == 200){
-           //User post successfully!
-           debugger
-           dispatch(connect())
-           let userLogin = await LoginUser(newUser.email, newUser.passwordHash); 
-           dispatch(setCurrentUser(userLogin.data));
-           //נרשם בהצלחה
+            let userLogin = await LoginUser(newUser.email, newUser.passwordHash); 
+            if(userLogin != null && userLogin.status == 200){
+           
+         ConnectMe() }
            setSignsec(true)
       
-        //    save in cookies
           }
           else
-          alert("Error while registering")
+          setErrorMailExists(true)        
          } 
     };
     const style3={
@@ -129,6 +129,8 @@ const handleClose = () => {navigate(-2)};
               <Button className="w-100 mt-3" onClick={()=>handleRegister()}>
               {t('signUpPage.loginButton')}
               </Button>
+              {errorMailExists && <div style={{ color: 'red' }}>{t('signUpPage.errorMailExists') }</div>}
+
             </Form>
           </Col>
         </Row>

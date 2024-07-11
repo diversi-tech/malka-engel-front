@@ -32,9 +32,23 @@ import AllAdminPages from "../AdminComponents/AllAdminPages.js";
 import AllCategories from "../AdminComponents/AllCategories.js";
 import EmailForm from "../Email/EmailForm.js";
 import MailingList from "../Email/MailingList.js";
+import { useEffect } from "react";
+import {useConnectUser} from "../User Forms/useConnectUser.js";
+
 // Routing במקום 
 // כי זה שם שמור
 export const MyRouting = () => {
+    const {ConnectMe} = useConnectUser()
+
+    useEffect(() => {
+      const fetchUser = async () => {
+        ConnectMe()
+      };
+  
+      fetchUser();
+    }, []); // הרצה אחת בלבד כאשר הקומפוננטה נטענת
+  
+
     return (
         <BrowserRouter>
             <ScrollToTop></ScrollToTop>
@@ -48,6 +62,7 @@ export const MyRouting = () => {
                     <Route path="/myContact" element={<Contact></Contact>}></Route>
                     <Route path="/myAccount" element={<Account></Account>}></Route>
                     <Route path="/myLogin" element={<Login></Login>} />
+
                     <Route path="/myProfile" element={<UserProfile />} />
                     <Route path="/mySignUp" element={<SignUp />} />
                     <Route path="/myResetPassword" element={<ResetPassword />} />
