@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e325da70.css",
+    "main.js": "/static/js/main.edac1e0a.js",
+    "static/js/453.caf9288b.chunk.js": "/static/js/453.caf9288b.chunk.js",
+    "static/media/us_flag.png": "/static/media/us_flag.17fce3e15ce689f42251.png",
+    "static/media/il_flag.png": "/static/media/il_flag.ab6d675b67fd45a05b65.png",
+    "index.html": "/index.html",
+    "main.e325da70.css.map": "/static/css/main.e325da70.css.map",
+    "main.edac1e0a.js.map": "/static/js/main.edac1e0a.js.map",
+    "453.caf9288b.chunk.js.map": "/static/js/453.caf9288b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e325da70.css",
+    "static/js/main.edac1e0a.js"
+  ]
+}
