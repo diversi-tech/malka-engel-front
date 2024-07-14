@@ -7,6 +7,7 @@ import AllCategories from './AllCategories';
 import EmailForm from '../Email/EmailForm';
 import MailingList from '../Email/MailingList';
 import SeEmails from '../Email/SeEmails';
+import { Message } from '../Email/Messages';
 // import { sendEmailsForAllUsers } from '../../axios/EmailAxios';
 const AllAdminPages = () => {
   const [activeComponent, setActiveComponent] = useState(null);
@@ -32,8 +33,10 @@ const AllAdminPages = () => {
         return <UserAdmin />;
       case 'SeEmail':
         return <SeEmails />;
-        case 'MailingList':
-          return <MailingList />;
+      case 'MailingList':
+        return <MailingList />;
+      case 'Message':
+        return <Message />;
       default:
         return null;
     }
@@ -117,6 +120,14 @@ const AllAdminPages = () => {
               block
             >
               שליחת מייל לרשימת תפוצה
+            </Button>
+            <Button
+              variant="primary"
+              className="mb-3"
+              onClick={() => handleComponentChange('Message')}
+              block
+            >
+                 הצגות הודעות
             </Button>
           </div>
         </Offcanvas.Body>
