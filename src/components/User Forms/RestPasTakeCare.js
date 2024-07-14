@@ -1,28 +1,38 @@
-import React,{ useState } from 'react';
+import React,{ useEffect, useState } from 'react';
 import { Form, Button, Container, Row, Col, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { PutUser } from '../../axios/UsersAxios';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { PutUser, ResetPas } from '../../axios/UsersAxios';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import useValidation from './useValidation';
+import { ValidToken } from '../../axios/TokenAxios';
 
 
 
 export const ResetPasTakeCare=()=>{
     const { t, i18n } = useTranslation();
+    const { token } = useParams();
+
     const [pas, setPas] = useState({});
     const [passwordError1, setPasswordError] = useState('');
     const currentUser = useSelector(s=>s.DataReducer_Users.currentUser);
     const [current, setCurrent] = useState(currentUser)
 const navigate = useNavigate()
     //Pupup 
-const [showModal, setShowModal] = useState(true);
+const [showModal, setShowModal] = useState(false);
 const handleClose = () => {navigate(-2)};
 
  //Custom Hook for Validation
  const {passwordError, passwordComfirmError, validPasswordError, invalidPasswordConfirmation} = useValidation()
  const [resetSec, setRestSec] = useState(false);
- 
+ //check valid token
+ const validToken = async()=>{
+  debugger
+  const result = await ValidToken(token)
+  if(result.data)
+   setShowModal(true)
+
+ }
 //On click function
 const handleClick=async() => {
     //בדיקות תקינות הקלטים    
@@ -30,8 +40,7 @@ const handleClick=async() => {
         debugger
         //לשנות את הסיסמא עבור המשתמש
         //----------------------------------------------------------------
-        current.passwordHash = pas.password1
-        let result = await PutUser(current)
+        let result = await ResetPas(pas.password1)
         if(result != null && result.status == 200) {
            setRestSec (true)
         }
@@ -48,6 +57,10 @@ const style3={
     ' height': '700px',
      'border': '5px'
    }
+
+   useEffect(() => {
+    validToken();
+}, []);   
 return (
     
 
