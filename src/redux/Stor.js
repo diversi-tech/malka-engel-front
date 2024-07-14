@@ -7,6 +7,7 @@ import { DataReducer_Users } from "./DateReducer/dataReducer.Users";
 import { DataReducer_Orders } from "./DateReducer/dataReducer.Order";
 import { DataReducer_Categry } from "./DateReducer/dataReducer.Category";
 import { DataReducer_Email } from "./DateReducer/DataReducer.Email";
+import { DataReducer_Message } from "./DateReducer/dataReducer.Message";
 
 const reducers = combineReducers(
     {
@@ -18,6 +19,7 @@ const reducers = combineReducers(
         DataReducer_Orders: DataReducer_Orders,  
         DataReducer_Categry: DataReducer_Categry,
         DataReducer_Email: DataReducer_Email, 
+        DataReducer_Message:DataReducer_Message
     }
 )
 export const Store = createStore(reducers)

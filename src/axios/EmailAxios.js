@@ -160,3 +160,12 @@ export const sendEmailsForAllUsers = async ({ Greeting, Subject, Body, Attachmen
     }
   }
 
+  export const getMessage = async () => {
+    try {
+        let result = await axios.get("https://localhost:7297/api/Messages/get-all-messages");
+        return result.data;
+    } catch (error) {
+        console.log(error);
+    }
+  }
+
