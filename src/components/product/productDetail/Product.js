@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetAllProducts } from '../../../axios/ProductAxios';
 import { setProductList } from '../../../redux/DataActions/DataAction.Product';
@@ -9,6 +9,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import { Wording } from './Wording';
 import { addToCart, getCart, saveCart } from '../cookies/SetCart';
 import { setCookie } from '../cookies/CookieUtils';
+import { fillReviewsProduct } from '../../../redux/DataActions/DataAction.Reviews';
 
 export const Product = () => {
     const { t, i18n } = useTranslation();
@@ -20,6 +21,7 @@ export const Product = () => {
     const imageRef = useRef(null);
     const scrollToRef = useRef(null);
     const [cart, setCart] = useState(getCart());
+    const navigate = useNavigate();
 
     async function fetchProducts() {
         if (productsList.length === 0) {
@@ -37,6 +39,7 @@ export const Product = () => {
 
     useEffect(() => {
         setCart(getCart());
+        myDispatch(fillReviewsProduct())
     }, []);
 
     const product = products.find(product => product.productID == id);
@@ -83,6 +86,7 @@ export const Product = () => {
     return (
         <Container className="mt-4">
             <Row>
+                <p>{product.productID}</p>
                 <Col md={5} style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -105,7 +109,7 @@ export const Product = () => {
                             onMouseMove={handleMouseMove}
                             onMouseOut={handleMouseOut}
                         />
-                        <Button className="btn btn-light" onClick={handleScroll} >* {t('productPage.review')}</Button>
+                        <Button className="btn btn-light" onClick={()=>{navigate(`/myReview/${id}`)}} >* {t('productPage.review')}</Button>
                     </div>
                 </Col>
                 <Col md={7}>
@@ -125,7 +129,8 @@ export const Product = () => {
             <Row>
                 <Col>
                     <div style={{ marginTop: '150px' }} ref={scrollToRef}>
-                        <Review />
+                        <h2>{id}</h2> 
+                        <Review  productId={id}/>
                     </div>
                 </Col>
             </Row>
