@@ -31,6 +31,7 @@
         "invalidEmail": "פורמט דואר אלקטרוני לא חוקי",
         "invalidphoneNumber": "מספר טלפון לא חוקי",
         "invalidPassword": "הסיסמה צריכה להיות באורך של לפחות 8 תווים",
+        "errorMailExists":"חשבון מייל זה כבר קיים במערכת אנא הזן כתובת מייל חדשה",
         "massage": "נרשמת בהצלחה!\n תודה"
 
     },
@@ -98,7 +99,9 @@
         "linkLogin": "התחברות",
         "linkProduct": "רשימת מוצרים",
         "linkOrderForm": "  טופס הזמנות",
-        "linkShoppingCart": "סל קניות"
+        "linkShoppingCart": "סל קניות",
+        "linkStayTuned":"הישארו מעודכנים",
+        "linkDistributionRecord":"רשימת תפוצה"
     },
 
     "productListPage":{

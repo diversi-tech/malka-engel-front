@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import useValidation from './useValidation';
-import { SendEmail } from '../../axios/EmailAxios';
+import { SendEmail, SendEmailToReset } from '../../axios/EmailAxios';
 
 export const ResetPassword=()=>{
 
@@ -40,12 +40,13 @@ const handleClick= async() => {
 //כאן צריך להיות פעולה של שליחת מייל 
 //המייל יכנס ל - '/myResetPasswordLink'
 debugger
-let result = await SendEmail(emailRequest)
+let result = await SendEmailToReset(emailRequest.toAddress)
 if (result && result.status == 200)
 //Go back
         setRestSec(true)
 // navigate(-2) 
-
+else
+alert("Network error: ")
     }
 }
 const style3={

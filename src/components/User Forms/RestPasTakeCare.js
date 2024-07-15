@@ -11,7 +11,7 @@ import useValidation from './useValidation';
 export const ResetPasTakeCare=()=>{
     const { t, i18n } = useTranslation();
     const [pas, setPas] = useState({});
-    const [passwordError, setPasswordError] = useState('');
+    const [passwordError1, setPasswordError] = useState('');
     const currentUser = useSelector(s=>s.DataReducer_Users.currentUser);
     const [current, setCurrent] = useState(currentUser)
 const navigate = useNavigate()
@@ -20,32 +20,22 @@ const [showModal, setShowModal] = useState(true);
 const handleClose = () => {navigate(-2)};
 
  //Custom Hook for Validation
- const {invalidPasswordConfirmation, validatePassword, } = useValidation()
+ const {passwordError, passwordComfirmError, validPasswordError, invalidPasswordConfirmation} = useValidation()
  const [resetSec, setRestSec] = useState(false);
  
 //On click function
 const handleClick=async() => {
-    let isValid = true;
-    //בדיקות תקינות הקלטים
-    if (!validatePassword(pas.password1)) {
-        setPasswordError(t('resetPasswordCarePage.invalidPassword'));
-        isValid = false;
-      }
-    else if (!invalidPasswordConfirmation(pas.password1, pas.password2)) {
-        setPasswordError(t('resetPasswordCarePage.invalidPasswordConfirmation'));
-        isValid = false;
-      }
-    else {setPasswordError('');    
-         isValid = true;
-       } 
-    if(isValid) {
+    //בדיקות תקינות הקלטים    
+    if(validPasswordError(pas.password1,pas.password2)) {
         debugger
         //לשנות את הסיסמא עבור המשתמש
         //----------------------------------------------------------------
-        setCurrent({...current, passwordHash: pas.password1});
+        current.passwordHash = pas.password1
         let result = await PutUser(current)
-        if(result != null && result.status == 200) 
-            setRestSec (true)
+        if(result != null && result.status == 200) {
+           setRestSec (true)
+        }
+           
         
              else
                 alert('Network error')
@@ -75,15 +65,15 @@ return (
           <Form.Group controlId="formBasicEmail">
             <Form.Label> {t('resetPasswordCarePage.password1')}</Form.Label>
             <Form.Control type="password" 
-             onChange={(e) => {setPas({ ...pas, password1: e.target.value })}} />
+             onChange={(e) => {validPasswordError(pas.password1, pas.password2);setPas({ ...pas, password1: e.target.value })}} />
             {passwordError && <div style={{ color: 'red' }}>{passwordError}</div>}
 
           </Form.Group>
           <Form.Group controlId="formBasicEmail">
             <Form.Label> {t('resetPasswordCarePage.password2')}</Form.Label>
             <Form.Control  type="password" 
-             onChange={(e) => {setPas({ ...pas, password2: e.target.value })}} />
-             {passwordError && <div style={{ color: 'red' }}>{passwordError}</div>}
+             onChange={(e) => {validPasswordError(pas.password1, pas.password2);setPas({ ...pas, password2: e.target.value })}} />
+             {passwordComfirmError && <div style={{ color: 'red' }}>{passwordComfirmError}</div>}
 
           </Form.Group>
           <Button className="w-100 mt-3" onClick={()=>handleClick()}>

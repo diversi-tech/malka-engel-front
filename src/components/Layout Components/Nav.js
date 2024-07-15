@@ -6,16 +6,16 @@ import usFlag from '../../assets/flags/us_flag.png';
 import ilFlag from '../../assets/flags/il_flag.png';
 import { useSelector } from "react-redux";
 import { setCurrentUser } from "../../redux/DataActions/DataAction.Users";
+import { useConnectUser } from "../User Forms/useConnectUser";
+import { Button } from "react-bootstrap";
 // Nav page
 export const Nav = () => {
     const { t, i18n } = useTranslation();
     const currentUser = useSelector(s => s.DataReducer_Users.currentUser)
     const connected = useSelector(s => s.DataReducer_Users.connected)
+    const {Logout} = useConnectUser()
 
-    let currentName = "NOT CONNECTED";
-    if (connected) {
-        currentName = currentUser.name;
-    }
+  
     let myStyle = { backgroundColor: "rgb(207, 97, 221)" }
     //TODO//
     // i want to declare a global variable to save in what language are we currently!!
@@ -42,11 +42,16 @@ export const Nav = () => {
                         <li className="nav-item"><Link className="nav-link" to="./myShoppingCart"><FontAwesomeIcon icon={faShoppingCart} /><span className="cart-item-count"></span></Link> </li>
                         <li className="nav-item"><Link className="nav-link" to="./myHome">{t('navPage.linkHome')}</Link> </li>
                         <li className="nav-item"><Link className="nav-link" to="./myCommonQuestions">{t('navPage.linCommonQuestions')}</Link> </li>
-                        <li className="nav-item"> <Link className="nav-link" to="./myLogin">{t('navPage.linkLogin')}</Link></li>
+                        { !connected &&<li className="nav-item"> <Link className="nav-link" to="./myLogin">{t('navPage.linkLogin')}</Link></li>}
+                        {connected && <li className="nav-item"> <button className="nav-link" onClick={Logout}>Logout</button></li>}
                         <li className="nav-item"><Link className="nav-link" to="./myProductList">{t('navPage.linkProduct')}</Link> </li>
                         <li className="nav-item"><Link className="nav-link" to="./myAccount">Account</Link> </li>
+
+
+                        <li className="nav-item"><Link className="nav-link" to="./myEmailForm">{t('navPage.linkStayTuned')}</Link> </li>
+
                         <li className="nav-item"><Link className="nav-link" to="./AllAdminPages">מסכי ניהול</Link> </li>
-                        <li className="nav-item"><p className="nav-link" style ={myStyle}>{currentName}</p> </li>
+                        <li className="nav-item"><p className="nav-link" style ={myStyle}>{connected && currentUser.name || !connected && "NOT CONNECTED"}</p> </li>
                     </ul>
                 </div>
                 {i18n.language !== 'en' && (

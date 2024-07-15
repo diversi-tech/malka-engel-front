@@ -31,6 +31,7 @@
         "invalidEmail": "Invalid email format",
         "invalidphoneNumber": "Invalid phone number",
         "invalidPassword": "Password should be at least 8 characters long",
+        "errorMailExists":"This email account already exists in the system, please enter a new email address",
         "massage": "You have successfully registered!\n Thanks"
     },
     "resetPasswordPage": {
@@ -98,7 +99,9 @@
         "linkLogin": "Sign in",
         "linkProduct": "product list",
         "linkOrderForm": " Order Form",
-        "linkShoppingCart": " Shopping Cart"
+        "linkShoppingCart": " Shopping Cart",
+        "linkStayTuned": "Stay Tuned",
+        "linkDistributionRecord": "Distribution Record"
     },
   
     "productListPage":{
