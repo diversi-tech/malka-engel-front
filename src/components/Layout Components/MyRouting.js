@@ -71,7 +71,7 @@ export const MyRouting = () => {
                     <Route path="/myProfile" element={<UserProfile />} />
                     <Route path="/mySignUp" element={<SignUp />} />
                     <Route path="/myResetPassword" element={<ResetPassword />} />
-                    <Route path="/myResetPasswordLink" element={<ResetPasTakeCare />} />
+                    <Route path="/myResetPasswordLink/:token" element={<ResetPasTakeCare />} />
                     <Route path="/myToConnect" element={<ToConnect></ToConnect>} />
 
                     {/* product pages */}

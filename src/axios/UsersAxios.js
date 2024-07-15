@@ -68,4 +68,23 @@ return result
         console.log(ch)
     }
 }
+export const ResetPas = async (token, pas) => {
+
+    try{
+       
+        debugger
+let result = await axios.put(`${API_BASE_URL}ResetPas?password=${pas}`,{},{
+ 
+    headers: {
+        // 'Content-Type': 'application/json',
+        'token': `Bearer ${token}` // שליחת הטוקן בכותרת בשם "token"
+      }
+})
+return result
+    }
+    catch(ch){
+        console.log(ch)
+    }
+}
+
 
