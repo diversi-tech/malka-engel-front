@@ -9,7 +9,6 @@ import { Subscriber } from 'rxjs';
 import { Review } from './components/product/productDetail/Review.js';
 import { RecommendedProducts } from './components/product/RecommendedProducts.js';
 
-
 function App() {
   
   return (

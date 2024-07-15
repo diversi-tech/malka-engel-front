@@ -1,30 +1,29 @@
 import { useTranslation } from 'react-i18next';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import { GetAllProducts } from '../../../axios/ProductAxios';
 import { setProductList } from '../../../redux/DataActions/DataAction.Product';
 import { Review } from './Review';
-import { Container, Row, Col, Button, Card, Badge } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import { Wording } from './Wording';
-import { CartDisplay } from '../../Cart/CartShow';
-import { addToCart } from '../cookies/SetCart';
+import { addToCart, getCart, saveCart } from '../cookies/SetCart';
+import { setCookie } from '../cookies/CookieUtils';
 
 export const Product = () => {
     const { t, i18n } = useTranslation();
-    const currentLanguage = i18n.language == "en" ? "En" : "He"
-    const productsList = useSelector(s => s.DataReducer_Products.Prodlist);
+    const currentLanguage = i18n.language === "en" ? "En" : "He";
+    const productsList = useSelector(state => state.DataReducer_Products.Prodlist);
     const { id } = useParams();
     const [products, setProducts] = useState(productsList);
     const myDispatch = useDispatch();
     const imageRef = useRef(null);
-    const navigate = useNavigate();
     const scrollToRef = useRef(null);
+    const [cart, setCart] = useState(getCart());
 
     async function fetchProducts() {
         if (productsList.length === 0) {
-            var response = await GetAllProducts();
+            const response = await GetAllProducts();
             setProducts(response);
             myDispatch(setProductList(response));
         } else {
@@ -36,15 +35,15 @@ export const Product = () => {
         fetchProducts();
     }, []);
 
+    useEffect(() => {
+        setCart(getCart());
+    }, []);
+
     const product = products.find(product => product.productID == id);
 
     if (!product) {
         return <div>Loading...</div>;
     }
-
-    // const addToCart = () => {
-    //     // TODO: Add the product to the cart in redux store
-    // }
 
     const handleMouseMove = (e) => {
         const img = imageRef.current;
@@ -65,11 +64,21 @@ export const Product = () => {
         scrollToRef.current.scrollIntoView({ behavior: 'smooth' });
     };
 
-    //add to cart function
     const handleAddToCart = (product) => {
-        addToCart(product);
-        alert('Product added to cart');
+        const cartCopy = [...cart];
+        const productIndex = cartCopy.findIndex(p => p.productID === product.productID);
+        if (productIndex !== -1) {
+            cartCopy[productIndex].quantity = (parseInt(cartCopy[productIndex].quantity, 10) || 1) + 1;
+            setCart(cartCopy);
+            setCookie("cart", JSON.stringify(cartCopy), 7); // עדכון ה-Cookie
+
+        } else {
+            addToCart(product);
+            setCart(getCart());
+        }
     };
+
+    const productInCart = cart.find(item => item.productID === product.productID);
 
     return (
         <Container className="mt-4">
@@ -86,8 +95,7 @@ export const Product = () => {
                     }}>
                         <img
                             ref={imageRef}
-                            src={`https://localhost:7297${product.imageURL}`}
-                            //how it know to go to the name in Hebrew?
+                            src={`${process.env.REACT_APP_API_URL}${product.imageURL}`}
                             alt={product[`name${currentLanguage}`]}
                             style={{
                                 width: '100%',
@@ -105,15 +113,20 @@ export const Product = () => {
                     <p>{product[`description${currentLanguage}`]}</p>
                     <p className="text-muted">מחיר: {product.price} ש"ח</p>
                     <Wording />
-                    <button onClick={() => handleAddToCart(product)}>Add to Cart</button>
-                    {/* <Button variant="outline-primary" className="mt-2">הוספה לסל</Button> */}
+                    <br />
+                    <button className='btn btn-dark' onClick={() => handleAddToCart(product)}>Add to Cart</button>
+                    {productInCart && (
+                        <div>
+                            <p>You have ordered {productInCart.quantity || 1} of this product</p>
+                        </div>
+                    )}
                 </Col>
             </Row>
             <Row>
                 <Col>
-                <div style={{ marginTop: '150px' }} ref={scrollToRef}>
-                    <Review />
-                </div>
+                    <div style={{ marginTop: '150px' }} ref={scrollToRef}>
+                        <Review />
+                    </div>
                 </Col>
             </Row>
         </Container>

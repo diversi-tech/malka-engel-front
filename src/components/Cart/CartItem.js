@@ -1,6 +1,11 @@
 import React from 'react';
 // import './CartItem.css';
 
+
+
+/*******************************************/
+///i dont know if we useing this page!!! //
+
 const CartItem = ({ item, onQuantityChange, onRemove }) => {
     const handleQuantityChange = (e) => {
         onQuantityChange(item.id, parseInt(e.target.value));

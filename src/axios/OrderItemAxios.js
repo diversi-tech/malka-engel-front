@@ -1,7 +1,6 @@
 import axios from "axios";
 
-// const API_BASE_URL = `${process.env.REACT_APP_API_URL}/api/OrderItem/`
-const API_BASE_URL = `https://localhost:7297/api/OrderItem/`
+const API_BASE_URL = `${process.env.REACT_APP_API_URL}/api/OrderItem/`
 
 export const GetAllOrderItems = async () => {
     try {
@@ -36,5 +35,17 @@ export const PostOrderItem = async (orderItem) => {
     catch (ch) {
         debugger
         console.log(ch)
+    }
+}
+
+export const PostOrderItemList = async (orderList) => {
+    try {
+        let result = await axios.post(`${API_BASE_URL}PostOrderItemList`, orderList);
+        return result.data
+    }
+    catch (ch) {
+        debugger
+        console.log(ch)
+        alert('i came to here!!!!');
     }
 }

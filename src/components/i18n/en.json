@@ -5,7 +5,7 @@
     "homePage": {
         "title": "Home page",
         "up":"up",
-        "information":"Here it will be written, brief information about the site, who operates it and all kinds of other interesting things"
+        "information":"Welcome!!!!!<br>On our website you can choose a special design that will make your whole event jump,<br>We will design the branding for you for the most perfect event possible,<br>After all the design is a very important part, and it is impossible Lose it,<br>want to reap compliments on your event?<br>Go to the website and write to us which design style you connected with, and we will make sure to provide you with the most perfect service,<br>a useful and enjoyable experience!!!"
 
     },
     "loginPage": {
@@ -106,9 +106,9 @@
         "moreDetails": "more details",
         "cart":"add to cart",
         "technicalIssue":"Sorry, technical issue, try to relod your page",
-        "noProducts": "no products!"
-
-
+        "noProducts": "no products!",
+        "minPrice":"min price",
+        "maxPrice":"max price"
     },
     "recommendedProducts": {
         "title": "recommended Products"
@@ -140,5 +140,13 @@
     "accountPage":{
         "errCon":"You are not signed in",
         "signIn":"Sign in"
+   },
+   "OrderHistoryPage":{
+    "not connect1":"Sorry, you are not connected.",
+    "not connect2":"Log in and you can see your order history",
+    "ordersFor":"orders for",
+    "createdAt":"ordered at",
+    "status":"status",
+    "totalAmount":"total amount"
    }
 }

@@ -2,6 +2,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+/*******************************************/
+///i dont know if we useing this page!!! //
 const CartSummary = ({ total, onCheckout }) => {
   const { t } = useTranslation();
 
