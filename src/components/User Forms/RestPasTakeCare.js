@@ -20,7 +20,8 @@ export const ResetPasTakeCare=()=>{
 const navigate = useNavigate()
     //Pupup 
 const [showModal, setShowModal] = useState(false);
-const handleClose = () => {navigate(-2)};
+const handleClose = () => {window.close()};
+
 
  //Custom Hook for Validation
  const {passwordError, passwordComfirmError, validPasswordError, invalidPasswordConfirmation} = useValidation()
@@ -40,8 +41,8 @@ const handleClick=async() => {
         debugger
         //לשנות את הסיסמא עבור המשתמש
         //----------------------------------------------------------------
-        let result = await ResetPas(pas.password1)
-        if(result != null && result.status == 200) {
+        let result = await ResetPas(token, pas.password1)
+        if(result != null && result.data) {
            setRestSec (true)
         }
            

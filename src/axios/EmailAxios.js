@@ -84,7 +84,7 @@ export const postSendEmails = async (newEmail) => {
 export const SendEmailToReset = async (toAddress) => {
     try {
         debugger
-        const response = await axios.post(`${API_BASE_URL}/sendToResetPas`, toAddress);
+        let  response = await axios.post(`${API_BASE_URL}/sendToResetPas?ToAddress=${toAddress.ToAddress}`);
         return response;
 
     } catch (error) {
