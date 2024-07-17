@@ -10,7 +10,7 @@ try{
     let result = axios.get(`${API_BASE_URL}ValidateToken`,{
         headers: {
             // 'Content-Type': 'application/json',
-            'token': `Bearer ${token}` // שליחת הטוקן בכותרת בשם "token"
+            'Authorization': `Bearer ${token}` // שליחת הטוקן בכותרת בשם "token"
         }
       })
       return result

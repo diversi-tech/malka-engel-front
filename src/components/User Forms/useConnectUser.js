@@ -25,8 +25,8 @@ const ConnectMe = async()=>{
 const Logout = ()=>{
     debugger
     localStorage.removeItem('token')
+    dispatch(setCurrentUser(null))
     dispatch(connect(false))
-   dispatch(setCurrentUser(null))
 }
 return {
     ConnectMe,
