@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Form, Button, Container, Row, Col, Modal } from 'react-bootstrap';
 import { GetAllUsers, GetUserDetails, LoginUser } from '../../axios/UsersAxios';
-import { Link, Route, useNavigate } from 'react-router-dom';
-// import { connect, setCurrentUser } from '../../redux/DataActions/DataAction.Users';
+import { Link, useNavigate } from 'react-router-dom';
+
 import { ResetPassword } from './ResetPassword';
 import useValidation from './useValidation';
 import {useConnectUser} from './useConnectUser';
@@ -31,7 +31,7 @@ const handleClose = () => {navigate(-1)};
 const handleLogin = async ()=>{
       if ( validForm(user)) {    
   //Go to DB ......
-    let userLogin = await LoginUser(user.email, user.passwordHash); 
+    let userLogin = await LoginUser({email:user.email,passwordHash: user.passwordHash}); 
     if(userLogin != null && userLogin.status == 200){
       debugger
      //User exists in the database

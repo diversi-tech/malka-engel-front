@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { Form, Button, Container, Row, Col, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { connect, setCurrentUser } from '../../redux/DataActions/DataAction.Users';
 import { LoginUser, PostUser } from '../../axios/UsersAxios';
 import useValidation from './useValidation';
 import { useConnectUser } from './useConnectUser';
