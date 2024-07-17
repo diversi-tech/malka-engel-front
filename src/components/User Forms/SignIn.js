@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Form, Button, Container, Row, Col, Modal } from 'react-bootstrap';
 import { GetAllUsers, GetUserDetails, LoginUser } from '../../axios/UsersAxios';
-import { Link, Route, useNavigate } from 'react-router-dom';
-// import { connect, setCurrentUser } from '../../redux/DataActions/DataAction.Users';
+import { Link, useNavigate } from 'react-router-dom';
+
 import { ResetPassword } from './ResetPassword';
 import useValidation from './useValidation';
 import {useConnectUser} from './useConnectUser';

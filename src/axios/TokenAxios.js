@@ -1,6 +1,8 @@
 import axios from "axios"
-import Cookies from 'js-cookie';
-
+const token = localStorage.getItem("token");
+if(token) {
+axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
 const API_BASE_URL = `${process.env.REACT_APP_API_URL}/api/Token/`
 
 export const ValidToken =async (token) =>{
