@@ -87,7 +87,6 @@ export const CartDisplay = () => {
       </table>
       <div className="text-right">
         {/* <button className="btn btn-primary" onClick={goToCheckout} >{t("Proceed to Checkout")}</button> */}
-        <OrderForm></OrderForm>
       </div>
     </div>
   );
