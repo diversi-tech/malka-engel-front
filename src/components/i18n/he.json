@@ -127,15 +127,19 @@
     },
 
     "orderFormPage":{
-        "title":"טופס הזמנה",
-        "name":"שם:",
-        "address":"כתובת:",
-        "phone":"טלפון:",
-        "email":"מייל:",
-        "addLogo":" הוסף לוגו",
-        "selectLogo":"בחר קובץ לוגו :",
-        "fileLogo":"קובץ לוגו:",
-        "buttonSubmitOrder":"שלח הזמנה"
+    "title":"פרטי ההזמנה שלך",
+    "nameTitle":"שם המוצר: ",
+    "nameProduct":"nameHe",
+    "descriptionTitle":" תאור מוצר: " ,
+    "descriptionProduct":"descriptionHe",
+    "wording":" טקסט: " ,
+    "comments":"הערות: ",
+    "price":"מחיר: " ,
+    "addLogo":" הוסף לוגו",
+    "selectLogo":"בחר קובץ לוגו :",
+    "fileLogo":"קובץ לוגו:",
+    "TotalPayment":"סה''כ לתשלום: ",
+    "buttonSubmitOrder":"סיים הזמנה"
     },
     "productPage":{
         "review":"חוות דעת"

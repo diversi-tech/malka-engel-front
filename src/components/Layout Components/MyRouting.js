@@ -37,6 +37,8 @@ import EmailForm from "../Email/EmailForm.js";
 import MailingList from "../Email/MailingList.js";
 import { useEffect } from "react";
 import {useConnectUser} from "../User Forms/useConnectUser.js";
+import { Checkout } from "../Order/Checkout.js";
+import { PayForm } from "../Order/PayForm.js";
 
 // Routing במקום 
 // כי זה שם שמור
@@ -94,6 +96,8 @@ export const MyRouting = () => {
 
                     {/* cart pages */}
                     <Route path="/myShoppingCart" element={<ShoppingCart></ShoppingCart>}></Route>
+                    <Route path="/myPayForm" element={<PayForm></PayForm>}></Route>
+                    <Route path="/myCheckout" element={<Checkout></Checkout>}></Route>
 
                     {/* questions pages */}
                     <Route path="/myCommonQuestions" element={<CommonQuestions></CommonQuestions>}></Route>
