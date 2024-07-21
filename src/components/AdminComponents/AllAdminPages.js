@@ -381,7 +381,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Button, Container, Row, Col, Offcanvas } from 'react-bootstrap';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import AdminDashboard from './AdminDashboard';
 import OrderManager from './OrderManager';
 import UserAdmin from './UserAdmin';
@@ -390,23 +390,37 @@ import EmailForm from '../Email/EmailForm';
 import MailingList from '../Email/MailingList';
 import SeEmails from '../Email/SeEmails';
 import { Message } from '../Email/Messages';
+import { ValidToken } from '../../axios/TokenAxios';
+import { useSelector } from 'react-redux';
 // import { sendEmailsForAllUsers } from '../../axios/EmailAxios';
 
 const AllAdminPages = () => {
   const [activeComponent, setActiveComponent] = useState(null);
   const [show, setShow] = useState(false);
   const location = useLocation();
-
+  const { token } = useParams();
+  const { currentUser, connected } = useSelector(u => u.DataReducer_Users);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+const navigate = useNavigate();
   const handleComponentChange = (componentName) => {
     setActiveComponent(componentName);
     handleClose();
   };
-
+  const validToken= async()=>{
+    debugger
+    const result = await ValidToken(token)
+    if(result.data && currentUser&& currentUser.typeID === 3)
+    {
+      handleShow();  
+    }
+    else{
+      navigate(`/myErrorPage/${403}/${"אין לך הרשאה לגשת לדף זה"}/${"back"}`)
+    
+    }  
+   }
   useEffect(() => {
-    handleShow();
+    validToken()
   }, [location]);
 
   const renderComponent = () => {
@@ -429,10 +443,10 @@ const AllAdminPages = () => {
         return null;
     }
   };
+ 
 
   return (
     <Container fluid>
-      <h1 className="my-4">ניהול מוצרים</h1>
       <Row>
         <Col md={9}>
           {activeComponent && renderComponent()}

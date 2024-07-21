@@ -39,6 +39,7 @@ import { useEffect } from "react";
 import {useConnectUser} from "../User Forms/useConnectUser.js";
 import { Checkout } from "../Order/Checkout.js";
 import { PayForm } from "../Order/PayForm.js";
+import ErrorPage from "./ErrorPage.js";
 
 // Routing במקום 
 // כי זה שם שמור
@@ -102,9 +103,13 @@ export const MyRouting = () => {
                     {/* questions pages */}
                     <Route path="/myCommonQuestions" element={<CommonQuestions></CommonQuestions>}></Route>
 
+                    <Route path="/myErrorPage/:code/:message/:back" element={<ErrorPage/>}></Route>
+
+
+
                     {/* admin page */}
-                    <Route path="/AllAdminPages" element={<AllAdminPages></AllAdminPages>}></Route>
-                    <Route path="/myAdminDashboard" element={<AdminDashboard></AdminDashboard>}></Route>
+                    <Route path="/AllAdminPages/:token" element={<AllAdminPages></AllAdminPages>}></Route>
+                    {/* <Route path="/myAdminDashboard" element={<AdminDashboard></AdminDashboard>}></Route> */}
 
                     {/* empty pages?? */}
                     <Route path="/myJoys" element={<Joys></Joys>}></Route>
