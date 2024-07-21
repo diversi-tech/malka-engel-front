@@ -5,10 +5,10 @@ import { useNavigate } from 'react-router-dom';
 
 export const ToConnect = () => {
     const navigate = useNavigate();
-    const handleClose = () => {navigate('/myOrderForm')};
+    const handleClose = () => {navigate(-1)};
     const handleShowLogin = () => {navigate('/myLogin')}; 
-    const handleShowLogin2 = () => {navigate('/myOrderForm')};  
-    const { currentUser, connected } = useSelector(u => u.DataReducer_Users);
+    const handleShowLogin2 = () => {navigate(-1)};  
+    const {currentUser, connected } = useSelector(u => u.DataReducer_Users);
 
 
     return (
