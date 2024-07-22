@@ -1,6 +1,8 @@
+
 <span style="color: #FFA500;">EventDesign E-commerce Platform</span>
 Introduction
 Welcome to the Event Design site, a sophisticated online marketplace for purchasing graphic design products tailored for events, such as banners, advertisements, and more. Our platform offers a seamless and user-friendly experience, ensuring that both customers and administrators have all the tools they need for efficient and enjoyable interactions.
+
 
 Features
 User Registration: Easy sign-up and login process for customers.
@@ -21,7 +23,9 @@ Clone the repository:
 
 bash
 Copy code
+
 git clone https://github.com/diversi-tech/malka-engel-front.git
+
 cd eventdesign-platform
 Set up the database:
 
@@ -82,5 +86,7 @@ License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 Contact
+
 For any inquiries or questions, please contact us at <span style="color: #FFA500;">d32193412.com</span>.
+
 
