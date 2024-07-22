@@ -12,26 +12,14 @@ export const SendEmail = async (emailRequest) => {
     }
 }
 
-
 export const addEmail = async (newEmail) => {
-  try {
-    const responses = await Promise.all([
-      axios.post("https://localhost:7297/api/Mailchimp/add-subscriber", {
-        listId: "e1737e366f",
-        email: newEmail.email,
-        fName: newEmail.name
-      }),
-      axios.put("https://localhost:7297/api/Email/add-data", {
-        name: newEmail.name,
-        email: newEmail.email,
-        message: newEmail.message
-      })
-    ]);
-    return responses;
-  } catch (error) {
-    console.error('Error adding email:', error);
-    throw error;
-  }
+    try {
+        const response = await axios.put("https://localhost:7297/api/Email/add-data", newEmail);
+        return response;
+    } catch (error) {
+        console.error('Error adding category :', error);
+        throw error;
+    }
 };
 
 export const SendEmails = async (newEmail) => {
@@ -96,7 +84,7 @@ export const postSendEmails = async (newEmail) => {
 export const SendEmailToReset = async (toAddress) => {
     try {
         debugger
-        let  response = await axios.post(`${API_BASE_URL}/sendToResetPas?ToAddress=${toAddress.ToAddress}`);
+        const response = await axios.post(`${API_BASE_URL}/sendToResetPas`, toAddress);
         return response;
 
     } catch (error) {
@@ -106,26 +94,33 @@ export const SendEmailToReset = async (toAddress) => {
 
 
 
-
-export const sendCampaign = async ({ Subject, HtmlContent }) => {
-  try {
-    const response = await axios.post("https://localhost:7297/api/Mailchimp/send-campaign", {
-      Subject,
-      HtmlContent
-    }, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-
-    console.log('Campaign sent successfully:', response.data);
-    return response;
-  } catch (error) {
-    console.error('Error sending campaign:', error);
-    throw error;
+export const sendEmailsForAllUsers = async ({ Greeting, Subject, Body, Attachments }) => {
+    try {
+      const formData = new FormData();
+      formData.append('Greeting', Greeting);
+    //   formData.append('ToAddress', ToAddress);
+      formData.append('Subject', Subject);
+      formData.append('Body', Body);
+  
+      Attachments.forEach((file, index) => {
+        if (file) {
+          formData.append(`Attachments`, file);
+        }
+      });
+  
+      const response = await axios.post("https://localhost:7297/api/Email/send-emails", formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+  
+      console.log('Email sent successfully:', response.data);
+      return response;
+    } catch (error) {
+      console.error('Error sending email:', error);
+      throw error;
+    }
   }
-}
-
 
 
 
