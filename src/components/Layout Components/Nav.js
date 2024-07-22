@@ -14,7 +14,7 @@ export const Nav = () => {
     const currentUser = useSelector(s => s.DataReducer_Users.currentUser)
     const connected = useSelector(s => s.DataReducer_Users.connected)
     const {Logout} = useConnectUser()
-
+    const token = localStorage.getItem('token')
   
     let myStyle = { backgroundColor: "rgb(207, 97, 221)" }
     //TODO//
@@ -50,8 +50,8 @@ export const Nav = () => {
 
                         <li className="nav-item"><Link className="nav-link" to="./myEmailForm">{t('navPage.linkStayTuned')}</Link> </li>
 
-                        <li className="nav-item"><Link className="nav-link" to="./AllAdminPages">מסכי ניהול</Link> </li>
-                        <li className="nav-item"><p className="nav-link" style ={myStyle}>{connected && currentUser.name || !connected && "NOT CONNECTED"}</p> </li>
+{                connected && currentUser.typeID ===3 && <li className="nav-item"><Link className="nav-link" to={`./AllAdminPages/${token}`}>מסכי ניהול</Link> </li>
+}                        <li className="nav-item"><p className="nav-link" style ={myStyle}>{connected && currentUser.name || !connected && "NOT CONNECTED"}</p> </li>
                     </ul>
                 </div>
                 {i18n.language !== 'en' && (

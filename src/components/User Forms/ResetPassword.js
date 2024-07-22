@@ -40,7 +40,7 @@ const handleClick= async() => {
 //כאן צריך להיות פעולה של שליחת מייל 
 //המייל יכנס ל - '/myResetPasswordLink'
 debugger
-let result = await SendEmailToReset(emailRequest.toAddress)
+let result = await SendEmailToReset({ToAddress:emailRequest.toAddress})
 if (result && result.status == 200)
 //Go back
         setRestSec(true)

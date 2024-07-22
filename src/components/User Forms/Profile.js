@@ -26,10 +26,7 @@ export const Profile = () => {
   };
 
   const handleSave = async() => {
-    if(profileData.typeID)
-        setProfileData({ ...profileData, typeID: 2})
-    else 
-        setProfileData({ ...profileData, typeID: 1})
+    debugger
     //בדיקת תקינות קלטים
     debugger
 if(validForm(profileData)){
@@ -44,6 +41,7 @@ if(validForm(profileData)){
 
     }
 else{
+  console.log(result)
     alert("Network error")
 }
 
@@ -86,11 +84,14 @@ else{
 
             <Form.Group controlId="formType">
               <Form.Label> {t('signUpPage.typeName')}</Form.Label>
-                <input type="checkbox"
+                <input 
+                 type="checkbox"
                  checked={isChecked}
-                 onChange={(e) => setProfileData({ ...profileData,typeID : e.target.checked})}
+                 onChange={(e) => {setIsChecked(!isChecked); {!isChecked && setProfileData({ ...profileData, typeID: 2})}{ isChecked && setProfileData({ ...profileData, typeID: 1})}}}
                  disabled={!isEditing} 
+                 
                  />
+      
               </Form.Group>
 
 

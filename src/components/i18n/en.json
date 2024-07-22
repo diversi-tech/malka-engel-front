@@ -151,5 +151,21 @@
     "createdAt":"ordered at",
     "status":"status",
     "totalAmount":"total amount"
+   },
+   "orderFormPage":{
+    "title":"Order details",
+    "nameTitle":"Product name: ",
+    "nameProduct":"nameEn",
+    "descriptionTitle":"Your text: ",
+    "descriptionProduct":"descriptionEn",
+    "wording":"text: " ,
+    "comments":"comments: ",
+
+    "price":"Price: ",
+    "addLogo":" הוסף לוגו",
+    "selectLogo":"בחר קובץ לוגו :",
+    "fileLogo":"קובץ לוגו:",
+    "TotalPayment":"Total payment:",
+    "buttonSubmitOrder":"Place order"
    }
 }
