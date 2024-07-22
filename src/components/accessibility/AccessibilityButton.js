@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Menu, MenuItem, IconButton } from '@mui/material';
-import AccessibilityIcon from '@mui/icons-material/Accessibility';
+import AccessibleForwardIcon from '@mui/icons-material/AccessibleForward'; // השתמש באייקון המתאים
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import FormatSizeIcon from '@mui/icons-material/FormatSize';
 import HighlightIcon from '@mui/icons-material/Highlight';
@@ -72,10 +72,8 @@ const AccessibilityButton = () => {
     const toggleInvertColors = () => {
         if (isInverted) {
             document.body.classList.remove('invert-colors');
-            document.querySelector('.accessibility-button').classList.remove('invert-colors');
         } else {
             document.body.classList.add('invert-colors');
-            document.querySelector('.accessibility-button').classList.add('invert-colors');
         }
         setIsInverted(!isInverted);
     };
@@ -119,15 +117,15 @@ const AccessibilityButton = () => {
                 </IconButton>
             )}
             <Button
+                className="accessibility-button"
                 aria-controls="accessibility-menu"
                 aria-haspopup="true"
                 onClick={handleClick}
                 variant="contained"
                 color="primary"
-                startIcon={<AccessibilityIcon />}
             >
-                נגישות
-      </Button>
+                <AccessibleForwardIcon />
+            </Button>
             <Menu
                 id="accessibility-menu"
                 anchorEl={anchorEl}
@@ -137,19 +135,19 @@ const AccessibilityButton = () => {
             >
                 <MenuItem onClick={() => handleAccessibilityOption('textReader')}>
                     <VisibilityIcon /> קורא טקסטים
-        </MenuItem>
+                </MenuItem>
                 <MenuItem onClick={() => handleAccessibilityOption('highlightHeadlines')}>
                     <HighlightIcon /> הדגשת כותרות
-        </MenuItem>
+                </MenuItem>
                 <MenuItem onClick={() => handleAccessibilityOption('enlargeText')}>
                     <FormatSizeIcon /> הגדלת כתב
-        </MenuItem>
+                </MenuItem>
                 <MenuItem onClick={() => handleAccessibilityOption('invertColors')}>
                     <InvertColorsIcon /> היפוך צבעים
-        </MenuItem>
+                </MenuItem>
                 <MenuItem onClick={() => handleAccessibilityOption('resetAccessibility')}>
                     <CloseIcon /> איפוס נגישות
-        </MenuItem>
+                </MenuItem>
             </Menu>
         </div>
     );
