@@ -8,6 +8,7 @@ import Home from './components/Layout Components/Home.js';
 import { Subscriber } from 'rxjs';
 import React, { useEffect } from 'react';
 import setupRefreshToken from './components/User Forms/Tokens/RefreshToken.js'; 
+import AccessibilityButton from './components/accessibility/AccessibilityButton';
 
 function App() {
   useEffect(() => {
@@ -16,8 +17,13 @@ function App() {
 
   return (
     <div className="App">
+
       <Provider store={Store}>
-        <MyRouting></MyRouting>
+      
+        <MyRouting>
+      
+        </MyRouting>
+        <AccessibilityButton />
         {/* <RecommendedProducts></RecommendedProducts> */}
       </Provider>
     </div> 
