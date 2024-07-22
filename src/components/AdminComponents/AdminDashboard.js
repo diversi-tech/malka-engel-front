@@ -427,7 +427,13 @@ const AdminDashboard = () => {
 
     let imageURL = selectedProduct.imageURL; // Use existing image URL or update it if a new image is selected
     if (image) {
-      imageURL = await uploadImageToS3(image);
+      try {
+        imageURL = await uploadImageToS3(image);
+      } catch (error) {
+        console.error('Error uploading image to S3:', error);
+        alert('Failed to upload image');
+        return;
+      }
     }
 
     const formData = {
@@ -465,40 +471,38 @@ const AdminDashboard = () => {
         <Button variant="primary" onClick={handleShowAddModal}>Add Product</Button>
       </div>
       <ListGroup className="mb-4">
-  {products.map((product, index) => (
-    <ListGroup.Item key={index}>
-      <Row>
-        <Col md={3}>
-          <div className="product-image-container">
-            <iframe
-              title={`Product ${index}`}
-              src={product.imageURL}
-              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-              frameBorder="0"
-            />
-          </div>
-        </Col>
-        <Col md={7}>
-          <h5><b>Id: </b>{product.productID}</h5>
-          <h4>{product.nameEn} / {product.nameHe}</h4>
-          <p>{product.descriptionEn} / {product.descriptionHe}</p>
-          <p>Price: {product.price}</p>
-          <p>Sale Price: {product.salePrice}</p>
-        </Col>
-        <Col md={2}>
-          <Button variant="outline-primary" onClick={() => handleShowUpdateModal(product)}>
-            <FaPen />
-          </Button>
-          <Button variant="outline-danger" className="ml-2" onClick={() => handleDeleteProduct(product.productID)}>
-            <FaTrash />
-          </Button>
-        </Col>
-      </Row>
-    </ListGroup.Item>
-  ))}
-</ListGroup>
-
-
+        {products.map((product, index) => (
+          <ListGroup.Item key={index}>
+            <Row>
+              <Col md={3}>
+                <div className="product-image-container">
+                  <iframe
+                    title={`Product ${index}`}
+                    src={product.imageURL}
+                    style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                    frameBorder="0"
+                  />
+                </div>
+              </Col>
+              <Col md={7}>
+                <h5><b>Id: </b>{product.productID}</h5>
+                <h4>{product.nameEn} / {product.nameHe}</h4>
+                <p>{product.descriptionEn} / {product.descriptionHe}</p>
+                <p>Price: {product.price}</p>
+                <p>Sale Price: {product.salePrice}</p>
+              </Col>
+              <Col md={2}>
+                <Button variant="outline-primary" onClick={() => handleShowUpdateModal(product)}>
+                  <FaPen />
+                </Button>
+                <Button variant="outline-danger" className="ml-2" onClick={() => handleDeleteProduct(product.productID)}>
+                  <FaTrash />
+                </Button>
+              </Col>
+            </Row>
+          </ListGroup.Item>
+        ))}
+      </ListGroup>
 
       <Modal show={showAddModal} onHide={handleCloseAddModal}>
         <Modal.Header closeButton>
@@ -534,18 +538,14 @@ const AdminDashboard = () => {
               <Form.Label>Image</Form.Label>
               <Form.Control type="file" onChange={(e) => setImage(e.target.files[0])} required />
             </Form.Group>
-            <Form.Group controlId="recommaned">
-              <Form.Check
-                type="checkbox"
-                label="Recommended"
-                checked={recommaned}
-                onChange={(e) => setRecommaned(e.target.checked)}
-              />
+            <Form.Group controlId="isRecommended">
+              <Form.Check type="checkbox" label="Recommended" checked={recommaned} onChange={(e) => setRecommaned(e.target.checked)} />
             </Form.Group>
             <Button variant="primary" type="submit">Add Product</Button>
           </Form>
         </Modal.Body>
       </Modal>
+
       <Modal show={showUpdateModal} onHide={handleCloseUpdateModal}>
         <Modal.Header closeButton>
           <Modal.Title>Update Product</Modal.Title>
@@ -580,13 +580,8 @@ const AdminDashboard = () => {
               <Form.Label>Image</Form.Label>
               <Form.Control type="file" onChange={(e) => setImage(e.target.files[0])} />
             </Form.Group>
-            <Form.Group controlId="recommaned">
-              <Form.Check
-                type="checkbox"
-                label="Recommended"
-                checked={recommaned}
-                onChange={(e) => setRecommaned(e.target.checked)}
-              />
+            <Form.Group controlId="isRecommended">
+              <Form.Check type="checkbox" label="Recommended" checked={recommaned} onChange={(e) => setRecommaned(e.target.checked)} />
             </Form.Group>
             <Button variant="primary" type="submit">Update Product</Button>
           </Form>
