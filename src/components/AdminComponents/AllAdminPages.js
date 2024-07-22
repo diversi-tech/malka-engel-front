@@ -390,6 +390,7 @@ import EmailForm from '../Email/EmailForm';
 import MailingList from '../Email/MailingList';
 import SeEmails from '../Email/SeEmails';
 import { Message } from '../Email/Messages';
+import { AdminCommonQuestions } from './CommonQuestions';
 // import { sendEmailsForAllUsers } from '../../axios/EmailAxios';
 
 const AllAdminPages = () => {
@@ -425,6 +426,8 @@ const AllAdminPages = () => {
         return <MailingList />;
       case 'Message':
         return <Message />;
+      case 'AdminCommonQuestions':
+        return <AdminCommonQuestions />;
       default:
         return null;
     }
@@ -500,6 +503,14 @@ const AllAdminPages = () => {
               block
             >
               הצגות הודעות
+            </Button>
+            <Button
+              variant="primary"
+              className="mb-3"
+              onClick={() => handleComponentChange('AdminCommonQuestions')}
+              block
+            >
+              שאלות נפוצות
             </Button>
           </div>
         </Offcanvas.Body>
