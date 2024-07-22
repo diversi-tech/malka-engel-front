@@ -58,7 +58,8 @@ export const Checkout = () => {
                         "OrderItemID": 0,
                         "OrderID": orderidToAdd,
                         "ProductID": product.productID,
-                       // "Quantity": product.quantity,
+                        "Wording": product.wording,
+                        "Comment": product.additionalComments,
                         "Price": product.salePrice != 0 ? product.salePrice : product.price,
                         "Comment":"",// product.comment,
                         "Wording": ""//product.wording
