@@ -50,6 +50,7 @@ export const PutOrder = async (id, status) => {
 
 export const PostOrder = async (order) => {
     try {
+        debugger
         let result = await axios.post(`${API_BASE_URL}PostOrder`, order);
         return result.data
     }
@@ -60,13 +61,4 @@ export const PostOrder = async (order) => {
     }
 }
 
-export const PutAllPropOfOrder = async (id, order) => {
-    try {
-        let result = await axios.put(`${API_BASE_URL}PutAllPropOfOrder/${id}`, order);
-        debugger
-        return result.data
-    }
-    catch (ch) {
-        console.log(ch)
-    }
-}
+

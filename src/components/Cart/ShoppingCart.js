@@ -6,8 +6,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { PageTitle } from '../Layout Components/PageTitle';
 import { CartDisplay } from './CartDisplay';
+import { CartSummary } from './CartSummary';
+
 import { Button } from 'react-bootstrap';
 import { getCart } from '../product/cookies/SetCart';
+import { OrderHistory } from '../Order/OrderHistory';
 
 
 
@@ -18,6 +21,7 @@ export const ShoppingCart = () => {
   const { t, i18n } = useTranslation();
   const [items, setItems] = useState([]);
   const [total, setTotal] = useState(0);
+  const [showHistory, setShowHistory] = useState(false);
   const navigate = useNavigate();
 
   // useEffect(() => {
@@ -62,7 +66,10 @@ export const ShoppingCart = () => {
   //   itemsSubject.next([]);
   // };
 
-
+const goToCheckout=()=>{
+  navigate('/myCheckout');
+ 
+}
   
 
 
@@ -78,10 +85,14 @@ export const ShoppingCart = () => {
       {cart.length < 0 ? (
         <p>{t('shoppingCartPage.p1')}</p>) : (
         <CartDisplay></CartDisplay>
+
       )}
-    
-      {/* <button onClick={goToCheckout}>{t('shoppingCartPage.checkoutButton')}</button> */}
-    </div>
+            <button className="btn btn-primary" onClick={()=>{setShowHistory(!showHistory)}}>צפה בהזמנות קודמות </button>
+           { showHistory && <OrderHistory/>} 
+<br></br>
+            <button className="btn btn-primary" onClick={goToCheckout}>המשך לתשלום-Proceed to checkout </button>
+           
+            </div>
   );
 };
 
