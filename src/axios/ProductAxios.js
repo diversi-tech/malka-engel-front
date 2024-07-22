@@ -25,10 +25,10 @@ export const GetProById = async (language) => {
 }
 
 export const PostProduct = async (productForm) => {
-    try {
+    try {debugger
         let result = await axios.post(`${API_BASE_URL}PostProduct`, productForm)
         debugger
-        return result.data
+        return result;
     }
     catch (ch) {
         console.log(ch)

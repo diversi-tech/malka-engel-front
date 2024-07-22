@@ -39,7 +39,9 @@ import { useEffect } from "react";
 import {useConnectUser} from "../User Forms/useConnectUser.js";
 import { AddReview } from "../product/productDetail/review/AddReview.js";
 import { Checkout } from "../Order/Checkout.js";
+import { PayForm } from "../Order/PayForm.js";
 import ErrorPage from "./ErrorPage.js";
+import { PopUp } from "../Cart/popUp.js";
 
 // Routing במקום 
 // כי זה שם שמור
@@ -98,6 +100,9 @@ export const MyRouting = () => {
 
                     {/* cart pages */}
                     <Route path="/myShoppingCart" element={<ShoppingCart></ShoppingCart>}></Route>
+                    <Route path="/myPayForm" element={<PayForm></PayForm>}></Route>
+                    <Route path="/myCheckout" element={<Checkout></Checkout>}></Route>
+                    <Route path="/myPopUp" element={<PopUp/>}></Route>
 
                     {/* questions pages */}
                     <Route path="/myCommonQuestions" element={<CommonQuestions></CommonQuestions>}></Route>
