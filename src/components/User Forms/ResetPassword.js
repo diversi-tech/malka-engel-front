@@ -1,95 +1,89 @@
-import React,{ useState } from 'react';
-import { Form, Button, Container, Row, Col, Modal } from 'react-bootstrap';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import useValidation from './useValidation';
-import { SendEmail, SendEmailToReset } from '../../axios/EmailAxios';
+import { SendEmailToReset } from '../../axios/EmailAxios';
+import { Modal, Box, Typography, TextField, Button, CircularProgress } from '@mui/material';
+import theme from '../../createTheme'; 
 
-export const ResetPassword=()=>{
-
-    const { t, i18n } = useTranslation();
-    // const [user, setUser] = useState({});
-    const [emailError, setEmailError] = useState('');
-//Email
-const [emailRequest, setEmailRequest]=useState({
-    toAddress: "",
-    subject: "Email to reset password",
-    body: "Click on this link...........",
+export const ResetPassword = () => {
+  const { t } = useTranslation();
+  const [emailRequest, setEmailRequest] = useState({
+    toAddress: '',
+    subject: 'Email to reset password',
+    body: 'Click on this link...........',
     isBodyHtml: false
-  } )  
-//Pupup 
-const [showModal, setShowModal] = useState(true);
-const [restSec, setRestSec] = useState(false);
+  });
+  const [emailError, setEmailError] = useState('');
+  const [restSec, setRestSec] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-const handleClose = () => {navigate(-2)};    
-  //יצירת משנה שישמש לניווט
-  const navigate = useNavigate()
-   //Custom Hook for Validation
- const {validateEmail} = useValidation()
+  const navigate = useNavigate();
+  const { validateEmail } = useValidation();
 
-//On click function
-const handleClick= async() => {
-    debugger
+  const handleClose = () => { navigate(-2); };
+
+  const handleClick = async () => {
     if (!validateEmail(emailRequest.toAddress)) {
-        setEmailError(t('resetPasswordPage.invalidEmail'));
+      setEmailError(t('resetPasswordPage.invalidEmail'));
+    } else {
+      setEmailError('');
+      setLoading(true);
+      try {
+        // Send email to reset the password
+        let result = await SendEmailToReset({ ToAddress: emailRequest.toAddress });
+        if (result && result.status === 200) {
+          setRestSec(true);
+        } else {
+          alert('Network error: ');
+        }
+      } catch (error) {
+        console.error('Error sending email:', error);
+        alert('Network error: ');
+      } finally {
+        setLoading(false);
+      }
     }
-    else{
-        setEmailError('');
-    //Send a Email to Rest the password
-//כאן צריך להיות פעולה של שליחת מייל 
-//המייל יכנס ל - '/myResetPasswordLink'
-debugger
-let result = await SendEmailToReset({ToAddress:emailRequest.toAddress})
-if (result && result.status == 200)
-//Go back
-        setRestSec(true)
-// navigate(-2) 
-else
-alert("Network error: ")
-    }
-}
-const style3={
-    ' width': '100%',
-    ' height': '700px',
-     'border': '5px'
-   }
-return<>
+  };
 
-<Modal show={showModal} onHide={handleClose}  centered> 
-    <Modal.Body>
-{/*  */}
-{restSec?(<h3 className="text-center">{t('resetPasswordPage.secMassage')}</h3>):(
-<Container className="d-flex justify-content-center align-items-center vh-50" style={style3}>
-    <Row className="w-100">
-      <Col xs={80} md={50} lg={100} className="mx-auto">
-        <Form className="text-center">
-            <h3>{t('resetPasswordPage.title')}</h3>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label > {t('resetPasswordPage.putEmail')}</Form.Label>
-            <Form.Control type="email"
-             onChange={(e) => {setEmailRequest({ ...emailRequest, toAddress: e.target.value })}} />
-              {emailError && <div style={{ color: 'red' }}>{emailError}</div>}
-          </Form.Group>
+  const modalStyle = {
+    width: '80%',
+    height: 'auto',
+    maxWidth: '600px',
+    padding: theme.spacing(4)
+  };
 
-          <Button className="w-100 mt-3" onClick={handleClick}>
-          {t('resetPasswordPage.resetButton')}
-          </Button>
-          </Form>
-      </Col>
-    </Row>
-  </Container>)}
-{/*  */}
-    </Modal.Body>
-    <Modal.Footer>
-      <Button variant="secondary" onClick={handleClose}>
-        Close
-      </Button>
-      {/* Add additional buttons if needed */}
-    </Modal.Footer>
-  </Modal>
- 
-      
-);
-  </>
+  return (
+    <Modal open onClose={handleClose} centered>
+      <Box sx={modalStyle}>
+        <Typography variant="h4" align="center" mb={3}>
+          {restSec ? t('resetPasswordPage.secMassage') : t('resetPasswordPage.title')}
+        </Typography>
+        {!restSec && (
+          <Box component="form" noValidate onSubmit={(e) => e.preventDefault()} textAlign="center">
+            <TextField
+              label={t('resetPasswordPage.putEmail')}
+              fullWidth
+              margin="normal"
+              variant="outlined"
+              type="email"
+              value={emailRequest.toAddress}
+              onChange={(e) => setEmailRequest({ ...emailRequest, toAddress: e.target.value })}
+              error={!!emailError}
+              helperText={emailError}
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              fullWidth
+              onClick={handleClick}
+              sx={{ mt: 2 }}
+            >
+              {loading ? <CircularProgress size={24} color="inherit" /> : t('resetPasswordPage.resetButton')}
+            </Button>
+          </Box>
+        )}
+      </Box>
+    </Modal>
+  );
 };

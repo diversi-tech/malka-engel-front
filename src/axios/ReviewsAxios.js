@@ -12,7 +12,7 @@ export const GetAllReviews = async () => {
     }
 }
 
-export const AddReview = async (reviewToAdd) => {
+export const AddReviewFunc = async (reviewToAdd) => {
     debugger
     try {
         let result = await axios.post(`${API_BASE_URL}AddReview`, reviewToAdd);

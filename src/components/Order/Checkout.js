@@ -10,7 +10,8 @@ import { clearCart, getCart } from '../product/cookies/SetCart';
 import { GetOrderByOrderId, PostOrder, PutAllPropOfOrder, } from '../../axios/OrderAxios';
 import { PostOrderItemList } from '../../axios/OrderItemAxios';
 import { PopUp } from "../Cart/popUp.js";
-import { SendEmail } from "../../axios/EmailAxios.js";
+import { sendEmails } from "../../axios/EmailAxios.js";
+import ReactDOMServer from 'react-dom/server';
 
 export const Checkout = () => {
     const { t, i18n } = useTranslation();
@@ -57,7 +58,8 @@ export const Checkout = () => {
                         "OrderItemID": 0,
                         "OrderID": orderidToAdd,
                         "ProductID": product.productID,
-                       // "Quantity": product.quantity,
+                        "Wording": product.wording,
+                        "Comment": product.additionalComments,
                         "Price": product.salePrice != 0 ? product.salePrice : product.price,
                         "Comment":"",// product.comment,
                         "Wording": ""//product.wording
@@ -70,10 +72,9 @@ export const Checkout = () => {
                 //delete all data from cookies
                 if (result) {
 setMyHTML(
-   " <div> <h1>Thank you for your order</h1></div>"
-
-/* <h1>Thank you for your order</h1>
-<ListGroup>
+<div>
+<h1>Thank you for your order </h1>
+ <ListGroup>
 {currentCart.map(product => (
     <ListGroup.Item key={product.productID}>
         <p> <strong>{t('orderFormPage.nameTitle')} </strong> {product[t('orderFormPage.nameProduct')]}
@@ -84,13 +85,11 @@ setMyHTML(
             <strong>{t('orderFormPage.price')} </strong> {product.salePrice != 0 ? product.salePrice : product.price}</p>
     </ListGroup.Item>
 ))}
-</ListGroup>
-</div>" */
+</ListGroup> 
+</div>
 )
-                    // sendEmails();
+                  sendEmailsTo();
                     clearCart();
-
-                    alert("Thanks for Ordering in our site!")
                 }
 
 
@@ -98,32 +97,30 @@ setMyHTML(
             }
         }
     };
-    const sendEmails = async() => {
+    const sendEmailsTo = async() => {
         // setEmailToCust({...emailToCust, ToAddress:"sr6737543@gmail.com"})
 
         const emailToCust = {
             Greeting: '',
             ToAddress: currentUser.email,
             Subject: 'Your Deginery order receipt from ' ,
-            Body: "myHTML",
-            IsBodyHtml: false,
+             Body: ReactDOMServer.renderToStaticMarkup(myHTML),         
+            IsBodyHtml: true,
             Attachments: [],
             // EmailList:null
         };
-        debugger
-        const { Greeting, ToAddress, Subject, Body } = emailToCust;
-try{
-            const result = await SendEmail( { Greeting, ToAddress, Subject, Body } )
+        const { Greeting, ToAddress, Subject, Body,IsBodyHtml, Attachments } = emailToCust;
+
+    debugger
+            const result = await sendEmails( { Greeting, ToAddress, Subject, Body,IsBodyHtml, Attachments } )
             if (result && result.status == 200)
-                alert("Email sent successfully")
+                navigate("/myPopUp")
+
+else{
+    navigate(`/myErrorPage/${204}/${"שגיאה בעת שליחת מייל"}/${"back"}`)
+
 }
-catch(error){
-   alert(error.message)
- 
-}
-       
-       
-        
+         
     }
     useEffect(() => {
         setOrder({ ...order, "TotalAmount": calculateTotalPrice(currentCart) })

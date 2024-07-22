@@ -13,12 +13,12 @@ import { Joys } from "../Empty pages/Joys.js";
 import UserProfile from "../User/UserProfile.js";
 import { Product } from "../product/productDetail/Product.js";
 import { OrderForm } from "../Order/OrderForm.js";
-import { Review } from "../product/productDetail/Review.js";
+import { Review } from "../product/productDetail/review/Review.js";
 import { ScrollToTop } from "./scrollToTop.js";
 import { Home } from './Home.js';
 import { ShoppingCart } from '../Cart/ShoppingCart.js';
 import { Terms } from '../Empty pages/Terms.js';
-import { ShowReviews } from '../product/ShowReviews.js';
+import { ShowReviews } from '../product/productDetail/review/ShowReviews.js';
 import { OrderHistory } from "../Order/OrderHistory.js";
 import { Account } from "../User Forms/Account.js"
 import { Login } from "../User Forms/SignIn.js";
@@ -37,9 +37,11 @@ import EmailForm from "../Email/EmailForm.js";
 import MailingList from "../Email/MailingList.js";
 import { useEffect } from "react";
 import {useConnectUser} from "../User Forms/useConnectUser.js";
+import { AddReview } from "../product/productDetail/review/AddReview.js";
 import { Checkout } from "../Order/Checkout.js";
 import { PayForm } from "../Order/PayForm.js";
 import ErrorPage from "./ErrorPage.js";
+import { PopUp } from "../Cart/popUp.js";
 
 // Routing במקום 
 // כי זה שם שמור
@@ -74,7 +76,7 @@ export const MyRouting = () => {
                     <Route path="/myProfile" element={<UserProfile />} />
                     <Route path="/mySignUp" element={<SignUp />} />
                     <Route path="/myResetPassword" element={<ResetPassword />} />
-                    <Route path="/myResetPasswordLink/:token" element={<ResetPasTakeCare />} />
+                    <Route path="/myResetPasswordLink" element={<ResetPasTakeCare />} />
                     <Route path="/myToConnect" element={<ToConnect></ToConnect>} />
 
                     {/* product pages */}
@@ -83,6 +85,7 @@ export const MyRouting = () => {
                     <Route path="/myRecommendedProducts" element={<RecommendedProducts></RecommendedProducts>} ></Route>
                     <Route path="/myShowReviews/:numStars" element={<ShowReviews></ShowReviews>}></Route>
                     <Route path="/myReview/:productId" element={<Review></Review>}></Route>
+                    <Route path="/myAddReview" element={<AddReview></AddReview>}></Route>
                     <Route path="/myProductByCategory/:idCategory" element={<ProductByCategory></ProductByCategory>}></Route>
                     <Route path ="/myCategoriesManager" element={<AllCategories></AllCategories>}></Route>
 
@@ -99,6 +102,7 @@ export const MyRouting = () => {
                     <Route path="/myShoppingCart" element={<ShoppingCart></ShoppingCart>}></Route>
                     <Route path="/myPayForm" element={<PayForm></PayForm>}></Route>
                     <Route path="/myCheckout" element={<Checkout></Checkout>}></Route>
+                    <Route path="/myPopUp" element={<PopUp/>}></Route>
 
                     {/* questions pages */}
                     <Route path="/myCommonQuestions" element={<CommonQuestions></CommonQuestions>}></Route>
