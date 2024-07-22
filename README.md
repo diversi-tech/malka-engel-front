@@ -1,4 +1,5 @@
-pan style="color: #FFA500;">EventDesign E-commerce Platform</span>
+
+Event Design 
 Introduction
 Welcome to the EventDesign E-commerce Platform, a sophisticated online marketplace for purchasing graphic design products tailored for events, such as banners, advertisements, and more. Our platform offers a seamless and user-friendly experience, ensuring that both customers and administrators have all the tools they need for efficient and enjoyable interactions.
 
@@ -82,5 +83,5 @@ License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 Contact
-For any inquiries or questions, please contact us at <span style="color: #FFA500;">support@eventdesign.com</span>.
+For any inquiries or questions, please contact us at d32193412.com.
 
