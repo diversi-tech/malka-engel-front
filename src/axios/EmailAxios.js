@@ -55,14 +55,15 @@ export const send = async (newEmail) => {
 };
 
 //עבור שליחת מייל לכתובת אחת
-export const sendEmails = async ({ Greeting, ToAddress, Subject, Body, Attachments }) => {
+export const sendEmails = async ({ Greeting, ToAddress, Subject, Body,IsBodyHtml = false , Attachments }) => {
+  debugger
   try {
     const formData = new FormData();
     formData.append('Greeting', Greeting);
     formData.append('ToAddress', ToAddress);
     formData.append('Subject', Subject);
     formData.append('Body', Body);
-
+    formData.append('IsBodyHtml', IsBodyHtml);
     Attachments.forEach((file, index) => {
       if (file) {
         formData.append(`Attachments`, file);

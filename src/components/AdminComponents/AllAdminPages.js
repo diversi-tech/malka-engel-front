@@ -410,7 +410,7 @@ const navigate = useNavigate();
   const validToken= async()=>{
     debugger
     const result = await ValidToken(token)
-    if(result.data && currentUser&& currentUser.typeID === 3)
+    if(result && result.data && currentUser&& currentUser.typeID === 3)
     {
       handleShow();  
     }

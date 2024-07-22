@@ -32,7 +32,9 @@ const handleClose = () => {window.close()};
   const result = await ValidToken(token)
   if(result.data)
    setShowModal(true)
-
+  else{
+    navigate(`/myErrorPage/${404}/${"דף לא נמצא"}/${"close"}`)
+  }  
  }
 //On click function
 const handleClick=async() => {
