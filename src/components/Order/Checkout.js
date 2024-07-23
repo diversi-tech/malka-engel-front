@@ -11,7 +11,8 @@ import { PostOrderItemList } from '../../axios/OrderItemAxios';
 import { PopUp } from '../Cart/popUp';
 import { sendEmails } from '../../axios/EmailAxios';
 import ReactDOMServer from 'react-dom/server';
-import { PageTitle } from '../Layout Components/PageTitle';
+import PdfGenerator from "./PdfGenerator.js";
+import { SendEmailsForOrder, sendEmailsForOrder } from "./sendEmailsForOrder.js";
 
 export const Checkout = () => {
     const { t, i18n } = useTranslation();
@@ -23,11 +24,15 @@ export const Checkout = () => {
         "UserID": currentUser.userID,
         "Status": "Processing",
         "TotalAmount": 0,
-        "CreatedAt": "2024-07-22T11:32:01.338Z",
-        "Comment": "good"
-    });
-    const [myHTML, setMyHTML] = useState();
+        "CreatedAt": null,
+        "Comment": ""
+    })
+        const {generatePDFHtml} = PdfGenerator(order.OrderID)
+        const {sendEmailsToCustomer} = SendEmailsForOrder()
 
+
+
+    // פונקציה לחישוב סך המחירים
     const calculateTotalPrice = (products) => {
         return products.reduce((total, product) => total + (product.salePrice !== 0 ? product.salePrice : product.price), 0);
     };
@@ -37,8 +42,10 @@ export const Checkout = () => {
             navigate('/myToConnect');
         } else {
             const result = await PostOrder(order);
-            const orderidToAdd = result;
-            if (!orderidToAdd) {
+            const orderidToAdd = result
+            setOrder({...order,  OrderID: orderidToAdd})
+            // end //
+            if (!orderidToAdd || orderidToAdd  == -1) {
                 alert("Failed to create order, please try again later");
                 return;
             } else {
@@ -48,60 +55,29 @@ export const Checkout = () => {
                         "OrderItemID": 0,
                         "OrderID": orderidToAdd,
                         "ProductID": product.productID,
-                        "Wording": product.wording,
-                        "Comment": product.additionalComments,
-                        "Price": product.salePrice !== 0 ? product.salePrice : product.price,
-                    };
+                       // "Quantity": product.quantity,
+                        "Price": product.salePrice != 0 ? product.salePrice : product.price,
+                        "Comment": "",//product.comment,
+                        "Wording":"" //product.wording
+                    }
                     listItemOrder.push(itemOrder);
                 });
                 const result = await PostOrderItemList(listItemOrder);
                 if (result) {
-                    sendEmailsTo();
-                    clearCart();
+                    debugger
+                    generatePDFHtml(orderidToAdd)
+                    sendEmailsToCustomer(orderidToAdd)
+                    clearCart()
                 }
             }
         }
     };
 
-    const sendEmailsTo = async () => {
-        const emailToCust = {
-            Greeting: '',
-            ToAddress: currentUser.email,
-            Subject: 'Your Deginery order receipt from ',
-            Body: ReactDOMServer.renderToStaticMarkup(myHTML),
-            IsBodyHtml: true,
-            Attachments: [],
-        };
-        const { Greeting, ToAddress, Subject, Body, IsBodyHtml, Attachments } = emailToCust;
-        const result = await sendEmails({ Greeting, ToAddress, Subject, Body, IsBodyHtml, Attachments });
-        if (result && result.status === 200)
-            navigate("/myPopUp");
-        else {
-            navigate(`/myErrorPage/${204}/${"שגיאה בעת שליחת מייל"}/${"back"}`);
-        }
-    };
 
     useEffect(() => {
-        setMyHTML(
-            <div>
-                <Typography variant="h5">Thank you for your order</Typography>
-                <List>
-                    {currentCart.map(product => (
-                        <ListItem key={product.productID}>
-                            <ListItemText
-                                primary={`${t('orderFormPage.nameTitle')} ${product[t('orderFormPage.nameProduct')]}
-                                ${t('orderFormPage.descriptionTitle')} ${product[t('orderFormPage.descriptionProduct')]}
-                                ${t('orderFormPage.wording')} ${product.wording}
-                                ${t('orderFormPage.comments')} ${product.comment}
-                                ${t('orderFormPage.price')} ${product.salePrice !== 0 ? product.salePrice : product.price}`}
-                            />
-                        </ListItem>
-                    ))}
-                </List>
-            </div>
-        );
-        setOrder({ ...order, "TotalAmount": calculateTotalPrice(currentCart) });
-    }, []);
+        setOrder({ ...order, "TotalAmount": calculateTotalPrice(currentCart) })
+       
+    }, []);  
 
     return (
         <Container sx={{ mt: 4 }}>
