@@ -13,6 +13,7 @@ import { sendEmails } from '../../axios/EmailAxios';
 import ReactDOMServer from 'react-dom/server';
 import PdfGenerator from "./PdfGenerator.js";
 import { SendEmailsForOrder, sendEmailsForOrder } from "./sendEmailsForOrder.js";
+import { PageTitle } from '../Layout Components/PageTitle';
 
 export const Checkout = () => {
     const { t, i18n } = useTranslation();
