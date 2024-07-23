@@ -41,6 +41,7 @@ import { Checkout } from "../Order/Checkout.js";
 import { PayForm } from "../Order/PayForm.js";
 import ErrorPage from "./ErrorPage.js";
 import { PopUp } from "../Cart/popUp.js";
+import PdfGenerator from "../Order/PdfGenerator.js";
 
 // Routing במקום 
 // כי זה שם שמור
@@ -90,11 +91,13 @@ export const MyRouting = () => {
                     {/* order pages */}
                     <Route path="/myOrderForm" element={<OrderForm></OrderForm>}></Route>
                     <Route path="/myOrderHistory/:CurrentUser" element={<OrderHistory></OrderHistory>}></Route>
+                    <Route path="/sendEmailsForOrder" element={<sendEmailsForOrder/>}></Route>
 
                     {/* email page */}
                     <Route path="/mySendEmails" element={<SeEmails></SeEmails>}></Route>
                     <Route path="myEmailForm" element={<EmailForm></EmailForm>}></Route>
                     {/* <Route path="/myMailingList" element={<MailingList></MailingList>}></Route> */}
+                    <Route path="myPdf" element={<PdfGenerator/>}></Route>
 
                     {/* cart pages */}
                     <Route path="/myShoppingCart" element={<ShoppingCart></ShoppingCart>}></Route>

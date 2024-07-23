@@ -84,6 +84,35 @@ export const sendEmails = async ({ Greeting, ToAddress, Subject, Body,IsBodyHtml
   }
 };
 
+export const sendEmailsPdfFile = async ({ Greeting, ToAddress, Subject, Body,IsBodyHtml = false , Attachments }) => {
+  debugger
+  try {
+    const formData = new FormData();
+    formData.append('Greeting', Greeting);
+    formData.append('ToAddress', ToAddress);
+    formData.append('Subject', Subject);
+    formData.append('Body', Body);
+    formData.append('IsBodyHtml', IsBodyHtml);
+    Attachments.forEach((file, index) => {
+      if (file) {
+        formData.append(`Attachments`, file, "document.pdf");
+      }
+    });
+
+    const response = await axios.post("https://localhost:7297/api/Email/send", formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+
+    console.log('Email sent successfully:', response.data);
+    return response;
+  } catch (error) {
+    console.error('Error sending email:', error);
+    throw error;
+  }
+};
+
 
 export const postSendEmails = async (newEmail) => {
     try {

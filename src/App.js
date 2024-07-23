@@ -19,6 +19,7 @@ function App() {
     <div className="App">
       <Provider store={Store}>
         <MyRouting></MyRouting>
+        
         {/* <FileUpload></FileUpload> */}
         {/* <img src='https://designery.s3.eu-north-1.amazonaws.com/A.jpg'></img> */}
         {/* <RecommendedProducts></RecommendedProducts> */}

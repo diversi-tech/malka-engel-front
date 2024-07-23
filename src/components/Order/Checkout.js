@@ -12,6 +12,8 @@ import { PostOrderItemList } from '../../axios/OrderItemAxios';
 import { PopUp } from "../Cart/popUp.js";
 import { sendEmails } from "../../axios/EmailAxios.js";
 import ReactDOMServer from 'react-dom/server';
+import PdfGenerator from "./PdfGenerator.js";
+import { SendEmailsForOrder, sendEmailsForOrder } from "./sendEmailsForOrder.js";
 
 export const Checkout = () => {
     const { t, i18n } = useTranslation();
@@ -26,7 +28,10 @@ export const Checkout = () => {
         "CreatedAt": null,
         "Comment": ""
     })
-    const [myHTML, setMyHTML] = useState()
+        const {generatePDFHtml} = PdfGenerator(order.OrderID)
+        const {sendEmailsToCustomer} = SendEmailsForOrder()
+
+
 
     // פונקציה לחישוב סך המחירים
     const calculateTotalPrice = (products) => {
@@ -44,8 +49,9 @@ export const Checkout = () => {
             //alert(t)
             const result = await PostOrder(order);
             const orderidToAdd = result
+            setOrder({...order,  OrderID: orderidToAdd})
             // end //
-            if (!orderidToAdd) {
+            if (!orderidToAdd || orderidToAdd  == -1) {
                 alert("Failed to create order, please try again later");
                 return;
             }
@@ -60,8 +66,8 @@ export const Checkout = () => {
                         "ProductID": product.productID,
                        // "Quantity": product.quantity,
                         "Price": product.salePrice != 0 ? product.salePrice : product.price,
-                        "Comment":"",// product.comment,
-                        "Wording": ""//product.wording
+                        "Comment": "",//product.comment,
+                        "Wording":"" //product.wording
                     }
                     listItemOrder.push(itemOrder);
                 })
@@ -70,59 +76,19 @@ export const Checkout = () => {
                 // end //
                 //delete all data from cookies
                 if (result) {
-setMyHTML(
-<div>
-<h1>Thank you for your order </h1>
- <ListGroup>
-{currentCart.map(product => (
-    <ListGroup.Item key={product.productID}>
-        <p> <strong>{t('orderFormPage.nameTitle')} </strong> {product[t('orderFormPage.nameProduct')]}
-        <strong> {t('orderFormPage.descriptionTitle')} </strong>{product[t('orderFormPage.descriptionProduct')]}
-            <strong> {t('orderFormPage.wording')} </strong>{product.wording}
-            <strong> {t('orderFormPage.comments')} </strong>{product.comment}
-
-            <strong>{t('orderFormPage.price')} </strong> {product.salePrice != 0 ? product.salePrice : product.price}</p>
-    </ListGroup.Item>
-))}
-</ListGroup> 
-</div>
-)
-                  sendEmailsTo();
-                    clearCart();
+                    debugger
+                    generatePDFHtml(orderidToAdd)
+                    sendEmailsToCustomer(orderidToAdd)
+                    clearCart()
                 }
-
-
-                // })
             }
         }
     };
-    const sendEmailsTo = async() => {
-        // setEmailToCust({...emailToCust, ToAddress:"sr6737543@gmail.com"})
 
-        const emailToCust = {
-            Greeting: '',
-            ToAddress: currentUser.email,
-            Subject: 'Your Deginery order receipt from ' ,
-             Body: ReactDOMServer.renderToStaticMarkup(myHTML),         
-            IsBodyHtml: true,
-            Attachments: [],
-            // EmailList:null
-        };
-        const { Greeting, ToAddress, Subject, Body,IsBodyHtml, Attachments } = emailToCust;
 
-    debugger
-            const result = await sendEmails( { Greeting, ToAddress, Subject, Body,IsBodyHtml, Attachments } )
-            if (result && result.status == 200)
-                navigate("/myPopUp")
-
-else{
-    navigate(`/myErrorPage/${204}/${"שגיאה בעת שליחת מייל"}/${"back"}`)
-
-}
-         
-    }
     useEffect(() => {
         setOrder({ ...order, "TotalAmount": calculateTotalPrice(currentCart) })
+       
     }, []);  
 
     return (<>
