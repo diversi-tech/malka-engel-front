@@ -1,98 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { BehaviorSubject } from 'rxjs';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { PageTitle } from '../Layout Components/PageTitle';
+import { Typography, Box, Button, Container } from '@mui/material';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { CartDisplay } from './CartDisplay';
-import { CartSummary } from './CartSummary';
-
-import { Button } from 'react-bootstrap';
 import { getCart } from '../product/cookies/SetCart';
-import { OrderHistory } from '../Order/OrderHistory';
-
-
-
-// export const itemsSubject = new BehaviorSubject([]);
 
 export const ShoppingCart = () => {
-  const [cart, setCart] = useState(getCart());
-  const { t, i18n } = useTranslation();
-  const [items, setItems] = useState([]);
-  const [total, setTotal] = useState(0);
-  const [showHistory, setShowHistory] = useState(false);
-  const navigate = useNavigate();
+    const { t } = useTranslation();
+    const cart = getCart();
 
-  // useEffect(() => {
-  //   const subscription = itemsSubject.subscribe((cartItems) => {
-  //     setItems(cartItems);
-  //     calculateTotal(cartItems);
-  //   });
-
-
-  //   return () => {
-  //     subscription.unsubscribe();
-  //   };
-  // }, []);
-
-  // const calculateTotal = (cartItems) => {
-  //   const totalAmount = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-  //   setTotal(totalAmount);
-  // };
-
-  // const addItem = (item) => {
-  //   const currentItems = itemsSubject.value;
-  //   const existingItemIndex = currentItems.findIndex(i => i.id === item.id);
-
-  //   if (existingItemIndex >= 0) {
-  //     const updatedItems = [...currentItems];
-  //     updatedItems[existingItemIndex].quantity += item.quantity;
-  //     itemsSubject.next(updatedItems);
-  //   } else {
-  //     itemsSubject.next([...currentItems, item]);
-  //   }
-  // };
-
-
-
-
-  // const removeItem = (item) => {
-  //   const updatedItems = itemsSubject.value.filter(i => i.id !== item.id);
-  //   itemsSubject.next(updatedItems);
-  // };
-
-  // const clearBasket = () => {
-  //   itemsSubject.next([]);
-  // };
-
-const goToCheckout=()=>{
-  navigate('/myCheckout');
- 
-}
-  
-
-
-  return (
-    <div className="shopping-cart">
-      <div className="nav-item">
-        <br></br><br></br>
-        <FontAwesomeIcon icon={faShoppingCart} size="2x" />
-      </div>
-      <div>
-        <PageTitle title={t('shoppingCartPage.title')} />
-      </div>
-      {cart.length < 0 ? (
-        <p>{t('shoppingCartPage.p1')}</p>) : (
-        <CartDisplay></CartDisplay>
-
-      )}
-            <button className="btn btn-primary" onClick={()=>{setShowHistory(!showHistory)}}>צפה בהזמנות קודמות </button>
-           { showHistory && <OrderHistory/>} 
-<br></br>
-            <button className="btn btn-primary" onClick={goToCheckout}>המשך לתשלום-Proceed to checkout </button>
-           
-            </div>
-  );
+    return (
+        <Container>
+            <Box sx={{ display: 'flex', alignItems: 'center', mb: 4 }}>
+                <ShoppingCartIcon sx={{ fontSize: 40, mr: 2 }} />
+                <Typography variant="h4">{t('shoppingCartPage.title')}</Typography>
+            </Box>
+            {cart.length === 0 ? (
+                <Typography variant="body1">{t('shoppingCartPage.p1')}</Typography>
+            ) : (
+                <CartDisplay />
+            )}
+        </Container>
+    );
 };
-

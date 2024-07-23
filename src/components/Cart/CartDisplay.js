@@ -17,11 +17,12 @@ import {
   Box
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { OrderHistory } from "../Order/OrderHistory";
 
 export const CartDisplay = () => {
-  debugger
-  const [cart, setCart] = useState(getCart());
+  const [showHistory, setShowHistory] = useState(false);
   const navigate = useNavigate();
+  const [cart, setCart] = useState(getCart());
   const { t, i18n } = useTranslation();
   const currentLanguage = i18n.language === "en" ? "En" : "He";
 
@@ -37,9 +38,9 @@ export const CartDisplay = () => {
       alert(t('shoppingCartPage.emptyCartMessage'));
       return;
     }
-    navigate('/myOrderForm');
+    navigate('/myCheckout');
   };
-
+debugger
   return (
     <Container>
       <Typography variant="h4" gutterBottom>
@@ -94,14 +95,26 @@ export const CartDisplay = () => {
           ))}
         </List>
         <Grid container justifyContent="flex-end" sx={{ marginTop: '20px' }}>
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            onClick={goToCheckout}
-          >
-            {t("Proceed to Checkout")}
-          </Button>
+                    <Box sx={{ mt: 4 }}>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => setShowHistory(!showHistory)}
+                    sx={{ mr: 2 }}
+                >
+                    {t('shoppingCartPage.viewOrderHistory')}
+                </Button>
+                {showHistory && <OrderHistory />}
+            </Box>
+            <Box sx={{ mt: 4, textAlign: 'center' }}>
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={goToCheckout}
+                >
+                    {t('shoppingCartPage.proceedToCheckout')}
+                </Button>
+            </Box>
         </Grid>
         <Box mt={2} />
       </Paper>

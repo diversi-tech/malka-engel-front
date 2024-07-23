@@ -123,11 +123,6 @@ export const Product = () => {
                             <>
                                 <Grid container spacing={2} alignItems="center">
                                     <Grid item>
-                                        <Typography variant="body2" color="error" gutterBottom>
-                                            {t('הזמנת ממוצר זה! ')}
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item>
                                         <Button
                                             variant="contained"
                                             color="secondary"
