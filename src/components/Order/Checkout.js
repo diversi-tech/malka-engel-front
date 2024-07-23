@@ -1,16 +1,15 @@
-import { Container, Form, ListGroup } from "react-bootstrap"
-import { OrderForm } from "./OrderForm"
-import { PayForm } from "./PayForm.js"
+import React, { useEffect, useState } from 'react';
+import { Container, Grid, Typography, TextField, Button, Paper, List, ListItem, ListItemText, Box } from '@mui/material';
+import { OrderForm } from './OrderForm';
+import { PayForm } from './PayForm';
 import { useTranslation } from 'react-i18next';
-import { useEffect, useState } from 'react';
-import { PageTitle } from '../Layout Components/PageTitle';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { clearCart, getCart } from '../product/cookies/SetCart';
-import { GetOrderByOrderId, PostOrder, PutAllPropOfOrder, } from '../../axios/OrderAxios';
+import { GetOrderByOrderId, PostOrder, PutAllPropOfOrder } from '../../axios/OrderAxios';
 import { PostOrderItemList } from '../../axios/OrderItemAxios';
-import { PopUp } from "../Cart/popUp.js";
-import { sendEmails } from "../../axios/EmailAxios.js";
+import { PopUp } from '../Cart/popUp';
+import { sendEmails } from '../../axios/EmailAxios';
 import ReactDOMServer from 'react-dom/server';
 import PdfGenerator from "./PdfGenerator.js";
 import { SendEmailsForOrder, sendEmailsForOrder } from "./sendEmailsForOrder.js";
@@ -35,18 +34,13 @@ export const Checkout = () => {
 
     // פונקציה לחישוב סך המחירים
     const calculateTotalPrice = (products) => {
-        debugger
-        return products.reduce((total, product) => total + (product.salePrice != 0 ? product.salePrice : product.price), 0);
-    }
+        return products.reduce((total, product) => total + (product.salePrice !== 0 ? product.salePrice : product.price), 0);
+    };
+
     const CreateOrder = async () => {
-        if (!connected)
-            navigate('/myToConnect')
-        //--אחרי שהתקבל אישור מחברת באשראי---
-        else {
-            debugger
-            //Add order// 
-            // let t =calculateTotalPrice(currentCart)
-            //alert(t)
+        if (!connected) {
+            navigate('/myToConnect');
+        } else {
             const result = await PostOrder(order);
             const orderidToAdd = result
             setOrder({...order,  OrderID: orderidToAdd})
@@ -54,12 +48,9 @@ export const Checkout = () => {
             if (!orderidToAdd || orderidToAdd  == -1) {
                 alert("Failed to create order, please try again later");
                 return;
-            }
-            else {
-                // add item order // 
-                // currentCart.map(async (product, index) => {
-                const listItemOrder = []
-                currentCart.map((product, i) => {
+            } else {
+                const listItemOrder = [];
+                currentCart.map((product) => {
                     const itemOrder = {
                         "OrderItemID": 0,
                         "OrderID": orderidToAdd,
@@ -70,11 +61,8 @@ export const Checkout = () => {
                         "Wording":"" //product.wording
                     }
                     listItemOrder.push(itemOrder);
-                })
-                debugger
+                });
                 const result = await PostOrderItemList(listItemOrder);
-                // end //
-                //delete all data from cookies
                 if (result) {
                     debugger
                     generatePDFHtml(orderidToAdd)
@@ -91,26 +79,34 @@ export const Checkout = () => {
        
     }, []);  
 
-    return (<>
-        <h3>--Payment page--</h3>
-        <Container className="d-flex justify-content-center align-items-center vh-50">
-            <OrderForm></OrderForm>
-
-            <Form.Group className="d-flex justify-content-center align-items-center vh-50">
-                <Form.Label> הערות חשובות שתרצה להוסיף</Form.Label>
-                <Form.Control type="data"
-                    onChange={(e) => { { setOrder({ ...order, "Comment": e.target.value }) } }} />
-            </Form.Group>
-            {/* </Container>
- <Container className="d-flex justify-content-center align-items-center vh-50"> */}
-            <PayForm></PayForm> </Container>
-
-        <butten class="btn btn-primary"
-            onClick={CreateOrder}
-
-        // onClick={(e)=>{ setOrder({...order, "totalAmount" : calculateTotalPrice(currentCart)});CreateOrder(e)}}
-        >בצע הזמנה-place order</butten>
-
-
-    </>)
-}
+    return (
+        <Container sx={{ mt: 4 }}>
+            <PageTitle title={t('orderFormPage.pageTitle')} />
+            <Paper elevation={3} sx={{ padding: 3 }}>
+                <Grid container spacing={3}>
+                    <Grid item xs={12} md={6}>
+                        <OrderForm />
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                        <TextField
+                            fullWidth
+                            label={t('orderFormPage.comments')}
+                            variant="outlined"
+                            onChange={(e) => setOrder({ ...order, "Comment": e.target.value })}
+                        />
+                    </Grid>
+                </Grid>
+                <Grid container spacing={3} justifyContent="center" sx={{ mt: 3 }}>
+                    <Grid item>
+                        <PayForm />
+                    </Grid>
+                </Grid>
+                <Box sx={{ mt: 3, textAlign: 'center' }}>
+                    <Button variant="contained" color="primary" onClick={CreateOrder}>
+                        {t('orderFormPage.placeOrder')}
+                    </Button>
+                </Box>
+            </Paper>
+        </Container>
+    );
+};

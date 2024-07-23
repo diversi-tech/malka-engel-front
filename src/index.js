@@ -7,13 +7,29 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import enTranslation from './components/i18n/en.json';
 import heTranslation from './components/i18n/he.json';
+import theme from './createTheme';
+import { ThemeProvider } from '@mui/material';
+import { CacheProvider } from '@emotion/react';
+import { prefixer } from 'stylis';
+import stylisRTLPlugin from 'stylis-plugin-rtl';
+import createCache from '@emotion/cache'
 
 
+const cacheRtl = createCache({
+    key: "muirtl",
+    stylisPlugins: [prefixer, stylisRTLPlugin],
+    color: "#0D1E46",
+  });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <CacheProvider value={cacheRtl}>
+    <ThemeProvider theme={theme}>
+      <div dir="rtl">
+        <App />
+      </div>
+    </ThemeProvider></CacheProvider>
   </React.StrictMode>
 );
 
