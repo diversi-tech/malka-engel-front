@@ -153,6 +153,13 @@
     "totalAmount":"total amount"
    },
    "orderFormPage":{
+    "pageTitle":"Order Form",
+    "totalPayment":"total payment",
+    "placeOrder":"Place Order", 
+    "customerInfo":"cache customer information",
+    "name":"Name",
+    "email":"Email",
+    "phoneNumber":"Phone number",
     "title":"Order details",
     "nameTitle":"Product name: ",
     "nameProduct":"nameEn",

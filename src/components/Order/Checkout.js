@@ -6,14 +6,14 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { clearCart, getCart } from '../product/cookies/SetCart';
-import { GetOrderByOrderId, PostOrder, PutAllPropOfOrder } from '../../axios/OrderAxios';
-import { PostOrderItemList } from '../../axios/OrderItemAxios';
-import { PopUp } from '../Cart/popUp';
+import { PostOrder } from '../../axios/OrderAxios';
 import { sendEmails } from '../../axios/EmailAxios';
 import ReactDOMServer from 'react-dom/server';
 import PdfGenerator from "./PdfGenerator.js";
 import { SendEmailsForOrder, sendEmailsForOrder } from "./sendEmailsForOrder.js";
 import { PageTitle } from '../Layout Components/PageTitle';
+import { PostOrderItemList } from '../../axios/OrderItemAxios.js';
+import { PageTitle } from '../Layout Components/PageTitle.js';
 
 export const Checkout = () => {
     const { t, i18n } = useTranslation();
@@ -81,25 +81,28 @@ export const Checkout = () => {
     }, []);  
 
     return (
-        <Container sx={{ mt: 4 }}>
+        <Container>
             <PageTitle title={t('orderFormPage.pageTitle')} />
-            <Paper elevation={3} sx={{ padding: 3 }}>
+            <Paper elevation={3} sx={{ padding: 3, mb: 3 }}>
+                <Typography variant="h4" gutterBottom>
+                    פרטי ההזמנה שלך
+                </Typography>
                 <Grid container spacing={3}>
                     <Grid item xs={12} md={6}>
                         <OrderForm />
                     </Grid>
                     <Grid item xs={12} md={6}>
+                        <PayForm />
+                    </Grid>
+                </Grid>
+                <Grid container spacing={3} justifyContent="center" sx={{ mt: 3 }}>
+                    <Grid item xs={12}>
                         <TextField
                             fullWidth
                             label={t('orderFormPage.comments')}
                             variant="outlined"
                             onChange={(e) => setOrder({ ...order, "Comment": e.target.value })}
                         />
-                    </Grid>
-                </Grid>
-                <Grid container spacing={3} justifyContent="center" sx={{ mt: 3 }}>
-                    <Grid item>
-                        <PayForm />
                     </Grid>
                 </Grid>
                 <Box sx={{ mt: 3, textAlign: 'center' }}>

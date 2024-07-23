@@ -172,30 +172,7 @@ export const Nav = () => {
                                         מסכי ניהול
                                     </MenuItem>
                                 )}
-                                {/* {categories.map(category => (
-                                    <MenuItem key={category.categoryID} color="inherit" component={Link} to={`/myProductByCategory/${category.categoryID}`}>
-                                        {category.nameHe}
-                                    </MenuItem>
-                                ))} */}
-
-                                 <MenuItem onClick={handleCategoryMenu}>
-                                    קטגוריות
-                                </MenuItem>
-                                <Menu
-                                    anchorEl={categoryMenuAnchorEl}
-                                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                                    keepMounted
-                                    transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-                                    open={Boolean(categoryMenuAnchorEl)}
-                                    onClose={handleClose}
-                                >
-                                    {categories.map(category => (
-                                        <MenuItem key={category.categoryID} component={Link} to={`/myProductByCategory/${category.categoryID}`} onClick={handleClose}>
-                                            {category.nameHe}
-                                        </MenuItem>
-                                    ))}
-                                </Menu>
-                                <MenuItem>
+                                <MenuItem style={{ color: connected ? theme.palette.text.primary : theme.palette.text.secondary }}>
                                     {connected ? currentUser.name : "NOT CONNECTED"}
                                 </MenuItem>
                                 {i18n.language !== 'en' && (

@@ -1,7 +1,11 @@
 import { produce } from "immer"
 export const InitialState_Users = {
     UserList: [],
-    currentUser: {},
+    currentUser: {
+        "name": "unknown",
+        "email": "unknown",
+        "phoneNumber": "unknown",
+    },
     connected: false,
     ordersList:[]
 }
