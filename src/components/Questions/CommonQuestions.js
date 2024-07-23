@@ -15,7 +15,6 @@ export const CommonQuestions = () => {
   const [errorFetch, setErrorFetch] = useState(false);
   const dispatch = useDispatch();
 
-  // Function to fetch FAQ data
   const fetchData = async () => {
     if (FAQlist.length === 0) {
       try {
@@ -37,60 +36,63 @@ export const CommonQuestions = () => {
     fetchData();
   }, [FAQlist, dispatch]);
 
-  // Handle search input change
   const handleChange = (event) => {
-    setQuestionsList(FAQlist.filter((q) => 
-      q[t('CommonQuestionsPage.question')].toLowerCase().includes(event.target.value.toLowerCase())
-    ));
+    setQuestionsList(
+      FAQlist.filter((q) =>
+        q[t('CommonQuestionsPage.question')].toLowerCase().includes(event.target.value.toLowerCase())
+      )
+    );
   };
 
-  // Handle toggle for question collapse
   const handleToggle = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <Container>
+    <Container sx={{ py: 5 }}>
       <Typography variant="h4" gutterBottom>
         {t('CommonQuestionsPage.title')}
       </Typography>
       <TextField
-        label={t('CommonQuestionsPage.serchTitle')}
+        label={t('CommonQuestionsPage.searchTitle')}
         variant="outlined"
         fullWidth
         margin="normal"
         onChange={handleChange}
+        sx={{ mb: 2 }}
       />
       {errorFetch ? (
-        <Typography variant="h6" color="error">
+        <Typography variant="h6" color="error" align="center">
           Network Error
         </Typography>
       ) : (
         questionsList.map((item, index) => (
-          <Card key={index} sx={{ mb: 2 }}>
-            <CardContent>
+          <Card key={index} sx={{ mb: 1, transition: 'transform 0.2s', ':hover': { transform: 'scale(1.02)' } }}>
+            <CardContent sx={{ padding: '10px' }}>
               <Box
                 sx={{
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
                   cursor: 'pointer',
+                  borderBottom: '1px solid #ddd',
+                  pb: 1
                 }}
                 onClick={() => handleToggle(index)}
               >
-                <Typography variant="h6">
+                <Typography variant="body1">
                   {item[t('CommonQuestionsPage.question')]}
                 </Typography>
-                <IconButton>
+                <IconButton size="small">
                   {openIndex === index ? <ExpandLessIcon /> : <ExpandMoreIcon />}
                 </IconButton>
               </Box>
               <Collapse in={openIndex === index}>
-                <Box sx={{ mt: 2 }}>
-                  <Typography variant="body1">
+                <Box sx={{ mt: 1 }}>
+                  <Typography variant="body2">
                     {item[t('CommonQuestionsPage.answer')]}
                   </Typography>
-                  <Typography variant="body2" color="textSecondary" mt={2}>
+                  <Typography variant="caption" color="textSecondary" sx={{ mt: 1 }}>
                     {item.rating}
                   </Typography>
                 </Box>

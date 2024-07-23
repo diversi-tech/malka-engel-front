@@ -16,7 +16,8 @@ import {
     TextField,
     Box,
     Tooltip,
-    Button
+    Button,
+    Paper
 } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
@@ -69,30 +70,9 @@ export const ProductList = () => {
     };
 
     return (
-        <Container sx={{ padding: '20px', backgroundColor: '#f9f9f9' }}>
+        <Container sx={{ padding: '20px', backgroundColor: '#f9f9f9', minHeight: '100vh' }}>
             <Grid container spacing={3}>
-                <Grid item xs={12} md={3}>
-                    <Typography variant="h4">{t('productListPage.title')}</Typography>
-                    <Box component="form">
-                        <TextField
-                            label={t('productListPage.minPrice')}
-                            type="number"
-                            value={minPrice}
-                            onChange={(e) => setMinPrice(Number(e.target.value))}
-                            fullWidth
-                            margin="normal"
-                        />
-                        <TextField
-                            label={t('productListPage.maxPrice')}
-                            type="number"
-                            value={maxPrice}
-                            onChange={(e) => setMaxPrice(Number(e.target.value))}
-                            fullWidth
-                            margin="normal"
-                        />
-                    </Box>
-                </Grid>
-                <Grid item xs={12} md={9}>
+                <Grid item xs={12}>
                     {error || filteredProducts.length === 0 ? (
                         <Box textAlign="center" mt={5}>
                             <Typography variant="h5">{t('productListPage.noProducts')}</Typography>
@@ -108,10 +88,14 @@ export const ProductList = () => {
                                         <Card
                                             sx={{
                                                 position: 'relative',
-                                                border: 'none',
-                                                transition: 'transform 0.2s',
+                                                border: '1px solid #ddd',
+                                                borderRadius: '8px',
+                                                transition: 'transform 0.2s, box-shadow 0.2s',
                                                 boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-                                                ':hover': { transform: 'scale(1.02)' }
+                                                ':hover': { 
+                                                    transform: 'scale(1.02)',
+                                                    boxShadow: '0 8px 16px rgba(0,0,0,0.2)' 
+                                                }
                                             }}
                                         >
                                             <CardMedia
@@ -126,9 +110,11 @@ export const ProductList = () => {
                                                     ':hover': { transform: 'scale(1.1)' }
                                                 }}
                                             />
-                                            <CardContent>
-                                                <Typography variant="h6">{product.name}</Typography>
-                                                <Typography variant="body2" color="textSecondary">
+                                            <CardContent sx={{ padding: '16px' }}>
+                                                <Typography variant="h6" component="div" gutterBottom>
+                                                    {product.name}
+                                                </Typography>
+                                                <Typography variant="body2" color="textSecondary" component="div">
                                                     {product.price} ₪
                                                 </Typography>
                                                 <Box mt={2} textAlign="center">

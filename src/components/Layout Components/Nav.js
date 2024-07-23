@@ -120,7 +120,7 @@ export const Nav = () => {
                                         מסכי ניהול
                                     </MenuItem>
                                 )}
-                                <MenuItem>
+                                <MenuItem style={{ color: connected ? theme.palette.text.primary : theme.palette.text.secondary }}>
                                     {connected ? currentUser.name : "NOT CONNECTED"}
                                 </MenuItem>
                                 {i18n.language !== 'en' && (

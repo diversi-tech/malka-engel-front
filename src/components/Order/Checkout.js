@@ -6,12 +6,11 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { clearCart, getCart } from '../product/cookies/SetCart';
-import { GetOrderByOrderId, PostOrder, PutAllPropOfOrder } from '../../axios/OrderAxios';
-import { PostOrderItemList } from '../../axios/OrderItemAxios';
-import { PopUp } from '../Cart/popUp';
+import { PostOrder } from '../../axios/OrderAxios';
 import { sendEmails } from '../../axios/EmailAxios';
 import ReactDOMServer from 'react-dom/server';
 import { PageTitle } from '../Layout Components/PageTitle';
+import { PostOrderItemList } from '../../axios/OrderItemAxios';
 
 export const Checkout = () => {
     const { t, i18n } = useTranslation();
@@ -23,8 +22,8 @@ export const Checkout = () => {
         "UserID": currentUser.userID,
         "Status": "Processing",
         "TotalAmount": 0,
-        "CreatedAt": "2024-07-22T11:32:01.338Z",
-        "Comment": "good"
+        "CreatedAt": new Date().toISOString(),
+        "Comment": ""
     });
     const [myHTML, setMyHTML] = useState();
 
@@ -42,18 +41,14 @@ export const Checkout = () => {
                 alert("Failed to create order, please try again later");
                 return;
             } else {
-                const listItemOrder = [];
-                currentCart.map((product) => {
-                    const itemOrder = {
-                        "OrderItemID": 0,
-                        "OrderID": orderidToAdd,
-                        "ProductID": product.productID,
-                        "Wording": product.wording,
-                        "Comment": product.additionalComments,
-                        "Price": product.salePrice !== 0 ? product.salePrice : product.price,
-                    };
-                    listItemOrder.push(itemOrder);
-                });
+                const listItemOrder = currentCart.map((product) => ({
+                    "OrderItemID": 0,
+                    "OrderID": orderidToAdd,
+                    "ProductID": product.productID,
+                    "Wording": product.wording,
+                    "Comment": product.additionalComments,
+                    "Price": product.salePrice !== 0 ? product.salePrice : product.price,
+                }));
                 const result = await PostOrderItemList(listItemOrder);
                 if (result) {
                     sendEmailsTo();
@@ -104,25 +99,28 @@ export const Checkout = () => {
     }, []);
 
     return (
-        <Container sx={{ mt: 4 }}>
+        <Container>
             <PageTitle title={t('orderFormPage.pageTitle')} />
-            <Paper elevation={3} sx={{ padding: 3 }}>
+            <Paper elevation={3} sx={{ padding: 3, mb: 3 }}>
+                <Typography variant="h4" gutterBottom>
+                    פרטי ההזמנה שלך
+                </Typography>
                 <Grid container spacing={3}>
                     <Grid item xs={12} md={6}>
                         <OrderForm />
                     </Grid>
                     <Grid item xs={12} md={6}>
+                        <PayForm />
+                    </Grid>
+                </Grid>
+                <Grid container spacing={3} justifyContent="center" sx={{ mt: 3 }}>
+                    <Grid item xs={12}>
                         <TextField
                             fullWidth
                             label={t('orderFormPage.comments')}
                             variant="outlined"
                             onChange={(e) => setOrder({ ...order, "Comment": e.target.value })}
                         />
-                    </Grid>
-                </Grid>
-                <Grid container spacing={3} justifyContent="center" sx={{ mt: 3 }}>
-                    <Grid item>
-                        <PayForm />
                     </Grid>
                 </Grid>
                 <Box sx={{ mt: 3, textAlign: 'center' }}>

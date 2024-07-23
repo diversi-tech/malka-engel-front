@@ -65,7 +65,7 @@ export const Product = () => {
             if (newCart[productIndex].wording !== JSON.stringify(wording)) {
                 newCart[productIndex].wording = JSON.stringify(wording);
             }
-            if (newCart[productIndex].additionalComments !== additionalComments) {
+            if (newCart[productIndex].additionalComments != additionalComments) {
                 newCart[productIndex].additionalComments = additionalComments;
             }
             setCart(newCart);

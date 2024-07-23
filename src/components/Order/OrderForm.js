@@ -1,54 +1,75 @@
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
-import { PageTitle } from '../Layout Components/PageTitle';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { Box, Typography, Container, Paper, List, ListItem, ListItemText, Divider } from '@mui/material';
 import { clearCart, getCart } from '../product/cookies/SetCart';
-import { GetOrderByOrderId, PostOrder, PutAllPropOfOrder, } from '../../axios/OrderAxios';
+import { GetOrderByOrderId, PostOrder, PutAllPropOfOrder } from '../../axios/OrderAxios';
 import { PostOrderItemList } from '../../axios/OrderItemAxios';
 import { PopUp } from '../Cart/popUp';
-import { ListGroup } from 'react-bootstrap';
+import { PageTitle } from '../Layout Components/PageTitle';
 
 export const OrderForm = () => {
     const { t, i18n } = useTranslation();
     const { currentUser, connected } = useSelector(u => u.DataReducer_Users);
+    const currentLanguage = i18n.language === 'en' ? 'En' : 'He';
     const navigate = useNavigate();
-    const [currentCart, setCurrentCart] = useState(getCart())
+    const [currentCart, setCurrentCart] = useState(getCart());
 
     const calculateTotalPrice = (products) => {
+        return products.reduce((total, product) => total + (product.salePrice !== 0 ? product.salePrice : product.price), 0);
+    };
+    const showByHtmlTags = (htmlString) => {
         debugger
-        return products.reduce((total, product) => total + (product.salePrice != 0 ? product.salePrice : product.price), 0);
-    }
-    debugger
-    return (<>
+        if (htmlString.startsWith('"') && htmlString.endsWith('"')) 
+            htmlString = htmlString.slice(1, -1);
+        return <span dangerouslySetInnerHTML={{ __html: htmlString }} />;
+    };
 
-        <div className="container mt-5" >
-            <div className="card">
-
-                <h3>{t('orderFormPage.title')}</h3>
-                <ListGroup>
-                    <ListGroup.Item>
-                        <p> <b>Name: </b>{currentUser.name} <b>Email:</b> {currentUser.email} <b>PhoneNumber: </b>{currentUser.phoneNumber} </p>
-                    </ListGroup.Item>
-                </ListGroup>
-                <ListGroup>
-
+    return (
+        <Container sx={{ mt: 5 }}>
+            <Paper elevation={3} sx={{ p: 3 }}>
+                <Typography variant="h4" gutterBottom>
+                    {t('orderFormPage.title')}
+                </Typography>
+                <List>
+                    <ListItem>
+                        <ListItemText
+                            primary={<strong>{t('orderFormPage.customerInfo')}</strong>}
+                            secondary={
+                                <span>
+                                    <b>{t('orderFormPage.name')}: </b>{currentUser.name} <br />
+                                    <b>{t('orderFormPage.email')}: </b>{currentUser.email} <br />
+                                    <b>{t('orderFormPage.phoneNumber')}: </b>{currentUser.phoneNumber}
+                                </span>
+                            }
+                        />
+                    </ListItem>
+                    <Divider />
                     {currentCart.map(product => (
-                        <ListGroup.Item key={product.productID}>
-                            <p> <strong>{t('orderFormPage.nameTitle')} </strong> {product[t('orderFormPage.nameProduct')]}
-                            <strong> {t('orderFormPage.descriptionTitle')} </strong>{product[t('orderFormPage.descriptionProduct')]}
-                                <strong> {t('orderFormPage.wording')} </strong>{product.wording}
-                                <strong> {t('orderFormPage.comments')} </strong>{product.comment}
-
-                                <strong>{t('orderFormPage.price')} </strong> {product.salePrice != 0 ? product.salePrice : product.price}</p>
-                        </ListGroup.Item>
+                        <ListItem key={product.productID}>
+                            <ListItemText
+                                primary={
+                                    <span style={{ whiteSpace: 'nowrap' }}>
+                                        <b>{t('orderFormPage.nameTitle')}: </b> {product[`name${currentLanguage}`]} <br />
+                                        <b>{t('orderFormPage.descriptionTitle')}: </b>{product[`description${currentLanguage}`]}<br />
+                                        <b>{t('orderFormPage.wording')}:</b> {showByHtmlTags(product.wording)}
+                                        <b>{t('orderFormPage.comments')}: </b>{product.additionalComment} <br />
+                                        <b>{t('orderFormPage.price')}: </b>{product.salePrice !== 0 ? product.salePrice : product.price}
+                                    </span>
+                                }
+                            />
+                        </ListItem>
                     ))}
-                </ListGroup>
-            </div>
-            <h5>{t('orderFormPage.TotalPayment')} {calculateTotalPrice(currentCart)}</h5>
-
-        </div>
-
-    </>
-    )
-}
+                    <Divider />
+                    <ListItem>
+                        <ListItemText
+                            primary={<strong>{t('orderFormPage.totalPayment')}</strong>}
+                            secondary={calculateTotalPrice(currentCart)}
+                        />
+                    </ListItem>
+                </List>
+            </Paper>
+        </Container>
+    );
+};

@@ -32,44 +32,45 @@ export const Footer = ({ showOnScroll }) => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: '#f8f9fa',
+                backgroundColor: 'primary.main',
                 padding: 2,
                 borderTop: '1px solid #ccc',
-                position: 'relative',
                 mt: 'auto',
+                color: 'secondary.contrastText',
+                flexDirection: 'column',
             }}
         >
             <Container>
                 <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, justifyContent: 'center' }}>
-                    <MUILink component={Link} to="./myCommonQuestions" color="textPrimary" underline="none">
+                    <MUILink component={Link} to="./myCommonQuestions" color="inherit" underline="none">
                         {t('footerPage.linkCommonQuestions')}
                     </MUILink>
-                    <MUILink component={Link} to="./MyAccount" color="textPrimary" underline="none">
+                    <MUILink component={Link} to="./MyAccount" color="inherit" underline="none">
                         {t('footerPage.linkMyAccount')}
                     </MUILink>
-                    <MUILink component={Link} to="./myContact" color="textPrimary" underline="none">
+                    <MUILink component={Link} to="./myContact" color="inherit" underline="none">
                         {t('footerPage.linkContact')}
                     </MUILink>
-                    <MUILink component={Link} to="./myDesignerBirkins" color="textPrimary" underline="none">
+                    <MUILink component={Link} to="./myDesignerBirkins" color="inherit" underline="none">
                         {t('footerPage.linkDesignerBirkins')}
                     </MUILink>
-                    <MUILink component={Link} to="./myCongratulationsToTheDonors" color="textPrimary" underline="none">
+                    <MUILink component={Link} to="./myCongratulationsToTheDonors" color="inherit" underline="none">
                         {t('footerPage.linkCongratulationsToTheDonors')}
                     </MUILink>
-                    <MUILink component={Link} to="./myJoys" color="textPrimary" underline="none">
+                    <MUILink component={Link} to="./myJoys" color="inherit" underline="none">
                         {t('footerPage.linkJoys')}
                     </MUILink>
-                    <MUILink component={Link} to="./myEvents" color="textPrimary" underline="none">
+                    <MUILink component={Link} to="./myEvents" color="inherit" underline="none">
                         {t('footerPage.linkEvents')}
                     </MUILink>
-                    <MUILink component={Link} to="./myLogin" color="textPrimary" underline="none">
+                    <MUILink component={Link} to="./myLogin" color="inherit" underline="none">
                         {t('footerPage.linkLogin')}
                     </MUILink>
-                    <MUILink component={Link} to="./myTerms" color="textPrimary" underline="none">
+                    <MUILink component={Link} to="./myTerms" color="inherit" underline="none">
                         {t('footerPage.linkTerms')}
                     </MUILink>
                 </Box>
-                <Typography variant="body2" align="center" color="textSecondary" sx={{ mt: 2 }}>
+                <Typography variant="body2" align="center" color="secondary.contrastText" sx={{ mt: 2 }}>
                     כל הזכויות שמורות@
                 </Typography>
             </Container>

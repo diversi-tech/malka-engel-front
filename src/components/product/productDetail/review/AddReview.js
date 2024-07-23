@@ -1,9 +1,13 @@
-import { Button, Card, CardContent, Grid, TextareaAutosize, Typography, Box, IconButton } from "@mui/material";
-import { t } from "i18next";
-import { useState } from "react";
-import { AddReviewFunc } from "../../../../axios/ReviewsAxios";
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { Button, Card, CardContent, Grid, TextareaAutosize, Typography, Box, IconButton, Snackbar } from '@mui/material';
 import { Star, StarBorder } from '@mui/icons-material';
+import MuiAlert from '@mui/material/Alert';
+import { AddReviewFunc } from '../../../../axios/ReviewsAxios';
+import { useTranslation } from 'react-i18next';
+
+const Alert = (props) => <MuiAlert elevation={6} variant="filled" {...props} />;
 
 const StarRating = ({ rating, setRating }) => {
   const [hover, setHover] = useState(0);
@@ -20,7 +24,7 @@ const StarRating = ({ rating, setRating }) => {
           onClick={() => handleRating(value)}
           onMouseEnter={() => setHover(value)}
           onMouseLeave={() => setHover(0)}
-          style={{ color: value <= (hover || rating) ? 'gold' : 'gray', padding: '4px' }} // שיניתי מ-margin ל-padding כדי לצמצם את המרווח
+          style={{ color: value <= (hover || rating) ? 'gold' : 'gray', padding: '4px' }}
         >
           {value <= (hover || rating) ? <Star style={{ fontSize: '32px' }} /> : <StarBorder style={{ fontSize: '32px' }} />}
         </IconButton>
@@ -30,28 +34,42 @@ const StarRating = ({ rating, setRating }) => {
 };
 
 export const AddReview = () => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
   const { currentUser, connected } = useSelector((u) => u.DataReducer_Users);
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState(0);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState('success');
 
   const sendYourReview = async () => {
-    debugger
     if (connected) {
       const review = {
         reviewID: 0,
-        productID: 14,//TODO!!
-        userID: 1,//currentUser.userID,
+        productID: 14, // TODO: Replace with actual product ID
+        userID: currentUser.userID,
         rating: rating || "no rating!",
         comment: comment || "no comment!",
-        createdAt: "2024-07-21T19:45:23.448Z"
+        createdAt: new Date().toISOString()
       };
-      debugger
-      const response = await AddReviewFunc(review);
-      if (response.status == !true) {
-        alert(t('Review sent successfully!'));
-      } else {
-        alert(t('Failed to send review. Please try again later.'));
+      try {
+        const response = await AddReviewFunc(review);
+        debugger
+        if (response == !true) {
+          setSnackbarMessage(t('Review sent successfully!'));
+          setSnackbarSeverity('success');
+        } else {
+          setSnackbarMessage(t('Failed to send review. Please try again later.'));
+          setSnackbarSeverity('error');
+        }
+      } catch (error) {
+        setSnackbarMessage(t('Failed to send review. Please try again later.'));
+        setSnackbarSeverity('error');
       }
+      setSnackbarOpen(true);
+    } else {
+      navigate('/myLogin');
     }
   };
 
@@ -75,11 +93,31 @@ export const AddReview = () => {
             {t('Your Rating:')}
           </Typography>
           <StarRating rating={rating} setRating={setRating} />
-          <Button variant="contained" color="primary" sx={{ mt: 2 }} onClick={sendYourReview}>
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{ mt: 2 }}
+            onClick={sendYourReview}
+          >
             {t('Submit')}
           </Button>
         </CardContent>
       </Card>
+
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={() => setSnackbarOpen(false)}
+        action={
+          <Button color="inherit" onClick={() => setSnackbarOpen(false)}>
+            Close
+          </Button>
+        }
+      >
+        <Alert onClose={() => setSnackbarOpen(false)} severity={snackbarSeverity}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </Grid>
   );
 };
