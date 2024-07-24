@@ -86,7 +86,7 @@ export const MyRouting = () => {
                     <Route path="/myRecommendedProducts" element={<RecommendedProducts></RecommendedProducts>} ></Route>
                     <Route path="/myShowReviews/:numStars" element={<ShowReviews></ShowReviews>}></Route>
                     <Route path="/myReview/:productId" element={<Review></Review>}></Route>
-                    <Route path="/myAddReview" element={<AddReview></AddReview>}></Route>
+                    <Route path="/myAddReview/:productId" element={<AddReview></AddReview>}></Route>
                     <Route path="/myProductByCategory/:idCategory" element={<ProductByCategory></ProductByCategory>}></Route>
                     <Route path ="/myCategoriesManager" element={<AllCategories></AllCategories>}></Route>
 

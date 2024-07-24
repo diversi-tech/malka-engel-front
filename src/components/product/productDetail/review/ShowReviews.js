@@ -100,7 +100,6 @@ export const ShowReviews = () => {
                 )) : (
                     <Typography variant="body1">{t('No reviews available')}</Typography>
                 )}
-                <AddReview></AddReview>
             </Grid>
         </Box>
     );

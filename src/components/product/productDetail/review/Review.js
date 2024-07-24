@@ -25,31 +25,29 @@ const StarContainer = styled('div')({
 });
 
 const StarIconStyled = styled(StarIcon)(({ theme }) => ({
-    color: theme.palette.primary.main
+  color: theme.palette.primary.main
 }));
 
 export const Review = ({ productId }) => {
+  debugger
   const { t, i18n } = useTranslation();
-  let reviewList = useSelector((s) => s.DataReducer_Reviews.ReviewsProduct);
-  let [reviews, setReviews] = useState(reviewList);
+  let [reviews, setReviews] = useState([]);
   const myDispatch = useDispatch();
   const navigate = useNavigate();
   const { currentUser, connected } = useSelector(u => u.DataReducer_Users);
 
 
   async function fetchReviews() {
-    if (reviewList.length === 0) {
-      try {
-        const response = await GetReviewByProd(productId);
-        setReviews(response.data);
-        myDispatch(fillReviewsProduct(response.data));
-      } catch (err) {
-        console.error('Error fetching reviews:', err);
-      }
-    } else {
-      setReviews(reviewList);
+    try {
+      myDispatch(fillReviewsProduct([]))
+      const response = await GetReviewByProd(productId);
+      setReviews(response.data);
+      myDispatch(fillReviewsProduct(response.data));
+    } catch (err) {
+      console.error('Error fetching reviews:', err);
     }
   }
+
 
   useEffect(() => {
     fetchReviews();
@@ -59,13 +57,11 @@ export const Review = ({ productId }) => {
 
   for (let i = 0; i < reviews.length; i++) {
     console.log("review " + reviews[i] + " has " + i)
-    totalRating += reviews[i].Rating;
+    totalRating += reviews[i].rating;
     console.log("total rating " + totalRating)
   }
 
-  const averageRating = 4;
-  //TODO:
-  // reviews.length ? (totalRating / reviews.length).toFixed(1) : 0;
+  const averageRating = reviews.length ? (totalRating / reviews.length).toFixed(1) : 0;
 
   const ratingsDistribution = [0, 0, 0, 0, 0];
   if (reviews && Array.isArray(reviews) && reviews.length > 0) {
@@ -77,6 +73,7 @@ export const Review = ({ productId }) => {
   const totalRatings = reviews.length || 0;
 
   const renderStars = (rating) => {
+    debugger
     return [...Array(5)].map((_, index) => (
       <StarIconStyled
         key={index}
@@ -89,12 +86,13 @@ export const Review = ({ productId }) => {
     if (!connected)
       navigate('/myLogin')
     else {
-      navigate(`/myiview`);
+      navigate(`/myAddReview/${productId}`);
     };
   }
 
-  const sentToSeeStars = (numOfStar) => {
-    navigate(`/myShowReviews/${numOfStar}`);
+  const sentToSeeStars = (numOfStar, percent) => {
+    if (percent > 0)
+      navigate(`/myShowReviews/${numOfStar}`);
   };
 
   return (
@@ -110,23 +108,26 @@ export const Review = ({ productId }) => {
               >
                 ביקורות מוצר של לקוחות
               </Typography>
-              <Box display="flex" alignItems="center" mb={3}>
-                {renderStars(averageRating)}
-                <Typography variant="h6" ml={2} sx={{ fontWeight: 'bold', color: '#333', textAlign: 'center' }} >
-                  {averageRating} מתוך 5 כוכבים
-                </Typography>
-              </Box>
+              {reviews.length > 0 ? (
+                <>
+                  <Box display="flex" alignItems="center" mb={3}>
+                    {renderStars(averageRating)}
+                    <Typography variant="h6" ml={2} sx={{ fontWeight: 'bold', color: '#333', textAlign: 'center' }} >
+                      {averageRating} מתוך 5 כוכבים
+                    </Typography>
+                  </Box>
+                </>) : (<></>)}
               <Typography variant="subtitle1" sx={{ color: '#666' }}>
                 {totalRatings} דירוגים גלובליים
               </Typography>
               <Box>
-                {Array.isArray(ratingsDistribution) && ratingsDistribution.length > 0 ? (
+                {Array.isArray(ratingsDistribution) && ratingsDistribution.length > 0 && reviews.length > 0 ? (
                   ratingsDistribution.map((percent, index) => (
                     <Box key={index} display="flex" alignItems="center" mb={1}>
                       <Button
                         variant="text"
                         size="small"
-                        onClick={() => sentToSeeStars(5 - index)}
+                        onClick={() => sentToSeeStars(5 - index, percent)}
                       >
                         {5 - index} כוכבים
                       </Button>

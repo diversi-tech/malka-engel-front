@@ -12,6 +12,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import theme from '../../createTheme';
 import { ThemeProvider } from '@mui/material/styles';
+import { cacheRtl, chosen, defaulti } from '../..';
 
 export const Nav = () => {
     const { t, i18n } = useTranslation();
@@ -22,6 +23,7 @@ export const Nav = () => {
     const [anchorEl, setAnchorEl] = useState(null);
 
     const handleLanguageChange = (lng) => {
+        debugger
         i18n.changeLanguage(lng);
         if (lng === 'he') {
             document.body.dir = 'rtl';
@@ -123,12 +125,12 @@ export const Nav = () => {
                                 <MenuItem style={{ color: connected ? theme.palette.text.primary : theme.palette.text.secondary }}>
                                     {connected ? currentUser.name : "NOT CONNECTED"}
                                 </MenuItem>
-                                {i18n.language !== 'en' && (
+                                {i18n.language != 'en' && (
                                     <MenuItem onClick={() => handleLanguageChange('en')}>
                                         <img src={usFlag} alt="English" style={{ width: '25px', height: '20px' }} />
                                     </MenuItem>
                                 )}
-                                {i18n.language !== 'he' && (
+                                {i18n.language != 'he' && (
                                     <MenuItem onClick={() => handleLanguageChange('he')}>
                                         <img src={ilFlag} alt="Hebrew" style={{ width: '25px', height: '20px' }} />
                                     </MenuItem>

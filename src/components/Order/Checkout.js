@@ -15,20 +15,21 @@ import { PostOrderItemList } from '../../axios/OrderItemAxios.js';
 import { PageTitle } from '../Layout Components/PageTitle.js';
 
 export const Checkout = () => {
+    debugger
     const { t, i18n } = useTranslation();
     const { currentUser, connected } = useSelector(u => u.DataReducer_Users);
     const navigate = useNavigate();
     const [currentCart, setCurrentCart] = useState(getCart());
     const [order, setOrder] = useState({
         "OrderID": 0,
-        "UserID": currentUser.userID,
+        "UserID": currentUser.userID || 0,
         "Status": "Processing",
         "TotalAmount": 0,
-        "CreatedAt": null,
+        "CreatedAt": new Date().toISOString(),
         "Comment": ""
     })
-        const {generatePDFHtml} = PdfGenerator(order.OrderID)
-        const {sendEmailsToCustomer} = SendEmailsForOrder()
+    const { generatePDFHtml } = PdfGenerator(order.OrderID)
+    const { sendEmailsToCustomer } = SendEmailsForOrder()
 
 
 
@@ -43,9 +44,9 @@ export const Checkout = () => {
         } else {
             const result = await PostOrder(order);
             const orderidToAdd = result
-            setOrder({...order,  OrderID: orderidToAdd})
+            setOrder({ ...order, OrderID: orderidToAdd })
             // end //
-            if (!orderidToAdd || orderidToAdd  == -1) {
+            if (!orderidToAdd || orderidToAdd == -1) {
                 alert("Failed to create order, please try again later");
                 return;
             } else {
@@ -55,10 +56,9 @@ export const Checkout = () => {
                         "OrderItemID": 0,
                         "OrderID": orderidToAdd,
                         "ProductID": product.productID,
-                       // "Quantity": product.quantity,
                         "Price": product.salePrice != 0 ? product.salePrice : product.price,
-                        "Comment": "",//product.comment,
-                        "Wording":"" //product.wording
+                        "Comment": product.additionalComments,
+                        "Wording": product.wording
                     }
                     listItemOrder.push(itemOrder);
                 });
@@ -67,7 +67,7 @@ export const Checkout = () => {
                     debugger
                     generatePDFHtml(orderidToAdd)
                     sendEmailsToCustomer(orderidToAdd)
-                    clearCart()
+                    clearCart();
                 }
             }
         }
@@ -76,8 +76,8 @@ export const Checkout = () => {
 
     useEffect(() => {
         setOrder({ ...order, "TotalAmount": calculateTotalPrice(currentCart) })
-       
-    }, []);  
+
+    }, []);
 
     return (
         <Container>

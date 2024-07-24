@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Button, Card, CardContent, Grid, TextareaAutosize, Typography, Box, IconButton, Snackbar } from '@mui/material';
 import { Star, StarBorder } from '@mui/icons-material';
 import MuiAlert from '@mui/material/Alert';
@@ -34,6 +34,7 @@ const StarRating = ({ rating, setRating }) => {
 };
 
 export const AddReview = () => {
+  const {productId} = useParams()
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { currentUser, connected } = useSelector((u) => u.DataReducer_Users);
@@ -47,7 +48,7 @@ export const AddReview = () => {
     if (connected) {
       const review = {
         reviewID: 0,
-        productID: 14, // TODO: Replace with actual product ID
+        productID: productId,
         userID: currentUser.userID,
         rating: rating || "no rating!",
         comment: comment || "no comment!",
@@ -57,17 +58,21 @@ export const AddReview = () => {
         const response = await AddReviewFunc(review);
         debugger
         if (response == !true) {
-          setSnackbarMessage(t('Review sent successfully!'));
-          setSnackbarSeverity('success');
+          alert("success");
+          //setSnackbarMessage(t('Review sent successfully!'));
+          //setSnackbarSeverity('success');
         } else {
-          setSnackbarMessage(t('Failed to send review. Please try again later.'));
-          setSnackbarSeverity('error');
+          alert("failed");
+          //setSnackbarMessage(t('Failed to send review. Please try again later.'));
+          //setSnackbarSeverity('error');
         }
       } catch (error) {
-        setSnackbarMessage(t('Failed to send review. Please try again later.'));
-        setSnackbarSeverity('error');
+        alert("error");
+        //setSnackbarMessage(t('Failed to send review. Please try again later.'));
+        //setSnackbarSeverity('error');
       }
-      setSnackbarOpen(true);
+      //setSnackbarOpen(true);
+      navigate(-1);
     } else {
       navigate('/myLogin');
     }
@@ -104,7 +109,7 @@ export const AddReview = () => {
         </CardContent>
       </Card>
 
-      <Snackbar
+      {/* <Snackbar
         open={snackbarOpen}
         autoHideDuration={6000}
         onClose={() => setSnackbarOpen(false)}
@@ -117,7 +122,7 @@ export const AddReview = () => {
         <Alert onClose={() => setSnackbarOpen(false)} severity={snackbarSeverity}>
           {snackbarMessage}
         </Alert>
-      </Snackbar>
+      </Snackbar> */}
     </Grid>
   );
 };

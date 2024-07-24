@@ -54,7 +54,7 @@ export const OrderForm = () => {
                                         <b>{t('orderFormPage.nameTitle')}: </b> {product[`name${currentLanguage}`]} <br />
                                         <b>{t('orderFormPage.descriptionTitle')}: </b>{product[`description${currentLanguage}`]}<br />
                                         <b>{t('orderFormPage.wording')}:</b> {showByHtmlTags(product.wording)}
-                                        <b>{t('orderFormPage.comments')}: </b>{product.additionalComment} <br />
+                                        <b>{t('orderFormPage.comments')}: </b>{product.additionalComments} <br />
                                         <b>{t('orderFormPage.price')}: </b>{product.salePrice !== 0 ? product.salePrice : product.price}
                                     </span>
                                 }
