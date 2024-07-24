@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { GetProductsByCategory } from '../../axios/ProductAxios';
 
 const ProductByCategory = () => {
+    debugger
     const { t } = useTranslation();
     const { idCategory } = useParams();
     const navigate = useNavigate();
@@ -16,6 +17,7 @@ const ProductByCategory = () => {
 
     const fetchProducts = async (idCategory) => {
         try {
+            debugger
             const products = await GetProductsByCategory(idCategory);
             setProducts(products);
         } catch (error) {

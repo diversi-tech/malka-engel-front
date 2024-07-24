@@ -40,6 +40,7 @@ export const ProductList = () => {
     async function fetchProducts() {
         try {
             if (productsList.length == 0) {
+                debugger
                 const response = await GetAllProducts();
                 if (!response) {
                     setProducts([]);
