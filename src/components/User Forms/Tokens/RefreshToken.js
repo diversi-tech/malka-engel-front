@@ -1,5 +1,5 @@
 import { jwtDecode } from 'jwt-decode';
-import authService from '../../../axios/AuthorizationAxios'; 
+import authService from '../../../axios/AuthenticationAxios'; 
 
 const setupRefreshToken = () => {
   const accessToken = authService.getAccessToken();
@@ -10,8 +10,13 @@ const setupRefreshToken = () => {
 
     if (timeout > 0) {
       setTimeout(async () => {
-        await authService.refreshToken();
-        setupRefreshToken(); // Re-setup refresh
+       try {
+          await authService.refreshToken();
+        } catch (error) {
+          console.error('Failed to refresh token:', error);
+          authService.logout();
+      } 
+       setupRefreshToken(); // Re-setup refresh
       }, timeout);
     }
   }

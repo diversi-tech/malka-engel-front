@@ -8,15 +8,17 @@ import Home from './components/Layout Components/Home.js';
 import { Subscriber } from 'rxjs';
 import React, { useEffect } from 'react';
 import setupRefreshToken from './components/User Forms/Tokens/RefreshToken.js'; 
-
 import AccessibilityButton from './components/accessibility/AccessibilityButton';
-
+import authService from './axios/AuthenticationAxios.js';
 import FileUpload from './components/FileUpload.js';
 
 
 function App() {
   useEffect(() => {
-    setupRefreshToken();
+    const token = authService.getAccessToken();
+    if (token) {
+      setupRefreshToken();
+    }
   }, []);
 
   return (
