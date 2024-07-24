@@ -35,6 +35,7 @@ const SignUp = () => {
 
   // Function to handle Register
   const handleRegister = async () => {
+    
     if (validForm(newUser)) {
       setLoading(true);
       try {

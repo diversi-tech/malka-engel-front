@@ -31,7 +31,7 @@ export const Login = () => {
   const handleLogin = async () => {
     if (validForm(user)) {
       //Go to DB ......
-      let userLogin = await LoginUser(user.email, user.passwordHash);
+      let userLogin = await LoginUser({email:user.email,passwordHash: user.passwordHash});
       if (userLogin != null && userLogin.status == 200) {
         debugger
         //User exists in the database

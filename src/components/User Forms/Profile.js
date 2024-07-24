@@ -31,11 +31,13 @@ export const Profile = () => {
     if (validForm(profileData)) {
       try {
         let result = await PutUser(profileData);
-        if (result && result.status === 200) {
+        if (result && result.status === 200) 
+          {
           setCurrentUser(profileData);
           ConnectMe();
           setIsEditing(false);
-        } else {
+        } 
+        else {
           setSnackbarMessage('Network error');
           setOpenSnackbar(true);
         }
