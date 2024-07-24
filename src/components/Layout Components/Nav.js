@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,7 +12,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import theme from '../../createTheme';
 import { ThemeProvider } from '@mui/material/styles';
-import { cacheRtl, chosen, defaulti } from '../..';
+import { GetAllCategories } from '../../axios/CategoryAxios';
 
 export const Nav = () => {
     const { t, i18n } = useTranslation();
@@ -21,6 +21,10 @@ export const Nav = () => {
     const { Logout } = useConnectUser();
     const token = localStorage.getItem('token');
     const [anchorEl, setAnchorEl] = useState(null);
+    const [categoryMenuAnchorEl, setCategoryMenuAnchorEl] = useState(null);
+    const [categories, setCategories] = useState([]);
+
+
 
     const handleLanguageChange = (lng) => {
         debugger
@@ -38,7 +42,31 @@ export const Nav = () => {
 
     const handleClose = () => {
         setAnchorEl(null);
+        setCategoryMenuAnchorEl(null);
+
     };
+    // להוספת לינקים לקטדוריות
+    // const [categories, setCategories] = useState([]);
+
+    const fetchCategories = async () => {
+        try {
+            const categories = await GetAllCategories();
+            setCategories(categories.filter(category => category.upCategory === 0));
+        } catch (error) {
+            console.error("Error fetching categories:", error);
+            alert("An error occurred while fetching the categories.");
+        }
+    };
+
+    useEffect(() => {
+        fetchCategories();
+    }, []);
+
+
+    const handleCategoryMenu = (event) => {
+        setCategoryMenuAnchorEl(event.currentTarget);
+    };
+
 
     return (
         <ThemeProvider theme={theme}>
@@ -81,6 +109,29 @@ export const Nav = () => {
                                     מסכי ניהול
                                 </Button>
                             )}
+                            {/* {categories.map(category => (
+                                <Button key={category.categoryID} color="inherit" component={Link} to={`/myProductByCategory/${category.categoryID}`}>
+                                    {category.nameHe}
+                                </Button>
+                            ))} */}
+
+                            <Button color="inherit" onClick={handleCategoryMenu}>
+                                קטגוריות
+                            </Button>
+                            <Menu
+                                anchorEl={categoryMenuAnchorEl}
+                                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                                keepMounted
+                                transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+                                open={Boolean(categoryMenuAnchorEl)}
+                                onClose={handleClose}
+                            >
+                                {categories.map(category => (
+                                    <MenuItem key={category.categoryID} component={Link} to={`/myProductByCategory/${category.categoryID}`} onClick={handleClose}>
+                                        {category.nameHe}
+                                    </MenuItem>
+                                ))}
+                            </Menu>
                             <Typography variant="body1" style={{ marginLeft: '10px', color: connected ? theme.palette.text.primary : theme.palette.text.secondary }}>
                                 {connected ? currentUser.name : "NOT CONNECTED"}
                             </Typography>
