@@ -22,6 +22,7 @@ import {
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import InfoIcon from '@mui/icons-material/Info';
+import WatermarkedImage from './productDetail/WatermarkedImage';
 
 export const ProductList = () => {
     const { t } = useTranslation();
@@ -93,22 +94,28 @@ export const ProductList = () => {
                                                 borderRadius: '8px',
                                                 transition: 'transform 0.2s, box-shadow 0.2s',
                                                 boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-                                                ':hover': { 
+                                                ':hover': {
                                                     transform: 'scale(1.02)',
-                                                    boxShadow: '0 8px 16px rgba(0,0,0,0.2)' 
+                                                    boxShadow: '0 8px 16px rgba(0,0,0,0.2)'
                                                 }
                                             }}
                                         >
-                                            <CardMedia
-                                                component="img"
-                                                height="250"
-                                                image={`${process.env.REACT_APP_API_URL}${product.imageURL}`}
+                                            <WatermarkedImage
                                                 alt={product.name}
                                                 onClick={() => navigate(`/myProduct/${product.productID}`)}
                                                 sx={{
                                                     cursor: 'pointer',
                                                     transition: 'transform 0.3s',
                                                     ':hover': { transform: 'scale(1.1)' }
+                                                }}
+                                                imageUrl={`${process.env.REACT_APP_API_URL}${product.imageURL}`}
+                                                watermarkText='malka engel'
+
+                                                style={{
+                                                    width: '100%',
+                                                    height: '250px',
+                                                    transition: 'transform 0.2s ease-out',
+                                                    cursor: 'pointer'
                                                 }}
                                             />
                                             <CardContent sx={{ padding: '16px' }}>

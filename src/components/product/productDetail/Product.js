@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -11,6 +11,7 @@ import { AdditionalComments } from './AdditionalComments';
 import GoBackButton from '../../Layout Components/GoBackButton';
 import { Review } from './review/Review';
 import { setCookie } from '../cookies/CookieUtils';
+import WatermarkedImage from './WatermarkedImage'; // Import the new component
 
 export const Product = () => {
     const { t, i18n } = useTranslation();
@@ -18,14 +19,14 @@ export const Product = () => {
     const currentLanguage = i18n.language === 'en' ? 'En' : 'He';
     const productsList = useSelector(s => s.DataReducer_Products?.Prodlist || []);
     const [products, setProducts] = useState(productsList);
-    const imageRef = useRef(null);
-    const scrollToRef = useRef(null);
     const [cart, setCart] = useState(getCart());
     const [wording, setWording] = useState(cart.findIndex(item => item.productID == id) !== -1 ? cart[cart.findIndex(item => item.productID == id)].wording : '');
     const [additionalComments, setAdditionalComments] = useState(cart.findIndex(item => item.productID == id) !== -1 ? cart[cart.findIndex(item => item.productID == id)].additionalComments : '');
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
     const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+    const scrollToRef = useRef(null);
+
 
     const product = products.find(product => product.productID == id);
 
@@ -95,10 +96,10 @@ export const Product = () => {
                             height: 'auto'
                         }}
                     >
-                        <img
-                            ref={imageRef}
-                            src={`${process.env.REACT_APP_API_URL}${product.imageURL}`}
-                            alt={product[`name${currentLanguage}`]}
+                        <WatermarkedImage
+                            imageUrl={`${process.env.REACT_APP_API_URL}${product.imageURL}`}
+                            watermarkText='malka engel'
+                    
                             style={{
                                 width: '100%',
                                 height: 'auto',
