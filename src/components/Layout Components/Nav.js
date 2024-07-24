@@ -22,6 +22,7 @@ export const Nav = () => {
     const token = localStorage.getItem('token');
     const [anchorEl, setAnchorEl] = useState(null);
     const [categoryMenuAnchorEl, setCategoryMenuAnchorEl] = useState(null);
+    const [userMenuAnchorEl, setUserMenuAnchorEl] = useState(null);
     const [categories, setCategories] = useState([]);
 
 
@@ -43,7 +44,7 @@ export const Nav = () => {
     const handleClose = () => {
         setAnchorEl(null);
         setCategoryMenuAnchorEl(null);
-
+        setUserMenuAnchorEl(null);
     };
     // להוספת לינקים לקטדוריות
     // const [categories, setCategories] = useState([]);
@@ -65,6 +66,10 @@ export const Nav = () => {
 
     const handleCategoryMenu = (event) => {
         setCategoryMenuAnchorEl(event.currentTarget);
+    };
+
+    const handleUserMenu = (event) => {
+        setUserMenuAnchorEl(event.currentTarget);
     };
 
 
@@ -132,9 +137,27 @@ export const Nav = () => {
                                     </MenuItem>
                                 ))}
                             </Menu>
-                            <Typography variant="body1" style={{ marginLeft: '10px', color: connected ? theme.palette.text.primary : theme.palette.text.secondary }}>
+                            {connected && (
+                                <>
+                                    <Typography color="inherit" onClick={handleUserMenu}>
+                                        {currentUser.name}
+                                    </Typography>
+                                    <Menu
+                                        anchorEl={userMenuAnchorEl}
+                                        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                                        keepMounted
+                                        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+                                        open={Boolean(userMenuAnchorEl)}
+                                        onClose={handleClose}
+                                    >
+                                        <MenuItem component={Link} to="./myAccount" onClick={handleClose}>Account</MenuItem>
+                                        <MenuItem onClick={Logout}>Logout</MenuItem>
+                                    </Menu>
+                                </>
+                            )}
+                            {/* <Typography variant="body1" style={{ marginLeft: '10px', color: connected ? theme.palette.text.primary : theme.palette.text.secondary }}>
                                 {connected ? currentUser.name : "NOT CONNECTED"}
-                            </Typography>
+                            </Typography> */}
                             {i18n.language !== 'en' && (
                                 <IconButton onClick={() => handleLanguageChange('en')}>
                                     <img src={usFlag} alt="English" style={{ width: '25px', height: '20px' }} />
