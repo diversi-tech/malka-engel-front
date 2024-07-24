@@ -97,15 +97,15 @@ export const Nav = () => {
                             {!connected && <Button color="inherit" component={Link} to="./myLogin">
                                 {t('navPage.linkLogin')}
                             </Button>}
-                            {connected && <Button color="inherit" onClick={Logout}>
+                            {/* {connected && <Button color="inherit" onClick={Logout}>
                                 Logout
-                            </Button>}
+                            </Button>} */}
                             <Button color="inherit" component={Link} to="./myProductList">
                                 {t('navPage.linkProduct')}
                             </Button>
-                            <Button color="inherit" component={Link} to="./myAccount">
+                            {/* <Button color="inherit" component={Link} to="./myAccount">
                                 Account
-                            </Button>
+                            </Button> */}
                             <Button color="inherit" component={Link} to="./myEmailForm">
                                 {t('navPage.linkStayTuned')}
                             </Button>
@@ -137,24 +137,34 @@ export const Nav = () => {
                                     </MenuItem>
                                 ))}
                             </Menu>
-                            {connected && (
-                                <>
-                                    <Typography color="inherit" onClick={handleUserMenu}>
-                                        {currentUser.name}
-                                    </Typography>
-                                    <Menu
-                                        anchorEl={userMenuAnchorEl}
-                                        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                                        keepMounted
-                                        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-                                        open={Boolean(userMenuAnchorEl)}
-                                        onClose={handleClose}
-                                    >
-                                        <MenuItem component={Link} to="./myAccount" onClick={handleClose}>Account</MenuItem>
-                                        <MenuItem onClick={Logout}>Logout</MenuItem>
-                                    </Menu>
-                                </>
-                            )}
+                            
+                             {connected ? (
+                                    <div>
+                                        <MenuItem onClick={handleUserMenu}>
+                                            {currentUser.name}
+                                        </MenuItem>
+                                        <Menu
+                                            anchorEl={userMenuAnchorEl}
+                                            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                                            keepMounted
+                                            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+                                            open={Boolean(userMenuAnchorEl)}
+                                            onClose={handleClose}
+                                        >
+                                            <MenuItem component={Link} to="./myAccount" onClick={handleClose}>
+                                                Account
+                                            </MenuItem>
+                                            <MenuItem onClick={Logout}>
+                                                Logout
+                                            </MenuItem>
+                                        </Menu>
+                                    </div>
+                                ) : (
+                                    <MenuItem style={{ color: theme.palette.text.secondary }}>
+                                        NOT CONNECTED
+                                    </MenuItem>
+                                )}
+
                             {/* <Typography variant="body1" style={{ marginLeft: '10px', color: connected ? theme.palette.text.primary : theme.palette.text.secondary }}>
                                 {connected ? currentUser.name : "NOT CONNECTED"}
                             </Typography> */}
