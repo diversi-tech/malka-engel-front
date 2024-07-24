@@ -18,7 +18,7 @@ const ProductByCategory = () => {
     const fetchProducts = async (idCategory) => {
         try {
             debugger
-            const products = await GetProductsByCategory(idCategory);
+            const products = await GetProductsByCategory (idCategory);
             setProducts(products);
         } catch (error) {
             console.error("Error fetching products:", error);

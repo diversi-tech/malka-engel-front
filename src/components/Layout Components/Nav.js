@@ -22,6 +22,7 @@ export const Nav = () => {
     const token = localStorage.getItem('token');
     const [anchorEl, setAnchorEl] = useState(null);
     const [categoryMenuAnchorEl, setCategoryMenuAnchorEl] = useState(null);
+    const [userMenuAnchorEl, setUserMenuAnchorEl] = useState(null);
     const [categories, setCategories] = useState([]);
 
 
@@ -43,7 +44,7 @@ export const Nav = () => {
     const handleClose = () => {
         setAnchorEl(null);
         setCategoryMenuAnchorEl(null);
-
+        setUserMenuAnchorEl(null);
     };
     // להוספת לינקים לקטדוריות
     // const [categories, setCategories] = useState([]);
@@ -65,6 +66,10 @@ export const Nav = () => {
 
     const handleCategoryMenu = (event) => {
         setCategoryMenuAnchorEl(event.currentTarget);
+    };
+
+    const handleUserMenu = (event) => {
+        setUserMenuAnchorEl(event.currentTarget);
     };
 
 
@@ -92,15 +97,15 @@ export const Nav = () => {
                             {!connected && <Button color="inherit" component={Link} to="./myLogin">
                                 {t('navPage.linkLogin')}
                             </Button>}
-                            {connected && <Button color="inherit" onClick={Logout}>
+                            {/* {connected && <Button color="inherit" onClick={Logout}>
                                 Logout
-                            </Button>}
+                            </Button>} */}
                             <Button color="inherit" component={Link} to="./myProductList">
                                 {t('navPage.linkProduct')}
                             </Button>
-                            <Button color="inherit" component={Link} to="./myAccount">
+                            {/* <Button color="inherit" component={Link} to="./myAccount">
                                 Account
-                            </Button>
+                            </Button> */}
                             <Button color="inherit" component={Link} to="./myEmailForm">
                                 {t('navPage.linkStayTuned')}
                             </Button>
@@ -132,9 +137,37 @@ export const Nav = () => {
                                     </MenuItem>
                                 ))}
                             </Menu>
-                            <Typography variant="body1" style={{ marginLeft: '10px', color: connected ? theme.palette.text.primary : theme.palette.text.secondary }}>
+                            
+                             {connected ? (
+                                    <div>
+                                        <MenuItem onClick={handleUserMenu}>
+                                            {currentUser.name}
+                                        </MenuItem>
+                                        <Menu
+                                            anchorEl={userMenuAnchorEl}
+                                            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                                            keepMounted
+                                            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+                                            open={Boolean(userMenuAnchorEl)}
+                                            onClose={handleClose}
+                                        >
+                                            <MenuItem component={Link} to="./myAccount" onClick={handleClose}>
+                                                Account
+                                            </MenuItem>
+                                            <MenuItem onClick={Logout}>
+                                                Logout
+                                            </MenuItem>
+                                        </Menu>
+                                    </div>
+                                ) : (
+                                    <MenuItem style={{ color: theme.palette.text.secondary }}>
+                                        NOT CONNECTED
+                                    </MenuItem>
+                                )}
+
+                            {/* <Typography variant="body1" style={{ marginLeft: '10px', color: connected ? theme.palette.text.primary : theme.palette.text.secondary }}>
                                 {connected ? currentUser.name : "NOT CONNECTED"}
-                            </Typography>
+                            </Typography> */}
                             {i18n.language !== 'en' && (
                                 <IconButton onClick={() => handleLanguageChange('en')}>
                                     <img src={usFlag} alt="English" style={{ width: '25px', height: '20px' }} />
