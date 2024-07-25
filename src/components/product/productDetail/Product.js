@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Container, Grid, Typography, Button, Box, Snackbar, Alert } from '@mui/material';
+import { Container, Grid, Typography, Button, Box, Snackbar, Alert, Breadcrumbs } from '@mui/material';
 import { Wording } from './Wording';
 import { addToCart, getCart, removeFromCart } from '../cookies/SetCart';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -26,7 +26,6 @@ export const Product = () => {
     const [snackbarMessage, setSnackbarMessage] = useState('');
     const [snackbarSeverity, setSnackbarSeverity] = useState('success');
     const scrollToRef = useRef(null);
-
 
     const product = products.find(product => product.productID == id);
 
@@ -81,9 +80,30 @@ export const Product = () => {
         setOpenSnackbar(false);
     };
 
+    // Example breadcrumb data
+    const breadcrumbs = [
+        { name: 'Home Page', link: '/' },
+        { name: 'CategoryName', link: '/category/2' },
+        { name: product[`name${currentLanguage}`] }
+    ];
+
     return (
         <Container sx={{ mt: 4 }}>
-            <Grid container spacing={2}>
+            <Breadcrumbs aria-label="breadcrumb">
+                {breadcrumbs.map((crumb, index) => (
+                    index < breadcrumbs.length - 1 ? (
+                        <Link key={index} to={crumb.link} style={{ textDecoration: 'none', color: '#1976d2' }}>
+                            {crumb.name}
+                        </Link>
+                    ) : (
+                        <Typography key={index} color="text.primary">
+                            {crumb.name}
+                        </Typography>
+                    )
+                ))}
+            </Breadcrumbs>
+
+            <Grid container spacing={2} sx={{ mt: 2 }}>
                 <Grid item xs={12} md={6}>
                     <Box
                         sx={{
@@ -99,7 +119,6 @@ export const Product = () => {
                         <WatermarkedImage
                             imageUrl={`${process.env.REACT_APP_API_URL}${product.imageURL}`}
                             watermarkText='malka engel'
-                    
                             style={{
                                 width: '100%',
                                 height: 'auto',
