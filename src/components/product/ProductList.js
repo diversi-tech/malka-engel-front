@@ -62,8 +62,11 @@ export const ProductList = () => {
     }, []);
 
     const handleAddToCart = (product) => {
-        addToCart(product);
-        setCart(getCart());
+        navigate(`/myProduct/${product.productID}`)
+        // product.wording = "no wording";
+        // product.additionalComments = "no comments";
+        // addToCart(product);
+        // setCart(getCart());
     };
 
     const handleRemoveFromCart = (productId) => {

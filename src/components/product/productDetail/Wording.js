@@ -46,7 +46,7 @@ export const Wording = ({ initialValue, setWording }) => {
 
     return (
         <Box sx={{ width: '100%', minHeight: '30px', border: '1px solid #ddd', borderRadius: '4px', padding: '16px', direction: 'rtl' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', marginBottom: '8px' }}>
+            {/* <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', marginBottom: '8px' }}>
                 <Tooltip title={isBold ? 'Remove Bold' : 'Make Bold'}>
                     <Button variant={isBold ? 'contained' : 'outlined'} onClick={handleToggleBold} sx={{ mr: 1 }}>
                         <FormatBoldIcon />
@@ -62,7 +62,7 @@ export const Wording = ({ initialValue, setWording }) => {
                         <FormatClearIcon />
                     </Button>
                 </Tooltip>
-            </Box>
+            </Box> */}
             <ReactQuill ref={quillRef} value={editorHtml} onChange={handleChange} placeholder="הקלד כאן ניסוח" />
         </Box>
     );

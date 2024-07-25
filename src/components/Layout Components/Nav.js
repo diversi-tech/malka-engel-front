@@ -14,6 +14,17 @@ import theme from '../../createTheme';
 import { ThemeProvider } from '@mui/material/styles';
 import { GetAllCategories } from '../../axios/CategoryAxios';
 
+// Define new color palette
+const colors = {
+    primaryBg: '#000000', // Black background
+    primaryText: '#ffffff', // White text
+    accent1: '#ff5722', // Red-Orange accent
+    accent2: '#009688', // Teal accent
+    hoverBg: '#333333', // Dark gray for hover
+    menuBg: '#222222', // Dark gray for menu background
+    menuItemHover: '#444444', // Medium gray for menu item hover
+};
+
 export const Nav = () => {
     const { t, i18n } = useTranslation();
     const currentUser = useSelector(s => s.DataReducer_Users.currentUser);
@@ -25,29 +36,17 @@ export const Nav = () => {
     const [userMenuAnchorEl, setUserMenuAnchorEl] = useState(null);
     const [categories, setCategories] = useState([]);
 
-
-
     const handleLanguageChange = (lng) => {
-        debugger
         i18n.changeLanguage(lng);
-        if (lng === 'he') {
-            document.body.dir = 'rtl';
-        } else {
-            document.body.dir = 'ltr';
-        }
+        document.body.dir = lng === 'he' ? 'rtl' : 'ltr';
     };
 
-    const handleMenu = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
+    const handleMenu = (event) => setAnchorEl(event.currentTarget);
     const handleClose = () => {
         setAnchorEl(null);
         setCategoryMenuAnchorEl(null);
         setUserMenuAnchorEl(null);
     };
-    // להוספת לינקים לקטדוריות
-    // const [categories, setCategories] = useState([]);
 
     const fetchCategories = async () => {
         try {
@@ -63,111 +62,174 @@ export const Nav = () => {
         fetchCategories();
     }, []);
 
-
-    const handleCategoryMenu = (event) => {
-        setCategoryMenuAnchorEl(event.currentTarget);
-    };
-
-    const handleUserMenu = (event) => {
-        setUserMenuAnchorEl(event.currentTarget);
-    };
-
+    const handleCategoryMenu = (event) => setCategoryMenuAnchorEl(event.currentTarget);
+    const handleUserMenu = (event) => setUserMenuAnchorEl(event.currentTarget);
 
     return (
         <ThemeProvider theme={theme}>
-            <AppBar position="static" color="primary">
+            <AppBar position="static" sx={{ background: `linear-gradient(45deg, ${colors.primaryBg}, #333333)` }}>
                 <Container>
                     <Toolbar>
                         <IconButton edge="start" color="inherit" aria-label="menu" onClick={handleMenu}>
                             <MenuIcon />
                         </IconButton>
-                        <Typography variant="h6" component={Link} to="/" style={{ flexGrow: 1, textDecoration: 'none', color: 'inherit' }}>
+                        <Typography
+                            variant="h6"
+                            component={Link}
+                            to="/"
+                            sx={{ flexGrow: 1, textDecoration: 'none', color: colors.primaryText, fontWeight: 'bold' }}
+                        >
                             Designery
                         </Typography>
-                        <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                            <Button color="inherit" component={Link} to="./myShoppingCart">
+                        <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
+                            <Button
+                                color="inherit"
+                                component={Link}
+                                to="./myShoppingCart"
+                                sx={{
+                                    color: colors.primaryText,
+                                    '&:hover': { backgroundColor: colors.hoverBg }
+                                }}
+                            >
                                 <FontAwesomeIcon icon={faShoppingCart} />
                             </Button>
-                            <Button color="inherit" component={Link} to="./myHome">
+                            <Button
+                                color="inherit"
+                                component={Link}
+                                to="./myHome"
+                                sx={{
+                                    color: colors.primaryText,
+                                    '&:hover': { backgroundColor: colors.hoverBg }
+                                }}
+                            >
                                 {t('navPage.linkHome')}
                             </Button>
-                            <Button color="inherit" component={Link} to="./myCommonQuestions">
+                            <Button
+                                color="inherit"
+                                component={Link}
+                                to="./myCommonQuestions"
+                                sx={{
+                                    color: colors.primaryText,
+                                    '&:hover': { backgroundColor: colors.hoverBg }
+                                }}
+                            >
                                 {t('navPage.linCommonQuestions')}
                             </Button>
-                            {!connected && <Button color="inherit" component={Link} to="./myLogin">
-                                {t('navPage.linkLogin')}
-                            </Button>}
-                            {/* {connected && <Button color="inherit" onClick={Logout}>
-                                Logout
-                            </Button>} */}
-                            <Button color="inherit" component={Link} to="./myProductList">
+                            {!connected && (
+                                <Button
+                                    color="inherit"
+                                    component={Link}
+                                    to="./myLogin"
+                                    sx={{
+                                        color: colors.primaryText,
+                                        '&:hover': { backgroundColor: colors.hoverBg }
+                                    }}
+                                >
+                                    {t('navPage.linkLogin')}
+                                </Button>
+                            )}
+                            <Button
+                                color="inherit"
+                                component={Link}
+                                to="./myProductList"
+                                sx={{
+                                    color: colors.primaryText,
+                                    '&:hover': { backgroundColor: colors.hoverBg }
+                                }}
+                            >
                                 {t('navPage.linkProduct')}
                             </Button>
-                            {/* <Button color="inherit" component={Link} to="./myAccount">
-                                Account
-                            </Button> */}
-                            <Button color="inherit" component={Link} to="./myEmailForm">
+                            <Button
+                                color="inherit"
+                                component={Link}
+                                to="./myEmailForm"
+                                sx={{
+                                    color: colors.primaryText,
+                                    '&:hover': { backgroundColor: colors.hoverBg }
+                                }}
+                            >
                                 {t('navPage.linkStayTuned')}
                             </Button>
                             {connected && currentUser.typeID === 3 && (
-                                <Button color="inherit" component={Link} to={`./AllAdminPages/${token}`}>
+                                <Button
+                                    color="inherit"
+                                    component={Link}
+                                    to={`./AllAdminPages/${token}`}
+                                    sx={{
+                                        color: colors.primaryText,
+                                        '&:hover': { backgroundColor: colors.hoverBg }
+                                    }}
+                                >
                                     מסכי ניהול
                                 </Button>
                             )}
-                            {/* {categories.map(category => (
-                                <Button key={category.categoryID} color="inherit" component={Link} to={`/myProductByCategory/${category.categoryID}`}>
-                                    {category.nameHe}
-                                </Button>
-                            ))} */}
-
-                            <Button color="inherit" onClick={handleCategoryMenu}>
+                            <Button
+                                color="inherit"
+                                onClick={handleCategoryMenu}
+                                sx={{
+                                    color: colors.primaryText,
+                                    '&:hover': { backgroundColor: colors.hoverBg }
+                                }}
+                            >
                                 קטגוריות
                             </Button>
                             <Menu
                                 anchorEl={categoryMenuAnchorEl}
-                                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
                                 keepMounted
-                                transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+                                transformOrigin={{ vertical: 'top', horizontal: 'center' }}
                                 open={Boolean(categoryMenuAnchorEl)}
                                 onClose={handleClose}
+                                PaperProps={{ style: { backgroundColor: colors.menuBg } }}
                             >
                                 {categories.map(category => (
-                                    <MenuItem key={category.categoryID} component={Link} to={`/myProductByCategory/${category.categoryID}`} onClick={handleClose}>
+                                    <MenuItem
+                                        key={category.categoryID}
+                                        component={Link}
+                                        to={`/myProductByCategory/${category.categoryID}`}
+                                        onClick={handleClose}
+                                        sx={{
+                                            color: colors.primaryText,
+                                            '&:hover': { backgroundColor: colors.menuItemHover }
+                                        }}
+                                    >
                                         {category.nameHe}
                                     </MenuItem>
                                 ))}
                             </Menu>
-                            
-                             {connected ? (
-                                    <div>
-                                        <MenuItem onClick={handleUserMenu}>
-                                            {currentUser.name}
-                                        </MenuItem>
-                                        <Menu
-                                            anchorEl={userMenuAnchorEl}
-                                            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                                            keepMounted
-                                            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-                                            open={Boolean(userMenuAnchorEl)}
-                                            onClose={handleClose}
-                                        >
-                                            <MenuItem component={Link} to="./myAccount" onClick={handleClose}>
-                                                Account
-                                            </MenuItem>
-                                            <MenuItem onClick={Logout}>
-                                                Logout
-                                            </MenuItem>
-                                        </Menu>
-                                    </div>
-                                ) : (
-                                    <MenuItem style={{ color: theme.palette.text.secondary }}>
-                                        NOT CONNECTED
+                            {connected ? (
+                                <div>
+                                    <MenuItem
+                                        onClick={handleUserMenu}
+                                        sx={{
+                                            color: colors.primaryText,
+                                            '&:hover': { backgroundColor: colors.menuItemHover }
+                                        }}
+                                    >
+                                        {currentUser.name}
                                     </MenuItem>
-                                )}
-
-                            {/* <Typography variant="body1" style={{ marginLeft: '10px', color: connected ? theme.palette.text.primary : theme.palette.text.secondary }}>
-                                {connected ? currentUser.name : "NOT CONNECTED"}
-                            </Typography> */}
+                                    <Menu
+                                        anchorEl={userMenuAnchorEl}
+                                        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                                        keepMounted
+                                        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+                                        open={Boolean(userMenuAnchorEl)}
+                                        onClose={handleClose}
+                                        PaperProps={{ style: { backgroundColor: colors.menuBg } }}
+                                    >
+                                        <MenuItem component={Link} to="./myAccount" onClick={handleClose}>
+                                            Account
+                                        </MenuItem>
+                                        <MenuItem onClick={Logout}>
+                                            Logout
+                                        </MenuItem>
+                                    </Menu>
+                                </div>
+                            ) : (
+                                <MenuItem sx={{ color: colors.primaryText }}>
+                                    NOT CONNECTED
+                                </MenuItem>
+                            )}
                             {i18n.language !== 'en' && (
                                 <IconButton onClick={() => handleLanguageChange('en')}>
                                     <img src={usFlag} alt="English" style={{ width: '25px', height: '20px' }} />
@@ -178,48 +240,6 @@ export const Nav = () => {
                                     <img src={ilFlag} alt="Hebrew" style={{ width: '25px', height: '20px' }} />
                                 </IconButton>
                             )}
-                        </Box>
-                        <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-                            <IconButton color="inherit" onClick={handleMenu}>
-                                <MenuIcon />
-                            </IconButton>
-                            <Menu
-                                anchorEl={anchorEl}
-                                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                                keepMounted
-                                transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-                                open={Boolean(anchorEl)}
-                                onClose={handleClose}
-                            >
-                                <MenuItem component={Link} to="./myShoppingCart">
-                                    <FontAwesomeIcon icon={faShoppingCart} />
-                                </MenuItem>
-                                <MenuItem component={Link} to="./myHome">{t('navPage.linkHome')}</MenuItem>
-                                <MenuItem component={Link} to="./myCommonQuestions">{t('navPage.linCommonQuestions')}</MenuItem>
-                                {!connected && <MenuItem component={Link} to="./myLogin">{t('navPage.linkLogin')}</MenuItem>}
-                                {connected && <MenuItem onClick={Logout}>Logout</MenuItem>}
-                                <MenuItem component={Link} to="./myProductList">{t('navPage.linkProduct')}</MenuItem>
-                                <MenuItem component={Link} to="./myAccount">Account</MenuItem>
-                                <MenuItem component={Link} to="./myEmailForm">{t('navPage.linkStayTuned')}</MenuItem>
-                                {connected && currentUser.typeID === 3 && (
-                                    <MenuItem component={Link} to={`./AllAdminPages/${token}`}>
-                                        מסכי ניהול
-                                    </MenuItem>
-                                )}
-                                <MenuItem style={{ color: connected ? theme.palette.text.primary : theme.palette.text.secondary }}>
-                                    {connected ? currentUser.name : "NOT CONNECTED"}
-                                </MenuItem>
-                                {i18n.language != 'en' && (
-                                    <MenuItem onClick={() => handleLanguageChange('en')}>
-                                        <img src={usFlag} alt="English" style={{ width: '25px', height: '20px' }} />
-                                    </MenuItem>
-                                )}
-                                {i18n.language != 'he' && (
-                                    <MenuItem onClick={() => handleLanguageChange('he')}>
-                                        <img src={ilFlag} alt="Hebrew" style={{ width: '25px', height: '20px' }} />
-                                    </MenuItem>
-                                )}
-                            </Menu>
                         </Box>
                     </Toolbar>
                 </Container>

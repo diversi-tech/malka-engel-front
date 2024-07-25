@@ -4,7 +4,7 @@ const theme = createTheme({
   direction: 'rtl',
   palette: {
     primary: {
-      main: '#7851A9', // Royal Purple
+      main: '#1C1C1C', // Royal Purple
     },
     secondary: {
       main: '#008080', // Teal
