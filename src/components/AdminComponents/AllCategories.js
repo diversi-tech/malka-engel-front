@@ -1,3 +1,4 @@
+
 import { useTranslation } from 'react-i18next';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -8,14 +9,20 @@ import { addProductToCategory, deleteProductInCategory, GetAllProducts, GetProdu
 // import { GetAllProducts } from '../../axios/ProductAxios';
 // צריכה לאפס ארת הנתונים בטופס!
 // צריכהךלרםפש בצורה יותר יעילה
-const AllCategories = () =>  {
+const AllCategories = () => {
+    debugger
     const { t, i18n } = useTranslation();
     const myCategory = useSelector(c => c.DataReducer_Categry.Categorylist);
     const [data, setData] = useState([]);
+    const filteredCategories = [];
     const dispatch = useDispatch();
     const [showAddForm, setShowAddForm] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
     const [addedCategory, setAddedCategory] = useState('');
+    const [currentImage, setCurrentImage] = useState('');
+    const [categories, setCategories] = useState([]);
+    const [canEnter, setCanEnter] = useState([]);
+    const [cannotEnter, setCannotEnter] = useState([]);
     const [newC, setNewC] = useState({
         nameHe: '',
         descriptionHe: '',
@@ -23,16 +30,18 @@ const AllCategories = () =>  {
         descriptionEn: '',
         upCategory: 0,
         ImageURL: '',
-        Image :''
+        Image: ''
     });
     async function fetchData() {
-        // if (myCategory.length === 0) {
-        var dataFromServer = await GetAllCategories();
-        setData(dataFromServer);
-        dispatch(setCategoryList(dataFromServer));
-        // } else {
-        //     setData(myCategory);
-        // }
+        debugger
+        if (myCategory.length === 0) {
+            var dataFromServer = await GetAllCategories();
+            setData(dataFromServer);
+            dispatch(setCategoryList(dataFromServer));
+        }
+        else {
+            setData(myCategory);
+        }
     }
 
     useEffect(() => {
@@ -44,17 +53,16 @@ const AllCategories = () =>  {
         debugger
         e.preventDefault();
         // קוד להוספת קטגוריה חדשה
-        const formData= new FormData();
+        const formData = new FormData();
         // formData.append('categoryID',0);
         formData.append('nameHe', newC.nameHe);
         formData.append('descriptionHe', newC.descriptionHe);
         formData.append('nameEn', newC.nameEn);
         formData.append('descriptionEn', newC.descriptionEn);
         formData.append('upCategory', newC.upCategory);
-        formData.append('createAt', "2024-07-03T09:45:43.322Z");
-        formData.append('ImageURL', "/images/"+newC.Image.name );
+        formData.append('ImageURL', "/images/" + newC.Image.name);
         formData.append('Image', newC.Image);
-        
+
         // alert(newCategory)
         debugger
         ///= כאן לקרוא לשרת
@@ -88,7 +96,66 @@ const AllCategories = () =>  {
     //         ...newC,
     //         [newC.Image]: e.target.files[0]
     //     });
-    // };
+    // };  
+
+    const getValidCategories = (currentCategoryId, allCategories) => {
+        debugger
+        const categoryMap = new Map(allCategories.map(category => [category.categoryID, category]));
+        const parent = new Map();
+        const rank = new Map();
+        const canEnterSet = new Set();
+        const cannotEnterSet = new Set();
+        const find = (x) => {
+            if (parent.get(x) !== x) {
+                parent.set(x, find(parent.get(x)));
+            }
+            return parent.get(x);
+        };
+        const union = (x, y) => {
+            const rootX = find(x);
+            const rootY = find(y);
+
+            if (rootX !== rootY) {
+                if (rank.get(rootX) > rank.get(rootY)) {
+                    parent.set(rootY, rootX);
+                } else if (rank.get(rootX) < rank.get(rootY)) {
+                    parent.set(rootX, rootY);
+                } else {
+                    parent.set(rootY, rootX);
+                    rank.set(rootX, rank.get(rootX) + 1);
+                }
+            }
+        };
+        allCategories.forEach(category => {
+            parent.set(category.categoryID, category.categoryID);
+            rank.set(category.categoryID, 0);
+        });
+
+        allCategories.forEach(category => {
+            if (category.upCategory !== 0 && categoryMap.has(category.upCategory)) {
+                union(category.categoryID, category.upCategory);
+            }
+        });
+
+        allCategories.forEach(category => {
+            if (category.categoryID === currentCategoryId) return;
+
+            if (find(category.categoryID) === find(currentCategoryId)) {
+                cannotEnterSet.add(category);
+            } else {
+                canEnterSet.add(category);
+            }
+        });
+
+
+        setCanEnter(Array.from(canEnterSet));
+        setCannotEnter(Array.from(cannotEnterSet));
+        return { canEnter: Array.from(canEnterSet) }
+
+
+    };
+
+
     const handleChange = (e) => {
         const { name, value, files } = e.target;
         if (name === "Image") {
@@ -96,14 +163,15 @@ const AllCategories = () =>  {
                 ...newC,
                 [name]: files[0]
             });
-        } else {
+        } 
+        else {
             setNewC({
                 ...newC,
                 [name]: value
             });
         }
     };
-    
+
     //----------- getProductByCategory
 
     const [expandedCategory, setExpandedCategory] = useState(null);
@@ -157,38 +225,57 @@ const AllCategories = () =>  {
     //------------- update category
     const [showEditForm, setShowEditForm] = useState(false);
     const [currentCategory, setCurrentCategory] = useState(null);
-    const [newProduct, setNewProduct] = useState({
-        productName: '',
-        productDescription: ''
-    });
-    const handleEditCategory = (category) => {
+    const handleEditCategory = async (category) => {
+        debugger
         setCurrentCategory(category);
+
+        try {
+            debugger
+            const fileName = category.imageURL.substring(category.imageURL.lastIndexOf('/') + 1);
+            const response = await fetch(`${process.env.REACT_APP_API_URL}${category.imageURL}`);
+            const blob = await response.blob();
+            const file = new File([blob], fileName, { type: blob.type });
+            setCurrentImage(file);
+        } catch (error) {
+            console.error("Error fetching current image:", error);
+            alert("err");
+        }
         setNewC({
             nameHe: category.nameHe,
             descriptionHe: category.descriptionHe,
             nameEn: category.nameEn,
             descriptionEn: category.descriptionEn,
             upCategory: category.upCategory,
-            ImageURL: category.ImageURL  ,
+            ImageURL: category.imageURL,
             Image: category.Image
         });
+        setCurrentCategory(category.categoryID);
+
         setShowEditForm(true);
 
     };
 
     const handleUpdateCategory = async (e) => {
+        debugger
         e.preventDefault();
         try {
-            const updatedCategory = {
-                ...currentCategory,
-                nameHe: newC.nameHe,
-                descriptionHe: newC.descriptionHe,
-                nameEn: newC.nameEn,
-                descriptionEn: newC.descriptionEn,
-                upCategory: newC.upCategory,
-                ImageURL: newC.ImageURL,
-                Image: newC.Image
-            };
+            debugger
+            const updatedCategory = new FormData();
+            updatedCategory.append('categoryID', currentCategory.categoryID);
+            updatedCategory.append('nameHe', newC.nameHe);
+            updatedCategory.append('descriptionHe', newC.descriptionHe);
+            updatedCategory.append('nameEn', newC.nameEn);
+            updatedCategory.append('descriptionEn', newC.descriptionEn);
+            updatedCategory.append('upCategory', newC.upCategory);
+            if (newC.Image) {
+                updatedCategory.append('ImageURL', "/images/" + newC.Image.name);
+                updatedCategory.append('Image', newC.Image);
+            }
+            else {
+                updatedCategory.append('imageURL', currentImage.name);
+                updatedCategory.append('image', currentImage);
+            }
+
             await updateCategory(currentCategory.categoryID, updatedCategory);
             fetchData();
             setShowEditForm(false);
@@ -255,6 +342,8 @@ const AllCategories = () =>  {
         setCurrentProduct(product);
         setShowDetailsModal(true);
     };
+
+
     return (
         <div className="container mt-4">
             <div className="d-flex justify-content-between align-items-center mb-3">
@@ -267,7 +356,7 @@ const AllCategories = () =>  {
                     <li key={category.categoryID} className="list-group-item">
                         <h5>{category.nameHe} ({category.nameEn})</h5>
                         <p>{category.descriptionHe} ({category.descriptionEn})</p>
-                        <small>Up Category: {category.upCategory} | Created At: {category.createAt}</small>
+                        <small>CategoryID: {category.categoryID} | Up Category: {category.upCategory} | Created At: {category.createAt}</small>
                         <p>{category.ImageURL}</p>
                         <div className="mt-3">
                             <button className="btn btn-primary me-2" onClick={() => showProducts(category.categoryID)}>
@@ -287,7 +376,6 @@ const AllCategories = () =>  {
                                                     <Card.Body>
                                                         <Card.Title>{product.nameHe}</Card.Title>
                                                         <Button variant="info" onClick={() => handleShowDetailsModal(product)}>פרטים נוספים</Button>
-                                                        {/* <Button variant="info" onClick={() => alert(`פרטים נוספים:\n${product.descriptionHe}\nמחיר: ${product.price}\nמחיר במבצע: ${product.salePrice}\nשם באנגלית: ${product.nameEn}\nתיאור באנגלית: ${product.descriptionEn}\nנוצר בתאריך: ${product.createdAt}`)}>פרטים נוספים</Button> */}
                                                         <Button variant="danger" onClick={() => confirmDeleteProduct(category.categoryID, product.productID)}>מחק מוצר</Button>
                                                     </Card.Body>
                                                 </Card>
@@ -301,6 +389,7 @@ const AllCategories = () =>  {
                     </li>
                 ))}
             </ul>
+
 
             <Modal show={showAddForm} onHide={() => setShowAddForm(false)}>
                 <Modal.Header closeButton>
@@ -329,7 +418,6 @@ const AllCategories = () =>  {
                                 onChange={handleChange}
                                 required
                             />
-                            {/* <Form.Control type="text" placeholder="הכנס תיאור קטגוריה בעברית" required /> */}
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>  שם באנגלית  </Form.Label>
@@ -341,7 +429,6 @@ const AllCategories = () =>  {
                                 onChange={handleChange}
                                 required
                             />
-                            {/* <Form.Control type="text" placeholder="Enter category name in English" required /> */}
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>תיאור באנגלית</Form.Label>
@@ -353,18 +440,27 @@ const AllCategories = () =>  {
                                 onChange={handleChange}
                                 required
                             />
-
-                            {/* <Form.Control type="text" placeholder="Enter category description in English" required /> */}
                         </Form.Group>
                         <Form.Group>
-    <Form.Label>תמונה</Form.Label>
-    <Form.Control
-        type="file"
-        name="Image"
-        onChange={handleChange}
-        required
-    />
-</Form.Group>
+                            <Form.Label>קטגוריית אב</Form.Label>
+                            <Form.Control
+                                type="number"
+                                name="upCategory"
+                                placeholder="Enter upCategory"
+                                value={newC.upCategory}
+                                onChange={handleChange}
+                                required
+                            />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>תמונה</Form.Label>
+                            <Form.Control
+                                type="file"
+                                name="Image"
+                                onChange={handleChange}
+                                required
+                            />
+                        </Form.Group>
 
                         <Button variant="primary" type="submit" >הוסף קטגוריה</Button>
                     </Form>
@@ -385,30 +481,6 @@ const AllCategories = () =>  {
                 </Modal.Footer>
             </Modal>
 
-            {/* <Modal show={showModal} onHide={() => setShowModal(false)}>
-                <Modal.Header closeButton>
-                    <Modal.Title>הוספת מוצרים לקטגוריה</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <ListGroup>
-                        {allProducts.map(product => (
-                            <ListGroup.Item key={product.productID}>
-                                <Form.Check
-                                    type="checkbox"
-                                    label={product.nameHe}
-                                    checked={selectedProducts.includes(product.productID)}
-                                    onChange={() => handleSelectProduct(product.productID)}
-                                    disabled={products[modalCategory] ?.some(p => p.productID === product.productID)}
-                                />
-                            </ListGroup.Item>
-                        ))}
-                    </ListGroup>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShowModal(false)}>ביטול</Button>
-                    <Button variant="primary" onClick={handleAddProductsToCategory}>הוסף מוצרים</Button>
-                </Modal.Footer>
-            </Modal> */}
             <Modal show={showModal} onHide={() => setShowModal(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>הוספת מוצרים לקטגוריה</Modal.Title>
@@ -493,15 +565,36 @@ const AllCategories = () =>  {
                             />
                         </Form.Group>
                         <Form.Group>
-    <Form.Label>תמונה</Form.Label>
-    <Form.Control
-        type="file"
-        name="Image"
-        onChange={handleChange}
-        required
-    />
-</Form.Group>
+                            <Form.Label>קטגוריית אב</Form.Label>
+                            <Form.Control
+                                as="select"
+                                name="upCategory"
+                                value={currentCategory.categoryID}
+                                onChange={handleChange}
+                                required
+                            >
+                                <option value="" disabled>
+                                    Select upCategory
+                                </option>
+                                {getValidCategories(currentCategory.categoryID, data).canEnter.map((category) => (
+                                    <option key={category.categoryID} value={category.categoryID}>
+                                        {category.name} {/* Adjust according to your category object structure */}
+                                    </option>
+                                ))}
+                            </Form.Control>
+                        </Form.Group>
+                        <select >
+                            <option value="">בחר קטגוריה</option>
+                        </select>
 
+                        <Form.Group>
+                            <Form.Label>תמונה</Form.Label>
+                            <Form.Control
+                                type="file"
+                                name="Image"
+                                onChange={handleChange}
+                            />
+                        </Form.Group>
                         <Button variant="primary" type="submit">עדכן קטגוריה</Button>
                     </Form>
                 </Modal.Body>
@@ -520,25 +613,6 @@ const AllCategories = () =>  {
                 </Modal.Footer>
             </Modal>
 
-
-            {/* <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)}>
-                <Modal.Header closeButton>
-                    <Modal.Title>מוצרים נוספו בהצלחה</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <p>המוצרים הבאים נוספו בהצלחה:</p>
-                    <ListGroup>
-                        {selectedProducts.map(productID => {
-                            const product = allProducts.find(product => product.productID === productID);
-                            return <ListGroup.Item key={productID}>{product.nameHe}</ListGroup.Item>;
-                        })}
-                    </ListGroup>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" onClick={() => setShowSuccessModal(false)}>אישור</Button>
-                </Modal.Footer>
-            </Modal> */}
-
             <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>מוצרים נוספו בהצלחה</Modal.Title>
@@ -555,7 +629,6 @@ const AllCategories = () =>  {
                     <Button variant="primary" onClick={() => setShowSuccessModal(false)}>אישור</Button>
                 </Modal.Footer>
             </Modal>
-
 
             <Modal show={showDetailsModal} onHide={() => setShowDetailsModal(false)}>
                 <Modal.Header closeButton>
@@ -586,10 +659,8 @@ const AllCategories = () =>  {
     );
 };
 export default AllCategories;
-// צבע לבחירה ::selection {
-// 	color: #0B1126;
-// 	background-color: #05FD75;
-// }
+
+
 
 
 // import { useTranslation } from 'react-i18next';
