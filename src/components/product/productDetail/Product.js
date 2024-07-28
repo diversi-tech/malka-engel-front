@@ -14,6 +14,7 @@ import { setCookie } from '../cookies/CookieUtils';
 import WatermarkedImage from './WatermarkedImage'; // Import the new component
 
 export const Product = () => {
+    //const params = useParams();
     const { t, i18n } = useTranslation();
     const { id } = useParams();
     const currentLanguage = i18n.language === 'en' ? 'En' : 'He';
@@ -83,7 +84,7 @@ export const Product = () => {
     // Example breadcrumb data
     const breadcrumbs = [
         { name: 'Home Page', link: '/' },
-        { name: 'CategoryName', link: '/category/2' },
+     //   { name: 'CategoryName', link: `/myProductByCategory/${params.idCategory}` },
         { name: product[`name${currentLanguage}`] }
     ];
 

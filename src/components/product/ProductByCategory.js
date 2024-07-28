@@ -1,25 +1,35 @@
-
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router';
-import { Button, Modal, Form, Card, Collapse, ListGroup, Row, Col } from 'react-bootstrap';
+import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import InfoIcon from '@mui/icons-material/Info';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
 import { GetProductsByCategory } from '../../axios/ProductAxios';
+import { Box, Breadcrumbs, Card, CardContent, Container, Grid, IconButton, Link, Tooltip, Typography } from '@mui/material';
+import WatermarkedImage from './productDetail/WatermarkedImage';
+import { getCart, removeFromCart } from './cookies/SetCart';
+import { GetCategoryByCategoryId } from '../../axios/CategoryAxios';
 
 const ProductByCategory = () => {
     debugger
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
+    const currentLanguage = i18n.language === 'en' ? 'En' : 'He';
     const { idCategory } = useParams();
     const navigate = useNavigate();
-
+    const [cart, setCart] = useState(getCart());
+    const [category, setCategory] = useState({name:"unknown"});
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const fetchProducts = async (idCategory) => {
+    const fetchData = async () => {
         try {
             debugger
-            const products = await GetProductsByCategory (idCategory);
-            setProducts(products);
+            const [productsResponse, categoryResponse] = await Promise.all([
+                GetProductsByCategory(idCategory),
+                GetCategoryByCategoryId(idCategory)
+            ]);
+            setCategory(categoryResponse);
+            setProducts(productsResponse);
         } catch (error) {
             console.error("Error fetching products:", error);
             alert("An error occurred while fetching the products.");
@@ -29,74 +39,139 @@ const ProductByCategory = () => {
     };
 
     useEffect(() => {
-        fetchProducts(idCategory);
+        fetchData();
     }, [idCategory]);
 
+    const handleRemoveFromCart = (productId) => {
+        removeFromCart(productId);
+        setCart(getCart());
+    };
+
+    const handleAddToCart = (product) => {
+        navigate(`/myProduct/${product.productID}`);
+        // Add the product to cart here if needed
+    };
+
+    const breadcrumbs = [
+        { name: 'Home Page', link: '/' },
+        { name: category[`name${currentLanguage}`] }
+    ];
+
     return (
-        <div style={{ padding: '20px', backgroundColor: '#f9f9f9' }}>
-            <h1>{idCategory}</h1>
-            {loading ? (
-                <p>Loading...</p>
-            ) : products.length > 0 ? (
-                <Row xs={1} md={2} lg={4} className="g-4">
-                    {products.map(product => (
-                        <Col key={product.productID} md={3}>
-                            <Card className="mb-2"
-                                style={{
-                                    position: 'relative',
-                                    border: 'none',
-                                    transition: 'transform 0.2s',
-                                    boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
-                                }}>
-                                <div style={{ overflow: 'hidden', position: 'relative' }}>
-                                    <Card.Img
-                                        variant="top"
-                                        src={`${process.env.REACT_APP_API_URL}${product.imageURL}`}
-                                        onClick={() => { navigate(`/myProduct/${product.productID}`) }}
-                                        alt={product.name}
-                                        style={{
-                                            height: '250px',
-                                            objectFit: 'cover',
-                                            transition: 'transform 0.3s'
-                                        }}
-                                        onMouseOver={e => e.currentTarget.style.transform = 'scale(1.1)'}
-                                        onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}
-                                    />
-                                </div>
-                                <Card.Body>
-                                    <Card.Title>{product.nameHe}</Card.Title>
-                                    <Card.Title>{product.name}</Card.Title>
-                                    <Card.Text style={{ fontSize: '18px', color: '#888' }}>
-                                        {product.price} ₪
-                                    </Card.Text>
-                                    <Link
-                                        to={`/myProduct/${product.productID}`}
-                                        style={{
-                                            display: 'block',
-                                            width: '100%',
-                                            marginTop: '10px',
-                                            textAlign: 'center',
-                                            textDecoration: 'none',
-                                            color: '#007bff'
-                                        }}
-                                    >
-                                        {t('productListPage.moreDetails')}
-                                    </Link>
-                                </Card.Body>
-                            </Card>
-                        </Col>
+        <Container sx={{ padding: '20px', backgroundColor: '#f9f9f9', minHeight: '100vh' }}>
+            <Box textAlign="center" mb={4}>
+                <Typography variant="h4" component="h1" gutterBottom>
+                {category[`name${currentLanguage}`]}
+                </Typography>
+                <Breadcrumbs aria-label="breadcrumb" sx={{ justifyContent: 'center' }}>
+                    {breadcrumbs.map((crumb, index) => (
+                        index < breadcrumbs.length - 1 ? (
+                            <Link key={index} to={crumb.link} style={{ textDecoration: 'none', color: '#1976d2' }}>
+                                {crumb.name}
+                            </Link>
+                        ) : (
+                            <Typography key={index} color="text.primary">
+                                {crumb.name}
+                            </Typography>
+                        )
                     ))}
-                </Row>
-            ) : (
-                <div>
-                    <br />
-                    <h3>{t('productListPage.noProducts')}</h3>
-                    <p>{t('productListPage.technicalIssue')}</p>
-                </div>
-            )}
-        </div>
+                </Breadcrumbs>
+            </Box>
+            <Grid container spacing={3}>
+                <Grid item xs={12}>
+                    {loading ? (
+                        <Box textAlign="center" mt={5}>
+                            <Typography variant="h5">{t('productListPage.noProducts')}</Typography>
+                            <Typography>{t('productListPage.technicalIssue')}</Typography>
+                        </Box>
+                    ) : (
+                        <Grid container spacing={3}>
+                            {products.map((product, index) => {
+                                const productInCart = cart.find((item) => item.productID === product.productID);
+
+                                return (
+                                    <Grid item xs={12} sm={6} md={4} key={index}>
+                                        <Card
+                                            sx={{
+                                                position: 'relative',
+                                                border: '1px solid #ddd',
+                                                borderRadius: '8px',
+                                                transition: 'transform 0.2s, box-shadow 0.2s',
+                                                boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+                                                ':hover': {
+                                                    transform: 'scale(1.02)',
+                                                    boxShadow: '0 8px 16px rgba(0,0,0,0.2)'
+                                                }
+                                            }}
+                                        >
+                                            <WatermarkedImage
+                                                alt={product.name}
+                                                onClick={() => navigate(`/myProduct/${product.productID}`)}
+                                                sx={{
+                                                    cursor: 'pointer',
+                                                    transition: 'transform 0.3s',
+                                                    ':hover': { transform: 'scale(1.1)' }
+                                                }}
+                                                imageUrl={`${process.env.REACT_APP_API_URL}${product.imageURL}`}
+                                                watermarkText='malka engel'
+                                                style={{
+                                                    width: '100%',
+                                                    height: '250px',
+                                                    transition: 'transform 0.2s ease-out',
+                                                    cursor: 'pointer'
+                                                }}
+                                            />
+                                            <CardContent sx={{ padding: '16px' }}>
+                                                <Typography variant="h6" component="div" gutterBottom>
+                                                    {product.name}
+                                                </Typography>
+                                                <Typography variant="body2" color="textSecondary" component="div">
+                                                    {product.price} ₪
+                                                </Typography>
+                                                <Box mt={2} textAlign="center">
+                                                    <Tooltip
+                                                        title={
+                                                            productInCart
+                                                                ? t('הסר מסל')
+                                                                : t('הוסף לסל')
+                                                        }
+                                                    >
+                                                        <IconButton
+                                                            color={productInCart ? 'secondary' : 'primary'}
+                                                            onClick={() =>
+                                                                productInCart
+                                                                    ? handleRemoveFromCart(product.productID)
+                                                                    : handleAddToCart(product)
+                                                            }
+                                                        >
+                                                            {productInCart ? (
+                                                                <RemoveShoppingCartIcon />
+                                                            ) : (
+                                                                <ShoppingCartIcon />
+                                                            )}
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                    <Tooltip title={t('פרטים נוספים')}>
+                                                        <IconButton
+                                                            color="info"
+                                                            onClick={() => navigate(`/myProduct/${product.productID}`)}
+                                                            sx={{ mt: 1 }}
+                                                        >
+                                                            <InfoIcon />
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                </Box>
+                                            </CardContent>
+                                        </Card>
+                                    </Grid>
+                                );
+                            })}
+                        </Grid>
+                    )}
+                </Grid>
+            </Grid>
+        </Container>
     );
 };
 
 export default ProductByCategory;
-
