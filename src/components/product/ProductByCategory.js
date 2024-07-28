@@ -4,7 +4,7 @@ import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import InfoIcon from '@mui/icons-material/Info';
 import { useTranslation } from 'react-i18next';
-import { GetProductsByCategory } from '../../axios/ProductAxios';
+import { GetProductsByAllCategory, GetProductsByCategory } from '../../axios/ProductAxios';
 import { Box, Breadcrumbs, Card, CardContent, Container, Grid, IconButton, Link, Tooltip, Typography } from '@mui/material';
 import WatermarkedImage from './productDetail/WatermarkedImage';
 import { getCart, removeFromCart } from './cookies/SetCart';
@@ -25,7 +25,7 @@ const ProductByCategory = () => {
         try {
             debugger
             const [productsResponse, categoryResponse] = await Promise.all([
-                GetProductsByCategory(idCategory),
+                GetProductsByAllCategory(idCategory),
                 GetCategoryByCategoryId(idCategory)
             ]);
             setCategory(categoryResponse);
@@ -39,6 +39,7 @@ const ProductByCategory = () => {
     };
 
     useEffect(() => {
+        debugger
         fetchData();
     }, [idCategory]);
 
