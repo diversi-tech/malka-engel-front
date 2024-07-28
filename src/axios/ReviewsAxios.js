@@ -12,7 +12,7 @@ export const GetAllReviews = async () => {
     }
 }
 
-export const AddReview = async (reviewToAdd) => {
+export const AddReviewFunc = async (reviewToAdd) => {
     debugger
     try {
         let result = await axios.post(`${API_BASE_URL}AddReview`, reviewToAdd);
@@ -24,8 +24,11 @@ export const AddReview = async (reviewToAdd) => {
 }
 
 export const GetReviewByProd = async (prodId) => {
+    debugger
     try {
-        let result = await axios.get(`${API_BASE_URL}/GetReviewByProd/${prodId}`)
+        debugger
+        let result = await axios.get(`${API_BASE_URL}GetReviewByProd/${prodId}`)
+        debugger
         return result
     }
     catch (ch) {

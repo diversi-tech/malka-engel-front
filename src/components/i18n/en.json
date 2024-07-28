@@ -151,5 +151,28 @@
     "createdAt":"ordered at",
     "status":"status",
     "totalAmount":"total amount"
+   },
+   "orderFormPage":{
+    "pageTitle":"Order Form",
+    "totalPayment":"total payment",
+    "placeOrder":"Place Order", 
+    "customerInfo":"cache customer information",
+    "name":"Name",
+    "email":"Email",
+    "phoneNumber":"Phone number",
+    "title":"Order details",
+    "nameTitle":"Product name: ",
+    "nameProduct":"nameEn",
+    "descriptionTitle":"Your text: ",
+    "descriptionProduct":"descriptionEn",
+    "wording":"text: " ,
+    "comments":"comments: ",
+
+    "price":"Price: ",
+    "addLogo":" הוסף לוגו",
+    "selectLogo":"בחר קובץ לוגו :",
+    "fileLogo":"קובץ לוגו:",
+    "TotalPayment":"Total payment:",
+    "buttonSubmitOrder":"Place order"
    }
 }

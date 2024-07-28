@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Grid, TextField, Button, FormControlLabel, Checkbox, Snackbar, Box, Typography } from '@mui/material';
+import MuiAlert from '@mui/material/Alert';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { PutUser } from '../../axios/UsersAxios';
@@ -7,118 +8,164 @@ import { setCurrentUser } from '../../redux/DataActions/DataAction.Users';
 import useValidation from './useValidation';
 import { useConnectUser } from './useConnectUser';
 
+const Alert = (props) => <MuiAlert elevation={6} variant="filled" {...props} />;
+
 export const Profile = () => {
-    const { t, i18n } = useTranslation();
-
+  const { t } = useTranslation();
   const [isEditing, setIsEditing] = useState(false);
-  const currentUser = useSelector(s=>s.DataReducer_Users.currentUser);
-  const {ConnectMe} = useConnectUser()
-
-  const [profileData, setProfileData] = useState(currentUser)
+  const currentUser = useSelector(s => s.DataReducer_Users.currentUser);
+  const { ConnectMe } = useConnectUser();
+  const [profileData, setProfileData] = useState(currentUser);
   const [isChecked, setIsChecked] = useState(profileData.typeID === 2);
-  //Custom Hook for Validation
-  const {validForm,
-    //משתנים לבדיקות תקינות 
-    emailError, passwordError, phoneNumberError} = useValidation()
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+
+  // Custom Hook for Validation
+  const { validForm, emailError, passwordError, phoneNumberError } = useValidation();
 
   const handleEdit = () => {
     setIsEditing(true);
   };
 
-  const handleSave = async() => {
-    if(profileData.typeID)
-        setProfileData({ ...profileData, typeID: 2})
-    else 
-        setProfileData({ ...profileData, typeID: 1})
-    //בדיקת תקינות קלטים
-    debugger
-if(validForm(profileData)){
-    // כאן אפשר להוסיף לוגיקה לשמירת הנתונים לשרת
-   let result =await PutUser(profileData)
-   debugger
-   if(result && result.status==200)
-    {
-        setCurrentUser(profileData)
-        ConnectMe()
-        setIsEditing(false);
-
+  const handleSave = async () => {
+    if (validForm(profileData)) {
+      try {
+        let result = await PutUser(profileData);
+        if (result && result.status === 200) 
+          {
+          setCurrentUser(profileData);
+          ConnectMe();
+          setIsEditing(false);
+        } 
+        else {
+          setSnackbarMessage('Network error');
+          setOpenSnackbar(true);
+        }
+      } catch (error) {
+        setSnackbarMessage('Network error');
+        setOpenSnackbar(true);
+      }
     }
-else{
-    alert("Network error")
-}
-
   };
-  }
-  return <>
-          
-<Container className="mt-5">
-      <Row>
-        <Col md={{ span: 6, offset: 3 }}>
-          <h1 className="text-center">{t('profilePage.title')}</h1>
-          <Form>
-            <Form.Group className="mb-3" controlId="formUsername">
-              <Form.Label>{t('profilePage.userName')}</Form.Label>
-              <Form.Control type="text" name="username" value={profileData.name}   
-                onChange={(e) => setProfileData({ ...profileData, name: e.target.value })}                
-                readOnly={!isEditing}/> 
-            </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formPhone">
-              <Form.Label>{t('profilePage.phoneNumber')}</Form.Label>
-              <Form.Control type="text" name="phone"  
-                value={profileData.phoneNumber}
-                onChange={(e) => setProfileData({ ...profileData, phoneNumber: e.target.value })}                
-                readOnly={!isEditing}
-              />
-           {phoneNumberError && <div style={{ color: 'red' }}>{t('signUpPage.invalidphoneNumber')}</div>}
-            </Form.Group>
+  return (
+    <Container maxWidth="sm" sx={{ mt: 8 }}>
+      <Typography variant="h4" gutterBottom align="center" sx={{ color: 'RoyalPurple' }}>
+        {t('profilePage.title')}
+      </Typography>
+      <Box
+        component="form"
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 2,
+          p: 3,
+          borderRadius: 2,
+          boxShadow: 3,
+          backgroundColor: 'white'
+        }}
+      >
+        <TextField
+          label={t('profilePage.userName')}
+          name="username"
+          value={profileData.name}
+          onChange={(e) => setProfileData({ ...profileData, name: e.target.value })}
+          InputProps={{
+            readOnly: !isEditing,
+            sx: { color: isEditing ? 'black' : 'gray' }
+          }}
+          fullWidth
+        />
 
-            <Form.Group className="mb-3" controlId="formEmail">
-              <Form.Label>{t('profilePage.email')}</Form.Label>
-              <Form.Control    type="email"  name="email" 
-                value={profileData.email}
-                onChange={(e) => setProfileData({ ...profileData, email: e.target.value })}                
-                readOnly={!isEditing}
-              />
-             {emailError && <div style={{ color: 'red' }}>{t('signUpPage.invalidEmail')}</div>}
-             
-            </Form.Group>
+        <TextField
+          label={t('profilePage.phoneNumber')}
+          name="phone"
+          value={profileData.phoneNumber}
+          onChange={(e) => setProfileData({ ...profileData, phoneNumber: e.target.value })}
+          InputProps={{
+            readOnly: !isEditing,
+            sx: { color: isEditing ? 'black' : 'gray' }
+          }}
+          fullWidth
+          error={Boolean(phoneNumberError)}
+          helperText={phoneNumberError ? t('signUpPage.invalidphoneNumber') : ''}
+        />
 
-            <Form.Group controlId="formType">
-              <Form.Label> {t('signUpPage.typeName')}</Form.Label>
-                <input type="checkbox"
-                 checked={isChecked}
-                 onChange={(e) => setProfileData({ ...profileData,typeID : e.target.checked})}
-                 disabled={!isEditing} 
-                 />
-              </Form.Group>
+        <TextField
+          label={t('profilePage.email')}
+          name="email"
+          type="email"
+          value={profileData.email}
+          onChange={(e) => setProfileData({ ...profileData, email: e.target.value })}
+          InputProps={{
+            readOnly: !isEditing,
+            sx: { color: isEditing ? 'black' : 'gray' }
+          }}
+          fullWidth
+          error={Boolean(emailError)}
+          helperText={emailError ? t('signUpPage.invalidEmail') : ''}
+        />
 
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={isChecked}
+              onChange={(e) => {
+                const newTypeID = !isChecked ? 2 : 1;
+                setProfileData({ ...profileData, typeID: newTypeID });
+                setIsChecked(!isChecked);
+              }}
+              disabled={!isEditing}
+              sx={{ color: isEditing ? 'primary' : 'gray' }}
+            />
+          }
+          label={t('signUpPage.typeName')}
+        />
 
-            <Form.Group className="mb-3" controlId="formPassword">
-              <Form.Label>{t('profilePage.password')}</Form.Label>
-              <Form.Control
-                type="text"
-                name="password"
-                value={profileData.passwordHash}
-                onChange={(e) => setProfileData({ ...profileData, passwordHash: e.target.value })}                
-                readOnly={!isEditing}
-              />
-{passwordError && <div style={{ color: 'red' }}>{t('signUpPage.invalidPassword')}</div>}
-            </Form.Group>
+        <TextField
+          label={t('profilePage.password')}
+          name="password"
+          type="password"
+          value={profileData.passwordHash}
+          onChange={(e) => setProfileData({ ...profileData, passwordHash: e.target.value })}
+          InputProps={{
+            readOnly: !isEditing,
+            sx: { color: isEditing ? 'black' : 'gray' }
+          }}
+          fullWidth
+          error={Boolean(passwordError)}
+          helperText={passwordError ? t('signUpPage.invalidPassword') : ''}
+        />
 
-            {isEditing ? (
-              <Button variant="primary" onClick={handleSave}>
-                {t('profilePage.saveButton')}
-              </Button>
-            ) : (
-              <Button variant="secondary" onClick={handleEdit}>
-                {t('profilePage.editButton')}
-              </Button>
-            )}
-          </Form>
-        </Col>
-      </Row>
+        <Button
+          variant={isEditing ? "contained" : "outlined"}
+          color="primary"
+          onClick={isEditing ? handleSave : handleEdit}
+          fullWidth
+          sx={{
+            mt: 2,
+            backgroundColor: isEditing ? 'Teal' : 'RoyalPurple',
+            '&:hover': { backgroundColor: isEditing ? 'RoyalPurple' : 'Teal' }
+          }}
+        >
+          {isEditing ? t('profilePage.saveButton') : t('profilePage.editButton')}
+        </Button>
+      </Box>
+
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={() => setOpenSnackbar(false)}
+        action={
+          <Button color="inherit" onClick={() => setOpenSnackbar(false)}>
+            Close
+          </Button>
+        }
+      >
+        <Alert onClose={() => setOpenSnackbar(false)} severity="error">
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </Container>
-  </>;
+  );
 };
-

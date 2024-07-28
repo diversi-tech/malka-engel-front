@@ -52,7 +52,7 @@ const UserAdmin = () => {
               <ListGroup.Item key={user.userID}>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <div>
-                    <p><strong>תז' המשתמש:</strong> {user.userID}</p>
+                    <p><strong>קוד המשתמש:</strong> {user.userID}</p>
                     <p><strong>שם:</strong> {user.name}</p>
                     <p><strong>מייל:</strong> {user.email}</p>
                     <p><strong>פלאפון:</strong> {user.phoneNumber}</p>

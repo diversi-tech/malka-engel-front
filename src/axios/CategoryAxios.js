@@ -36,3 +36,14 @@ export const updateCategory = async (idCategory, category) => {
         throw error;
     }
 };
+
+export const GetCategoryByCategoryId = async (idCategory) => {
+    try {
+        debugger
+        const response = await axios.get(`${API_BASE_URL}GetCategoryById/${idCategory}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error get category by id :', error);
+        throw error;
+    }
+};

@@ -1,80 +1,75 @@
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
-import { PageTitle } from '../Layout Components/PageTitle';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { Box, Typography, Container, Paper, List, ListItem, ListItemText, Divider } from '@mui/material';
 import { clearCart, getCart } from '../product/cookies/SetCart';
-import { GetOrderByOrderId, PostOrder, PutAllPropOfOrder, } from '../../axios/OrderAxios';
+import { GetOrderByOrderId, PostOrder, PutAllPropOfOrder } from '../../axios/OrderAxios';
 import { PostOrderItemList } from '../../axios/OrderItemAxios';
 import { PopUp } from '../Cart/popUp';
+import { PageTitle } from '../Layout Components/PageTitle';
 
 export const OrderForm = () => {
     const { t, i18n } = useTranslation();
     const { currentUser, connected } = useSelector(u => u.DataReducer_Users);
+    const currentLanguage = i18n.language === 'en' ? 'En' : 'He';
     const navigate = useNavigate();
     const [currentCart, setCurrentCart] = useState(getCart());
 
-    const func_submit = async () => {
-        if (!connected)
-            navigate('/myToConnect')
-        else {
-            //Add order//
-            const order = {
-                "OrderID": 0,
-                "UserID": currentUser.userID,
-                "TotalAmount": 0,
-                "Status": "Processing",
-                "CreatedAt": "2024-07-07T09:31:32.38"
-            }
-            const result = await PostOrder(order);
-            const orderidToAdd = result
-            // end //
-            if (!orderidToAdd) {
-                alert("Failed to create order, please try again later");
-                return;
-            }
-            else {
-                // add item order // 
-                currentCart.map(async (product, index) => {
-                    const listItemOrder = []
-                    currentCart.map((product, i) => {
-                        const itemOrder = {
-                            "OrderItemID": 0,
-                            "OrderID": orderidToAdd,
-                            "ProductID": product.productID,
-                            "Quantity": product.quantity,
-                            "Price": product.price
-                        }
-                        listItemOrder.push(itemOrder);
-                    })
-                    const result = await PostOrderItemList(listItemOrder);
-                    // end //
-                    //delete all data from cookies
-                    clearCart();
-                    let tAmount = 0;
-                    for (let i = 0; i < listItemOrder.length; i++) {
-                        tAmount = tAmount + listItemOrder[i].Price * listItemOrder[i].Quantity
-                    }
-                    let order = await GetOrderByOrderId(orderidToAdd);
-                    order.TotalAmount = tAmount;
-                    let resultFrUpdate = await PutAllPropOfOrder(orderidToAdd, order);
-                    if (resultFrUpdate) {
-                        <PopUp></PopUp>
-                    }
-                    else
-                        alert(result);
-                })
-            }
-        }
+    const calculateTotalPrice = (products) => {
+        return products.reduce((total, product) => total + (product.salePrice !== 0 ? product.salePrice : product.price), 0);
+    };
+    const showByHtmlTags = (htmlString) => {
+        debugger
+        if (htmlString.startsWith('"') && htmlString.endsWith('"')) 
+            htmlString = htmlString.slice(1, -1);
+        return <span dangerouslySetInnerHTML={{ __html: htmlString }} />;
     };
 
     return (
-        <div className="container mt-5">
-            <div className="mb-4">
-                <PageTitle title={t('orderFormPage.title')} />
-            </div>
-            <h3>פרטי אשראי!</h3>
-            <button onClick={func_submit} className="btn btn-primary">{t('orderFormPage.buttonSubmitOrder')}</button>
-        </div>
-    )
-}
+        <Container sx={{ mt: 5 }}>
+            <Paper elevation={3} sx={{ p: 3 }}>
+                <Typography variant="h4" gutterBottom>
+                    {t('orderFormPage.title')}
+                </Typography>
+                <List>
+                    <ListItem>
+                        <ListItemText
+                            primary={<strong>{t('orderFormPage.customerInfo')}</strong>}
+                            secondary={
+                                <span>
+                                    <b>{t('orderFormPage.name')}: </b>{currentUser.name} <br />
+                                    <b>{t('orderFormPage.email')}: </b>{currentUser.email} <br />
+                                    <b>{t('orderFormPage.phoneNumber')}: </b>{currentUser.phoneNumber}
+                                </span>
+                            }
+                        />
+                    </ListItem>
+                    <Divider />
+                    {currentCart.map(product => (
+                        <ListItem key={product.productID}>
+                            <ListItemText
+                                primary={
+                                    <span style={{ whiteSpace: 'nowrap' }}>
+                                        <b>{t('orderFormPage.nameTitle')}: </b> {product[`name${currentLanguage}`]} <br />
+                                        <b>{t('orderFormPage.descriptionTitle')}: </b>{product[`description${currentLanguage}`]}<br />
+                                        <b>{t('orderFormPage.wording')}:</b> {showByHtmlTags(product.wording)}
+                                        <b>{t('orderFormPage.comments')}: </b>{product.additionalComments} <br />
+                                        <b>{t('orderFormPage.price')}: </b>{product.salePrice !== 0 ? product.salePrice : product.price}
+                                    </span>
+                                }
+                            />
+                        </ListItem>
+                    ))}
+                    <Divider />
+                    <ListItem>
+                        <ListItemText
+                            primary={<strong>{t('orderFormPage.totalPayment')}</strong>}
+                            secondary={calculateTotalPrice(currentCart)}
+                        />
+                    </ListItem>
+                </List>
+            </Paper>
+        </Container>
+    );
+};
