@@ -19,7 +19,8 @@ export const LoginUser = async (userLogin) => {
     try {
         let result = await axios.post(`${API_BASE_URL}Login`, userLogin)
         debugger
-        localStorage.setItem('token', result.data.token);           
+        localStorage.setItem('token', result.data.accessToken);  
+                     
         return result
     }
 
@@ -48,7 +49,8 @@ export const PutUser = async (user) => {
     }
 }
 export const GetUserDetails = async () => {
-    try{      
+    try{     
+        debugger 
 let result = await axios.get(`${API_BASE_URL}GetUserDeteils`
     ,{
     headers: {
