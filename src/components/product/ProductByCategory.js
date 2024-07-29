@@ -8,7 +8,7 @@ import { GetAllSubcategoriesByCategoryID, GetProductsByCategoryAndSubcategories 
 import { Box, Breadcrumbs, Button, Card, CardContent, Container, Grid, IconButton, Tooltip, Typography } from '@mui/material';
 import WatermarkedImage from './productDetail/WatermarkedImage';
 import { getCart, removeFromCart } from './cookies/SetCart';
-import { GetCategoryByCategoryId } from '../../axios/CategoryAxios';
+import { GetCategoryByCategoryId, GetUpCategoriesByCategoryID } from '../../axios/CategoryAxios';
 
 const ProductByCategory = () => {
     const { t, i18n } = useTranslation();
@@ -20,25 +20,28 @@ const ProductByCategory = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [subcategories, setSubCategories] = useState([]);
+    const [upCategories, setUpCategories] = useState([]);
 
     const fetchData = async () => {
         try {
-            const [productsResponse, categoryResponse, subcategoriesResponse] = await Promise.all([
+            const [productsResponse, categoryResponse, subcategoriesResponse, upcategoriesRespose] = await Promise.all([
                 GetProductsByCategoryAndSubcategories(idCategory),
                 GetCategoryByCategoryId(idCategory),
-                GetAllSubcategoriesByCategoryID(idCategory)
+                GetAllSubcategoriesByCategoryID(idCategory),
+                GetUpCategoriesByCategoryID(idCategory)
             ]);
-
+            debugger
             setCategory(categoryResponse);
             setProducts(productsResponse);
+            setSubCategories(subcategoriesResponse);
+            setUpCategories(upcategoriesRespose)
+            // const subcategoryDetailsPromises = subcategoriesResponse.map(async (subcategory) => {
+            //     return await GetCategoryByCategoryId(subcategory.categoryID);
+            // });
 
-            const subcategoryDetailsPromises = subcategoriesResponse.map(async (subcategory) => {
-                return await GetCategoryByCategoryId(subcategory.categoryID);
-            });
+            // const subcategoriesDetails = await Promise.all(subcategoryDetailsPromises);
 
-            const subcategoriesDetails = await Promise.all(subcategoryDetailsPromises);
-
-            setSubCategories(subcategoriesDetails);
+            // setSubCategories(subcategoriesDetails);
 
         } catch (error) {
             console.error("Error fetching data:", error);
@@ -60,9 +63,11 @@ const ProductByCategory = () => {
     const handleAddToCart = (product) => {
         navigate(`/myProduct/${product.productID}`);
     };
+    
 
     const breadcrumbs = [
         { name: 'Home Page', link: '/' },
+       // upCategories.map(cat => ({ name:" cat.nameHe" , link: `/myProductByCategory/${cat.categoryID}` })),
         { name: category[`name${currentLanguage}`] }
     ];
 
