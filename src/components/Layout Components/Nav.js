@@ -128,7 +128,7 @@ export const Nav = () => {
                                     {t('navPage.linkLogin')}
                                 </Button>
                             )}
-                            <Button
+                            {/* <Button
                                 color="inherit"
                                 component={Link}
                                 to="./myProductList"
@@ -138,7 +138,7 @@ export const Nav = () => {
                                 }}
                             >
                                 {t('navPage.linkProduct')}
-                            </Button>
+                            </Button> */}
                             <Button
                                 color="inherit"
                                 component={Link}

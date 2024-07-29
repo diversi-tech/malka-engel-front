@@ -166,3 +166,12 @@ export const GetProductsByAllCategory = async (categoryId) => {
     }
 };
 
+export const GetProductsByCategoryAndSubcategories = async (categoryId)=>{
+    try {
+        const response = await axios.get(`${API_BASE_URL}GetProductsByCategoryAndSubcategories/${categoryId}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching subcategories by category ID:', error);
+        throw error;
+    }
+}
