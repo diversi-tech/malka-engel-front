@@ -24,17 +24,17 @@ const ProductByCategory = () => {
 
     const fetchData = async () => {
         try {
-            const [productsResponse, categoryResponse, subcategoriesResponse, upcategoriesRespose] = await Promise.all([
+            const [productsResponse, categoryResponse, subcategoriesResponse] = await Promise.all([
                 GetProductsByCategoryAndSubcategories(idCategory),
                 GetCategoryByCategoryId(idCategory),
                 GetAllSubcategoriesByCategoryID(idCategory),
-                GetUpCategoriesByCategoryID(idCategory)
+                //GetUpCategoriesByCategoryID(idCategory)
             ]);
             debugger
             setCategory(categoryResponse);
             setProducts(productsResponse);
             setSubCategories(subcategoriesResponse);
-            setUpCategories(upcategoriesRespose)
+            //setUpCategories(upcategoriesRespose)
             // const subcategoryDetailsPromises = subcategoriesResponse.map(async (subcategory) => {
             //     return await GetCategoryByCategoryId(subcategory.categoryID);
             // });
