@@ -56,7 +56,6 @@ export const AddReview = () => {
       };
       try {
         const response = await AddReviewFunc(review);
-        debugger
         if (response == !true) {
           alert("success");
           //setSnackbarMessage(t('Review sent successfully!'));

@@ -9,7 +9,6 @@ import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import { AddReview } from "./AddReview";
 
 export const ShowReviews = () => {
-    debugger
     let param = useParams();
     const { t, i18n } = useTranslation();
     const reviewList = useSelector(state => state.DataReducer_Reviews.ReviewsProduct);
@@ -22,10 +21,8 @@ export const ShowReviews = () => {
         }
     }, [reviewList, param.numStars]);
 
-    // Simulate user authentication (replace this with your actual authentication logic)
     const isAuthenticated = true;
 
-    // Handle feedback (like/dislike) increment
     const handleFeedback = (reviewId, feedbackType) => {
         if (!isAuthenticated) {
             alert('You need to be logged in to give feedback');
@@ -91,7 +88,7 @@ export const ShowReviews = () => {
                                         <Typography variant="caption">{review.dislikes || 0}</Typography>
                                     </Box>
                                     <Typography variant="caption">
-                                        {review.createdAt}
+                                       {review.createdAt}
                                     </Typography>
                                 </Box>
                             </CardContent>
