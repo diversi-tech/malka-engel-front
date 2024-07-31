@@ -132,8 +132,8 @@ export const ProductList = () => {
                                                     <Tooltip
                                                         title={
                                                             productInCart
-                                                                ? t('הסר מסל')
-                                                                : t('הוסף לסל')
+                                                                ? t('productListPage.removeFromCart')
+                                                                : t('productListPage.addToCart')
                                                         }
                                                     >
                                                         <IconButton
@@ -151,7 +151,7 @@ export const ProductList = () => {
                                                             )}
                                                         </IconButton>
                                                     </Tooltip>
-                                                    <Tooltip title={t('פרטים נוספים')}>
+                                                    <Tooltip title={t('productListPage.moreDetails')}>
                                                         <IconButton
                                                             color="info"
                                                             onClick={() => navigate(`/myProduct/${product.productID}`)}

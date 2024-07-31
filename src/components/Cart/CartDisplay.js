@@ -44,7 +44,7 @@ debugger
   return (
     <Container>
       <Typography variant="h4" gutterBottom>
-        {t('shoppingCartPage.cartTitle')}
+        {t('shoppingCartPage.title')}
       </Typography>
       <Paper elevation={3} sx={{ padding: '20px' }}>
         <List>

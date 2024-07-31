@@ -170,8 +170,7 @@ export const Nav = () => {
                                     color: colors.primaryText,
                                     '&:hover': { backgroundColor: colors.hoverBg }
                                 }}
-                            >
-                                קטגוריות
+                            >{t('navPage.linkCatergories')}
                             </Button>
                             <Menu
                                 anchorEl={categoryMenuAnchorEl}

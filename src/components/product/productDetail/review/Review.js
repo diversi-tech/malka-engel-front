@@ -106,19 +106,19 @@ export const Review = ({ productId }) => {
                 gutterBottom
                 sx={{ fontFamily: 'Segoe UI', fontWeight: 'bold', color: '#333' }}
               >
-                ביקורות מוצר של לקוחות
+                {t('reviewPage.reviews')}
               </Typography>
               {reviews.length > 0 ? (
                 <>
                   <Box display="flex" alignItems="center" mb={3}>
                     {renderStars(averageRating)}
                     <Typography variant="h6" ml={2} sx={{ fontWeight: 'bold', color: '#333', textAlign: 'center' }} >
-                      {averageRating} מתוך 5 כוכבים
+                      {averageRating} {t('reviewPage.from5Stars')} 
                     </Typography>
                   </Box>
                 </>) : (<></>)}
               <Typography variant="subtitle1" sx={{ color: '#666' }}>
-                {totalRatings} דירוגים גלובליים
+                {totalRatings}  {t('reviewPage.globalRatings')}
               </Typography>
               <Box>
                 {Array.isArray(ratingsDistribution) && ratingsDistribution.length > 0 && reviews.length > 0 ? (
@@ -150,7 +150,7 @@ export const Review = ({ productId }) => {
                     </Box>
                   ))
                 ) : (
-                  <Typography variant="body2">אין ביקורות זמינות</Typography>
+                  <Typography variant="body2">{t('reviewPage.noReviews')}</Typography>
                 )}
               </Box>
               <Button
@@ -159,8 +159,7 @@ export const Review = ({ productId }) => {
                 size="small"
                 onClick={navigateToReviewForm}
                 sx={{ mt: 2, mb: 1, fontWeight: 'bold' }}
-              >
-                כתוב ביקורת על מוצר זה
+              >{t('reviewPage.writeReview')}
               </Button>
             </CardContent>
           </Card>

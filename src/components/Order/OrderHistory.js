@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { Container, Typography, Alert, AlertTitle, List, ListItem, ListItemText, Paper, Box } from '@mui/material';
+import { Container, Typography, Alert, AlertTitle, List, ListItem, ListItemText, Paper, Box , Button} from '@mui/material';
 import { GetOrderByUserId } from "../../axios/OrderAxios";
+import { useNavigate } from 'react-router-dom'; 
+
 
 export const OrderHistory = ({ connect }) => {
   const { t, i18n } = useTranslation();
@@ -10,6 +12,8 @@ export const OrderHistory = ({ connect }) => {
   const currentUser = useSelector(state => state.DataReducer_Users.currentUser);
   const connected = useSelector(state => state.DataReducer_Users.connected);
   const [orders, setOrders] = useState([]);
+  const navigate = useNavigate(); 
+
 
   useEffect(() => {
     if (connected) {
@@ -24,6 +28,9 @@ export const OrderHistory = ({ connect }) => {
     } catch (error) {
       console.error(`Error fetching orders for user ${userId}:`, error);
     }
+  };
+  const handleShowOrderDetails = (orderId) => {
+    navigate(`/myOrderDetails/${orderId}`);
   };
 
   return (
@@ -55,6 +62,10 @@ export const OrderHistory = ({ connect }) => {
                           <Typography component="span" variant="body2" color="textPrimary" sx={{ color: 'Teal' }}>
                             {t('OrderHistoryPage.totalAmount')}: {order.totalAmount}
                           </Typography>
+                          <br />
+                           <Button onClick={() => handleShowOrderDetails(order.orderId)}>
+                            {t('OrderHistoryPage.showOrderDetails')}
+                            </Button>
                         </>
                       }
                     />
