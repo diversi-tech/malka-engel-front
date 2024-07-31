@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Container, TextField, Button, Modal, Box, Typography } from '@mui/material';
 import { addEmail } from '../../axios/EmailAxios';
+import { useTranslation } from 'react-i18next';
 
 export const EmailForm = () => {
   const [error, setError] = useState('');
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const { t, i18n } = useTranslation();
 
   const [newE, setNewE] = useState({
     name: '',
@@ -35,7 +37,7 @@ export const EmailForm = () => {
         setShowSuccessModal(false); // Close the modal after 2 seconds
       }, 2000);
     } catch (err) {
-      setError('לא הצלחנו להכניס את הנתונים. אנא בדוק את החיבור שלך לשרת ונסה שוב.');
+      setError(t('EmailFormPage.error'));
     }
   };
 
@@ -56,10 +58,10 @@ export const EmailForm = () => {
         }}
       >
         <Typography variant="h6" gutterBottom>
-          הצטרף לרשימת התפוצה
+         {t('EmailFormPage.join')}
         </Typography>
         <TextField
-          label="שם"
+          label={t('EmailFormPage.name')}
           name="name"
           value={newE.name}
           onChange={handleChange}
@@ -67,10 +69,10 @@ export const EmailForm = () => {
           fullWidth
           required
           error={submitted && !newE.name}
-          helperText={submitted && !newE.name ? "אנא מלא את השדה הזה" : ''}
+          helperText={submitted && !newE.name ? t('EmailFormPage.fillField') : ''}
         />
         <TextField
-          label="כתובת אימייל"
+          label={t('EmailFormPage.emailAddress')}
           name="email"
           type="email"
           value={newE.email}
@@ -79,10 +81,10 @@ export const EmailForm = () => {
           fullWidth
           required
           error={submitted && (!newE.email || !/\S+@\S+\.\S+/.test(newE.email))}
-          helperText={submitted && (!newE.email || !/\S+@\S+\.\S+/.test(newE.email)) ? "אנא מלא כתובת אימייל תקינה" : ''}
+          helperText={submitted && (!newE.email || !/\S+@\S+\.\S+/.test(newE.email)) ?  t('EmailFormPage.emailField') : ''}
         />
         <TextField
-          label="הודעה"
+          label={t('EmailFormPage.message')}
           name="message"
           value={newE.message}
           onChange={handleChange}
@@ -96,7 +98,8 @@ export const EmailForm = () => {
           color="primary"
           type="submit"
         >
-          שלח
+        {t('EmailFormPage.send')}
+
         </Button>
       </Box>
 
@@ -116,10 +119,10 @@ export const EmailForm = () => {
           }}
         >
           <Typography variant="h6" gutterBottom>
-            הצטרפת בהצלחה
+              {t('EmailFormPage.successMessage')}
           </Typography>
           <Typography variant="body1">
-            הצטרפת בהצלחה לרשימת התפוצה שלנו!
+              {t('EmailFormPage.mailinglistMessage')}
           </Typography>
         </Box>
       </Modal>

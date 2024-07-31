@@ -2,9 +2,11 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useTranslation } from 'react-i18next';
 
 const GoBackButton = () => {
   const navigate = useNavigate();
+  const { t, i18next} = useTranslation();
 
   return (
     <Button
@@ -24,7 +26,7 @@ const GoBackButton = () => {
         padding: '10px 20px',
       }}
     >
-      Go Back
+       {t('goBackPage.button')}
     </Button>
   );
 };

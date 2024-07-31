@@ -51,13 +51,13 @@ export const Footer = ({ showOnScroll }) => {
                     <MUILink component={Link} to="./myContact" color="inherit" underline="none">
                         {t('footerPage.linkContact')}
                     </MUILink>
-                    <MUILink component={Link} to="./myDesignerBirkins" color="inherit" underline="none">
+                    <MUILink component={Link} to="./myDesignerBentchers" color="inherit" underline="none">
                         {t('footerPage.linkDesignerBirkins')}
                     </MUILink>
-                    <MUILink component={Link} to="./myCongratulationsToTheDonors" color="inherit" underline="none">
+                    <MUILink component={Link} to="./myDonorThank-Yous" color="inherit" underline="none">
                         {t('footerPage.linkCongratulationsToTheDonors')}
                     </MUILink>
-                    <MUILink component={Link} to="./myJoys" color="inherit" underline="none">
+                    <MUILink component={Link} to="./mySimchos" color="inherit" underline="none">
                         {t('footerPage.linkJoys')}
                     </MUILink>
                     <MUILink component={Link} to="./myEvents" color="inherit" underline="none">
@@ -71,7 +71,7 @@ export const Footer = ({ showOnScroll }) => {
                     </MUILink>
                 </Box>
                 <Typography variant="body2" align="center" color="secondary.contrastText" sx={{ mt: 2 }}>
-                    כל הזכויות שמורות@
+                    {t('footerPage.rights')}
                 </Typography>
             </Container>
         </Box>

@@ -1,8 +1,10 @@
 import { Box, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export const AdditionalComments = ({ initialValue, setAdditionalComments }) => {
     const [comments, setComments] = useState(initialValue || '');
+    const { t ,i18n} = useTranslation();
 
     useEffect(() => {
         setComments(initialValue || '');
@@ -16,9 +18,9 @@ export const AdditionalComments = ({ initialValue, setAdditionalComments }) => {
 
     return (
         <Box>
-            <Typography variant="h6">הוסף הערות נוספות למעצב</Typography>
+            <Typography variant="h6">{t('additionalCommentsPage.addComment')}</Typography>
             <TextField
-                label="הערות"
+                label={t('additionalCommentsPage.comments')}
                 multiline
                 rows={4}
                 variant="outlined"

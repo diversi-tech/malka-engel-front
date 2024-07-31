@@ -138,72 +138,107 @@ const ProductByCategory = () => {
                                             transform: 'scale(1.02)',
                                             boxShadow: '0 8px 16px rgba(0,0,0,0.2)'
                                         }
-                                    }}
-                                >
-                                    <WatermarkedImage
-                                        alt={product.name}
-                                        onClick={() => navigate(`/myProduct/${product.productID}`)}
-                                        sx={{
-                                            cursor: 'pointer',
-                                            transition: 'transform 0.3s',
-                                            ':hover': { transform: 'scale(1.1)' }
-                                        }}
-                                        imageUrl={`${process.env.REACT_APP_API_URL}${product.imageURL}`}
-                                        watermarkText='malka engel'
-                                        style={{
-                                            width: '100%',
-                                            height: '250px',
-                                            transition: 'transform 0.2s ease-out',
-                                            cursor: 'pointer'
-                                        }}
-                                    />
-                                    <CardContent sx={{ padding: '16px' }}>
-                                        <Typography variant="h6" component="div" gutterBottom>
-                                            {product.name}
-                                        </Typography>
-                                        <Typography variant="body2" color="textSecondary" component="div">
-                                            {product.price} ₪
-                                        </Typography>
-                                        <Box mt={2} textAlign="center">
-                                            <Tooltip
-                                                title={
-                                                    productInCart
-                                                        ? t('הסר מסל')
-                                                        : t('הוסף לסל')
-                                                }
-                                            >
-                                                <IconButton
-                                                    color={productInCart ? 'secondary' : 'primary'}
-                                                    onClick={() =>
-                                                        productInCart
-                                                            ? handleRemoveFromCart(product.productID)
-                                                            : handleAddToCart(product)
-                                                    }
-                                                >
-                                                    {productInCart ? (
-                                                        <RemoveShoppingCartIcon />
-                                                    ) : (
-                                                        <ShoppingCartIcon />
-                                                    )}
-                                                </IconButton>
-                                            </Tooltip>
-                                            <Tooltip title={t('פרטים נוספים')}>
-                                                <IconButton
-                                                    color="info"
-                                                    onClick={() => navigate(`/myProduct/${product.productID}`)}
-                                                    sx={{ mt: 1 }}
-                                                >
-                                                    <InfoIcon />
-                                                </IconButton>
-                                            </Tooltip>
-                                        </Box>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
-                        );
-                    })}
+//                                 }}
+//                              >
+//                                     <WatermarkedImage
+//                                         alt={product.name}
+//                                         onClick={() => navigate(`/myProduct/${product.productID}`)}
+//                                         sx={{
+//                                             cursor: 'pointer',
+//                                             transition: 'transform 0.3s',
+//                                             ':hover': { transform: 'scale(1.1)' }
+//                                         }}
+//                                         imageUrl={`${process.env.REACT_APP_API_URL}${product.imageURL}`}
+//                                         watermarkText='malka engel'
+//                                         style={{
+//                                             width: '100%',
+//                                             height: '250px',
+//                                             transition: 'transform 0.2s ease-out',
+//                                             cursor: 'pointer'
+//                                         }}
+//                                     />
+//                                     <CardContent sx={{ padding: '16px' }}>
+//                                         <Typography variant="h6" component="div" gutterBottom>
+//                                             {product.name}
+//                                         </Typography>
+//                                         <Typography variant="body2" color="textSecondary" component="div">
+//                                             {product.price} ₪
+//                                         </Typography>
+//                                         <Box mt={2} textAlign="center">
+//                                             <Tooltip
+//                                                 title={
+//                                                     productInCart
+//                                                         ? t('הסר מסל')
+//                                                         : t('הוסף לסל')
+//                                                 }
+                                            }}
+                                        >
+                                            <WatermarkedImage
+                                                alt={product.name}
+                                                onClick={() => navigate(`/myProduct/${product.productID}`)}
+                                                sx={{
+                                                    cursor: 'pointer',
+                                                    transition: 'transform 0.3s',
+                                                    ':hover': { transform: 'scale(1.1)' }
+                                                }}
+                                                imageUrl={`${process.env.REACT_APP_API_URL}${product.imageURL}`}
+                                                watermarkText='malka engel'
+                                                style={{
+                                                    width: '100%',
+                                                    height: '250px',
+                                                    transition: 'transform 0.2s ease-out',
+                                                    cursor: 'pointer'
+                                                }}
+                                            />
+                                            <CardContent sx={{ padding: '16px' }}>
+                                                <Typography variant="h6" component="div" gutterBottom>
+                                                    {product.name}
+                                                </Typography>
+                                                <Typography variant="body2" color="textSecondary" component="div">
+                                                    {product.price} ₪
+                                                </Typography>
+                                                <Box mt={2} textAlign="center">
+                                                    <Tooltip
+                                                        title={
+                                                            productInCart
+                                                                ?t('productByCatergory.remove')
+                                                                : t('productByCatergory.addToCart')
+                                                        }
+                                                    >
+                                                        <IconButton
+                                                            color={productInCart ? 'secondary' : 'primary'}
+                                                            onClick={() =>
+                                                                productInCart
+                                                                    ? handleRemoveFromCart(product.productID)
+                                                                    : handleAddToCart(product)
+                                                            }
+                                                        >
+                                                            {productInCart ? (
+                                                                <RemoveShoppingCartIcon />
+                                                            ) : (
+                                                                <ShoppingCartIcon />
+                                                            )}
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                    <Tooltip title={t('productListPage.moreDetails')}>
+                                                        <IconButton
+                                                            color="info"
+                                                            onClick={() => navigate(`/myProduct/${product.productID}`)}
+                                                            sx={{ mt: 1 }}
+                                                        >
+                                                            <InfoIcon />
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                </Box>
+                                            </CardContent>
+                                        </Card>
+                                    </Grid>
+                                );
+                            })}
                 </Grid>
             )}
+            </Grid>
+          </Grid>
         </Container>
     );
 };
