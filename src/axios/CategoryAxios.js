@@ -37,13 +37,26 @@ export const updateCategory = async (idCategory, category) => {
     }
 };
 
-export const GetCategoryByCategoryId = async (idCategory) => {
+
+export const GetCategoryByCategoryId = async (categoryId) => {
     try {
         debugger
-        const response = await axios.get(`${API_BASE_URL}GetCategoryById/${idCategory}`);
+        const response = await axios.get(`${API_BASE_URL}GetCategoryById/${categoryId}`);
         return response.data;
     } catch (error) {
-        console.error('Error get category by id :', error);
+        console.error('Error fetching category by id:', error);
         throw error;
     }
 };
+
+export const GetUpCategoriesByCategoryID = async (categoryId) => {
+    try {
+        debugger
+        const response = await axios.get(`${API_BASE_URL}GetUpCategoriesByCategoryID/${categoryId}`);
+        return response.data;
+    } catch (error) {
+        alert("errrrrrrrrrrrrrrrrrrrrrrrrrr!")
+        console.error('Error fetching up categories by id:', error);
+        throw error;
+    }
+}

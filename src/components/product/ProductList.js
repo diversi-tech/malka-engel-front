@@ -24,6 +24,8 @@ import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import InfoIcon from '@mui/icons-material/Info';
 import WatermarkedImage from './productDetail/WatermarkedImage';
 
+
+// for now this page need to be deleted!!!!!
 export const ProductList = () => {
     const { t } = useTranslation();
     const productsList = useSelector(s => s.DataReducer_Products?.Prodlist || []);
@@ -41,7 +43,6 @@ export const ProductList = () => {
     async function fetchProducts() {
         try {
             if (productsList.length == 0) {
-                debugger
                 const response = await GetAllProducts();
                 if (!response) {
                     setProducts([]);
@@ -63,10 +64,6 @@ export const ProductList = () => {
 
     const handleAddToCart = (product) => {
         navigate(`/myProduct/${product.productID}`)
-        // product.wording = "no wording";
-        // product.additionalComments = "no comments";
-        // addToCart(product);
-        // setCart(getCart());
     };
 
     const handleRemoveFromCart = (productId) => {

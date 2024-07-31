@@ -40,7 +40,7 @@ export const CartDisplay = () => {
     }
     navigate('/myCheckout');
   };
-debugger
+  
   return (
     <Container>
       <Typography variant="h4" gutterBottom>

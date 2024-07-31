@@ -6,7 +6,7 @@ const API_BASE_URL = `${process.env.REACT_APP_API_URL}/api/User/`
 export const GetAllUsers = async () => {
     try {
 
-        let result = await axios.get(`${API_BASE_URL}GetUsers`)  
+        let result = await axios.get(`${API_BASE_URL}GetUsers`)
         return result
     }
     catch (ch) {
@@ -15,16 +15,15 @@ export const GetAllUsers = async () => {
 }
 
 export const LoginUser = async (userLogin) => {
-    debugger
     try {
         let result = await axios.post(`${API_BASE_URL}Login`, userLogin)
-        debugger
-        localStorage.setItem('token', result.data.accessToken);  
-                     
+        localStorage.setItem('token', result.data.token);
         return result
     }
 
-    catch (ch) { debugger; return ch }
+    catch (Exception) {
+        return Exception
+    }
 }
 
 export const PostUser = async (user) => {
@@ -49,37 +48,36 @@ export const PutUser = async (user) => {
     }
 }
 export const GetUserDetails = async () => {
-    try{     
-        debugger 
-let result = await axios.get(`${API_BASE_URL}GetUserDeteils`
-    ,{
-    headers: {
-        'Authorization': `Bearer ${localStorage.getItem("token")}` 
-      }
-}
-)
-return result
+    try {
+        let result = await axios.get(`${API_BASE_URL}GetUserDeteils`
+            , {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`
+                }
+            }
+        )
+        return result
     }
-    catch(ch){
+    catch (ch) {
         console.log(ch)
     }
 }
 export const ResetPas = async (tokenFromUrl, pas) => {
 
-    try{
-       
-        debugger
-let result = await axios.put(`${API_BASE_URL}ResetPas?password=${pas}`,
-   {} ,{
-        headers: {
-            'Authorization': `Bearer ${tokenFromUrl}` 
-          }
-    }
-)
+    try {
 
-return result
+        debugger
+        let result = await axios.put(`${API_BASE_URL}ResetPas?password=${pas}`,
+            {}, {
+            headers: {
+                'Authorization': `Bearer ${tokenFromUrl}`
+            }
+        }
+        )
+
+        return result
     }
-    catch(ch){
+    catch (ch) {
         console.log(ch)
     }
 }
