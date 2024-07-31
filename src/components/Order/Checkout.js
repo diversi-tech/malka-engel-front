@@ -1,154 +1,115 @@
-import { Container, Form, ListGroup } from "react-bootstrap"
-import { OrderForm } from "./OrderForm"
-import { PayForm } from "./PayForm.js"
+import React, { useEffect, useState } from 'react';
+import { Container, Grid, Typography, TextField, Button, Paper, List, ListItem, ListItemText, Box } from '@mui/material';
+import { OrderForm } from './OrderForm';
+import { PayForm } from './PayForm';
 import { useTranslation } from 'react-i18next';
-import { useEffect, useState } from 'react';
-import { PageTitle } from '../Layout Components/PageTitle';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { clearCart, getCart } from '../product/cookies/SetCart';
-import { GetOrderByOrderId, PostOrder, PutAllPropOfOrder, } from '../../axios/OrderAxios';
-import { PostOrderItemList } from '../../axios/OrderItemAxios';
-import { PopUp } from "../Cart/popUp.js";
-import { SendEmail } from "../../axios/EmailAxios.js";
+import { PostOrder } from '../../axios/OrderAxios';
+import { sendEmails } from '../../axios/EmailAxios';
+import ReactDOMServer from 'react-dom/server';
+import PdfGenerator from "./PdfGenerator.js";
+import { SendEmailsForOrder, sendEmailsForOrder } from "./sendEmailsForOrder.js";
+import { PostOrderItemList } from '../../axios/OrderItemAxios.js';
+import { PageTitle } from '../Layout Components/PageTitle.js';
 
 export const Checkout = () => {
+    debugger
     const { t, i18n } = useTranslation();
     const { currentUser, connected } = useSelector(u => u.DataReducer_Users);
     const navigate = useNavigate();
     const [currentCart, setCurrentCart] = useState(getCart());
     const [order, setOrder] = useState({
         "OrderID": 0,
-        "UserID": currentUser.userID,
+        "UserID": currentUser.userID || 0,
         "Status": "Processing",
         "TotalAmount": 0,
-        "CreatedAt": null,
+        "CreatedAt": new Date().toISOString(),
         "Comment": ""
     })
-    const [myHTML, setMyHTML] = useState()
+    const { generatePDFHtml } = PdfGenerator(order.OrderID)
+    const { sendEmailsToCustomer } = SendEmailsForOrder()
+
+
 
     // פונקציה לחישוב סך המחירים
     const calculateTotalPrice = (products) => {
-        debugger
-        return products.reduce((total, product) => total + (product.salePrice != 0 ? product.salePrice : product.price), 0);
-    }
+        return products.reduce((total, product) => total + (product.salePrice !== 0 ? product.salePrice : product.price), 0);
+    };
+
     const CreateOrder = async () => {
-        if (!connected)
-            navigate('/myToConnect')
-        //--אחרי שהתקבל אישור מחברת באשראי---
-        else {
-            debugger
-            //Add order// 
-            // let t =calculateTotalPrice(currentCart)
-            //alert(t)
+        if (!connected) {
+            navigate('/myToConnect');
+        } else {
             const result = await PostOrder(order);
             const orderidToAdd = result
+            setOrder({ ...order, OrderID: orderidToAdd })
             // end //
-            if (!orderidToAdd) {
+            if (!orderidToAdd || orderidToAdd == -1) {
                 alert("Failed to create order, please try again later");
                 return;
-            }
-            else {
-                // add item order // 
-                // currentCart.map(async (product, index) => {
-                const listItemOrder = []
-                currentCart.map((product, i) => {
+            } else {
+                const listItemOrder = [];
+                currentCart.map((product) => {
                     const itemOrder = {
                         "OrderItemID": 0,
                         "OrderID": orderidToAdd,
                         "ProductID": product.productID,
-                       // "Quantity": product.quantity,
                         "Price": product.salePrice != 0 ? product.salePrice : product.price,
-                        "Comment":"",// product.comment,
-                        "Wording": ""//product.wording
+                        "Comment": product.additionalComments,
+                        "Wording": product.wording
                     }
                     listItemOrder.push(itemOrder);
-                })
-                debugger
+                });
                 const result = await PostOrderItemList(listItemOrder);
-                // end //
-                //delete all data from cookies
                 if (result) {
-setMyHTML(
-   " <div> <h1>Thank you for your order</h1></div>"
-
-/* <h1>Thank you for your order</h1>
-<ListGroup>
-{currentCart.map(product => (
-    <ListGroup.Item key={product.productID}>
-        <p> <strong>{t('orderFormPage.nameTitle')} </strong> {product[t('orderFormPage.nameProduct')]}
-        <strong> {t('orderFormPage.descriptionTitle')} </strong>{product[t('orderFormPage.descriptionProduct')]}
-            <strong> {t('orderFormPage.wording')} </strong>{product.wording}
-            <strong> {t('orderFormPage.comments')} </strong>{product.comment}
-
-            <strong>{t('orderFormPage.price')} </strong> {product.salePrice != 0 ? product.salePrice : product.price}</p>
-    </ListGroup.Item>
-))}
-</ListGroup>
-</div>" */
-)
-                    // sendEmails();
+                    debugger
+                    generatePDFHtml(orderidToAdd)
+                    sendEmailsToCustomer(orderidToAdd)
                     clearCart();
-
-                    alert("Thanks for Ordering in our site!")
                 }
-
-
-                // })
             }
         }
     };
-    const sendEmails = async() => {
-        // setEmailToCust({...emailToCust, ToAddress:"sr6737543@gmail.com"})
 
-        const emailToCust = {
-            Greeting: '',
-            ToAddress: currentUser.email,
-            Subject: 'Your Deginery order receipt from ' ,
-            Body: "myHTML",
-            IsBodyHtml: false,
-            Attachments: [],
-            // EmailList:null
-        };
-        debugger
-        const { Greeting, ToAddress, Subject, Body } = emailToCust;
-try{
-            const result = await SendEmail( { Greeting, ToAddress, Subject, Body } )
-            if (result && result.status == 200)
-                alert("Email sent successfully")
-}
-catch(error){
-   alert(error.message)
- 
-}
-       
-       
-        
-    }
+
     useEffect(() => {
         setOrder({ ...order, "TotalAmount": calculateTotalPrice(currentCart) })
-    }, []);  
 
-    return (<>
-        <h3>--Payment page--</h3>
-        <Container className="d-flex justify-content-center align-items-center vh-50">
-            <OrderForm></OrderForm>
+    }, []);
 
-            <Form.Group className="d-flex justify-content-center align-items-center vh-50">
-                <Form.Label> הערות חשובות שתרצה להוסיף</Form.Label>
-                <Form.Control type="data"
-                    onChange={(e) => { { setOrder({ ...order, "Comment": e.target.value }) } }} />
-            </Form.Group>
-            {/* </Container>
- <Container className="d-flex justify-content-center align-items-center vh-50"> */}
-            <PayForm></PayForm> </Container>
-
-        <butten class="btn btn-primary"
-            onClick={CreateOrder}
-
-        // onClick={(e)=>{ setOrder({...order, "totalAmount" : calculateTotalPrice(currentCart)});CreateOrder(e)}}
-        >בצע הזמנה-place order</butten>
-
-
-    </>)
-}
+    return (
+        <Container>
+            <PageTitle title={t('orderFormPage.pageTitle')} />
+            <Paper elevation={3} sx={{ padding: 3, mb: 3 }}>
+                <Typography variant="h4" gutterBottom>
+                    פרטי ההזמנה שלך
+                </Typography>
+                <Grid container spacing={3}>
+                    <Grid item xs={12} md={6}>
+                        <OrderForm />
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                        <PayForm />
+                    </Grid>
+                </Grid>
+                <Grid container spacing={3} justifyContent="center" sx={{ mt: 3 }}>
+                    <Grid item xs={12}>
+                        <TextField
+                            fullWidth
+                            label={t('orderFormPage.comments')}
+                            variant="outlined"
+                            onChange={(e) => setOrder({ ...order, "Comment": e.target.value })}
+                        />
+                    </Grid>
+                </Grid>
+                <Box sx={{ mt: 3, textAlign: 'center' }}>
+                    <Button variant="contained" color="primary" onClick={CreateOrder}>
+                        {t('orderFormPage.placeOrder')}
+                    </Button>
+                </Box>
+            </Paper>
+        </Container>
+    );
+};

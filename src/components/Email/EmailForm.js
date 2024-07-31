@@ -1,111 +1,11 @@
-/*import React, { useState } from 'react';
-import { Container, Form, Button, Modal } from 'react-bootstrap';
-import { addEmail } from '../../axios/EmailAxios';
-
-export const EmailForm = () => {
-  const [error, setError] = useState('');
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
-
-  const [newE, setNewE] = useState({
-    fName: '',
-    email: '',
-    message: ''
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setNewE({
-      ...newE,
-      [name]: value
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError(''); // Reset error before new request
-    try {
-      await addEmail(newEmail);
-      setShowSuccessModal(true); // Show success modal
-      setTimeout(() => {
-        setShowSuccessModal(false); // Close the modal after 2 seconds
-      }, 2000);
-    } catch (err) {
-      alert("לא הצלחנו להכניס את הנתונים נראה שאין לך חיבור לשרת");
-      setError(err.message); // Optional: set error state to display in the UI
-    }
-
-  };
-
-  const newEmail = {
-    // greeting: "string",
-    // toAddress: "string",
-    // subject: "string",
-    // body: "string",
-    // isBodyHtml: true,
-    listId: "e1737e366f",
-    message: newE.message,
-    email: newE.email,
-    fName: newE.name
-  };
-
-  return (
-    <Container>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="formName">
-          <Form.Label>שם</Form.Label>
-          <Form.Control
-            type="text"
-            name="name"
-            // placeholder="Enter your name"
-            defaultValue={newE.name}
-            onChange={handleChange}
-            required />
-        </Form.Group>
-        <Form.Group controlId="formEmail">
-          <Form.Label>כתובת אימייל</Form.Label>
-          <Form.Control
-            type="email"
-            name="email"
-            // placeholder="Enter your email"
-            defaultValue={newE.email}
-            onChange={handleChange}
-            required />
-        </Form.Group>
-        <Form.Group controlId="formMessage">
-          <Form.Label>הודעה</Form.Label>
-          <Form.Control
-            as="textarea"
-            name="message"
-            // placeholder="Enter your message"
-            defaultValue={newE.message}
-            onChange={handleChange}
-          />
-        </Form.Group>
-
-        <Button variant="primary" type="submit">
-          שלח
-        </Button>
-      </Form>
-
-      <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>הצטרפת בהצלחה</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>הצטרפת בהצלחה לרשימת התפוצה שלנו!</Modal.Body>
-      </Modal>
-    </Container>
-  );
-};
-
-export default EmailForm;
-*/
 import React, { useState } from 'react';
-import { Container, Form, Button, Modal } from 'react-bootstrap';
+import { Container, TextField, Button, Modal, Box, Typography } from '@mui/material';
 import { addEmail } from '../../axios/EmailAxios';
 
 export const EmailForm = () => {
   const [error, setError] = useState('');
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const [newE, setNewE] = useState({
     name: '',
@@ -123,6 +23,10 @@ export const EmailForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitted(true); // Set submitted to true to trigger validation messages
+    if (!newE.name || !newE.email || !/\S+@\S+\.\S+/.test(newE.email)) {
+      return; // Prevent form submission if validation fails
+    }
     setError(''); // Reset error before new request
     try {
       await addEmail(newE);
@@ -131,52 +35,93 @@ export const EmailForm = () => {
         setShowSuccessModal(false); // Close the modal after 2 seconds
       }, 2000);
     } catch (err) {
-      alert("לא הצלחנו להכניס את הנתונים נראה שאין לך חיבור לשרת");
-      setError(err.message); // Optional: set error state to display in the UI
+      setError('לא הצלחנו להכניס את הנתונים. אנא בדוק את החיבור שלך לשרת ונסה שוב.');
     }
   };
 
   return (
-    <Container>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="formName">
-          <Form.Label>שם</Form.Label>
-          <Form.Control
-            type="text"
-            name="name"
-            value={newE.name}
-            onChange={handleChange}
-            required />
-        </Form.Group>
-        <Form.Group controlId="formEmail">
-          <Form.Label>כתובת אימייל</Form.Label>
-          <Form.Control
-            type="email"
-            name="email"
-            value={newE.email}
-            onChange={handleChange}
-            required />
-        </Form.Group>
-        <Form.Group controlId="formMessage">
-          <Form.Label>הודעה</Form.Label>
-          <Form.Control
-            as="textarea"
-            name="message"
-            value={newE.message}
-            onChange={handleChange}
-          />
-        </Form.Group>
-
-        <Button variant="primary" type="submit">
+    <Container maxWidth="sm" sx={{ mt: 8 }}>
+      <Box
+        component="form"
+        noValidate
+        onSubmit={handleSubmit}
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 2,
+          p: 3,
+          borderRadius: 2,
+          boxShadow: 3,
+          backgroundColor: 'white'
+        }}
+      >
+        <Typography variant="h6" gutterBottom>
+          הצטרף לרשימת התפוצה
+        </Typography>
+        <TextField
+          label="שם"
+          name="name"
+          value={newE.name}
+          onChange={handleChange}
+          variant="outlined"
+          fullWidth
+          required
+          error={submitted && !newE.name}
+          helperText={submitted && !newE.name ? "אנא מלא את השדה הזה" : ''}
+        />
+        <TextField
+          label="כתובת אימייל"
+          name="email"
+          type="email"
+          value={newE.email}
+          onChange={handleChange}
+          variant="outlined"
+          fullWidth
+          required
+          error={submitted && (!newE.email || !/\S+@\S+\.\S+/.test(newE.email))}
+          helperText={submitted && (!newE.email || !/\S+@\S+\.\S+/.test(newE.email)) ? "אנא מלא כתובת אימייל תקינה" : ''}
+        />
+        <TextField
+          label="הודעה"
+          name="message"
+          value={newE.message}
+          onChange={handleChange}
+          variant="outlined"
+          multiline
+          rows={4}
+          fullWidth
+        />
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+        >
           שלח
         </Button>
-      </Form>
+      </Box>
 
-      <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>הצטרפת בהצלחה</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>הצטרפת בהצלחה לרשימת התפוצה שלנו!</Modal.Body>
+      <Modal
+        open={showSuccessModal}
+        onClose={() => setShowSuccessModal(false)}
+        sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+      >
+        <Box
+          sx={{
+            bgcolor: 'background.paper',
+            padding: 3,
+            borderRadius: 1,
+            boxShadow: 24,
+            width: '300px',
+            textAlign: 'center'
+          }}
+        >
+          <Typography variant="h6" gutterBottom>
+            הצטרפת בהצלחה
+          </Typography>
+          <Typography variant="body1">
+            הצטרפת בהצלחה לרשימת התפוצה שלנו!
+          </Typography>
+        </Box>
       </Modal>
     </Container>
   );

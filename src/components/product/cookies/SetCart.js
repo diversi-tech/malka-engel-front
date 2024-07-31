@@ -4,7 +4,7 @@ import { getCookie, setCookie } from './CookieUtils.js';
 export const addToCart = (product) => {
   let cart = JSON.parse(getCookie('cart') || '[]');
   cart.push(product);
-  setCookie('cart', JSON.stringify(cart), 7); // נשמור את העוגיה ל-7 ימים
+  setCookie('cart', JSON.stringify(cart), 7);
 };
 
 export const clearCart = () => {
@@ -22,3 +22,9 @@ export const getCart = () => {
   return [];
 };
 
+export const removeFromCart = (productId) => {
+  let currentCart = getCart();
+  currentCart = currentCart.filter(item => item.productID !== productId);
+  setCookie("cart", JSON.stringify(currentCart), 7);
+  return currentCart;
+};

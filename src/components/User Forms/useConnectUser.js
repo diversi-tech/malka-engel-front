@@ -1,7 +1,6 @@
 import { useDispatch } from "react-redux";
 import { GetUserDetails } from "../../axios/UsersAxios"
 import {connect, setCurrentUser } from "../../redux/DataActions/DataAction.Users";
-import { useNavigate } from "react-router-dom";
 
 
 
