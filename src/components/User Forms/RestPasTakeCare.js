@@ -25,7 +25,7 @@ export const ResetPasTakeCare = () => {
   const validToken = async () => {
     debugger
     const result = await ValidToken(token)
-    if (result.data)
+    if (result && result.data)
       setShowModal(true)
     else {
       navigate(`/myErrorPage/${404}/${"דף לא נמצא"}/${"close"}`)
@@ -38,7 +38,7 @@ export const ResetPasTakeCare = () => {
         setRestSec(true)
       }
       else
-        alert('Network error')
+      navigate(`/myErrorPage/${400}/${"  איפוס סיסמא נכשל נסה שוב"}/${"back"}`)
     }
   }
 

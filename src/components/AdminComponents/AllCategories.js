@@ -10,7 +10,6 @@ import { addProductToCategory, deleteProductInCategory, GetAllProducts, GetProdu
 // צריכה לאפס ארת הנתונים בטופס!
 // צריכהךלרםפש בצורה יותר יעילה
 const AllCategories = () => {
-    debugger
     const { t, i18n } = useTranslation();
     const myCategory = useSelector(c => c.DataReducer_Categry.Categorylist);
     const [data, setData] = useState([]);
