@@ -15,7 +15,6 @@ import { PostOrderItemList } from '../../axios/OrderItemAxios.js';
 import { PageTitle } from '../Layout Components/PageTitle.js';
 
 export const Checkout = () => {
-    debugger
     const { t, i18n } = useTranslation();
     const { currentUser, connected } = useSelector(u => u.DataReducer_Users);
     const navigate = useNavigate();

@@ -17,7 +17,7 @@ export const GetAllUsers = async () => {
 export const LoginUser = async (userLogin) => {
     try {
         let result = await axios.post(`${API_BASE_URL}Login`, userLogin)
-        localStorage.setItem('token', result.data.token);
+        localStorage.setItem('token', result.data.accessToken);
         return result
     }
 
