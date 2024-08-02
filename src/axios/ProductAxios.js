@@ -4,8 +4,7 @@ const API_BASE_URL = `${process.env.REACT_APP_API_URL}/api/Product/`;
 
 export const GetAllProducts = async () => {
     try {
-     debugger
-        let result = await axios.get(`${API_BASE_URL}GetAllProduct`)
+        let result = await axios.get(`${API_BASE_URL}GetAllProducts`)
         return result.data
     }
     catch (ch) {

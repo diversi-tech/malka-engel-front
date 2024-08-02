@@ -124,7 +124,12 @@
         "title": "מוצרים מומלצים"
     },
     "errorPage": {
-        "backButton":"חזרה"
+        "backButton":"חזרה",
+       "message500": "!שגיאת שרת",
+        "message400": "ארעה שגיאה במהלך הבקשה!",
+        "message404": "!דף לא נמצא",
+        "message403": "אין לך הרשאה לגשת למשאב זה",
+        "message": "הפרעה בלתי צפויה!"
     },
     "goBackPage": {
         "button": "חזרה"

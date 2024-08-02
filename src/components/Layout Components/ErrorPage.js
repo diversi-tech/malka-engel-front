@@ -50,7 +50,7 @@ export const ErrorPage = () => {
  const navigate = useNavigate()
   const handleBack = () => {
     if(back === "back")
-    navigate(-2)
+    navigate(-1)
   else  if(back === "close")
       window.close()
    };

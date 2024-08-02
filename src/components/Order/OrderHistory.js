@@ -78,6 +78,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Container, Typography, Alert, AlertTitle, List, ListItem, ListItemText, Paper, Box , Button} from '@mui/material';
 import { GetOrderByUserId } from "../../axios/OrderAxios";
 import { useNavigate } from 'react-router-dom'; 
+import { Modal } from "react-bootstrap";
+import { GetOrderItemByOrdId } from "../../axios/OrderItemAxios";
 
 
 export const OrderHistory = ({ connect }) => {
@@ -157,7 +159,7 @@ export const OrderHistory = ({ connect }) => {
                             {t('OrderHistoryPage.totalAmount')}: {order.totalAmount}
                           </Typography>
                           <br />
-                           <Button onClick={() => handleShowOrderDetails(order.orderId)}>
+                           <Button onClick={() => handleShowOrderDetails(order.orderID)}>
                             {t('OrderHistoryPage.showOrderDetails')}
                             </Button>
                         </>

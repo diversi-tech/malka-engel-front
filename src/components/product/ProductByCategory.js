@@ -4,12 +4,14 @@ import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import InfoIcon from '@mui/icons-material/Info';
 import { useTranslation } from 'react-i18next';
-import { GetAllSubcategoriesByCategoryID, GetProductsByCategoryAndSubcategories } from '../../axios/ProductAxios';
+import { GetAllProducts, GetAllSubcategoriesByCategoryID, GetProductsByCategoryAndSubcategories } from '../../axios/ProductAxios';
 import { Box, Breadcrumbs, Button, Card, CardContent, Container, Grid, IconButton, Tooltip, Typography, CircularProgress } from '@mui/material';
 import WatermarkedImage from './productDetail/WatermarkedImage';
 import { getCart, removeFromCart } from './cookies/SetCart';
 import { GetCategoryByCategoryId } from '../../axios/CategoryAxios';
 import ErrorPage from '../Layout Components/ErrorPage';
+import { useDispatch, useSelector } from 'react-redux';
+import { setProductList, setProductListByCategory } from '../../redux/DataActions/DataAction.Product';
 
 const ProductByCategory = () => {
     const { t, i18n } = useTranslation();
@@ -18,22 +20,30 @@ const ProductByCategory = () => {
     const navigate = useNavigate();
     const [cart, setCart] = useState(getCart());
     const [category, setCategory] = useState({});
-    const [products, setProducts] = useState([]);
+    const productsFrmRedux = useSelector(p => p.DataReducer_Products.Prodlist)
+    const [products, setProducts] = useState(productsFrmRedux);
+    const [categoryProducts, setCategoryProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [subcategories, setSubCategories] = useState([]);
     const [error, setError] = useState(null);
+    const dispatch = useDispatch();
 
     const fetchData = async () => {
         try {
-            const [productsResponse, categoryResponse, subcategoriesResponse] = await Promise.all([
-                GetProductsByCategoryAndSubcategories(idCategory),
-                GetCategoryByCategoryId(idCategory),
-                GetAllSubcategoriesByCategoryID(idCategory),
-            ]);
-
-            setCategory(categoryResponse);
-            setProducts(productsResponse);
-            setSubCategories(subcategoriesResponse);
+            if (productsFrmRedux.length == 0) {
+                const [productsResponse, categoryProductsResponse, categoryResponse, subcategoriesResponse] = await Promise.all([
+                    GetAllProducts(),
+                    GetProductsByCategoryAndSubcategories(idCategory),
+                    GetCategoryByCategoryId(idCategory),
+                    GetAllSubcategoriesByCategoryID(idCategory),
+                ]);
+                dispatch(setProductListByCategory([]));
+                setCategory(categoryResponse);
+                setProducts(productsResponse);
+                setSubCategories(subcategoriesResponse);
+                setCategoryProducts(categoryProductsResponse);
+                dispatch(setProductListByCategory(categoryProductsResponse), setProductList(productsResponse));
+            }
         } catch (error) {
             console.error("Error fetching data:", error);
             setError({ code: 500, message: "An error occurred while fetching data." });

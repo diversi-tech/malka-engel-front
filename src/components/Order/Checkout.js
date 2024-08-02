@@ -13,6 +13,7 @@ import PdfGenerator from "./PdfGenerator.js";
 import { SendEmailsForOrder, sendEmailsForOrder } from "./sendEmailsForOrder.js";
 import { PostOrderItemList } from '../../axios/OrderItemAxios.js';
 import { PageTitle } from '../Layout Components/PageTitle.js';
+import ErrorPage from '../Layout Components/ErrorPage.js';
 
 export const Checkout = () => {
     const { t, i18n } = useTranslation();
@@ -44,10 +45,8 @@ export const Checkout = () => {
             const result = await PostOrder(order);
             const orderidToAdd = result
             setOrder({ ...order, OrderID: orderidToAdd })
-            // end //
             if (!orderidToAdd || orderidToAdd == -1) {
-                alert("Failed to create order, please try again later");
-                return;
+                navigate(`/myErrorPage/500/${t('errorPage.message')}/back`)
             } else {
                 const listItemOrder = [];
                 currentCart.map((product) => {

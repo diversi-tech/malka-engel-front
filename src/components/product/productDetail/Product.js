@@ -269,7 +269,7 @@ export const Product = () => {
     const { t, i18n } = useTranslation();
     const { id } = useParams();
     const currentLanguage = i18n.language === 'en' ? 'En' : 'He';
-    const productsList = useSelector(s => s.DataReducer_Products?.Prodlist || []);
+    const productsList = useSelector(s => s.DataReducer_Products?.ProdlistByCategory || s.DataReducer_Products?.Prodlist || []);
     const [products, setProducts] = useState(productsList);
     const [cart, setCart] = useState(getCart());
     const [wording, setWording] = useState(cart.find(item => item.productID == id)?.wording || '');
@@ -285,8 +285,7 @@ export const Product = () => {
     useEffect(() => {
         debugger
         const fetchData = async () => {
-            if (!product) return;
-
+            if (!product) return; 
             const categoriesResponse = await CategoriesHierarchyByProductId(id);
             //const categories = await categoriesResponse.json();
             const breadcrumbs = generateBreadcrumbs(categoriesResponse, product);
@@ -297,6 +296,7 @@ export const Product = () => {
     }, [id, product]);
 
     if (!product) {
+        debugger
         return <div>Loading...</div>;
     }
 

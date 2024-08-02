@@ -144,7 +144,6 @@ export const Login = () => {
       if (userLogin != null && userLogin.status == 200) {
         debugger
         //User exists in the database
-
         debugger
         //  let current = await GetUserDetails(userLogin.data.token);
         // dispatch(setCurrentUser(current.data));
@@ -155,7 +154,7 @@ export const Login = () => {
         navigate(-1)
       }
       else if (userLogin.code === "ERR_BAD_RESPONSE")
-        setErrorLoginingin(true)
+        setErrorLoggingIn(true); //setErrorLoginingin(true)
       else {
         alert("Network Error")
       }

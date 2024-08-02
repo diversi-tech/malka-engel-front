@@ -123,7 +123,12 @@
         "title": "recommended Products"
     },
     "errorPage": {
-        "backButton":"Back"
+        "backButton":"Back",
+        "message500": "Server error!",
+        "message400": "Bad request",
+        "message404": "Page not found!",
+        "message403": "You do not have authorization to access this resource.",
+        "message": "Unexpected disruption!"
     },
     "goBackPage": {
         "button": "Go back"

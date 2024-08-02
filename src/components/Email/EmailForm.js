@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { Container, TextField, Button, Modal, Box, Typography } from '@mui/material';
 import { addEmail } from '../../axios/EmailAxios';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 export const EmailForm = () => {
   const [error, setError] = useState('');
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
 
   const [newE, setNewE] = useState({
     name: '',
@@ -34,9 +36,19 @@ export const EmailForm = () => {
       await addEmail(newE);
       setShowSuccessModal(true); // Show success modal
       setTimeout(() => {
-        setShowSuccessModal(false); // Close the modal after 2 seconds
+        setShowSuccessModal(false);
+        navigate(-1) // Close the modal after 2 seconds
       }, 2000);
+      
     } catch (err) {
+      if(err.status == 500)
+        navigate(`/myErrorPage/500/${t('errorPage.message500')}/back`)
+      else if(err.status == 404)
+        navigate(`/myErrorPage/404/${t('errorPage.message404')}/back`)
+      else if(err.status == 403) 
+        navigate(`/myErrorPage/403/${t('errorPage.message400')}/back`)
+      else
+        navigate(`/myErrorPage/---/${t('errorPage.message')}/back`)
       setError(t('EmailFormPage.error'));
     }
   };
