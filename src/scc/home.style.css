@@ -1,0 +1,313 @@
+.box {
+    height: 1px;
+    width: 1972px;
+  }
+  
+  .box .line {
+    height: 1px;
+    left: 0;
+    object-fit: cover;
+    position: fixed;
+    top: 0;
+    width: 1920px;
+  }
+
+  .frame {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    width: 1500px;
+  }
+  
+  .frame .div {
+    align-items: center;
+    display: inline-flex;
+    gap: 296px;
+    height: 151px;
+    position: relative;
+  }
+  
+  .frame .frame-wrapper {
+    align-items: center;
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 10px;
+    margin-bottom: -1.5px;
+    margin-top: -1.5px;
+    padding: 10px;
+    position: relative;
+  }
+  
+  .frame .line-wrapper {
+    flex: 0 0 auto;
+    position: relative;
+  }
+  
+  .frame .line {
+    height: 114px;
+    left: 10px;
+    object-fit: cover;
+    position: absolute;
+    top: -14px;
+    width: 1px;
+  }
+  
+  .frame .img-wrapper {
+    flex: 0 0 auto;
+    height: 151px;
+    position: relative;
+  }
+  
+  .frame .img {
+    height: 122px;
+    left: 10px;
+    object-fit: cover;
+    position: absolute;
+    top: -13px;
+    width: 1px;
+  }
+  
+  .frame .div-wrapper {
+    align-items: center;
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 10px;
+    margin-bottom: -2px;
+    margin-top: -2px;
+    padding: 10px;
+    position: relative;
+  }
+  
+  .frame .line-2 {
+    height: 115px;
+    left: 10px;
+    object-fit: cover;
+    position: absolute;
+    top: -14px;
+    width: 1px;
+  }
+  
+  .frame .frame-wrapper-2 {
+    align-items: center;
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 10px;
+    height: 183px;
+    margin-bottom: -16px;
+    margin-top: -16px;
+    padding: 10px;
+    position: relative;
+  }
+  
+  .frame .line-wrapper-2 {
+    flex: 0 0 auto;
+    height: 145px;
+    position: relative;
+  }
+  
+  .frame .line-3 {
+    height: 114px;
+    left: 10px;
+    object-fit: cover;
+    position: absolute;
+    top: -9px;
+    width: 1px;
+  }
+  
+  .frame .div-2 {
+    align-items: center;
+    display: flex;
+    gap: 199px;
+    justify-content: center;
+    left: -173px;
+    position: absolute;
+    top: 30px;
+    width: 1374px;
+  }
+  
+  .frame .text-wrapper {
+    color: var(--variable-collection);
+    direction: rtl;
+    font-family: "Heebo-Regular", Helvetica;
+    font-size: 36px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-left: -14.5px;
+    margin-top: -1.62px;
+    position: relative;
+    width: fit-content;
+  }
+  
+  .frame .text-wrapper-2 {
+    color: var(--variable-collection);
+    direction: rtl;
+    font-family: "Heebo-Regular", Helvetica;
+    font-size: 36px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-top: -1.62px;
+    position: relative;
+    width: fit-content;
+  }
+  
+  .frame .text-wrapper-3 {
+    color: var(--variable-collection);
+    direction: rtl;
+    font-family: "Heebo-Regular", Helvetica;
+    font-size: 36px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-right: -14.5px;
+    margin-top: -1.62px;
+    position: relative;
+    width: fit-content;
+  }
+  
+  .frame .div-3 {
+    height: 55px;
+    left: 427px;
+    position: absolute;
+    top: 28px;
+    width: 174px;
+  }
+  .div-wrapper {
+    background-color: var(--variable-collection);
+    height: 1080px;
+    overflow: hidden;
+    width: 1920px;
+  }
+  
+  .div-wrapper .overlap {
+    height: 1080px;
+    position: relative;
+    width: 1938px;
+  }
+  
+  .div-wrapper .overlap-group {
+    height: 1080px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 1938px;
+  }
+  
+  .div-wrapper .vector {
+    height: 1079px;
+    left: 124px;
+    position: absolute;
+    top: 0;
+    width: 1px;
+  }
+  
+  .div-wrapper .line-4 {
+    height: 1px;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
+    top: 109px;
+    width: 1920px;
+  }
+  
+  .div-wrapper .vector-2 {
+    height: 1px;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
+    top: 1000px;
+    width: 1778px;
+  }
+  
+  .div-wrapper .frame-26 {
+    left: 210px !important;
+    position: absolute !important;
+    top: 0 !important;
+  }
+  
+  .div-wrapper .frame-instance {
+    height: 108px !important;
+    top: -8px !important;
+  }
+  
+  .div-wrapper .frame-26-instance {
+    height: 109px !important;
+    top: 0 !important;
+  }
+  
+  .div-wrapper .design-component-instance-node {
+    height: 109px !important;
+    top: -8px !important;
+  }
+  
+  .div-wrapper .frame-2 {
+    height: 108px !important;
+    top: -3px !important;
+  }
+  
+  .div-wrapper .frame-3 {
+    height: 150px;
+    left: 1778px;
+    position: absolute;
+    top: 926px;
+    width: 160px;
+  }
+  
+  .div-wrapper .text-wrapper-4 {
+    color: var(--variable-collection);
+    direction: rtl;
+    font-family: "Fb Basis-Regular", Helvetica;
+    font-size: 14px;
+    font-weight: 400;
+    left: 33px;
+    letter-spacing: 0;
+    line-height: 17px;
+    position: absolute;
+    text-align: center;
+    top: 92px;
+    white-space: nowrap;
+  }
+  
+  .div-wrapper .icon {
+    height: 49px;
+    left: 43px;
+    position: absolute;
+    top: 27px;
+    width: 43px;
+  }
+  
+  .div-wrapper .line-5 {
+    height: 1px;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    width: 142px;
+  }
+  
+  .div-wrapper .vector-3 {
+    height: 1080px;
+    left: 1777px;
+    position: absolute;
+    top: 0;
+    width: 1px;
+  }
+  
+  .div-wrapper .p {
+    color: var(--variable-collection);
+    font-family: "Alef-Regular", Helvetica;
+    font-size: 20px;
+    font-weight: 400;
+    left: 818px;
+    letter-spacing: 0;
+    line-height: 27px;
+    position: absolute;
+    text-align: right;
+    top: 1026px;
+    white-space: nowrap;
+    width: 283px;
+  }
+    

@@ -16,7 +16,7 @@ export const GetAllOrderItems = async () => {
 
 export const GetOrderItemByOrdId = async (orderId) => {
     try {
-        let result = await axios.get(`${API_BASE_URL}GetAllFAQ/${orderId}`)
+        let result = await axios.get(`${API_BASE_URL}GetOrderItemByOrdId/${orderId}`)
         debugger
         return result
     }

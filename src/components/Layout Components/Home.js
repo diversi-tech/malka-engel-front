@@ -8,7 +8,7 @@ import { StayTuned } from '../User Forms/StayTuned';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetAllCategories } from '../../axios/CategoryAxios';
 import { setCategoryList } from '../../redux/DataActions/DataAction.Category';
-import ilFlagImage from '../../assets/HomeImages/לוגו.png';
+import ilFlagImage from '../../assets/HomeImages/image.png';
 import { Card } from 'react-bootstrap';
 
 const ImageContainer1 = styled.div`
@@ -291,163 +291,27 @@ export const Home = () => {
   return (
     <div className="Home">
       <ShortInfo id="short-info">
-        <ImageContainer1>
-          <img src={ilFlagImage} alt="תמונה" />
-          <TextContainer
-            dangerouslySetInnerHTML={{ __html: t('homePage.information') }}
-            style={{
-              top: '25%',
-              left: i18n.language === 'he' ? '50%' : '70%',
-              right: i18n.language === 'he' ? 'auto' : '70%',
-              transform: 'translate(-50%, -50%)',
-              textAlign: i18n.language === 'he' ? 'center' : 'right',
-            }}
-          />
-        </ImageContainer1>
       </ShortInfo>
 
       <ScrollToTopButton onClick={scrollToTop} isVisible={isVisible}>
         <FaArrowUp />
       </ScrollToTopButton>
-      {/* <div> */}
-
-      {/* <Categories id="categories">
-      {categories.map(category => (
-        <Category
-          key={category.categoryID}
-          style={{ backgroundImage: `url(${process.env.REACT_APP_API_URL}${category.imageURL})` }}
-          onClick={() => handleCategoryClick(category.categoryID)}
-        >
-          <CategoryOverlay />
-          <CategoryLink>{category.nameHe}</CategoryLink>
-        </Category>
-      ))}
-    </Categories>
-  </div> */}
-
-      {/* <div>
-        <Categories id="categories">
+      <div>
+        <Categories>
           {categories.map(category => (
-            <div>
-            <Card>
-              <Card.Img 
-                src={`${process.env.REACT_APP_API_URL}${category.imageURL}`}>
-              </Card.Img>
-            </Card>
-            <Category
-            
-              key={category.categoryID}
-              // src={`${process.env.REACT_APP_API_URL}${category.imageURL}`}
-              // style={{ backgroundImage:`${process.env.REACT_APP_API_URL}${category.imageURL}`} }//`url(${category.ImageURL})` }}
-              onClick={() => handleCategoryClick(category.categoryID)}
-            >
-              <CategoryOverlay />
-              <CategoryLink>{category.nameHe}</CategoryLink>
-            </Category>
-            </div>
+            <CategoryContainer key={category.categoryID}>
+              <CategoryCard>
+                <CategoryImage src={`${process.env.REACT_APP_API_URL}${category.imageURL}`} />
+                <CategoryOverlay>
+                  <CategoryLink onClick={() => handleCategoryClick(category.categoryID)}>
+                    {category.nameHe}
+                  </CategoryLink>
+                </CategoryOverlay>
+              </CategoryCard>
+            </CategoryContainer>
           ))}
         </Categories>
-      </div> */}
-
-
-
-      {/* <div>
-        <Categories id="categories">
-          {categories.map(category => (
-            <div key={category.categoryID}>
-              <Card style={{
-                position: 'relative',
-                border: 'none',
-                transition: 'transform 0.2s',
-                boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
-              }}>
-                <div style={{
-                  overflow: 'hidden',
-                  position: 'relative'
-                }}></div>
-                <Card.Img
-                  style={{
-                    height: '250px',
-                    objectFit: 'cover',
-                    transition: 'transform 0.3s'
-                  }}
-                  src={`${process.env.REACT_APP_API_URL}${category.imageURL}`} />
-              </Card>
-              <Category onClick={() => handleCategoryClick(category.categoryID)}>
-                <CategoryOverlay />
-                <CategoryLink>{category.nameHe}</CategoryLink>
-              </Category>
-            </div>
-          ))}
-        </Categories>
-      </div> */}
-<div>
-<Categories>
-    {categories.map(category => (
-      <CategoryContainer key={category.categoryID}>
-        <CategoryCard>
-          <CategoryImage src={`${process.env.REACT_APP_API_URL}${category.imageURL}`} />
-          <CategoryOverlay>
-            <CategoryLink onClick={() => handleCategoryClick(category.categoryID)}>
-              {category.nameHe}
-            </CategoryLink>
-          </CategoryOverlay>
-        </CategoryCard>
-      </CategoryContainer>
-    ))}
-  </Categories>
-  </div>
-      {/* <Categories id="categories">
-        <Category style={{ backgroundImage: `url(${ilFlagImage0})` }} onClick={() => handleCategoryClick(9)}>
-          <CategoryOverlay />
-          <CategoryLink>אצולה</CategoryLink>
-        </Category>
-        <Category style={{ backgroundImage: `url(${ilFlagImage1})` }} onClick={() => handleCategoryClick(10)}>
-          <CategoryOverlay />
-          <CategoryLink>אשרי חלקיך</CategoryLink>
-        </Category>
-        <Category style={{ backgroundImage: `url(${ilFlagImage2})` }} onClick={() => handleCategoryClick(11)}>
-          <CategoryOverlay />
-          <CategoryLink>אתם מטהרין</CategoryLink>
-        </Category>
-        <Category style={{ backgroundImage: `url(${ilFlagImage3})` }} onClick={() => handleCategoryClick(12)}>
-          <CategoryOverlay />
-          <CategoryLink>בקרעסטיר</CategoryLink>
-        </Category>
-        <Category style={{ backgroundImage: `url(${ilFlagImage4})` }} onClick={() => handleCategoryClick(13)}>
-          <CategoryOverlay />
-          <CategoryLink>געפילן</CategoryLink>
-        </Category>
-        <Category style={{ backgroundImage: `url(${ilFlagImage5})` }} onClick={() => handleCategoryClick(7)}>
-          <CategoryOverlay />
-          <CategoryLink>חלקינו עמהם</CategoryLink>
-        </Category>
-        <Category style={{ backgroundImage: `url(${ilFlagImage6})` }} onClick={() => handleCategoryClick(15)}>
-          <CategoryOverlay />
-          <CategoryLink>כבוד התורה</CategoryLink>
-        </Category>
-        <Category style={{ backgroundImage: `url(${ilFlagImage7})` }} onClick={() => handleCategoryClick(16)}>
-          <CategoryOverlay />
-          <CategoryLink>מבשר טוב</CategoryLink>
-        </Category>
-        <Category style={{ backgroundImage: `url(${ilFlagImage8})` }} onClick={() => handleCategoryClick(17)}>
-          <CategoryOverlay />
-          <CategoryLink>מזוני רויחי</CategoryLink>
-        </Category>
-        <Category style={{ backgroundImage: `url(${ilFlagImage9})` }} onClick={() => handleCategoryClick(18)}>
-          <CategoryOverlay />
-          <CategoryLink>מתיצבים</CategoryLink>
-        </Category>
-        <Category style={{ backgroundImage: `url(${ilFlagImage10})` }} onClick={() => handleCategoryClick(19)}>
-          <CategoryOverlay />
-          <CategoryLink>שמחים לשמרו</CategoryLink>
-        </Category>
-        <Category style={{ backgroundImage: `url(${ilFlagImage11})` }} onClick={() => handleCategoryClick(20)}>
-          <CategoryOverlay />
-          <CategoryLink>תומכיה מאושר</CategoryLink>
-        </Category>
-      </Categories> */}
-
+      </div>
       <RecommendedProductsSection id="recommended-products">
         <ArrowButton direction="left" onClick={() => handleArrowClick('prev')}>
           <FaArrowLeft />

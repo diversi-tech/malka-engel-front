@@ -67,7 +67,7 @@ export const Nav = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <AppBar position="static" sx={{ background: `linear-gradient(45deg, ${colors.primaryBg}, #333333)` }}>
+            <AppBar position="static" sx={{ backgroundColor: colors.primaryBg }}>
                 <Container>
                     <Toolbar>
                         <IconButton edge="start" color="inherit" aria-label="menu" onClick={handleMenu}>
@@ -82,24 +82,24 @@ export const Nav = () => {
                             Designery
                         </Typography>
                         <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
-                            <Button
+                            <IconButton
                                 color="inherit"
                                 component={Link}
                                 to="./myShoppingCart"
-                                sx={{
-                                    color: colors.primaryText,
-                                    '&:hover': { backgroundColor: colors.hoverBg }
-                                }}
+                                sx={{ color: colors.primaryText }}
                             >
                                 <FontAwesomeIcon icon={faShoppingCart} />
-                            </Button>
+                            </IconButton>
                             <Button
                                 color="inherit"
                                 component={Link}
                                 to="./myHome"
                                 sx={{
                                     color: colors.primaryText,
-                                    '&:hover': { backgroundColor: colors.hoverBg }
+                                    '&:hover': { backgroundColor: colors.hoverBg },
+                                    borderRadius: 0, // No border radius for a cleaner look
+                                    textTransform: 'none', // Preserve text case
+                                    padding: '8px 16px', // Consistent padding
                                 }}
                             >
                                 {t('navPage.linkHome')}
@@ -110,7 +110,10 @@ export const Nav = () => {
                                 to="./myCommonQuestions"
                                 sx={{
                                     color: colors.primaryText,
-                                    '&:hover': { backgroundColor: colors.hoverBg }
+                                    '&:hover': { backgroundColor: colors.hoverBg },
+                                    borderRadius: 0,
+                                    textTransform: 'none',
+                                    padding: '8px 16px',
                                 }}
                             >
                                 {t('navPage.linCommonQuestions')}
@@ -122,30 +125,25 @@ export const Nav = () => {
                                     to="./myLogin"
                                     sx={{
                                         color: colors.primaryText,
-                                        '&:hover': { backgroundColor: colors.hoverBg }
+                                        '&:hover': { backgroundColor: colors.hoverBg },
+                                        borderRadius: 0,
+                                        textTransform: 'none',
+                                        padding: '8px 16px',
                                     }}
                                 >
                                     {t('navPage.linkLogin')}
                                 </Button>
                             )}
-                            {/* <Button
-                                color="inherit"
-                                component={Link}
-                                to="./myProductList"
-                                sx={{
-                                    color: colors.primaryText,
-                                    '&:hover': { backgroundColor: colors.hoverBg }
-                                }}
-                            >
-                                {t('navPage.linkProduct')}
-                            </Button> */}
                             <Button
                                 color="inherit"
                                 component={Link}
                                 to="./myEmailForm"
                                 sx={{
                                     color: colors.primaryText,
-                                    '&:hover': { backgroundColor: colors.hoverBg }
+                                    '&:hover': { backgroundColor: colors.hoverBg },
+                                    borderRadius: 0,
+                                    textTransform: 'none',
+                                    padding: '8px 16px',
                                 }}
                             >
                                 {t('navPage.linkStayTuned')}
@@ -157,7 +155,10 @@ export const Nav = () => {
                                     to={`./AllAdminPages/${token}`}
                                     sx={{
                                         color: colors.primaryText,
-                                        '&:hover': { backgroundColor: colors.hoverBg }
+                                        '&:hover': { backgroundColor: colors.hoverBg },
+                                        borderRadius: 0,
+                                        textTransform: 'none',
+                                        padding: '8px 16px',
                                     }}
                                 >
                                     מסכי ניהול
@@ -168,7 +169,10 @@ export const Nav = () => {
                                 onClick={handleCategoryMenu}
                                 sx={{
                                     color: colors.primaryText,
-                                    '&:hover': { backgroundColor: colors.hoverBg }
+                                    '&:hover': { backgroundColor: colors.hoverBg },
+                                    borderRadius: 0,
+                                    textTransform: 'none',
+                                    padding: '8px 16px',
                                 }}
                             >
                                 קטגוריות
@@ -190,7 +194,8 @@ export const Nav = () => {
                                         onClick={handleClose}
                                         sx={{
                                             color: colors.primaryText,
-                                            '&:hover': { backgroundColor: colors.menuItemHover }
+                                            '&:hover': { backgroundColor: colors.menuItemHover },
+                                            borderRadius: 0, // No border radius
                                         }}
                                     >
                                         {category.nameHe}
@@ -203,7 +208,8 @@ export const Nav = () => {
                                         onClick={handleUserMenu}
                                         sx={{
                                             color: colors.primaryText,
-                                            '&:hover': { backgroundColor: colors.menuItemHover }
+                                            '&:hover': { backgroundColor: colors.menuItemHover },
+                                            borderRadius: 0, // No border radius
                                         }}
                                     >
                                         {currentUser.name}
