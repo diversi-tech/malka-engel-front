@@ -174,8 +174,7 @@ export const Nav = () => {
                                     textTransform: 'none',
                                     padding: '8px 16px',
                                 }}
-                            >
-                                קטגוריות
+                            >{t('navPage.linkCatergories')}
                             </Button>
                             <Menu
                                 anchorEl={categoryMenuAnchorEl}

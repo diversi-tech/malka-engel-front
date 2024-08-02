@@ -75,9 +75,10 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { Container, Typography, Alert, AlertTitle, List, ListItem, ListItemText, Paper, Box, Button, Modal } from '@mui/material';
+import { Container, Typography, Alert, AlertTitle, List, ListItem, ListItemText, Paper, Box , Button} from '@mui/material';
 import { GetOrderByUserId } from "../../axios/OrderAxios";
-import { GetOrderItemByOrdId } from "../../axios/OrderItemAxios";
+import { useNavigate } from 'react-router-dom'; 
+
 
 export const OrderHistory = ({ connect }) => {
   const { t, i18n } = useTranslation();
@@ -88,6 +89,8 @@ export const OrderHistory = ({ connect }) => {
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [orderDetails, setOrderDetails] = useState([]);
   const [detailsModalOpen, setDetailsModalOpen] = useState(false);
+  const navigate = useNavigate(); 
+
 
   useEffect(() => {
     if (connected) {
@@ -102,6 +105,9 @@ export const OrderHistory = ({ connect }) => {
     } catch (error) {
       console.error(`Error fetching orders for user ${userId}:`, error);
     }
+  };
+  const handleShowOrderDetails = (orderId) => {
+    navigate(`/myOrderDetails/${orderId}`);
   };
 
   const fetchOrderDetails = async (orderId) => {
@@ -151,14 +157,9 @@ export const OrderHistory = ({ connect }) => {
                             {t('OrderHistoryPage.totalAmount')}: {order.totalAmount}
                           </Typography>
                           <br />
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => fetchOrderDetails(order.orderId)}
-                            sx={{ mt: 1 }}
-                          >
-                            {t('OrderHistoryPage.viewDetails')}
-                          </Button>
+                           <Button onClick={() => handleShowOrderDetails(order.orderId)}>
+                            {t('OrderHistoryPage.showOrderDetails')}
+                            </Button>
                         </>
                       }
                     />

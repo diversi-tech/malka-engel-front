@@ -138,20 +138,26 @@ export const Login = () => {
 
   const handleLogin = async () => {
     if (validForm(user)) {
-      setLoading(true);
-      try {
-        const userLogin = await LoginUser({ email: user.email, passwordHash: user.passwordHash });
-        if (userLogin?.status === 200) {
-          ConnectMe();
-          navigate(-1);
-        } else {
-          setErrorLoggingIn(true);
-        }
-      } catch (error) {
-        console.error(error);
-        setErrorLoggingIn(true);
-      } finally {
-        setLoading(false);
+      //Go to DB ......
+      debugger
+      let userLogin = await LoginUser({email:user.email,passwordHash: user.passwordHash});
+      if (userLogin != null && userLogin.status == 200) {
+        debugger
+        //User exists in the database
+
+        debugger
+        //  let current = await GetUserDetails(userLogin.data.token);
+        // dispatch(setCurrentUser(current.data));
+        ConnectMe()
+        //save in cookies
+
+        //Go to last page you visited
+        navigate(-1)
+      }
+      else if (userLogin.code === "ERR_BAD_RESPONSE")
+        setErrorLoginingin(true)
+      else {
+        alert("Network Error")
       }
     }
   };

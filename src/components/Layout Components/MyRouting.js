@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Footer } from "./Footer.js";
 import { Contact } from "../User/Contact.js";
-import { DesignerBirkins } from "../Empty pages/DesignerBirkins.js";
+import { DesignerBirkins } from "../Empty pages/DesignerBentcherss.js";
 import { CongratulationsToTheDonors } from "../Empty pages/CongratulationsToTheDonors.js";
 import { Events } from "../Empty pages/Events.js";
 import AdminDashboard from "../AdminComponents/AdminDashboard.js";
@@ -77,7 +77,7 @@ export const MyRouting = () => {
                     <Route path="/myProfile" element={<UserProfile />} />
                     <Route path="/mySignUp" element={<SignUp />} />
                     <Route path="/myResetPassword" element={<ResetPassword />} />
-                    <Route path="/myResetPasswordLink" element={<ResetPasTakeCare />} />
+                    <Route path="/myResetPasswordLink/:token" element={<ResetPasTakeCare />} />
                     <Route path="/myToConnect" element={<ToConnect></ToConnect>} />
 
                     {/* product pages */}
@@ -119,9 +119,9 @@ export const MyRouting = () => {
                     {/* <Route path="/myAdminDashboard" element={<AdminDashboard></AdminDashboard>}></Route> */}
 
                     {/* empty pages?? */}
-                    <Route path="/myJoys" element={<Joys></Joys>}></Route>
-                    <Route path="/myDesignerBirkins" element={<DesignerBirkins></DesignerBirkins>}></Route>
-                    <Route path="/myCongratulationsToTheDonors" element={<CongratulationsToTheDonors></CongratulationsToTheDonors>}></Route>
+                    <Route path="/mySimchos" element={<Joys></Joys>}></Route>
+                    <Route path="/myDesignerBentchers" element={<DesignerBirkins></DesignerBirkins>}></Route>
+                    <Route path="/myDonorsThank-Yous" element={<CongratulationsToTheDonors></CongratulationsToTheDonors>}></Route>
                     <Route path="myTerms" element={<Terms></Terms>} ></Route>
                     <Route path="/myEvents" element={<Events></Events>} ></Route>
 

@@ -196,12 +196,13 @@ const SignUp = () => {
       setLoading(true);
       try {
         // Set user type
-        newUser.typeID = newUser.typeID === 2 ? 1 : 2;
+        newUser.typeID = newUser.typeID === 2 ? 2 : 1;
 
         // Post new user
         const postUser = await PostUser(newUser);
         if (postUser && postUser.status === 200) {
-          const userLogin = await LoginUser(newUser.email, newUser.passwordHash);
+          debugger
+          const userLogin = await LoginUser({email:newUser.email,passwordHash: newUser.passwordHash});
           if (userLogin && userLogin.status === 200) {
             ConnectMe();
             setSignsec(true);

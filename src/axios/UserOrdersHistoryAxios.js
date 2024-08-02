@@ -11,3 +11,18 @@ export const getUserHistory = async () => {
     console.log(ch)
   }
 }
+export const GetOrderByOrderId = async (orderId) => {
+  try {
+    console.log(`Making request to: ${API_BASE_URL}GetOrderByOrderId/${orderId}`);
+    const response = await axios.get(`${API_BASE_URL}GetOrderByOrderId/${orderId}`);
+    console.log('Response received:', response);
+    if (response && response.data) {
+      return response.data;
+    } else {
+      throw new Error('No data found');
+    }
+  } catch (error) {
+    console.error('Error fetching order details:', error.response ? error.response.data : error.message);
+    throw error; // Rethrow the error to be handled by the caller
+  }
+};

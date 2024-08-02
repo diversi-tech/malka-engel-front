@@ -436,7 +436,7 @@ export const Product = () => {
                                             color="secondary"
                                             onClick={() => handleRemoveFromCart(product.productID)}
                                         >
-                                            <DeleteIcon /> {t('הסר מהסל ')}
+                                            <DeleteIcon /> {t('productPage.deleteFromCart')}
                                         </Button>
                                     </Grid>
                                     <Grid item>
@@ -445,7 +445,7 @@ export const Product = () => {
                                             color="secondary"
                                             onClick={() => handleUpdateFromCart(product.productID)}
                                         >
-                                            <EditIcon /> {t(' ערוך מוצר ')}
+                                            <EditIcon /> {t('productPage.editProduct')}
                                         </Button>
                                     </Grid>
                                 </Grid>
@@ -468,7 +468,7 @@ export const Product = () => {
                                 color="primary"
                                 onClick={() => handleAddToCart(product)}
                             >
-                                {t('הוסף לסל ')}
+                                {t('productPage.addToCart')}
                             </Button>
                         )}
                     </Box>

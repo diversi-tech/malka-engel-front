@@ -29,12 +29,14 @@ const validateEmail = (email) => {
    return re.test(phone);
   }
 const validPasswordError = (password, password2) => {
+  setIsValid(true);
+
   if (password && !validatePassword(password)) {
     setPasswordError(t('loginPage.invalidPassword'));
     setIsValid(false);
   }
    else {setPasswordError('');
-     setIsValid(true);
+   //  setIsValid(true);
    } 
    if (password && password2 && !invalidPasswordConfirmation(password, password2)) {
     setPasswordComfirmError(t('resetPasswordCarePage.invalidPasswordConfirmation'));
@@ -42,20 +44,21 @@ const validPasswordError = (password, password2) => {
 
   }
    else {setPasswordComfirmError('');
-     setIsValid(true);
+   //  setIsValid(true);
 
    } 
    return isValid;
 }
    const validForm = (newUser) => {
-   debugger  
+    debugger
+    setIsValid(true);
    //Check email
        if (newUser.email && !validateEmail(newUser.email)) {
          setEmailError(t('loginPage.invalidEmail'));
          setIsValid(false);
        } 
        else{setEmailError(''); 
-        setIsValid(true);
+       // setIsValid(true);
 
        }
    
@@ -66,7 +69,7 @@ const validPasswordError = (password, password2) => {
 
        }
         else {setPasswordError('');
-          setIsValid(true);
+        //  setIsValid(true);
 
         } 
    //Check Phone Number
@@ -76,7 +79,7 @@ const validPasswordError = (password, password2) => {
      setIsValid(false);
     }
     else {setPhoneNumberError('');
-    setIsValid(true);
+    //setIsValid(true);
     } 
   } 
     debugger 

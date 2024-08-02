@@ -9,6 +9,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import './AccessibilityButton.css';
+import { useTranslation } from'react-i18next';
 
 const AccessibilityButton = () => {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -17,6 +18,7 @@ const AccessibilityButton = () => {
     const [isTextEnlarged, setIsTextEnlarged] = useState(false);
     const [synth] = useState(window.speechSynthesis);
     const [utterThis, setUtterThis] = useState(null);
+    const { t, i18n } = useTranslation();
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -134,19 +136,19 @@ const AccessibilityButton = () => {
                 onClose={handleClose}
             >
                 <MenuItem onClick={() => handleAccessibilityOption('textReader')}>
-                    <VisibilityIcon /> קורא טקסטים
+                    <VisibilityIcon /> {t('accessibilityButtonPage.textReader')}
                 </MenuItem>
                 <MenuItem onClick={() => handleAccessibilityOption('highlightHeadlines')}>
-                    <HighlightIcon /> הדגשת כותרות
+                    <HighlightIcon />  {t('accessibilityButtonPage.highlightTitles')}
                 </MenuItem>
                 <MenuItem onClick={() => handleAccessibilityOption('enlargeText')}>
-                    <FormatSizeIcon /> הגדלת כתב
+                    <FormatSizeIcon />  {t('accessibilityButtonPage.textEnlarger')}
                 </MenuItem>
                 <MenuItem onClick={() => handleAccessibilityOption('invertColors')}>
-                    <InvertColorsIcon /> היפוך צבעים
+                    <InvertColorsIcon />  {t('accessibilityButtonPage.colorReversal')}
                 </MenuItem>
                 <MenuItem onClick={() => handleAccessibilityOption('resetAccessibility')}>
-                    <CloseIcon /> איפוס נגישות
+                    <CloseIcon />  {t('accessibilityButtonPage.resetAccessibility')}
                 </MenuItem>
             </Menu>
         </div>
