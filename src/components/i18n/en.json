@@ -1,11 +1,11 @@
 {
     "popUpPage": {
-        "modalTitle": "Your order was successfully plased"
+        "modalTitle": "Your order was successfully placed"
     },
     "homePage": {
         "title": "Home page",
         "up":"up",
-        "information":"Welcome!!!!!<br>On our website you can choose a special design that will make your whole event jump,<br>We will design the branding for you for the most perfect event possible,<br>After all the design is a very important part, and it is impossible Lose it,<br>want to reap compliments on your event?<br>Go to the website and write to us which design style you connected with, and we will make sure to provide you with the most perfect service,<br>a useful and enjoyable experience!!!"
+        "information":"Welcome!On our website, you can choose a special design to elevate your entire event. We will create the perfect branding to ensure your event is a success. Since design is a crucial element, don’t overlook it. Want to receive compliments on your event?  Visit our website, tell us which design style you connect with, and we'll provide you with exceptional service for a truly enjoyable experience!!!"
 
     },
     "loginPage": {
@@ -18,7 +18,7 @@
         "noAccount": "Don't have an account yet? ",
         "createAccount": "Create an account",
         "forgot": "Forgot password?",
-        "errorLoging":"One of the data entered is incorrect"
+        "errorLoging":"One or more of the entered data items are incorrect."
     },
     "signUpPage": {
         "title": "Sign up",
@@ -32,7 +32,7 @@
         "invalidphoneNumber": "Invalid phone number",
         "invalidPassword": "Password should be at least 8 characters long",
         "errorMailExists":"This email account already exists in the system, please enter a new email address",
-        "massage": "You have successfully registered!\n Thanks"
+        "massage": "You have successfully registered!\n Thank You!"
     },
     "resetPasswordPage": {
         "title": "Reset Password",
@@ -57,7 +57,7 @@
     "shoppingCartPage": {
         "title": "Shopping Cart",
         "p1": "your basket is empty",
-        "inCart":"products in your cart",
+        "inCart":"Items in your cart",
         "thItem": "Item",
         "thQuantity": "Quantity",
         "thPrice": "Price",
@@ -68,7 +68,10 @@
         "clearButton": "Clear Cart",
         "addButton": "Add Item",
         "checkoutButton": "Proceed to Checkout",
-        "emptyCartMessage": "Your cart is empty.To checkout add an item to your cart"
+        "emptyCartMessage": "Your cart is empty.To checkout add an item to your cart",
+        "viewOrderHistory":"Order History",
+        "proceedToCheckout":"Proceed to checkout"
+
     },
     "footerPage": {
         "title": "Footer page",
@@ -78,43 +81,57 @@
         "linkHome": "Home",
         "linkProducts": "Products",
         "linkCart": "Cart",
-        "linkContact": "contact",
+        "linkContact": "Contact",
         "contact": "Contact Us",
         "lableEmail": "Your email address",
         "lableMessage": "Your message",
         "buttonSend": "Send",
-        "linkDesignerBirkins": "DesignerBirkins",
-        "linkCongratulationsToTheDonors": "Congratulations to the donors",
-        "linkMyAccount": "my accont",
-        "linkJoys": "joys",
-        "linkCommonQuestions": "Common questions",
-        "linkEvents": "events",
-        "linkTerms": "terms",
-        "linkLogin": "Sign in"
+        "linkDesignerBirkins": "Designer Bentchers",
+        "linkCongratulationsToTheDonors": "Donor Thank-Yous",
+        "linkMyAccount": "My Account",
+        "linkJoys": "Simchas",
+        "linkCommonQuestions": "FAQ ",
+        "linkEvents": "Events",
+        "linkTerms": "Terms",
+        "linkLogin": "Sign in",
+        "rights" : "© All rights reserved"
     },
     "navPage": {
         "linkHome": "Home",
         "linkContact": "Contact",
         "linCommonQuestions": "FAQ",
         "linkLogin": "Sign in",
-        "linkProduct": "product list",
+        "linkProduct": "Product List",
         "linkOrderForm": " Order Form",
         "linkShoppingCart": " Shopping Cart",
         "linkStayTuned": "Stay Tuned",
-        "linkDistributionRecord": "Distribution Record"
+        "linkDistributionRecord": "Distribution Record",
+        "linkCatergories" : "Catergories"
     },
   
     "productListPage":{
         "title": "product List",
         "moreDetails": "more details",
-        "cart":"add to cart",
-        "technicalIssue":"Sorry, technical issue, try to relod your page",
+        "addToCart":"Add to cart",
+        "technicalIssue":"Sorry, technical issue, try to reload your page",
         "noProducts": "no products!",
         "minPrice":"min price",
-        "maxPrice":"max price"
+        "maxPrice":"max price",
+        "removeFromCart":"Remove from cart"
     },
     "recommendedProducts": {
         "title": "recommended Products"
+    },
+    "errorPage": {
+        "backButton":"Back",
+        "message500": "Server error!",
+        "message400": "Bad request",
+        "message404": "Page not found!",
+        "message403": "You do not have authorization to access this resource.",
+        "message": "Unexpected disruption!"
+    },
+    "goBackPage": {
+        "button": "Go back"
     },
     "CommonQuestionsPage": {
         "title": "FAQ",
@@ -123,11 +140,22 @@
         "language":"EN",
         "question":"questionEn",
         "answer":"answerEn",
-        "serchTitle":"Start typing  your question..."
+        "searchTitle":"Start typing  your question..."
     },
     "productPage":{
-        "review":"review products"
+        "review":"review products",
+        "addToCart": "Add to cart",
+        "editProduct": "Edit your product",
+        "deleteFromCart": "Delete from the cart"
 
+    },
+    "productByCatergorter": {
+        "remove": "Remove from cart",
+        "addToCart": "Add to cart"
+    },
+    "wordingPage":{
+        "title": "'wording'",
+        "wording":"Type your wording..."
     },
     "profilePage":{
         "title":"Profile",
@@ -142,15 +170,18 @@
     },
     "accountPage":{
         "errCon":"You are not signed in",
-        "signIn":"Sign in"
+        "signIn":"Sign in",
+        "profile":"Profile",
+        "orderHistory": "Orders"
    },
    "OrderHistoryPage":{
     "not connect1":"Sorry, you are not connected.",
-    "not connect2":"Log in and you can see your order history",
+    "not connect2":"Log in to see your order history",
     "ordersFor":"orders for",
     "createdAt":"ordered at",
     "status":"status",
-    "totalAmount":"total amount"
+    "totalAmount":"total amount",
+    "showOrderDetails":"Order details"
    },
    "orderFormPage":{
     "pageTitle":"Order Form",
@@ -169,10 +200,44 @@
     "comments":"comments: ",
 
     "price":"Price: ",
-    "addLogo":" הוסף לוגו",
-    "selectLogo":"בחר קובץ לוגו :",
-    "fileLogo":"קובץ לוגו:",
+    "addLogo":"Add a logo",
+    "selectLogo":"Choose a logo file:",
+    "fileLogo":" Logo File:",
     "TotalPayment":"Total payment:",
     "buttonSubmitOrder":"Place order"
+   },
+   "EmailFormPage":{
+    "pageTitle":"join mailing list form",
+    "message":"Write your message...",
+    "name":"Name",
+    "emailAddress" :"Email ",
+    "error" : "We were unable to submit the data. Please check your connection to the server and try again",
+    "join" :"Join the mailing list",
+    "send" : "Send",
+    "successMessage": "you joined successfully",
+    "mailinglistMessage": "You have successfully joined the mailing list",
+    "fillField" : "Please fill in the required field",
+    "emailField" : "Please enter a valid email address"
+   },
+   "accessibilityButtonPage" :{
+    "pageTitle":"accessibility page",
+    "alert" : "Your browser does not support a text reader",
+    "textReader" : "Text Reader",
+    "highlightTitles" : "Highlight Titles",
+    "textEnlarger" : "Text Enlarger",
+    "colorReversal" : "Color Reversal",
+    "resetAccessibility" : "Reset Accessibility"
+   },
+   "reviewPage" :{
+    "reviews":"Customer product reviews",
+    "writeReview" : "Write a review for this product",
+    "noReviews" : "No available reviews for this product",
+    "globalRatings" : "Global ratings",
+    "from5Stars" : "From 5 stars"
+   },
+   "additionalCommentsPage" :{
+    "addComment":"Add additional comments to the designer",
+    "comments" : "Comments"
    }
+
 }

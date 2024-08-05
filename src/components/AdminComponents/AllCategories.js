@@ -6,7 +6,7 @@ import { Button, Modal, Form, Card, Collapse, ListGroup, Row, Col } from 'react-
 import { addProductToCategory, deleteProductInCategory, GetAllProducts, GetProductsByCategory } from '../../axios/ProductAxios';
 
 const AllCategories = () => {
-    debugger
+
     const myCategory = useSelector(c => c.DataReducer_Categry.Categorylist);
     const [data, setData] = useState([]);
     const [filteredCategories, setFilteredCategories] = useState([]);

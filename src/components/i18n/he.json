@@ -66,7 +66,10 @@
         "clearButton": "נקה עגלה ",
         "addButton": "הוסף פריט",
         "checkoutButton": "המשך לטופס  ההזמנה",
-        "emptyCartMessage": "העגלה שלך ריקה.כדי להתקדם לטופס ההזמנה הוסף פריט לעגלת הקניות "
+        "emptyCartMessage": "העגלה שלך ריקה.כדי להתקדם לטופס ההזמנה הוסף פריט לעגלת הקניות ",
+        "viewOrderHistory":"הסטוריית הזמנות",
+        "proceedToCheckout":"התקדם לתשלום "
+
     },
     "footerPage": {
         "title": " תחתית עמוד",
@@ -88,7 +91,9 @@
         "linkCommonQuestions": "שאלות נפוצות",
         "linkEvents": "אירועים",
         "linkLogin": "התחברות",
-        "linkTerms": "תקנון"
+        "linkTerms": "תקנון",
+        "rights" : " © כל הזכויות שמורות"
+
     },
     "navPage": {
         "linkHome": "דף בית",
@@ -99,19 +104,35 @@
         "linkOrderForm": "  טופס הזמנות",
         "linkShoppingCart": "סל קניות",
         "linkStayTuned": "הישארו מעודכנים",
-        "linkDistributionRecord": "רשימת תפוצה"
+        "linkDistributionRecord": "רשימת תפוצה",
+        "linkCatergories" : "קטגוריות"
+
     },
     "productListPage": {
         "title": "  רשימת מוצרים",
         "moreDetails": "פרטים נוספים",
-        "cart": "הוספה לסל",
+        "addToCart": "הוספה לסל",
         "technicalIssue": "מצטערים, תקלה טכנית, נסו לרענן את הדף או להכנס שוב מחדש",
         "noProducts": "אין מוצרים!",
         "minPrice": "מחיר מינינלי",
-        "maxPrice": "מחיר מקסימלי "
+        "maxPrice": "מחיר מקסימלי ",
+        "removeFromCart":"הסר מהסל"
+
+
     },
     "recommendedProducts": {
         "title": "מוצרים מומלצים"
+    },
+    "errorPage": {
+        "backButton":"חזרה",
+       "message500": "!שגיאת שרת",
+        "message400": "ארעה שגיאה במהלך הבקשה!",
+        "message404": "!דף לא נמצא",
+        "message403": "אין לך הרשאה לגשת למשאב זה",
+        "message": "הפרעה בלתי צפויה!"
+    },
+    "goBackPage": {
+        "button": "חזרה"
     },
     "CommonQuestionsPage": {
         "title": "שאלות נפוצות",
@@ -120,7 +141,7 @@
         "language": "HE",
         "question": "questionHe",
         "answer": "answerHe",
-        "serchTitle": "התחל להקליד את השאלה שלך..."
+        "searchTitle": "התחל להקליד את השאלה שלך..."
     },
     "orderFormPage": {
         "pageTitle":"טופס הזמנה",
@@ -145,7 +166,18 @@
         "buttonSubmitOrder": "סיים הזמנה"
     },
     "productPage": {
-        "review": "חוות דעת"
+        "review": "חוות דעת",
+        "addToCart": "הוסף לסל",
+        "editProduct": "ערוך מוצר",
+        "deleteFromCart": "הסר מהסל"
+    },
+    "productByCatergorter": {
+        "remove": "הסר מהסל",
+        "addToCart": "הוסף לסל"
+    },
+    "wordingPage":{
+        "title": "ניסוח",
+        "wording":"הקלד כאן ניסוח"
     },
     "profilePage": {
         "title": "פרופיל",
@@ -160,7 +192,9 @@
     },
     "accountPage": {
         "errCon": "אינך מחובר",
-        "signIn": "התחבר"
+        "signIn": "התחבר",
+         "profile":"פרופיל ",
+        "orderHistory": "הזמנות"
     },
     "OrderHistoryPage": {
         "not connect1": "מצטערים, אינך מחובר",
@@ -168,6 +202,42 @@
         "ordersFor": "הזמנות ל",
         "createdAt": " תאריך הזמנה",
         "status": "סטטוס",
-        "totalAmount": "סך לתשלום"
-    }
+        "totalAmount": "סך לתשלום",
+        "showOrderDetails":"הצג פרטים"
+
+    },
+    "EmailFormPage":{
+    "pageTitle":"טופס הצטרפות לרשימת התפוצה ",
+    "message":"ההודעה שלך ...",
+    "name":"שם",
+    "emailAddress" :"מייל ",
+    "error" : "לא הצלחנו להכניס את הנתונים. אנא בדוק את החיבור שלך לשרת ונסה שוב.",
+    "join" :"הצטרף לרשימת התפוצה",
+    "send" : "שלח",
+     "successMessage": "הצטרפת בהצלחה  ",
+    "mailinglistMessage": "צטרפת בהצלחה לרשימת התפוצה שלנו!",
+    "fillField" : "אנא מלא את השדה הזה",
+    "emailField" : "אנא מלא כתובת אימייל תקינה"
+   },
+   "accessibilityButtonPage" :{
+    "pageTitle":" נגישות",
+    "alert" : "הדפדפן שלך אינו תומך בקורא טקסטים",
+    "textReader" : "קורא טקסטים",
+    "highlightTitles" : "הדגשת כותרות ",
+    "textEnlarger" : "הגדלת כתב ",
+    "colorReversal" : "היפוך צבעים ",
+    "resetAccessibility" : "איפוס נגישות "
+   },
+   "reviewPage" :{
+    "reviews":" ביקורות מוצר של לקוחות",
+    "writeReview" : "כתוב ביקורת על מוצר זה",
+    "noReviews" : "אין ביקורות זמינות",
+    "globalRatings" : "דירוגים גלובלים",
+    "from5Stars" : "מתוך 5 כוכבים"
+   },
+   "additionalCommentsPage" :{
+    "addComment":"הוסף הערות נוספות למעצב ",
+    "comments" : "הערות "
+
+   }
 }

@@ -16,12 +16,10 @@ export const GetAllOrderItems = async () => {
 
 export const GetOrderItemByOrdId = async (orderId) => {
     try {
-        let result = await axios.get(`${API_BASE_URL}GetAllFAQ/${orderId}`)
-        debugger
-        return result
+        let result = await axios.get(`${API_BASE_URL}GetOrderItemByOrdId/${orderId}`)
+        return result.data
     }
     catch (ch) {
-        debugger
         console.log(ch)
     }
 }
@@ -29,11 +27,9 @@ export const GetOrderItemByOrdId = async (orderId) => {
 export const PostOrderItem = async (orderItem) => {
     try {
         let result = await axios.post(`${API_BASE_URL}PostOrderItem`, orderItem)
-        debugger
         return result
     }
     catch (ch) {
-        debugger
         console.log(ch)
     }
 }
@@ -44,8 +40,6 @@ export const PostOrderItemList = async (orderList) => {
         return result.data
     }
     catch (ch) {
-        debugger
         console.log(ch)
-        alert('i came to here!!!!');
     }
 }

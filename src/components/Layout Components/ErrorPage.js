@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 const ErrorPageContainer = styled.div`
   display: flex;
@@ -45,10 +46,11 @@ const BackButton = styled.button`
 
 export const ErrorPage = () => {
  const {code, message, back} = useParams()
+ const { t, i18n } = useTranslation();
  const navigate = useNavigate()
   const handleBack = () => {
     if(back === "back")
-    navigate(-2)
+    navigate(-1)
   else  if(back === "close")
       window.close()
    };
@@ -58,7 +60,7 @@ export const ErrorPage = () => {
       <ErrorCode>{code}</ErrorCode>
       <ErrorMessage>Error</ErrorMessage>
       <ErrorDescription>{message}</ErrorDescription>
-      <BackButton onClick={handleBack}>Go Back</BackButton>
+      <BackButton onClick={handleBack}>{t('errorPage.backButton')}</BackButton>
     </ErrorPageContainer>
   );
 };

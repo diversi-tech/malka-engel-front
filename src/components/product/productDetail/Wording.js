@@ -5,12 +5,14 @@ import 'react-quill/dist/quill.snow.css';
 import FormatBoldIcon from '@mui/icons-material/FormatBold';
 import FormatColorFillIcon from '@mui/icons-material/FormatColorFill';
 import FormatClearIcon from '@mui/icons-material/FormatClear';
+import { useTranslation } from 'react-i18next';
 
 export const Wording = ({ initialValue, setWording }) => {
     const [editorHtml, setEditorHtml] = useState(initialValue || '');
     const [isBold, setIsBold] = useState(false);
     const [isHighlighted, setIsHighlighted] = useState(false);
-
+    const { t, i18n } = useTranslation();
+    
     useEffect(() => {
         setEditorHtml(initialValue || '');
     }, [initialValue]);
@@ -63,7 +65,7 @@ export const Wording = ({ initialValue, setWording }) => {
                     </Button>
                 </Tooltip>
             </Box> */}
-            <ReactQuill ref={quillRef} value={editorHtml} onChange={handleChange} placeholder="הקלד כאן ניסוח" />
+            <ReactQuill ref={quillRef} value={editorHtml} onChange={handleChange} placeholder={t('wordingPage.wording')} />
         </Box>
     );
 };
