@@ -4,11 +4,11 @@ import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import InfoIcon from '@mui/icons-material/Info';
 import { useTranslation } from 'react-i18next';
-import { GetAllSubcategoriesByCategoryID, GetProductsByCategoryAndSubcategories } from '../../axios/ProductAxios';
+import { GetProductsByCategoryAndSubcategories } from '../../axios/ProductAxios';
 import { Box, Breadcrumbs, Button, Card, CardContent, Container, Grid, IconButton, Tooltip, Typography } from '@mui/material';
 import WatermarkedImage from './productDetail/WatermarkedImage';
 import { getCart, removeFromCart } from './cookies/SetCart';
-import { GetCategoryByCategoryId, GetUpCategoriesByCategoryID } from '../../axios/CategoryAxios';
+import { GetAllSubcategoriesByCategoryID, GetCategoryByCategoryId, GetUpCategoriesByCategoryID } from '../../axios/CategoryAxios';
 
 const ProductByCategory = () => {
     const { t, i18n } = useTranslation();

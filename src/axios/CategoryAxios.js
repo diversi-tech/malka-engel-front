@@ -6,7 +6,6 @@ const API_BASE_URL = `${process.env.REACT_APP_API_URL}/api/Categories/`
 export const GetAllCategories = async () => {
     debugger
     try {
-    //  /Categories/GetAllCategories
         const response = await axios.get(`${API_BASE_URL}GetAllCategories`);
         return response.data;
     } catch (error) {
@@ -57,6 +56,17 @@ export const GetUpCategoriesByCategoryID = async (categoryId) => {
     } catch (error) {
         alert("errrrrrrrrrrrrrrrrrrrrrrrrrr!")
         console.error('Error fetching up categories by id:', error);
+        throw error;
+    }
+}
+export const GetAllSubcategoriesByCategoryID = async (categoryId) => {
+
+    debugger
+    try {
+        const response = await axios.get(`${API_BASE_URL}GetSubcategories/${categoryId}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching subcategories by category ID:', error);
         throw error;
     }
 }

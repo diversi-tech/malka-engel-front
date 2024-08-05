@@ -21,7 +21,7 @@ export const ValidToken = async (token) => {
         'Authorization': `Bearer ${token}`
       }
     });
-    return response.data.IsValid; // Assuming backend returns { IsValid: true/false }
+    return response  //.data.IsValid; // Assuming backend returns { IsValid: true/false }
   } catch (err) {
     console.error('Token validation failed:', err);
     return false;
