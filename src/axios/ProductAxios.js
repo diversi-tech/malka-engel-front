@@ -1,4 +1,5 @@
 import axios from "axios"
+import { GetAllSubcategoriesByCategoryID } from "./CategoryAxios";
 
 const API_BASE_URL = `${process.env.REACT_APP_API_URL}/api/Product/`;
 
@@ -99,15 +100,7 @@ export const CategoriesHierarchyByProductId = async (productId) => {
     }
 };
 
-export const GetAllSubcategoriesByCategoryID = async (categoryId) => {
-    try {
-        const response = await axios.get(`${API_BASE_URL}GetSubcategories/${categoryId}`);
-        return response.data;
-    } catch (error) {
-        console.error('Error fetching subcategories by category ID:', error);
-        throw error;
-    }
-}
+
 
 
 // export const GetProductsByAllCategory = async (categoryId) => {

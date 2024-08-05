@@ -65,47 +65,6 @@ const ScrollToTopButton = styled.button`
   z-index: 1000;
 `;
 
-// const Categories = styled.section`
-//   display: flex;
-//   padding: 10px;
-//   justify-content: space-around;
-//   flex-wrap: wrap;
-// `;
-
-// const Category = styled.div`
-//   flex: 1 1 calc(33% - 20px);
-//   margin: 10px;
-//   height: 300px;
-//   background-size: cover;
-//   background-position: center;
-//   border-radius: 5px;
-//   display: flex;
-//   align-items: flex-end;
-//   justify-content: center;
-//   position: relative;
-//   overflow: hidden;
-//   cursor: pointer;
-// `;
-
-// const CategoryLink = styled.div`
-//   text-decoration: none;
-//   color: #fff;
-//   background-color: rgba(0, 0, 0, 0.5);
-//   padding: 10px;
-//   border-radius: 5px;
-//   font-size: 1.2em;
-//   z-index: 1;
-//   position: relative;
-// `;
-
-// const CategoryOverlay = styled.div`
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   width: 100%;
-//   height: 100%;
-//   z-index: 0;
-// `;
 const Categories = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -168,11 +127,7 @@ const ProductsContainer = styled.div`
   display: flex;
   transition: transform 0.5s ease-in-out;
 `;
-// const ProductImage = styled.img`
-//   width: 150px;
-//   height: auto;
-//   object-fit: cover;
-// `;
+
 const ShortInfo = styled.section`
   text-align: center;
   padding: 20px;
@@ -276,8 +231,6 @@ export const Home = () => {
           debugger
 
           setCategorysl(data);
-          // debugger
-          // alert()
           dispatch(setCategoryList(data));
         }
         catch (error) {
@@ -297,22 +250,23 @@ export const Home = () => {
       <ScrollToTopButton onClick={scrollToTop} isVisible={isVisible}>
         <FaArrowUp />
       </ScrollToTopButton>
-      <div>
-        <Categories>
-          {categories.map(category => (
-            <CategoryContainer key={category.categoryID}>
-              <CategoryCard>
-                <CategoryImage src={`${process.env.REACT_APP_API_URL}${category.imageURL}`} />
-                <CategoryOverlay>
-                  <CategoryLink onClick={() => handleCategoryClick(category.categoryID)}>
-                    {category.nameHe}
-                  </CategoryLink>
-                </CategoryOverlay>
-              </CategoryCard>
-            </CategoryContainer>
-          ))}
-        </Categories>
-      </div>
+<div>
+  <Categories>
+        {categories.filter(category => !category.upCategory || category.upCategory === 0).map(category => (
+          <CategoryContainer key={category.categoryID}>
+            <CategoryCard>
+              <CategoryImage src={`${process.env.REACT_APP_API_URL}${category.imageURL}`} />
+              <CategoryOverlay>
+                <CategoryLink onClick={() => handleCategoryClick(category.categoryID)}>
+                  {category.nameHe}
+                </CategoryLink>
+              </CategoryOverlay>
+            </CategoryCard>
+          </CategoryContainer>
+        ))}
+      </Categories>
+  </div>
+
       <RecommendedProductsSection id="recommended-products">
         <ArrowButton direction="left" onClick={() => handleArrowClick('prev')}>
           <FaArrowLeft />

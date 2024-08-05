@@ -4,14 +4,11 @@ import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import InfoIcon from '@mui/icons-material/Info';
 import { useTranslation } from 'react-i18next';
-import { GetAllProducts, GetAllSubcategoriesByCategoryID, GetProductsByCategoryAndSubcategories } from '../../axios/ProductAxios';
-import { Box, Breadcrumbs, Button, Card, CardContent, Container, Grid, IconButton, Tooltip, Typography, CircularProgress } from '@mui/material';
+import { GetProductsByCategoryAndSubcategories } from '../../axios/ProductAxios';
+import { Box, Breadcrumbs, Button, Card, CardContent, Container, Grid, IconButton, Tooltip, Typography } from '@mui/material';
 import WatermarkedImage from './productDetail/WatermarkedImage';
 import { getCart, removeFromCart } from './cookies/SetCart';
-import { GetCategoryByCategoryId } from '../../axios/CategoryAxios';
-import ErrorPage from '../Layout Components/ErrorPage';
-import { useDispatch, useSelector } from 'react-redux';
-import { setProductList, setProductListByCategory } from '../../redux/DataActions/DataAction.Product';
+import { GetAllSubcategoriesByCategoryID, GetCategoryByCategoryId, GetUpCategoriesByCategoryID } from '../../axios/CategoryAxios';
 
 const ProductByCategory = () => {
     const { t, i18n } = useTranslation();
