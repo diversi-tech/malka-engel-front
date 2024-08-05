@@ -3,12 +3,15 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import InfoIcon from '@mui/icons-material/Info';
+import ErrorPage from '../Layout Components/ErrorPage'
 import { useTranslation } from 'react-i18next';
-import { GetProductsByCategoryAndSubcategories } from '../../axios/ProductAxios';
-import { Box, Breadcrumbs, Button, Card, CardContent, Container, Grid, IconButton, Tooltip, Typography } from '@mui/material';
+import { GetAllProducts, GetProductsByCategoryAndSubcategories } from '../../axios/ProductAxios';
+import { Box, Breadcrumbs, Button, Card, CardContent, CircularProgress, Container, Grid, IconButton, Tooltip, Typography } from '@mui/material';
 import WatermarkedImage from './productDetail/WatermarkedImage';
 import { getCart, removeFromCart } from './cookies/SetCart';
 import { GetAllSubcategoriesByCategoryID, GetCategoryByCategoryId, GetUpCategoriesByCategoryID } from '../../axios/CategoryAxios';
+import { useDispatch, useSelector } from 'react-redux';
+import { setProductList, setProductListByCategory } from '../../redux/DataActions/DataAction.Product';
 
 const ProductByCategory = () => {
     const { t, i18n } = useTranslation();

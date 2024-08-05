@@ -8,7 +8,7 @@ import { StayTuned } from '../User Forms/StayTuned';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetAllCategories } from '../../axios/CategoryAxios';
 import { setCategoryList } from '../../redux/DataActions/DataAction.Category';
-import ilFlagImage from '../../assets/HomeImages/image.png';
+import ilFlagImage from '../../assets/HomeImages/לוגו.png';
 import { Card } from 'react-bootstrap';
 
 const ImageContainer1 = styled.div`
@@ -161,7 +161,6 @@ export const Home = () => {
   const [isVisible, setIsVisible] = useState(false);
   const containerRef = useRef(null);
   const navigate = useNavigate();
-  
 
   useEffect(() => {
     const topButton = () => {
@@ -245,6 +244,19 @@ export const Home = () => {
   return (
     <div className="Home">
       <ShortInfo id="short-info">
+        <ImageContainer1>
+          <img src={ilFlagImage} alt="תמונה" />
+          <TextContainer
+            dangerouslySetInnerHTML={{ __html: t('homePage.information') }}
+            style={{
+              top: '25%',
+              left: i18n.language === 'he' ? '50%' : '70%',
+              right: i18n.language === 'he' ? 'auto' : '70%',
+              transform: 'translate(-50%, -50%)',
+              textAlign: i18n.language === 'he' ? 'center' : 'right',
+            }}
+          />
+        </ImageContainer1>
       </ShortInfo>
 
       <ScrollToTopButton onClick={scrollToTop} isVisible={isVisible}>
@@ -266,7 +278,6 @@ export const Home = () => {
         ))}
       </Categories>
   </div>
-
       <RecommendedProductsSection id="recommended-products">
         <ArrowButton direction="left" onClick={() => handleArrowClick('prev')}>
           <FaArrowLeft />
