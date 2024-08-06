@@ -95,7 +95,7 @@ import { useNavigate } from 'react-router-dom';
 import useValidation from './useValidation';
 import { SendEmailToReset } from '../../axios/EmailAxios';
 import { Modal, Box, Typography, TextField, Button, CircularProgress } from '@mui/material';
-import theme from '../../createTheme'; 
+import theme from '../../createTheme';
 
 export const ResetPassword = () => {
   const { t } = useTranslation();
@@ -117,21 +117,24 @@ export const ResetPassword = () => {
   const handleClick = async () => {
     if (!validateEmail(emailRequest.toAddress)) {
       setEmailError(t('resetPasswordPage.invalidEmail'));
-    } else {
+    }
+    else {
       setEmailError('');
       setLoading(true);
       try {
-        // Send email to reset the password
         let result = await SendEmailToReset({ ToAddress: emailRequest.toAddress });
         if (result && result.status === 200) {
           setRestSec(true);
-        } else {
+        }
+         else {
           alert('Network error: ');
         }
-      } catch (error) {
+      } 
+      catch (error) {
         console.error('Error sending email:', error);
         alert('Network error: ');
-      } finally {
+      } 
+      finally {
         setLoading(false);
       }
     }

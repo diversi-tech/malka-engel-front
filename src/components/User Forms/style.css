@@ -1,0 +1,197 @@
+.frame-screen {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    height: 424px;
+    position: relative;
+    width: 423px;
+  }
+  
+  .frame-screen .frame-wrapper {
+    align-items: flex-start;
+    display: inline-flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 40px;
+    position: relative;
+  }
+  
+  .frame-screen .frame-2 {
+    align-items: flex-end;
+    display: inline-flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 32px;
+    position: relative;
+  }
+  
+  .frame-screen .frame-3 {
+    align-items: flex-end;
+    display: inline-flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  .frame-screen .text-wrapper-2 {
+    color: var(--variable-collection);
+    direction: rtl;
+    font-family: "Fb Basis-Black", Helvetica;
+    font-size: 34px;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-top: -1px;
+    position: relative;
+    width: fit-content;
+  }
+  
+  .frame-screen .p {
+    color: var(--variable-collection);
+    direction: rtl;
+    font-family: var(--h3-font-family);
+    font-size: var(--h3-font-size);
+    font-style: var(--h3-font-style);
+    font-weight: var(--h3-font-weight);
+    letter-spacing: var(--h3-letter-spacing);
+    line-height: var(--h3-line-height);
+    margin-top: -4px;
+    position: relative;
+    width: fit-content;
+  }
+  
+  .frame-screen .view {
+    background-color: unset !important;
+    border-bottom-style: solid !important;
+    border-bottom-width: 1px !important;
+    border-color: var(--variable-collection) !important;
+    border-radius: unset !important;
+    flex: 0 0 auto !important;
+  }
+  
+  .frame-screen .design-component-instance-node {
+    color: var(--variable-collection) !important;
+  }
+  
+  .frame-screen .icon-instance-node {
+    height: 24px !important;
+    position: relative !important;
+    width: 24px !important;
+  }
+  
+  .frame-screen .frame-4 {
+    align-items: center;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-color: var(--variable-collection);
+    display: flex;
+    flex: 0 0 auto;
+    gap: 11px;
+    justify-content: flex-end;
+    padding: 11px 14px;
+    position: relative;
+    width: 419px;
+  }
+  
+  .frame-screen .text-wrapper-3 {
+    color: var(--variable-collection);
+    direction: rtl;
+    font-family: var(--menu-buttons-font-family);
+    font-size: var(--menu-buttons-font-size);
+    font-style: var(--menu-buttons-font-style);
+    font-weight: var(--menu-buttons-font-weight);
+    letter-spacing: var(--menu-buttons-letter-spacing);
+    line-height: var(--menu-buttons-line-height);
+    margin-top: -1px;
+    position: relative;
+    text-align: left;
+    width: fit-content;
+  }
+  
+  .frame-screen .eye-slash {
+    height: 24px !important;
+    left: 15px !important;
+    position: absolute !important;
+    top: 12px !important;
+    width: 24px !important;
+  }
+  
+  .frame-screen .group {
+    height: 21px;
+    left: 343px;
+    position: absolute;
+    top: 233px;
+    width: 77px;
+  }
+  
+  .frame-screen .text-wrapper-4 {
+    color: var(--variable-collection);
+    direction: rtl;
+    font-family: var(--h3-font-family);
+    font-size: var(--h3-font-size);
+    font-style: var(--h3-font-style);
+    font-weight: var(--h3-font-weight);
+    left: 0;
+    letter-spacing: var(--h3-letter-spacing);
+    line-height: var(--h3-line-height);
+    position: absolute;
+    text-align: left;
+    top: 0;
+  }
+  
+  .frame-screen .rectangle-4 {
+    border-color: var(--variable-collection) !important;
+    left: 62px !important;
+    position: absolute !important;
+    top: 4px !important;
+  }
+  
+  .frame-screen .div-wrapper {
+    height: 25px;
+    left: 252px;
+    position: absolute;
+    top: 399px;
+    width: 171px;
+  }
+  
+  .frame-screen .div-2 {
+    color: #ffffff;
+    direction: rtl;
+    font-family: "Heebo-Regular", Helvetica;
+    font-size: 14px;
+    font-weight: 400;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 0;
+    width: 169px;
+  }
+  
+  .frame-screen .span {
+    color: #1e1f2f;
+    font-family: var(--h3-font-family);
+    font-size: var(--h3-font-size);
+    font-style: var(--h3-font-style);
+    font-weight: var(--h3-font-weight);
+    letter-spacing: var(--h3-letter-spacing);
+    line-height: var(--h3-line-height);
+  }
+  
+  .frame-screen .text-wrapper-5 {
+    color: #1e1f2f;
+  }
+  
+  .frame-screen .text-wrapper-6 {
+    color: #1e1f2f;
+    text-decoration: underline;
+  }
+  
+  .frame-screen .frame-61 {
+    background-color: var(--variable-collection) !important;
+    left: 0 !important;
+    position: absolute !important;
+    top: 292px !important;
+  }
+  

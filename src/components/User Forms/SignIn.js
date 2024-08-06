@@ -55,7 +55,7 @@
 //         <Typography variant="h4" gutterBottom color="primary">
 //           {t('loginPage.title')}
 //         </Typography>
-        
+
 //         <TextField
 //           label={t('loginPage.email')}
 //           type="email"
@@ -66,7 +66,7 @@
 //           error={!!emailError}
 //           helperText={emailError}
 //         />
-        
+
 //         <TextField
 //           label={t('loginPage.password')}
 //           type="password"
@@ -77,11 +77,11 @@
 //           error={!!passwordError}
 //           helperText={passwordError}
 //         />
-        
+
 //         <Link href="/myResetPassword" variant="body2" sx={{ display: 'block', mt: 1, color: 'secondary.main' }}>
 //           {t('loginPage.forgot')}
 //         </Link>
-        
+
 //         <Button
 //           variant="contained"
 //           color="primary"
@@ -91,7 +91,7 @@
 //         >
 //           {t('loginPage.loginButton')}
 //         </Button>
-        
+
 //         <Typography variant="body2" sx={{ mt: 2 }}>
 //           {t('loginPage.noAccount')}{' '}
 //           <Link href="/mySignUp" variant="body2" sx={{ color: 'secondary.main' }}>
@@ -138,23 +138,14 @@ export const Login = () => {
 
   const handleLogin = async () => {
     if (validForm(user)) {
-      //Go to DB ......
       debugger
-      let userLogin = await LoginUser({email:user.email,passwordHash: user.passwordHash});
+      let userLogin = await LoginUser({ email: user.email, passwordHash: user.passwordHash });
       if (userLogin != null && userLogin.status == 200) {
-        debugger
-        //User exists in the database
-        debugger
-        //  let current = await GetUserDetails(userLogin.data.token);
-        // dispatch(setCurrentUser(current.data));
         ConnectMe()
-        //save in cookies
-
-        //Go to last page you visited
         navigate(-1)
       }
       else if (userLogin.code === "ERR_BAD_RESPONSE")
-        setErrorLoggingIn(true); //setErrorLoginingin(true)
+        setErrorLoggingIn(true);
       else {
         alert("Network Error")
       }

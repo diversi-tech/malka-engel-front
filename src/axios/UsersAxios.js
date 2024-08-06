@@ -15,20 +15,17 @@ export const GetAllUsers = async () => {
 }
 
 export const LoginUser = async (userLogin) => {
-    debugger
     try {
         let result = await axios.post(`${API_BASE_URL}Login`, userLogin)
         localStorage.setItem('token', result.data.accessToken);
         return result
     }
-
     catch (Exception) {
         return Exception
     }
 }
 
 export const PostUser = async (user) => {
-    debugger
     try {
         let result = await axios.post(`${API_BASE_URL}PostUser`, user)
         return result
@@ -66,8 +63,6 @@ export const GetUserDetails = async () => {
 export const ResetPas = async (tokenFromUrl, pas) => {
 
     try {
-
-        debugger
         let result = await axios.put(`${API_BASE_URL}ResetPas?password=${pas}`,
             {}, {
             headers: {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Container, Grid, TextField, Button, FormControlLabel, Checkbox, Snackbar, Box, Typography } from '@mui/material';
 import MuiAlert from '@mui/material/Alert';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { PutUser } from '../../axios/UsersAxios';
 import { setCurrentUser } from '../../redux/DataActions/DataAction.Users';
 import useValidation from './useValidation';
@@ -19,6 +19,7 @@ export const Profile = () => {
   const [isChecked, setIsChecked] = useState(profileData.typeID === 2);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
+  const dispatch = useDispatch();
 
   // Custom Hook for Validation
   const { validForm, emailError, passwordError, phoneNumberError } = useValidation();
@@ -31,12 +32,12 @@ export const Profile = () => {
     if (validForm(profileData)) {
       try {
         let result = await PutUser(profileData);
-        if (result && result.status === 200) 
-          {
-          setCurrentUser(profileData);
-          ConnectMe();
+        if (result && result.status === 200) {
+
+          dispatch(setCurrentUser(profileData));
+          
           setIsEditing(false);
-        } 
+        }
         else {
           setSnackbarMessage('Network error');
           setOpenSnackbar(true);
