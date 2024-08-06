@@ -6,32 +6,70 @@ import { useNavigate } from "react-router-dom";
 import { PopUp } from "../Cart/popUp.js";
 import { sendEmails } from "../../axios/EmailAxios.js";
 import ReactDOMServer from 'react-dom/server';
-import { Container, Form, ListGroup } from "react-bootstrap"
+import {  Form, ListGroup } from "react-bootstrap"
+import { Box, Typography, Container, Paper, List, ListItem, ListItemText, Divider } from '@mui/material';
 
 export const SendEmailsForOrder = ()=>{
-
+    
     const { t, i18n } = useTranslation();
+    const currentLanguage = i18n.language === 'en' ? 'En' : 'He';
     const { currentUser, connected } = useSelector(u => u.DataReducer_Users);
     const navigate = useNavigate();
     const [currentCart, setCurrentCart] = useState(getCart());
-
-
+    const calculateTotalPrice = (products) => {
+        return products.reduce((total, product) => total + (product.salePrice !== 0 ? product.salePrice : product.price), 0);
+    };
+    const showByHtmlTags = (htmlString) => {
+        debugger
+        if (htmlString.startsWith('"') && htmlString.endsWith('"')) 
+            htmlString = htmlString.slice(1, -1);
+        return <span dangerouslySetInnerHTML={{ __html: htmlString }} />;
+    };
     const sendEmailsToCustomer = async(orderidToAdd) => {
-        const myHTML = (<div >
-        <h1>תודה על הזמנתך # {orderidToAdd}</h1>
-         <ListGroup>
-        {currentCart.map(product => (
-            <ListGroup.Item key={product.productID}>
-                <p> <strong>{t('orderFormPage.nameTitle')} </strong> {product[t('orderFormPage.nameProduct')]}
-                <strong> {t('orderFormPage.descriptionTitle')} </strong>{product[t('orderFormPage.descriptionProduct')]}
-                    <strong> {t('orderFormPage.wording')} </strong>{product.wording}
-                    <strong> {t('orderFormPage.comments')} </strong>{product.comment}
-        
-                    <strong>{t('orderFormPage.price')} </strong> {product.salePrice != 0 ? product.salePrice : product.price}</p>
-            </ListGroup.Item>
-        ))}
-        </ListGroup> 
-        </div>
+        const myHTML = ( <Container sx={{ mt: 5 }}>
+            <Paper elevation={3} sx={{ p: 3 }}>
+                <Typography variant="h4" gutterBottom>
+                <h1>תודה על הזמנתך # {orderidToAdd}</h1>
+                </Typography>
+                <List>
+                    <ListItem>
+                        <ListItemText
+                            primary={<strong>{t('orderFormPage.customerInfo')}</strong>}
+                            secondary={
+                                <span>
+                                    <b>{t('orderFormPage.name')}: </b>{currentUser.name} <br />
+                                    <b>{t('orderFormPage.email')}: </b>{currentUser.email} <br />
+                                    <b>{t('orderFormPage.phoneNumber')}: </b>{currentUser.phoneNumber}
+                                </span>
+                            }
+                        />
+                    </ListItem>
+                    <Divider />
+                    {currentCart.map(product => (
+                        <ListItem key={product.productID}>
+                            <ListItemText
+                                primary={
+                                    <span style={{ whiteSpace: 'nowrap' }}>
+                                        <b>{t('orderFormPage.nameTitle')}: </b> {product[`name${currentLanguage}`]} <br />
+                                        <b>{t('orderFormPage.descriptionTitle')}: </b>{product[`description${currentLanguage}`]}<br />
+                                        <b>{t('orderFormPage.wording')}:</b> {showByHtmlTags(product.wording)}
+                                        <b>{t('orderFormPage.comments')}: </b>{product.additionalComments} <br />
+                                        <b>{t('orderFormPage.price')}: </b>{product.salePrice !== 0 ? product.salePrice : product.price}
+                                    </span>
+                                }
+                            />
+                        </ListItem>
+                    ))}
+                    <Divider />
+                    <ListItem>
+                        <ListItemText
+                            primary={<strong>{t('orderFormPage.totalPayment')}</strong>}
+                            secondary={calculateTotalPrice(currentCart)}
+                        />
+                    </ListItem>
+                </List>
+            </Paper>
+        </Container>
         )  
         // setEmailToCust({...emailToCust, ToAddress:"sr6737543@gmail.com"})
         const emailToCust = {

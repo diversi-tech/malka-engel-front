@@ -35,7 +35,7 @@ export const Account = () => {
                     <Grid item xs={12} md={6}>
                         <Paper elevation={3} sx={{ p: 4, backgroundColor: '#f9f9f9' }}>
                             <Typography variant="h5" gutterBottom sx={{ color: 'RoyalPurple' }}>
-                                {t('accountPage.profile')}
+                              {/* //  {t('accountPage.profile')} */}
                             </Typography>
                             <Profile />
                         </Paper>

@@ -22,6 +22,8 @@ export const ResetPasTakeCare = () => {
 
   const handleClose = () => { window.close(); };
 
+
+
   const validToken = async () => {
     debugger
     const result = await ValidToken(token)
@@ -31,6 +33,8 @@ export const ResetPasTakeCare = () => {
       navigate(`/myErrorPage/${404}/${"דף לא נמצא"}/${"close"}`)
     }
   }
+
+
   const handleClick = async () => {
     if (validPasswordError(pas.password1, pas.password2)) {
       let result = await ResetPas(token, pas.password1)
@@ -38,10 +42,12 @@ export const ResetPasTakeCare = () => {
         setRestSec(true)
       }
       else
-      navigate(`/myErrorPage/${400}/${"  איפוס סיסמא נכשל נסה שוב"}/${"back"}`)
+        navigate(`/myErrorPage/${400}/${"  איפוס סיסמא נכשל נסה שוב"}/${"back"}`)
     }
   }
 
+
+  
   const style3 = {
     ' width': '100%',
     ' height': '700px',

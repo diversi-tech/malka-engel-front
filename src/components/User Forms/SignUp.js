@@ -35,7 +35,7 @@
 
 //   // Function to handle Register
 //   const handleRegister = async () => {
-    
+
 //     if (validForm(newUser)) {
 //       setLoading(true);
 //       try {
@@ -190,31 +190,32 @@ const SignUp = () => {
 
   const handleClose = () => { navigate(-2); };
 
-  // Function to handle Register
+  
   const handleRegister = async () => {
     if (validForm(newUser)) {
       setLoading(true);
       try {
-        // Set user type
         newUser.typeID = newUser.typeID === 2 ? 2 : 1;
-
-        // Post new user
         const postUser = await PostUser(newUser);
         if (postUser && postUser.status === 200) {
           debugger
-          const userLogin = await LoginUser({email:newUser.email,passwordHash: newUser.passwordHash});
+          const userLogin = await LoginUser({ email: newUser.email, passwordHash: newUser.passwordHash });
           if (userLogin && userLogin.status === 200) {
             ConnectMe();
             setSignsec(true);
-          } else {
+          } 
+          else {
             setErrorMailExists(true);
           }
-        } else {
+        }
+        else {
           setErrorMailExists(true);
         }
-      } catch (error) {
+      }
+      catch (error) {
         console.error('Error during registration:', error);
-      } finally {
+      }
+      finally {
         setLoading(false);
       }
     }

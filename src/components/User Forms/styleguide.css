@@ -1,0 +1,29 @@
+:root {
+    ---font-family: "Heebo", Helvetica;
+    ---font-size: 16px;
+    ---font-style: normal;
+    ---font-weight: 400;
+    ---letter-spacing: 0px;
+    ---line-height: 160.0000023841858%;
+    --22-font-family: "Heebo", Helvetica;
+    --22-font-size: 22px;
+    --22-font-style: normal;
+    --22-font-weight: 400;
+    --22-letter-spacing: 0px;
+    --22-line-height: 160.0000023841858%;
+    --h3-font-family: "Heebo", Helvetica;
+    --h3-font-size: 14px;
+    --h3-font-style: normal;
+    --h3-font-weight: 400;
+    --h3-letter-spacing: 0px;
+    --h3-line-height: normal;
+    --menu-buttons-font-family: "Heebo", Helvetica;
+    --menu-buttons-font-size: 18px;
+    --menu-buttons-font-style: normal;
+    --menu-buttons-font-weight: 400;
+    --menu-buttons-letter-spacing: 0px;
+    --menu-buttons-line-height: normal;
+    --show-icon: rgba(239, 239, 239, 1);
+    --variable-collection: rgba(101, 185, 177, 1);
+  }
+  
