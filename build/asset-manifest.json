@@ -1,22 +1,21 @@
 {
   "files": {
     "main.css": "/malka-engel-front/static/css/main.57a0a653.css",
-    "main.js": "/malka-engel-front/static/js/main.8df2a220.js",
+    "main.js": "/malka-engel-front/static/js/main.9949106e.js",
     "static/js/213.1d0fd39e.chunk.js": "/malka-engel-front/static/js/213.1d0fd39e.chunk.js",
     "static/js/455.6decd57d.chunk.js": "/malka-engel-front/static/js/455.6decd57d.chunk.js",
     "static/js/453.f549b08d.chunk.js": "/malka-engel-front/static/js/453.f549b08d.chunk.js",
-    "static/media/image.png": "/malka-engel-front/static/media/image.a0856626ea77376e5b0d.png",
     "static/media/us_flag.png": "/malka-engel-front/static/media/us_flag.17fce3e15ce689f42251.png",
     "static/media/il_flag.png": "/malka-engel-front/static/media/il_flag.ab6d675b67fd45a05b65.png",
     "index.html": "/malka-engel-front/index.html",
     "main.57a0a653.css.map": "/malka-engel-front/static/css/main.57a0a653.css.map",
-    "main.8df2a220.js.map": "/malka-engel-front/static/js/main.8df2a220.js.map",
+    "main.9949106e.js.map": "/malka-engel-front/static/js/main.9949106e.js.map",
     "213.1d0fd39e.chunk.js.map": "/malka-engel-front/static/js/213.1d0fd39e.chunk.js.map",
     "455.6decd57d.chunk.js.map": "/malka-engel-front/static/js/455.6decd57d.chunk.js.map",
     "453.f549b08d.chunk.js.map": "/malka-engel-front/static/js/453.f549b08d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.57a0a653.css",
-    "static/js/main.8df2a220.js"
+    "static/js/main.9949106e.js"
   ]
 }
