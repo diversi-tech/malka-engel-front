@@ -1,18 +1,30 @@
-//עמוד זה- המנהל שולח מייל עם או בלי קבצים עבור  כתובת אחת
-import React, { useState } from 'react';
-import { Container, Form, Button,Modal } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Container, Form, Button, Modal } from 'react-bootstrap';
 import { sendEmails } from '../../axios/EmailAxios';
 
-export const SeEmails = () => {
+export const SeEmails = ({ emailData = {} }) => {
   const [newE, setNewE] = useState({
     Greeting: '',
     ToAddress: '',
     Subject: '',
     Body: '',
     Attachments: [],
-    // EmailList:null
   });
+
+  useEffect(() => {
+    if (Object.keys(emailData).length !== 0) {
+      setNewE({
+        Greeting: emailData.Greeting || '',
+        ToAddress: emailData.ToAddress || '',
+        Subject: emailData.Subject || '',
+        Body: emailData.Body || '',
+        Attachments: emailData.Attachments || [],
+      });
+    }
+  }, [emailData]);
+
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { Greeting, ToAddress, Subject, Body, Attachments } = newE;
@@ -21,9 +33,9 @@ export const SeEmails = () => {
     } catch (error) {
       console.error('Error sending email:', error);
     }
-    setShowSuccessModal(true); // Show success modal
+    setShowSuccessModal(true);
     setTimeout(() => {
-      setShowSuccessModal(false); // Close the modal after 2 seconds
+      setShowSuccessModal(false);
     }, 2000);
   };
 
@@ -68,7 +80,6 @@ export const SeEmails = () => {
           <Form.Control
             type="text"
             name="Greeting"
-            // placeholder="Greeting"
             value={newE.Greeting}
             onChange={handleChange}
           />
@@ -78,37 +89,35 @@ export const SeEmails = () => {
           <Form.Control
             type="email"
             name="ToAddress"
-            // placeholder="To Address"
             value={newE.ToAddress}
             onChange={handleChange}
-          required/>
+            required
+          />
         </Form.Group>
         <Form.Group controlId="formSubject">
           <Form.Label>נושא</Form.Label>
           <Form.Control
             type="text"
             name="Subject"
-            // placeholder="Subject"
             value={newE.Subject}
             onChange={handleChange}
             required
           />
         </Form.Group>
         <Form.Group controlId="formBody">
-          <Form.Label> הודעה</Form.Label>
+          <Form.Label>הודעה</Form.Label>
           <Form.Control
             as="textarea"
             name="Body"
-            // placeholder="Body"
             value={newE.Body}
             onChange={handleChange}
             required
           />
         </Form.Group>
-        {newE.Attachments.map((file, index) => (
+        {newE.Attachments && newE.Attachments.map((file, index) => ( // הוספת בדיקת newE.Attachments
           <div key={index}>
             <Form.Group controlId={`formAttachments${index}`}>
-              <Form.Label>קבצים </Form.Label>
+              <Form.Label>קבצים</Form.Label>
               <div className="d-flex align-items-center">
                 <Form.Control
                   type="file"
@@ -137,4 +146,5 @@ export const SeEmails = () => {
     </Container>
   );
 };
+
 export default SeEmails;

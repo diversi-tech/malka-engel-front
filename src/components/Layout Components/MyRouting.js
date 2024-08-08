@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
 import { Footer } from "./Footer.js";
 import { Contact } from "../User/Contact.js";
 import { DesignerBirkins } from "../Empty pages/DesignerBentcherss.js";
@@ -60,7 +60,7 @@ export const MyRouting = () => {
   
 
     return (
-        <BrowserRouter>
+        <HashRouter>
             <ScrollToTop></ScrollToTop>
             <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
                 <Nav></Nav>
@@ -139,7 +139,7 @@ export const MyRouting = () => {
                 {/* <Route path="/myRegister" element={<RegistrationForm />} /> */}
                 {/* </AuthProvider> */}
             </div>
-        </BrowserRouter>
+        </HashRouter>
     );
 }
 export default MyRouting;
