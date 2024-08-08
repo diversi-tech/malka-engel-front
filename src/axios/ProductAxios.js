@@ -13,18 +13,20 @@ export const GetAllProducts = async () => {
     }
 }
 
-export const GetProById = async (language) => {
+//לא בשימוש ניתן למחוק???
+// export const GetProById = async (language) => {
    
-    try {
-        let result = await axios.get(`${API_BASE_URL}GetProById?Language=${language}`)
-        return result.data
-    }
-    catch (ch) {
-        console.log(ch)
-    }
-}
+//     try {
+//         let result = await axios.get(`${API_BASE_URL}GetProById?Language=${language}`)
+//         return result.data
+//     }
+//     catch (ch) {
+//         console.log(ch)
+//     }
+// }
 
 export const PostProduct = async (productForm) => {
+    
     try {
         let result = await axios.post(`${API_BASE_URL}PostProduct`, productForm)
      
@@ -45,16 +47,16 @@ export const PutProduct = async (id, product) => {
         console.log(ch)
     }
 }
-
-export const GetRecommendedProducts = async () => {
-    try {
-        let result = await axios.get(`${API_BASE_URL}GetRecommendedProducts`)
-        return result.data
-    }
-    catch (ch) {
-        console.log(ch)
-    }
-}
+//לא בשימוש ניתן למחוק???
+// export const GetRecommendedProducts = async () => {
+//     try {
+//         let result = await axios.get(`${API_BASE_URL}GetRecommendedProducts`)
+//         return result.data
+//     }
+//     catch (ch) {
+//         console.log(ch)
+//     }
+// }
 
 export const GetProductsByCategory = async (categoryId) => {
     try {

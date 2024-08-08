@@ -8,38 +8,80 @@ import { getCart } from '../product/cookies/SetCart';
 import { ListGroup } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import ReactDOMServer from 'react-dom/server';
+import { Box, Typography, Container, Paper, List, ListItem, ListItemText, Divider } from '@mui/material';
 
 const PdfGenerator = (orderidToAdd) => {
     const { t, i18n } = useTranslation();
 const navigate = useNavigate()
 
+const currentLanguage = 'He';
+
 const { currentUser, connected } = useSelector(u => u.DataReducer_Users);
 const [currentCart, setCurrentCart] = useState(getCart());
-    
-
+const calculateTotalPrice = (products) => {
+    return products.reduce((total, product) => total + (product.salePrice !== 0 ? product.salePrice : product.price), 0);
+};   
+const showByHtmlTags = (htmlString) => {
+    debugger
+    if (htmlString.startsWith('"') && htmlString.endsWith('"')) 
+        htmlString = htmlString.slice(1, -1);
+    return <span dangerouslySetInnerHTML={{ __html: htmlString }} />;
+};
     // Function to generate PDF from HTML content
-    const generatePDFHtml = async (orderidToAdd) => {
-        const htmlContent = `
-        <div style="padding: 20px; background-color: #F249CB;">
-            <h1>${orderidToAdd} הזמנה מספר:</h1>
-            <h4>פרטי לקוח:</h4>
-                 
-                 <p> <b>Name: </b>${currentUser.name} <b>Email:</b> ${currentUser.email} <b>PhoneNumber: </b>${currentUser.phoneNumber} </p>
-              
-            <ul>
-                ${currentCart.map(product => `
-                    <li key="${product.productID}">
-                        <p>
-                            <strong>${t('orderFormPage.nameTitle')}</strong> ${product[t('orderFormPage.nameProduct')]}
-                            <strong>${t('orderFormPage.descriptionTitle')}</strong> ${product[t('orderFormPage.descriptionProduct')]}
-                            <strong>${t('orderFormPage.wording')}</strong> ${product.wording}
-                            <strong>${t('orderFormPage.comments')}</strong> ${product.comment}
-                            <strong>${t('orderFormPage.price')}</strong> ${product.salePrice !== 0 ? product.salePrice : product.price}
-                        </p>
-                    </li>`).join('')}
-            </ul>
-        </div>`;
-
+    const generatePDFHtml = async (orderidToAdd, order) => {
+        const htmlContent =(
+            <Container sx={{ mt: 5 }}>
+            <Paper elevation={3} sx={{ p: 3 }} >
+                <Typography variant="h4" gutterBottom>
+                <h3>הזמנה חדשה</h3>
+                <h4>הזמנה חדשה מס'  {orderidToAdd} </h4>
+                </Typography>
+                <List>
+                    <ListItem>
+                        <ListItemText
+                            primary={<strong> פרטי לקוח:</strong>}
+                            secondary={
+                                <span>
+                                    <b>{t('orderFormPage.name')}: </b>{currentUser.name} <br />
+                                    <b>{t('orderFormPage.email')}: </b>{currentUser.email} <br />
+                                    <b>{t('orderFormPage.phoneNumber')}: </b>{currentUser.phoneNumber}
+                                </span>
+                            }
+                        />
+                    </ListItem >              
+                    <strong>המוצרים שהוזמנו- - </strong>   
+                                  
+                    <Divider />
+                    {currentCart.map(product => (
+                        <ListItem key={product.productID}>
+                            <ListItemText
+                                primary={
+                                    <span style={{ whiteSpace: 'nowrap' }}>
+                                        <b>{t('orderFormPage.nameTitle')}: </b> {product[`name${currentLanguage}`]} <br />
+                                        <b>{t('orderFormPage.descriptionTitle')}: </b>{product[`description${currentLanguage}`]}<br />
+                                        <b>{t('orderFormPage.wording')}:</b> {showByHtmlTags(product.wording)}
+                                        <b>{t('orderFormPage.comments')}: </b>{product.additionalComments} <br />
+                                        <b>{t('orderFormPage.price')}: </b>{product.salePrice !== 0 ? product.salePrice : product.price}
+                                    </span>
+                                }
+                            />
+                        </ListItem>
+                    ))}
+                    <Divider />
+                    <ListItem>
+                        <ListItemText
+                            primary={<strong>{t('orderFormPage.totalPayment')}</strong>}
+                            secondary={calculateTotalPrice(currentCart)}
+                        />
+                        <ListItemText
+                            primary={<strong>הערות לקוח:</strong>}
+                            secondary={order.Comment}
+                        />
+                    </ListItem>
+                </List>
+            </Paper>
+        </Container>
+        )
         const tempDiv = document.createElement('div');
         tempDiv.style.position = 'absolute';
         tempDiv.style.top = '-9999px';
@@ -57,17 +99,17 @@ const [currentCart, setCurrentCart] = useState(getCart());
    
 
        const pdfBlob = pdf.output('blob')
-      sendEmailsToAdmin( pdfBlob, orderidToAdd, htmlContent) 
+      sendEmailsToAdmin( pdfBlob, orderidToAdd, htmlContent, order) 
     }
  
 
 
-    const sendEmailsToAdmin = async(pdf, orderidToAdd, htmlContent) => {
+    const sendEmailsToAdmin = async(pdf, orderidToAdd, htmlContent, order) => {
         const emailToAdmin = {
             Greeting: '',
             ToAddress: "d32193412@gmail.com",
-            Subject: 'הזמנה חדשה התקבלה #' +orderidToAdd,
-             Body:  htmlContent,         
+            Subject:`הזמנה חדשה התקבלה # ${orderidToAdd} מתאריך: ${new Date().toLocaleDateString()} `,
+             Body: ReactDOMServer.renderToStaticMarkup(htmlContent),
             IsBodyHtml: true,
             Attachments: [pdf],
         };

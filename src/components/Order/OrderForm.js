@@ -20,7 +20,6 @@ export const OrderForm = () => {
         return products.reduce((total, product) => total + (product.salePrice !== 0 ? product.salePrice : product.price), 0);
     };
     const showByHtmlTags = (htmlString) => {
-        debugger
         if (htmlString.startsWith('"') && htmlString.endsWith('"')) 
             htmlString = htmlString.slice(1, -1);
         return <span dangerouslySetInnerHTML={{ __html: htmlString }} />;

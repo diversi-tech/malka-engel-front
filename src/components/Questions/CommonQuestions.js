@@ -92,9 +92,9 @@ export const CommonQuestions = () => {
                   <Typography variant="body2">
                     {item[t('CommonQuestionsPage.answer')]}
                   </Typography>
-                  <Typography variant="caption" color="textSecondary" sx={{ mt: 1 }}>
+                  {/* <Typography variant="caption" color="textSecondary" sx={{ mt: 1 }}>
                     {item.rating}
-                  </Typography>
+                  </Typography> */}
                 </Box>
               </Collapse>
             </CardContent>

@@ -62,9 +62,8 @@ export const Checkout = () => {
                 });
                 const result = await PostOrderItemList(listItemOrder);
                 if (result) {
-                    debugger
-                    generatePDFHtml(orderidToAdd)
-                    sendEmailsToCustomer(orderidToAdd)
+                    generatePDFHtml(orderidToAdd, order)
+                    sendEmailsToCustomer(orderidToAdd, order)
                     clearCart();
                 }
             }

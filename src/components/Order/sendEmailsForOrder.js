@@ -25,16 +25,17 @@ export const SendEmailsForOrder = ()=>{
             htmlString = htmlString.slice(1, -1);
         return <span dangerouslySetInnerHTML={{ __html: htmlString }} />;
     };
-    const sendEmailsToCustomer = async(orderidToAdd) => {
+    const sendEmailsToCustomer = async(orderidToAdd, order) => {
         const myHTML = ( <Container sx={{ mt: 5 }}>
-            <Paper elevation={3} sx={{ p: 3 }}>
+            <Paper elevation={3} sx={{ p: 3 }} >
                 <Typography variant="h4" gutterBottom>
-                <h1>תודה על הזמנתך # {orderidToAdd}</h1>
+                <h3>תודה על הזמנתך</h3>
+                <h4> היי {currentUser.name} , רק רצינו ליידע אותך שקיבלנו את הזמנתך מס' {orderidToAdd} והיא כעת בביצוע </h4>
                 </Typography>
                 <List>
                     <ListItem>
                         <ListItemText
-                            primary={<strong>{t('orderFormPage.customerInfo')}</strong>}
+                            primary={<strong>הפרטים שלך ששמורים אצלינו:</strong>}
                             secondary={
                                 <span>
                                     <b>{t('orderFormPage.name')}: </b>{currentUser.name} <br />
@@ -43,7 +44,9 @@ export const SendEmailsForOrder = ()=>{
                                 </span>
                             }
                         />
-                    </ListItem>
+                    </ListItem >              
+                    <strong>המוצרים שהזמנת- - </strong>   
+                                  
                     <Divider />
                     {currentCart.map(product => (
                         <ListItem key={product.productID}>
@@ -66,6 +69,10 @@ export const SendEmailsForOrder = ()=>{
                             primary={<strong>{t('orderFormPage.totalPayment')}</strong>}
                             secondary={calculateTotalPrice(currentCart)}
                         />
+                        <ListItemText
+                            primary={<strong>הערות שלך:</strong>}
+                            secondary={order.Comment}
+                        />
                     </ListItem>
                 </List>
             </Paper>
@@ -75,7 +82,7 @@ export const SendEmailsForOrder = ()=>{
         const emailToCust = {
             Greeting: '',
             ToAddress: currentUser.email,
-            Subject: `הזמנתך בוצעה בהצלחה הזמנה מספר  ${orderidToAdd}` ,
+            Subject: `הזמנתך מתאריך ${new Date().getDay()}/${new Date().toLocaleDateString()}   בוצעה בהצלחה. הזמנה מספר  ${orderidToAdd}` ,
             Body: ReactDOMServer.renderToStaticMarkup(myHTML),         
             IsBodyHtml: true,
             Attachments: [],
