@@ -1,7 +1,7 @@
 {
   "name": "malka-engel-front",
   "version": "0.1.0",
-  "homepage": "https://diversi-tech.github.io/malka-engel-front",
+  "homepage": "http://engel.diversitech.co.il/",
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.14.5",
