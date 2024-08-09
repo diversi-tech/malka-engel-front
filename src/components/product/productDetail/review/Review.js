@@ -158,7 +158,6 @@ export const Review = ({ productId }) => {
                 onClick={navigateToReviewForm}
                 sx={{ mt: 2, mb: 1, fontWeight: 'bold' }}
               >{t('reviewPage.writeReview')}
-              >
               </Button>
             </CardContent>
           </Card>

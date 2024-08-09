@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Button, Card, CardContent, Grid, TextareaAutosize, Typography, Box, IconButton, Snackbar } from '@mui/material';
+import { Button, Card, CardContent, Grid, TextareaAutosize, Typography, Box, IconButton, Dialog, DialogActions, DialogContent, DialogTitle, CircularProgress } from '@mui/material';
 import { Star, StarBorder } from '@mui/icons-material';
-import MuiAlert from '@mui/material/Alert';
 import { AddReviewFunc } from '../../../../axios/ReviewsAxios';
 import { useTranslation } from 'react-i18next';
-
-const Alert = (props) => <MuiAlert elevation={6} variant="filled" {...props} />;
 
 const StarRating = ({ rating, setRating }) => {
   const [hover, setHover] = useState(0);
@@ -34,18 +31,20 @@ const StarRating = ({ rating, setRating }) => {
 };
 
 export const AddReview = () => {
-  const {productId} = useParams()
+  const { productId } = useParams();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { currentUser, connected } = useSelector((u) => u.DataReducer_Users);
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState(0);
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState('');
-  const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogMessage, setDialogMessage] = useState('');
+  const [dialogSeverity, setDialogSeverity] = useState('success');
+  const [loading, setLoading] = useState(false);
 
   const sendYourReview = async () => {
     if (connected) {
+      setLoading(true); // Start loading
       const review = {
         reviewID: 0,
         productID: productId,
@@ -56,22 +55,21 @@ export const AddReview = () => {
       };
       try {
         const response = await AddReviewFunc(review);
-        if (response == !true) {
-          alert("success");
-          //setSnackbarMessage(t('Review sent successfully!'));
-          //setSnackbarSeverity('success');
+        if (response === true) {
+          setDialogMessage(t('Review sent successfully!'));
+          setDialogSeverity('success');
         } else {
-          alert("failed");
-          //setSnackbarMessage(t('Failed to send review. Please try again later.'));
-          //setSnackbarSeverity('error');
+          setDialogMessage(t('Failed to send review. Please try again later.'));
+          setDialogSeverity('error');
         }
       } catch (error) {
-        alert("error");
-        //setSnackbarMessage(t('Failed to send review. Please try again later.'));
-        //setSnackbarSeverity('error');
+        setDialogMessage(t('Failed to send review. Please try again later.'));
+        setDialogSeverity('error');
+      } finally {
+        setLoading(false); // End loading
+        setDialogOpen(true);
+        navigate(-1);
       }
-      //setSnackbarOpen(true);
-      navigate(-1);
     } else {
       navigate('/myLogin');
     }
@@ -102,26 +100,29 @@ export const AddReview = () => {
             color="primary"
             sx={{ mt: 2 }}
             onClick={sendYourReview}
+            disabled={loading} // Disable the button while loading
           >
-            {t('Submit')}
+            {loading ? <CircularProgress size={24} color="inherit" /> : t('Submit')}
           </Button>
         </CardContent>
       </Card>
 
-      {/* <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={6000}
-        onClose={() => setSnackbarOpen(false)}
-        action={
-          <Button color="inherit" onClick={() => setSnackbarOpen(false)}>
-            Close
-          </Button>
-        }
+      <Dialog
+        open={dialogOpen}
+        onClose={() => setDialogOpen(false)}
       >
-        <Alert onClose={() => setSnackbarOpen(false)} severity={snackbarSeverity}>
-          {snackbarMessage}
-        </Alert>
-      </Snackbar> */}
+        <DialogTitle>{dialogSeverity === 'success' ? t('Success') : t('Error')}</DialogTitle>
+        <DialogContent>
+          <Typography variant="body1">{dialogMessage}</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setDialogOpen(false)} color="primary">
+            {t('Close')}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Grid>
   );
 };
+
+export default AddReview;
