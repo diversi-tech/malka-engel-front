@@ -53,7 +53,7 @@ export const CartDisplay = () => {
               <Grid container spacing={2} alignItems="center">
                 <Grid item xs={3}>
                   <img
-                    src={`${process.env.REACT_APP_API_URL}${product.imageURL}`}
+                    src={`${product.imageURL}`}
                     alt={product[`name${currentLanguage}`]}
                     style={{ width: '100%' }}
                   />

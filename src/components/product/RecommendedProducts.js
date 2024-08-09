@@ -75,7 +75,7 @@ export const RecommendedProducts = () => {
                 <div style={{ overflow: 'hidden', position: 'relative' }}>
                   <Card.Img
                     variant="top"
-                    src={`https://localhost:7297${product.imageURL}`}
+                    src={product.imageURL} 
                     alt={product.name}
                     style={{
                       height: '250px',

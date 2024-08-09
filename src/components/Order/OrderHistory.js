@@ -101,6 +101,7 @@ export const OrderHistory = ({ connect }) => {
   }, [connected, currentUser]);
 
   const fetchOrders = async (userId) => {
+    console.log("i came here i need to give you your orders!")
     try {
       const response = await GetOrderByUserId(userId);
       setOrders(response.data);

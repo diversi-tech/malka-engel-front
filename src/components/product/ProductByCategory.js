@@ -37,12 +37,21 @@ const ProductByCategory = () => {
                     GetCategoryByCategoryId(idCategory),
                     GetAllSubcategoriesByCategoryID(idCategory),
                 ]);
-                dispatch(setProductListByCategory([]));
+                //dispatch(setProductListByCategory([]));
                 setCategory(categoryResponse);
-                setProducts(productsResponse);
                 setSubCategories(subcategoriesResponse);
                 setCategoryProducts(categoryProductsResponse);
-                dispatch(setProductListByCategory(categoryProductsResponse), setProductList(productsResponse));
+                dispatch(setProductList(productsResponse));
+            } else {
+                const [categoryProductsResponse, categoryResponse, subcategoriesResponse] = await Promise.all([
+                    GetProductsByCategoryAndSubcategories(idCategory),
+                    GetCategoryByCategoryId(idCategory),
+                    GetAllSubcategoriesByCategoryID(idCategory),
+                ]);
+                //dispatch(setProductListByCategory([]));
+                setCategory(categoryResponse);
+                setSubCategories(subcategoriesResponse);
+                setCategoryProducts(categoryProductsResponse);
             }
         } catch (error) {
             console.error("Error fetching data:", error);
@@ -154,7 +163,7 @@ const ProductByCategory = () => {
                                                 transition: 'transform 0.3s',
                                                 ':hover': { transform: 'scale(1.1)' }
                                             }}
-                                            imageUrl={`${process.env.REACT_APP_API_URL}${product.imageURL}`}
+                                            imageUrl={`${product.imageURL}`}
                                             watermarkText='malka engel'
                                             style={{
                                                 width: '100%',

@@ -267,7 +267,7 @@ export const Home = () => {
         {categories.filter(category => !category.upCategory || category.upCategory === 0).map(category => (
           <CategoryContainer key={category.categoryID}>
             <CategoryCard>
-              <CategoryImage src={`${process.env.REACT_APP_API_URL}${category.imageURL}`} />
+              <CategoryImage src={`${category.imageURL}`} />
               <CategoryOverlay>
                 <CategoryLink onClick={() => handleCategoryClick(category.categoryID)}>
                   {category.nameHe}

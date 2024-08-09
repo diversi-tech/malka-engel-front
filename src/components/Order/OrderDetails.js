@@ -25,6 +25,7 @@ import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 export const OrderDetails = () => {
+  debugger
   const { orderId } = useParams();
   const [order, setOrder] = useState(null);
   const [orderItems, setOrderItems] = useState(null);
@@ -40,7 +41,9 @@ export const OrderDetails = () => {
   const currentLanguage = i18n.language === 'en' ? 'En' : 'He';
 
   useEffect(() => {
+    debugger
     const fetchOrderDetails = async () => {
+      debugger
       try {
         let fetchedProducts = productsList;
         if (productsList.length === 0) {

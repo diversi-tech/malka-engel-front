@@ -25,28 +25,51 @@ export const GetAllProducts = async () => {
 //     }
 // }
 
-export const PostProduct = async (productForm) => {
-    
+export const PutProduct = async (formData) => {
     try {
-        let result = await axios.post(`${API_BASE_URL}PostProduct`, productForm)
-     
-        return result;
+        const result = await axios.put(`${API_BASE_URL}PutProduct`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        return result.data;
+    } catch (error) {
+        console.error('Error updating product:', error);
+        throw error;
     }
-    catch (ch) {
-        console.log(ch)
-    }
-}
+};
 
-export const PutProduct = async (id, product) => {
-    try { debugger
-        let result = await axios.put(`${API_BASE_URL}PutProduct/${id}`, product)
-        debugger
-        return result.data
+
+
+export const PostProduct = async ({ IsRecommended, image, SalePrice, Price, DescriptionEn, DescriptionHe, NameEn, NameHe, ProductID, ImageURL, CreatedAt }) => {
+    try {
+    const formData = new FormData();
+    formData.append('IsRecommended', IsRecommended || '');
+    formData.append('image', image || '');
+    formData.append('SalePrice', SalePrice || '');
+    formData.append('Price', Price || '');
+    formData.append('DescriptionEn', DescriptionEn || '');
+    formData.append('DescriptionHe', DescriptionHe || '');
+    formData.append('NameEn', NameEn || '');
+    formData.append('NameHe', NameHe || '');
+    formData.append('ProductID', ProductID || '');
+    formData.append('ImageURL', ImageURL || '');
+    formData.append('CreatedAt', CreatedAt || '');
+
+    const result = await axios.post(`${API_BASE_URL}PostProduct`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    });
+    return result.data;
+    } catch (error) {
+        console.error('Error adding product:', error);
+        throw error;
     }
-    catch (ch) {
-        console.log(ch)
-    }
-}
+};
+
+
+
 //לא בשימוש ניתן למחוק???
 // export const GetRecommendedProducts = async () => {
 //     try {

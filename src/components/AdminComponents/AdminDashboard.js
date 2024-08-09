@@ -5,7 +5,6 @@ import { GetAllProducts, PostProduct, PutProduct } from '../../axios/ProductAxio
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaPen, FaTrash } from 'react-icons/fa';
-import s3 from '../config'; // ייבוא החיבור ל-S3
 
 const AdminDashboard = () => {
   const productsList = useSelector((s) => s.DataReducer_Products?.Prodlist || []);
@@ -25,6 +24,55 @@ const AdminDashboard = () => {
   const [recommaned, setRecommaned] = useState(false);
   const myDispatch = useDispatch();
   const navigate = useNavigate();
+  const [newE, setNewE] = useState({
+    IsRecommended: false,
+    image: '',
+    SalePrice: '',
+    Price: '',
+    DescriptionEn: '',
+    DescriptionHe: '',
+    NameEn: '',
+    NameHe: '',
+    ProductID: '',
+    ImageURL: '',
+    CreatedAt: ''
+  });
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showConfirmDeleteModal, setShowConfirmDeleteModal] = useState(false);
+  const [productIdToDelete, setProductIdToDelete] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await PostProduct(newE);
+      setShowSuccessModal(true);
+      setTimeout(() => {
+        setShowSuccessModal(false);
+      }, 2000);
+    } catch (error) {
+      console.error('Error adding product:', error);
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value, type, checked, files } = e.target;
+    if (type === 'checkbox') {
+      setNewE({
+        ...newE,
+        [name]: checked
+      });
+    } else if (name === 'image') {
+      setNewE({
+        ...newE,
+        [name]: files[0]
+      });
+    } else {
+      setNewE({
+        ...newE,
+        [name]: value
+      });
+    }
+  };
 
   async function fetchProducts() {
     try {
@@ -80,29 +128,8 @@ const AdminDashboard = () => {
 
   const handleCloseUpdateModal = () => setShowUpdateModal(false);
 
-  const uploadImageToS3 = async (file) => {
-    const params = {
-      Bucket: process.env.REACT_APP_S3_BUCKET_NAME,
-      Key: `${Date.now()}_${file.name}`,
-      Body: file,
-      ContentType: file.type,
-    };
-
-    try {
-      const { Location } = await s3.upload(params).promise();
-      return Location;
-    } catch (error) {
-      console.error('Error uploading image to S3:', error);
-      throw error;
-    }
-  };
-
   const handleAddProduct = async (e) => {
     e.preventDefault();
-    let imageURL = '';
-    if (image) {
-      imageURL = await uploadImageToS3(image);
-    }
 
     const formData = {
       NameHe: nameHe,
@@ -112,7 +139,7 @@ const AdminDashboard = () => {
       NameEn: nameEn,
       DescriptionEn: descriptionEn || null,
       IsRecommended: recommaned,
-      ImageURL: imageURL,
+      ImageURL: image ? URL.createObjectURL(image) : ''
     };
 
     try {
@@ -128,48 +155,43 @@ const AdminDashboard = () => {
     }
   };
 
-  
   const handleUpdateProduct = async (e) => {
     e.preventDefault();
 
-    let imageURL = selectedProduct.imageURL; // Use existing image URL or update it if a new image is selected
+    const formData = new FormData();
+    formData.append('ProductID', prdoId);
+    formData.append('NameHe', nameHe);
+    formData.append('DescriptionHe', descriptionHe || '');
+    formData.append('Price', parseFloat(price) || '');
+    formData.append('SalePrice', parseFloat(salePrice) || '');
+    formData.append('NameEn', nameEn);
+    formData.append('DescriptionEn', descriptionEn || '');
+    formData.append('IsRecommended', recommaned);
     if (image) {
-      try {
-        imageURL = await uploadImageToS3(image);
-      } catch (error) {
-        console.error('Error uploading image to S3:', error);
-        alert('Failed to upload image');
-        return;
-      }
+        formData.append('image', image);
     }
-
-    const formData = {
-      ProductID: prdoId,
-      NameHe: nameHe,
-      DescriptionHe: descriptionHe || null,
-      Price: parseFloat(price) || null,
-      SalePrice: parseFloat(salePrice) || null,
-      NameEn: nameEn,
-      DescriptionEn: descriptionEn || null,
-      IsRecommended: recommaned,
-      ImageURL: imageURL,
-    };
 
     try {
-      const response = await PutProduct(prdoId, formData);
-      if (response) {
-        const productsFromServer = await GetAllProducts();
-        myDispatch(setProductList(productsFromServer));
-        handleCloseUpdateModal();
-      }
+        const response = await PutProduct(formData);
+        if (response) {
+            const productsFromServer = await GetAllProducts();
+            myDispatch(setProductList(productsFromServer));
+            handleCloseUpdateModal();
+        }
     } catch (error) {
-      console.error('Error updating product:', error.response || error.message);
-      alert('Failed to update product');
+        console.error('Error updating product:', error.response || error.message);
+        alert('Failed to update product');
     }
+};
+
+  const handleShowConfirmDeleteModal = (productId) => {
+    setProductIdToDelete(productId);
+    setShowConfirmDeleteModal(true);
   };
 
-  const handleDeleteProduct = async (productId) => {
-    // Implement delete product functionality here
+  const handleCloseConfirmDeleteModal = () => {
+    setProductIdToDelete(null);
+    setShowConfirmDeleteModal(false);
   };
 
   return (
@@ -183,11 +205,10 @@ const AdminDashboard = () => {
             <Row>
               <Col md={3}>
                 <div className="product-image-container">
-                  <iframe
-                    title={`Product ${index}`}
+                  <img
                     src={product.imageURL}
-                    style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-                    frameBorder="0"
+                    alt={`Product ${index}`}
+                    style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
                   />
                 </div>
               </Col>
@@ -202,96 +223,190 @@ const AdminDashboard = () => {
                 <Button variant="outline-primary" onClick={() => handleShowUpdateModal(product)}>
                   <FaPen />
                 </Button>
-                <Button variant="outline-danger" className="ml-2" onClick={() => handleDeleteProduct(product.productID)}>
-                  <FaTrash />
-                </Button>
               </Col>
             </Row>
           </ListGroup.Item>
         ))}
       </ListGroup>
-
       <Modal show={showAddModal} onHide={handleCloseAddModal}>
         <Modal.Header closeButton>
           <Modal.Title>Add Product</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleAddProduct}>
-            <Form.Group controlId="nameHe">
-              <Form.Label>Name (Hebrew)</Form.Label>
-              <Form.Control type="text" value={nameHe} onChange={(e) => setNameHe(e.target.value)} required />
-            </Form.Group>
-            <Form.Group controlId="descriptionHe">
-              <Form.Label>Description (Hebrew)</Form.Label>
-              <Form.Control type="text" value={descriptionHe} onChange={(e) => setDescriptionHe(e.target.value)} required />
-            </Form.Group>
-            <Form.Group controlId="nameEn">
-              <Form.Label>Name (English)</Form.Label>
-              <Form.Control type="text" value={nameEn} onChange={(e) => setNameEn(e.target.value)} required />
-            </Form.Group>
-            <Form.Group controlId="descriptionEn">
-              <Form.Label>Description (English)</Form.Label>
-              <Form.Control type="text" value={descriptionEn} onChange={(e) => setDescriptionEn(e.target.value)} required />
-            </Form.Group>
-            <Form.Group controlId="price">
-              <Form.Label>Price</Form.Label>
-              <Form.Control type="number" value={price} onChange={(e) => setPrice(e.target.value)} required />
-            </Form.Group>
-            <Form.Group controlId="salePrice">
-              <Form.Label>Sale Price</Form.Label>
-              <Form.Control type="number" value={salePrice} onChange={(e) => setSalePrice(e.target.value)} required />
-            </Form.Group>
-            <Form.Group controlId="image">
-              <Form.Label>Image</Form.Label>
-              <Form.Control type="file" onChange={(e) => setImage(e.target.files[0])} required />
-            </Form.Group>
-            <Form.Group controlId="isRecommended">
-              <Form.Check type="checkbox" label="Recommended" checked={recommaned} onChange={(e) => setRecommaned(e.target.checked)} />
-            </Form.Group>
-            <Button variant="primary" type="submit">Add Product</Button>
-          </Form>
+          <Container>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group controlId="formIsRecommended">
+                <Form.Label>Is Recommended</Form.Label>
+                <Form.Check
+                  type="checkbox"
+                  name="IsRecommended"
+                  checked={newE.IsRecommended}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="formSalePrice">
+                <Form.Label>Sale Price</Form.Label>
+                <Form.Control
+                  type="number"
+                  name="SalePrice"
+                  value={newE.SalePrice}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="formPrice">
+                <Form.Label>Price</Form.Label>
+                <Form.Control
+                  type="number"
+                  name="Price"
+                  value={newE.Price}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="formDescriptionEn">
+                <Form.Label>Description (English)</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  name="DescriptionEn"
+                  value={newE.DescriptionEn}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="formDescriptionHe">
+                <Form.Label>Description (Hebrew)</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  name="DescriptionHe"
+                  value={newE.DescriptionHe}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="formNameEn">
+                <Form.Label>Name (English)</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="NameEn"
+                  value={newE.NameEn}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="formNameHe">
+                <Form.Label>Name (Hebrew)</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="NameHe"
+                  value={newE.NameHe}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="formImage">
+                <Form.Label>Image</Form.Label>
+                <Form.Control
+                  type="file"
+                  name="image"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <div className="d-flex justify-content-center">
+                <Button variant="primary" type="submit">Add Product</Button>
+              </div>
+            </Form>
+          </Container>
         </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseAddModal}>Close</Button>
+        </Modal.Footer>
       </Modal>
-
       <Modal show={showUpdateModal} onHide={handleCloseUpdateModal}>
         <Modal.Header closeButton>
           <Modal.Title>Update Product</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleUpdateProduct}>
-            <Form.Group controlId="nameHe">
-              <Form.Label>Name (Hebrew)</Form.Label>
-              <Form.Control type="text" value={nameHe} onChange={(e) => setNameHe(e.target.value)} required />
-            </Form.Group>
-            <Form.Group controlId="descriptionHe">
-              <Form.Label>Description (Hebrew)</Form.Label>
-              <Form.Control type="text" value={descriptionHe} onChange={(e) => setDescriptionHe(e.target.value)} required />
-            </Form.Group>
-            <Form.Group controlId="nameEn">
-              <Form.Label>Name (English)</Form.Label>
-              <Form.Control type="text" value={nameEn} onChange={(e) => setNameEn(e.target.value)} required />
-            </Form.Group>
-            <Form.Group controlId="descriptionEn">
-              <Form.Label>Description (English)</Form.Label>
-              <Form.Control type="text" value={descriptionEn} onChange={(e) => setDescriptionEn(e.target.value)} required />
-            </Form.Group>
-            <Form.Group controlId="price">
-              <Form.Label>Price</Form.Label>
-              <Form.Control type="number" value={price} onChange={(e) => setPrice(e.target.value)} required />
-            </Form.Group>
-            <Form.Group controlId="salePrice">
-              <Form.Label>Sale Price</Form.Label>
-              <Form.Control type="number" value={salePrice} onChange={(e) => setSalePrice(e.target.value)} required />
-            </Form.Group>
-            <Form.Group controlId="image">
-              <Form.Label>Image</Form.Label>
-              <Form.Control type="file" onChange={(e) => setImage(e.target.files[0])} />
-            </Form.Group>
-            <Form.Group controlId="isRecommended">
-              <Form.Check type="checkbox" label="Recommended" checked={recommaned} onChange={(e) => setRecommaned(e.target.checked)} />
-            </Form.Group>
-            <Button variant="primary" type="submit">Update Product</Button>
-          </Form>
+          <Container>
+            <Form onSubmit={handleUpdateProduct}>
+              <Form.Group controlId="formProductID">
+                <Form.Label>Product ID</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={prdoId}
+                  readOnly
+                />
+              </Form.Group>
+              <Form.Group controlId="formNameHe">
+                <Form.Label>Name (Hebrew)</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={nameHe}
+                  onChange={(e) => setNameHe(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group controlId="formDescriptionHe">
+                <Form.Label>Description (Hebrew)</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  value={descriptionHe}
+                  onChange={(e) => setDescriptionHe(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group controlId="formNameEn">
+                <Form.Label>Name (English)</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={nameEn}
+                  onChange={(e) => setNameEn(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group controlId="formDescriptionEn">
+                <Form.Label>Description (English)</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  value={descriptionEn}
+                  onChange={(e) => setDescriptionEn(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group controlId="formPrice">
+                <Form.Label>Price</Form.Label>
+                <Form.Control
+                  type="number"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group controlId="formSalePrice">
+                <Form.Label>Sale Price</Form.Label>
+                <Form.Control
+                  type="number"
+                  value={salePrice}
+                  onChange={(e) => setSalePrice(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group controlId="formIsRecommended">
+                <Form.Check
+                  type="checkbox"
+                  label="Is Recommended"
+                  checked={recommaned}
+                  onChange={(e) => setRecommaned(e.target.checked)}
+                />
+              </Form.Group>
+              <Form.Group controlId="formImage">
+                <Form.Label>Image</Form.Label>
+                <Form.Control
+                  type="file"
+                  onChange={(e) => setImage(e.target.files[0])}
+                />
+              </Form.Group>
+              <div className="d-flex justify-content-center">
+                <Button variant="primary" type="submit">Update Product</Button>
+              </div>
+            </Form>
+          </Container>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseUpdateModal}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+      <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)} centered>
+        <Modal.Body className="text-center">
+          <h5>Product added successfully!</h5>
         </Modal.Body>
       </Modal>
     </Container>

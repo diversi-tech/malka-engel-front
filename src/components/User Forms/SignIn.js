@@ -190,7 +190,7 @@ export const Login = () => {
               error={!!passwordError}
               helperText={passwordError}
             />
-            <Link href="/myResetPassword" variant="body2" sx={{ display: 'block', mt: 1, color: 'secondary.main' }}>
+            <Link href="/#/myResetPassword" variant="body2" sx={{ display: 'block', mt: 1, color: 'secondary.main' }}>
               {t('loginPage.forgot')}
             </Link>
             <Button
@@ -204,7 +204,7 @@ export const Login = () => {
             </Button>
             <Typography variant="body2" sx={{ mt: 2 }}>
               {t('loginPage.noAccount')}{' '}
-              <Link href="/mySignUp" variant="body2" sx={{ color: 'secondary.main' }}>
+              <Link href="/#/mySignUp" variant="body2" sx={{ color: 'secondary.main' }}>
                 {t('loginPage.createAccount')}
               </Link>
             </Typography>

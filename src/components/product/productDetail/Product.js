@@ -88,24 +88,24 @@
 //         // Create a map for quick lookup
 //         const categoryMap = new Map();
 //         categories.forEach(cat => categoryMap.set(cat.id, cat));
-    
+
 //         // Recursively find all parent categories
 //         const getHierarchy = (id) => {
 //             const category = categoryMap.get(id);
 //             if (!category) return [];
 //             return [category, ...getHierarchy(category.upCategoryId)];
 //         };
-    
+
 //         return getHierarchy(categoryId).reverse(); // reverse to get top-to-bottom order
 //     };
-    
+
 //     const generateBreadcrumbs = (categories, product) => {
 //         const productCategory = categories.find(cat => cat.products.includes(product.id));
-    
+
 //         if (!productCategory) return [{ name: 'Home Page', link: '/' }];
-    
+
 //         const hierarchy = getCategoryHierarchy(categories, productCategory.id);
-    
+
 //         return [
 //             { name: 'Home Page', link: '/' },
 //             ...hierarchy.map(cat => ({ name: cat.nameEn, link: `/categories/${cat.categp}` })),
@@ -118,7 +118,7 @@
 //         const categories = await categoriesResponse.json();
 //         return  categories ;
 //     };
-    
+
 //     useEffect(() => {
 //         const fetchData = async () => {
 //             const { product, categories } = await fetchProductWithCategories(productId);
@@ -269,7 +269,7 @@ export const Product = () => {
     const { t, i18n } = useTranslation();
     const { id } = useParams();
     const currentLanguage = i18n.language === 'en' ? 'En' : 'He';
-    const productsList = useSelector(s => s.DataReducer_Products?.ProdlistByCategory || s.DataReducer_Products?.Prodlist || []);
+    const productsList = useSelector(s => s.DataReducer_Products.Prodlist || []);
     const [products, setProducts] = useState(productsList);
     const [cart, setCart] = useState(getCart());
     const [wording, setWording] = useState(cart.find(item => item.productID == id)?.wording || '');
@@ -283,9 +283,10 @@ export const Product = () => {
     const product = products.find(product => product.productID == id);
 
     useEffect(() => {
-        debugger
         const fetchData = async () => {
-            if (!product) return; 
+            console.log("product from redux",productsList)
+            console.log("product in product page is",products)
+            if (!product) return;
             const categoriesResponse = await CategoriesHierarchyByProductId(id);
             //const categories = await categoriesResponse.json();
             const breadcrumbs = generateBreadcrumbs(categoriesResponse, product);
@@ -351,26 +352,26 @@ export const Product = () => {
         debugger
         const categoryMap = new Map();
         categories.forEach(cat => categoryMap.set(cat.categoryID, cat));
-    
+
         const getHierarchy = (id) => {
             const category = categoryMap.get(id);
             if (!category) return [];
             return [category, ...getHierarchy(category.upCategory)];
         };
-    
+
         return getHierarchy(categoryID).reverse();
     };
-    
+
     const generateBreadcrumbs = (categories, product) => {
         debugger
-    
+
         if (!categories) return [{ name: 'Home Page', link: '/' }];
-    
+
         const hierarchy = getCategoryHierarchy(categories, categories[categories.length - 1].categoryID);
-    
+
         return [
             { name: 'Home Page', link: '/' },
-            ...hierarchy.map(cat => ({ name: cat[`name${currentLanguage}`] , link: `/myProductByCategory/${cat.categoryID}` })),
+            ...hierarchy.map(cat => ({ name: cat[`name${currentLanguage}`], link: `/myProductByCategory/${cat.categoryID}` })),
             { name: product[`name${currentLanguage}`] }
         ];
     };
@@ -405,7 +406,7 @@ export const Product = () => {
                         }}
                     >
                         <WatermarkedImage
-                            imageUrl={`${process.env.REACT_APP_API_URL}${product.imageURL}`}
+                            imageUrl={`${product.imageURL}`}
                             watermarkText='malka engel'
                             style={{
                                 width: '100%',
