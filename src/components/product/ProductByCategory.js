@@ -137,7 +137,7 @@ const ProductByCategory = () => {
                     )}
 
                     <Grid container spacing={3}>
-                        {products.map((product, index) => {
+                        {categoryProducts.map((product, index) => {
                             const productInCart = cart.find((item) => item.productID === product.productID);
 
                             return (
@@ -174,11 +174,16 @@ const ProductByCategory = () => {
                                         />
                                         <CardContent sx={{ padding: '16px' }}>
                                             <Typography variant="h6" component="div" gutterBottom>
-                                                {product.name}
-                                            </Typography>
+                                                {product[`name${currentLanguage}`]}                                            </Typography>
                                             <Typography variant="body2" color="textSecondary" component="div">
-                                                {product.price} ₪
+                                                {product.salePrice == 0 ? (
+                                                    <>  מחיר: {product.price} ₪</>
+                                                ) : (
+                                                    <>   מחיר: <s>{product.price} </s >  <b>     {product.salePrice}</b>   ₪ </>
+
+                                                )}
                                             </Typography>
+
                                             <Box mt={2} textAlign="center">
                                                 <Tooltip
                                                     title={

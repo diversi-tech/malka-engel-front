@@ -170,6 +170,8 @@ export const Product = () => {
                             height: 'auto'
                         }}
                     >
+                                                {console.log(product)}
+
                         <WatermarkedImage
                             imageUrl={`${product.imageURL}`}
                             watermarkText='malka engel'
@@ -197,7 +199,12 @@ export const Product = () => {
                         {product[`description${currentLanguage}`]}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" gutterBottom>
-                        מחיר: {product.price} ש"ח
+                        {product.salePrice == 0?(
+                         <>  מחיר: {  product.price } ₪</> 
+                        ):(
+                            <>   מחיר: <s>{  product.price } </s >  <b>     {product.salePrice }</b>   ₪ </> 
+
+                        )}
                     </Typography>
                     <Wording setWording={setWording} initialValue={decodedWording} />
                     <AdditionalComments setAdditionalComments={setAdditionalComments} initialValue={initialComments} />

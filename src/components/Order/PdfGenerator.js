@@ -85,7 +85,7 @@ const showByHtmlTags = (htmlString) => {
         const tempDiv = document.createElement('div');
         tempDiv.style.position = 'absolute';
         tempDiv.style.top = '-9999px';
-        tempDiv.innerHTML = htmlContent;
+        tempDiv.innerHTML = ReactDOMServer.renderToStaticMarkup(htmlContent)
         document.body.appendChild(tempDiv);
 
         const canvas = await html2canvas(tempDiv); // Convert HTML content to canvas

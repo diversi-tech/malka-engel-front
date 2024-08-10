@@ -114,7 +114,7 @@ export const OrderDetails = () => {
                       transition: 'transform 0.3s',
                       ':hover': { transform: 'scale(1.1)' }
                     }}
-                    imageUrl={`${process.env.REACT_APP_API_URL}${item.product.imageURL}`}
+                    imageUrl={`${item.product.imageURL}`}
                     watermarkText='malka engel'
                     style={{
                       width: '100%',

@@ -20,7 +20,7 @@ export const Checkout = () => {
     const [order, setOrder] = useState({
         "OrderID": 0,
         "UserID": currentUser.userID || 0,
-        "Status": "Processing",
+        "Status": "ProccessProccess",
         "TotalAmount": 0,
         "CreatedAt": new Date().toISOString(),
         "Comment": ""

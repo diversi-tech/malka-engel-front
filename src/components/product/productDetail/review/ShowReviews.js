@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { FaStar } from 'react-icons/fa';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Box, Card, CardContent, Typography, IconButton, Grid, TextareaAutosize, Button } from '@mui/material';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
@@ -13,6 +13,7 @@ export const ShowReviews = () => {
     const { t, i18n } = useTranslation();
     const reviewList = useSelector(state => state.DataReducer_Reviews.ReviewsProduct);
     const [reviews, setReviews] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (reviewList) {
@@ -48,6 +49,8 @@ export const ShowReviews = () => {
             ))
         );
     };
+
+    const goBackButton = ()=>{navigate(-1)}
 
     return (
         <Box sx={{ width: '80%', margin: 'auto', mt: 4 }}>
@@ -88,7 +91,7 @@ export const ShowReviews = () => {
                                         <Typography variant="caption">{review.dislikes || 0}</Typography>
                                     </Box>
                                     <Typography variant="caption">
-                                       {review.createdAt}
+                                        {review.createdAt}
                                     </Typography>
                                 </Box>
                             </CardContent>
@@ -97,6 +100,9 @@ export const ShowReviews = () => {
                 )) : (
                     <Typography variant="body1">{t('No reviews available')}</Typography>
                 )}
+                <Button variant="outlined" color="secondary" onClick={goBackButton} sx={{ mt: 2 }}>
+                    חזור
+                </Button>
             </Grid>
         </Box>
     );

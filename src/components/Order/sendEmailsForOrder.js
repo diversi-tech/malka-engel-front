@@ -82,7 +82,7 @@ export const SendEmailsForOrder = ()=>{
         const emailToCust = {
             Greeting: '',
             ToAddress: currentUser.email,
-            Subject: `הזמנתך מתאריך ${new Date().getDay()}/${new Date().toLocaleDateString()}   בוצעה בהצלחה. הזמנה מספר  ${orderidToAdd}` ,
+            Subject: `הזמנתך מתאריך ${new Date().toLocaleDateString()}   בוצעה בהצלחה. הזמנה מספר  ${orderidToAdd}` ,
             Body: ReactDOMServer.renderToStaticMarkup(myHTML),         
             IsBodyHtml: true,
             Attachments: [],

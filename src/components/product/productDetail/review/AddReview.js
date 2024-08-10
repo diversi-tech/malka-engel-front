@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Button, Card, CardContent, Grid, TextareaAutosize, Typography, Box, IconButton, Dialog, DialogActions, DialogContent, DialogTitle, CircularProgress } from '@mui/material';
+import { Modal, Button, Card, CardContent, Grid, TextareaAutosize, Typography, Box, IconButton, Dialog, DialogActions, DialogContent, DialogTitle, CircularProgress } from '@mui/material';
 import { Star, StarBorder } from '@mui/icons-material';
 import { AddReviewFunc } from '../../../../axios/ReviewsAxios';
 import { useTranslation } from 'react-i18next';
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = (props) => <MuiAlert elevation={6} variant="filled" {...props} />;
 
 const StarRating = ({ rating, setRating }) => {
   const [hover, setHover] = useState(0);
@@ -41,6 +44,11 @@ export const AddReview = () => {
   const [dialogMessage, setDialogMessage] = useState('');
   const [dialogSeverity, setDialogSeverity] = useState('success');
   const [loading, setLoading] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const handleClose = () => { navigate(-1); };
+  const [showModal, setShowModal] = useState(false);
+
 
   const sendYourReview = async () => {
     if (connected) {
@@ -56,26 +64,20 @@ export const AddReview = () => {
       try {
         const response = await AddReviewFunc(review);
         if (response === true) {
-          setDialogMessage(t('Review sent successfully!'));
-          setDialogSeverity('success');
         } else {
-          setDialogMessage(t('Failed to send review. Please try again later.'));
-          setDialogSeverity('error');
+          navigate(`/myErrorPage/500/${t('errorPage.message')}/back`)
         }
       } catch (error) {
-        setDialogMessage(t('Failed to send review. Please try again later.'));
-        setDialogSeverity('error');
-      } finally {
-        setLoading(false); // End loading
-        setDialogOpen(true);
-        navigate(-1);
+        navigate(`/myErrorPage/500/${t('errorPage.message')}/back`)
       }
+      setShowModal(true);
     } else {
       navigate('/myLogin');
     }
   };
 
   return (
+  <>
     <Grid item xs={12}>
       <Card variant="outlined">
         <CardContent>
@@ -106,23 +108,19 @@ export const AddReview = () => {
           </Button>
         </CardContent>
       </Card>
-
-      <Dialog
-        open={dialogOpen}
-        onClose={() => setDialogOpen(false)}
-      >
-        <DialogTitle>{dialogSeverity === 'success' ? t('Success') : t('Error')}</DialogTitle>
-        <DialogContent>
-          <Typography variant="body1">{dialogMessage}</Typography>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setDialogOpen(false)} color="primary">
-            {t('Close')}
-          </Button>
-        </DialogActions>
-      </Dialog>
     </Grid>
+    <Modal open={showModal} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Box sx={{ width: '100%', maxWidth: 600, p: 3, bgcolor: 'background.paper', borderRadius: 1 }}>
+
+        <Typography variant="h5" align="center">
+          תודה לך, חוות הדעת שלך נוספה בהצלחה
+        </Typography>
+        <Button variant="outlined" color="secondary" onClick={handleClose} sx={{ mt: 2 }}>
+          חזור
+        </Button>
+      </Box>
+    </Modal>
+  </>
   );
 };
 
-export default AddReview;

@@ -20,8 +20,7 @@ export const ResetPasTakeCare = () => {
 
   const { passwordError, passwordComfirmError, validPasswordError } = useValidation();
 
-  const handleClose = () => { window.close(); };
-
+  const handleClose = () => { navigate('/'); };
 
 
   const validToken = async () => {
