@@ -37,8 +37,14 @@ export const OrderDetails = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const currentLanguage = i18n.language === 'en' ? 'En' : 'He';
+
+  const showByHtmlTags = (htmlString) => {
+    if (htmlString.startsWith('"') && htmlString.endsWith('"')) 
+        htmlString = htmlString.slice(1, -1);
+    return <span dangerouslySetInnerHTML={{ __html: htmlString }} />;
+  };
 
   useEffect(() => {
     debugger
@@ -128,17 +134,16 @@ export const OrderDetails = () => {
                   <Typography variant="body1" gutterBottom><strong>Item Name:</strong> {item.product[`name${currentLanguage}`]}</Typography>
                   <Typography variant="body1" paragraph>{item.product[`description${currentLanguage}`]}</Typography>
                   <Typography variant="body1"><strong>Price:</strong> ${item.price}</Typography>
-                  <Typography variant="body1"><strong>Quantity:</strong> {item.quantity}</Typography>
                   {item.product.isRecommended && (
                     <Box display="flex" alignItems="center">
-                      <Typography variant="body1" style={{ marginRight: '8px' }}><strong>Recommended:</strong></Typography>
-                      {[...Array(5)].map((_, index) => (
+                      <Typography variant="body1" style={{ marginRight: '8px' }}><strong>product is recommended:</strong></Typography>
+                      {[...Array(1)].map((_, index) => (
                         <StarIcon key={index} color="primary" style={{ fontSize: '20px' }} />
                       ))}
                     </Box>
                   )}
-                  <Typography variant="body1"><strong>Comment:</strong> {item.comment}</Typography>
-                  <Typography variant="body1"><strong>Wording:</strong> {item.wording}</Typography>
+                  <Typography variant="body1"><strong>Comment:</strong> {item.wording}</Typography>
+                  <Typography variant="body1"><strong>{t('orderFormPage.wording')}</strong> {showByHtmlTags(item.comment)}</Typography>
                 </Grid>
               </Grid>
             </CardContent>

@@ -8,7 +8,7 @@ import { StayTuned } from '../User Forms/StayTuned';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetAllCategories } from '../../axios/CategoryAxios';
 import { setCategoryList } from '../../redux/DataActions/DataAction.Category';
-import ilFlagImage from '../../assets/HomeImages/לוגו.png';
+import ilFlagImage from '../../assets/HomeImages/rinatLogo.jpg';
 import { Card } from 'react-bootstrap';
 
 const ImageContainer1 = styled.div`
@@ -24,7 +24,6 @@ const ImageContainer1 = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.1;
   }
 `;
 
@@ -158,6 +157,7 @@ const ArrowButton = styled.button`
 
 export const Home = () => {
   const { t, i18n } = useTranslation();
+  const currentLanguage = i18n.language === 'en' ? 'En' : 'He';
   const [isVisible, setIsVisible] = useState(false);
   const containerRef = useRef(null);
   const navigate = useNavigate();
@@ -247,7 +247,6 @@ export const Home = () => {
         <ImageContainer1>
           <img src={ilFlagImage} alt="תמונה" />
           <TextContainer
-            dangerouslySetInnerHTML={{ __html: t('homePage.information') }}
             style={{
               top: '25%',
               left: i18n.language === 'he' ? '50%' : '70%',
@@ -267,10 +266,11 @@ export const Home = () => {
         {categories.filter(category => !category.upCategory || category.upCategory === 0).map(category => (
           <CategoryContainer key={category.categoryID}>
             <CategoryCard>
+              {console.log("category:",category)}
               <CategoryImage src={`${category.imageURL}`} />
               <CategoryOverlay>
                 <CategoryLink onClick={() => handleCategoryClick(category.categoryID)}>
-                  {category.nameHe}
+                  {category[`name${currentLanguage}`]}
                 </CategoryLink>
               </CategoryOverlay>
             </CategoryCard>

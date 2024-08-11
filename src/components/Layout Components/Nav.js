@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import usFlag from '../../assets/flags/us_flag.png';
 import ilFlag from '../../assets/flags/il_flag.png';
+import navImg from '../../assets/Nav.png'; // Import your image here
 import { useSelector } from "react-redux";
 import { useConnectUser } from "../User Forms/useConnectUser";
 import { AppBar, Toolbar, IconButton, Typography, Button, Box, Menu, MenuItem, Container } from '@mui/material';
@@ -35,6 +36,7 @@ export const Nav = () => {
     const [categoryMenuAnchorEl, setCategoryMenuAnchorEl] = useState(null);
     const [userMenuAnchorEl, setUserMenuAnchorEl] = useState(null);
     const [categories, setCategories] = useState([]);
+    const currentLanguage = i18n.language === 'en' ? 'En' : 'He';
 
     const handleLanguageChange = (lng) => {
         i18n.changeLanguage(lng);
@@ -73,14 +75,17 @@ export const Nav = () => {
                         <IconButton edge="start" color="inherit" aria-label="menu" onClick={handleMenu}>
                             <MenuIcon />
                         </IconButton>
-                        <Typography
-                            variant="h6"
-                            component={Link}
-                            to="/"
-                            sx={{ flexGrow: 1, textDecoration: 'none', color: colors.primaryText, fontWeight: 'bold' }}
-                        >
-                            Designery
-                        </Typography>
+                        <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
+                            <img src={navImg} alt="Nav" style={{ width: '50px', height: '50px', marginRight: '16px' }} /> {/* Add the image */}
+                            <Typography
+                                variant="h6"
+                                component={Link}
+                                to="/"
+                                sx={{ textDecoration: 'none', color: colors.primaryText, fontWeight: 'bold' }}
+                            >
+                                Designery
+                            </Typography>
+                        </Box>
                         <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
                             <IconButton
                                 color="inherit"
@@ -174,7 +179,8 @@ export const Nav = () => {
                                     textTransform: 'none',
                                     padding: '8px 16px',
                                 }}
-                            >{t('navPage.linkCatergories')}
+                            >
+                                {t('navPage.linkCatergories')}
                             </Button>
                             <Menu
                                 anchorEl={categoryMenuAnchorEl}
@@ -197,7 +203,7 @@ export const Nav = () => {
                                             borderRadius: 0, // No border radius
                                         }}
                                     >
-                                        {category.nameHe}
+                                        {category[`name${currentLanguage}`]}
                                     </MenuItem>
                                 ))}
                             </Menu>
@@ -237,12 +243,12 @@ export const Nav = () => {
                             )}
                             {i18n.language !== 'en' && (
                                 <IconButton onClick={() => handleLanguageChange('en')}>
-                                    <img src={usFlag} alt="English" style={{ width: '25px', height: '20px' }} />
+                                    <img src={usFlag} alt="English" style={{ width: '20px', height: '20px' }} />
                                 </IconButton>
                             )}
                             {i18n.language !== 'he' && (
                                 <IconButton onClick={() => handleLanguageChange('he')}>
-                                    <img src={ilFlag} alt="Hebrew" style={{ width: '25px', height: '20px' }} />
+                                    <img src={ilFlag} alt="Hebrew" style={{ width: '20px', height: '20px' }} />
                                 </IconButton>
                             )}
                         </Box>

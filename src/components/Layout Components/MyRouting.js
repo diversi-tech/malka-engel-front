@@ -39,7 +39,7 @@ import { useEffect } from "react";
 import {useConnectUser} from "../User Forms/useConnectUser.js";
 import { AddReview } from "../product/productDetail/review/AddReview.js";
 import { Checkout } from "../Order/Checkout.js";
-import { PayForm } from "../Order/PayForm.js";
+import { ConfirmationPage } from "../Order/ConfirmationPage.js";
 import ErrorPage from "./ErrorPage.js";
 import { PopUp } from "../Cart/popUp.js";
 import PdfGenerator from "../Order/PdfGenerator.js";
@@ -105,7 +105,7 @@ export const MyRouting = () => {
 
                     {/* cart pages */}
                     <Route path="/myShoppingCart" element={<ShoppingCart></ShoppingCart>}></Route>
-                    <Route path="/myPayForm" element={<PayForm></PayForm>}></Route>
+                    <Route path="/myPayForm" element={<ConfirmationPage></ConfirmationPage>}></Route>
                     <Route path="/myCheckout" element={<Checkout></Checkout>}></Route>
                     <Route path="/myPopUp" element={<PopUp/>}></Route>
 

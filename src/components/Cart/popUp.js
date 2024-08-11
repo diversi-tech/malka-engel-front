@@ -1,33 +1,42 @@
-import { t } from "i18next";
 import React, { useState } from 'react';
-import { Button, Modal } from 'react-bootstrap';
-import { useNavigate, useNavigation } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 export const PopUp = () => {
-    const [showModal, setShowModal] = useState(true);
-    const navigate = useNavigate()
-    const handleClose = () =>  {navigate("/myHome")};
-    const handleShow = () => setShowModal(true);
+    const { t } = useTranslation();
+    const [open, setOpen] = useState(true);
+    const navigate = useNavigate();
 
+    const handleClose = () => {
+        setOpen(false);
+        navigate("/myHome");
+    };
 
-
-    return (<>
-
-
-      <Modal show={showModal} onHide={handleClose}>
-        {/* <Modal.Header closeButton> */}
-          <Modal.Title>{t('popUpPage.modalTitle')}</Modal.Title>
-        {/* </Modal.Header> */}
-        <Modal.Body>
-          <p>תודה.</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          {/* Add additional buttons if needed */}
-        </Modal.Footer>
-      </Modal>
-      </>
+    return (
+        <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="order-complete-dialog"
+            maxWidth="sm"
+            fullWidth
+        >
+            <DialogTitle id="order-complete-dialog">
+                {t('popUpPage.modalTitle')}
+            </DialogTitle>
+            <DialogContent>
+                <Typography variant="h6" gutterBottom>
+                    {t('popUpPage.thankYouMessage')}
+                </Typography>
+                <Typography variant="body1">
+                    {t('popUpPage.orderCompleteDescription')}
+                </Typography>
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={handleClose} color="primary" variant="contained">
+                    {t('popUpPage.closeButton')}
+                </Button>
+            </DialogActions>
+        </Dialog>
     );
-}
+};

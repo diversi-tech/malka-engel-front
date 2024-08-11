@@ -194,6 +194,7 @@ export const Product = () => {
                     </Grid>
                 </Grid>
                 <Grid item xs={12} md={6}>
+                    {console.log("product:", product)}
                     <Typography variant="h4" gutterBottom>{product[`name${currentLanguage}`]}</Typography>
                     <Typography variant="body1" sx={{ fontSize: '1.2rem', lineHeight: 1.6 }} gutterBottom>
                         {product[`description${currentLanguage}`]}
